@@ -39,7 +39,7 @@ public class SellWindow extends JFrame {
     private JButton a9Button;
     private JButton cButton;
     private JLabel searchLabel;
-    private JTextField searchGoodsTextField;
+    private JTextField barcodeTextField;
     private JButton backSpaceButton;
     private GraphicsDevice graphicsDevice;
 
@@ -76,7 +76,7 @@ public class SellWindow extends JFrame {
         FontProvider fontProvider = new FontProvider();
         discountButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 28f));
         paymentButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 28f));
-        searchButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 32f));
+        searchButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 34f));
 
         keyPadPanel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
         a1Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
@@ -91,15 +91,14 @@ public class SellWindow extends JFrame {
         a0Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
         dotButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
         cButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 20f));
 
-        searchGoodsTextField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
-        searchGoodsTextField.setBorder(BorderFactory.createEmptyBorder());
+        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 22f));
+
+        barcodeTextField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
+        barcodeTextField.setBorder(BorderFactory.createEmptyBorder());
 
         backSpaceButton.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 54f));
         backSpaceButton.setText("\uf104");
     }
-
-
 
 }
