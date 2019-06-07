@@ -1,8 +1,8 @@
 /*
- * Copyright (c) RESONANCE JSC, 03.06.2019
+ * Copyright (c) RESONANCE JSC, 06.06.2019
  */
 
-package resources.fonts;
+package gui;
 
 import java.awt.*;
 import java.io.IOException;
@@ -12,6 +12,7 @@ public class FontProvider {
     public static final String ROBOTO_REGULAR = "Roboto-Regular.ttf";
     public static final String ROBOTO_BOLD = "Roboto-Bold.ttf";
     public static final String FONTAWESOME_REGULAR = "FontAwesome-Regular.ttf";
+    public static final String MENU_ICONS = "MenuIcons.ttf";
 
     private float scaleValue;
 
@@ -25,7 +26,7 @@ public class FontProvider {
     }
 
     public Font getFont(String fontName, float size) {
-        InputStream inputStream = FontProvider.class.getResourceAsStream(fontName);
+        InputStream inputStream = FontProvider.class.getResourceAsStream("./fonts/" + fontName);
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(size / scaleValue);
