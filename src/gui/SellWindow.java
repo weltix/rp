@@ -18,11 +18,6 @@ import static gui.FontProvider.*;
 public class SellWindow extends JFrame {
     private JPanel contentPane;
 
-    private JPanel sellTablePanel;
-
-    private JPanel infoKeyPadPanel;
-
-    private JPanel paymentInfoPanel;
     private JLabel toPayLabel;
     private JLabel toPaySumLabel;
     private JLabel discountLabel;
@@ -30,7 +25,6 @@ public class SellWindow extends JFrame {
     private JButton discountButton;
     private JButton paymentButton;
 
-    private JPanel keyPadPanel;
     private JLabel searchLabel;
     private JTextField barcodeTextField;
     private JButton backSpaceButton;
@@ -66,6 +60,11 @@ public class SellWindow extends JFrame {
     private JPanel exitPanel;
     private JLabel exitIcon;
     private JLabel exitLabel;
+    private JPanel sellTablePanel;
+    private JPanel paymentInfoPanel;
+    private JPanel infoKeyPadPanel;
+    private JPanel keyPadPanel;
+    private JTable sellTable;
 
     private GraphicsDevice graphicsDevice;
 

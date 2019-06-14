@@ -390,7 +390,53 @@
           <preferredSize width="0" height="0"/>
         </properties>
         <border type="none"/>
-        <children/>
+        <children>
+          <grid id="c8ff" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="d5b01" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <component id="75569" class="javax.swing.JTable" binding="sellTable">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="150" height="50"/>
+                  </grid>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <intercellSpacing width="5" height="1"/>
+                </properties>
+                <clientProperties>
+                  <Table.isFileList class="java.lang.Boolean" value="false"/>
+                </clientProperties>
+              </component>
+              <grid id="86021" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <background color="-1183240"/>
+                  <opaque value="true"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+        </children>
       </grid>
       <grid id="9b837" binding="infoKeyPadPanel" layout-manager="GridBagLayout">
         <constraints>
@@ -520,11 +566,13 @@
                       <alignmentX value="0.5"/>
                       <background color="-13350562"/>
                       <borderPainted value="false"/>
+                      <contentAreaFilled value="true"/>
                       <focusPainted value="false"/>
                       <foreground color="-1"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="-1" height="-1"/>
                       <minimumSize width="-1" height="-1"/>
+                      <opaque value="true"/>
                       <preferredSize width="-1" height="-1"/>
                       <text resource-bundle="resources/strings" key="search"/>
                     </properties>
@@ -895,6 +943,7 @@
                       <alignmentX value="0.5"/>
                       <background color="-1"/>
                       <borderPainted value="false"/>
+                      <contentAreaFilled value="true"/>
                       <focusPainted value="false"/>
                       <foreground color="-13350562"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
