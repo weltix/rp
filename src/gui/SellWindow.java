@@ -132,6 +132,10 @@ public class SellWindow extends JFrame {
         resposLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 22f));
         marketLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 12f));
 
+        Color navPanelColor = new Color(52, 73, 94);
+        Color navPanelPressed = new Color(65, 91, 122);
+        Color navIconLabelPressed = new Color(172, 194, 215);
+
         addProductPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -140,16 +144,16 @@ public class SellWindow extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                addProductPanel.setBackground(new Color(42, 58, 84));
-                addProductIcon.setForeground(new Color(194, 208, 215));
-                addProductLabel.setForeground(new Color(194, 208, 215));
+                addProductPanel.setBackground(navPanelPressed);
+                addProductIcon.setForeground(navIconLabelPressed);
+                addProductLabel.setForeground(navIconLabelPressed);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                addProductPanel.setBackground(new Color(52, 73, 94));
-                addProductIcon.setForeground(new Color(255, 255, 255));
-                addProductLabel.setForeground(new Color(255, 255, 255));
+                addProductPanel.setBackground(navPanelColor);
+                addProductIcon.setForeground(Color.WHITE);
+                addProductLabel.setForeground(Color.WHITE);
             }
 
             @Override
@@ -164,6 +168,7 @@ public class SellWindow extends JFrame {
         });
         addProductIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
         addProductLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
+
         workWithReceiptPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -172,16 +177,16 @@ public class SellWindow extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                workWithReceiptPanel.setBackground(new Color(65, 91, 122));
-                workWithReceiptIcon.setForeground(new Color(222, 234, 240));
-                workWithReceiptLabel.setForeground(new Color(222, 234, 240));
+                workWithReceiptPanel.setBackground(navPanelPressed);
+                workWithReceiptIcon.setForeground(navIconLabelPressed);
+                workWithReceiptLabel.setForeground(navIconLabelPressed);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                workWithReceiptPanel.setBackground(new Color(52, 73, 94));
-                workWithReceiptIcon.setForeground(new Color(255, 255, 255));
-                workWithReceiptLabel.setForeground(new Color(255, 255, 255));
+                workWithReceiptPanel.setBackground(navPanelColor);
+                workWithReceiptIcon.setForeground(Color.WHITE);
+                workWithReceiptLabel.setForeground(Color.WHITE);
             }
 
             @Override
@@ -194,8 +199,9 @@ public class SellWindow extends JFrame {
                 mouseReleased(e);
             }
         });
-        workWithReceiptIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
+        workWithReceiptIcon.setFont(fontProvider.getFont(MENU_ICONS, 56f));
         workWithReceiptLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
+
         cashboxPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -204,16 +210,16 @@ public class SellWindow extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                cashboxPanel.setBackground(new Color(65, 91, 122));
-                cashboxIcon.setForeground(new Color(222, 234, 240));
-                cashboxLabel.setForeground(new Color(222, 234, 240));
+                cashboxPanel.setBackground(navPanelPressed);
+                cashboxIcon.setForeground(navIconLabelPressed);
+                cashboxLabel.setForeground(navIconLabelPressed);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                cashboxPanel.setBackground(new Color(52, 73, 94));
-                cashboxIcon.setForeground(new Color(255, 255, 255));
-                cashboxLabel.setForeground(new Color(255, 255, 255));
+                cashboxPanel.setBackground(navPanelColor);
+                cashboxIcon.setForeground(Color.WHITE);
+                cashboxLabel.setForeground(Color.WHITE);
             }
 
             @Override
@@ -228,6 +234,7 @@ public class SellWindow extends JFrame {
         });
         cashboxIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
         cashboxLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
+
         servicePanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -236,16 +243,16 @@ public class SellWindow extends JFrame {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                servicePanel.setBackground(new Color(65, 91, 122));
-                serviceIcon.setForeground(new Color(222, 234, 240));
-                serviceLabel.setForeground(new Color(222, 234, 240));
+                servicePanel.setBackground(navPanelPressed);
+                serviceIcon.setForeground(navIconLabelPressed);
+                serviceLabel.setForeground(navIconLabelPressed);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                servicePanel.setBackground(new Color(52, 73, 94));
-                serviceIcon.setForeground(new Color(255, 255, 255));
-                serviceLabel.setForeground(new Color(255, 255, 255));
+                servicePanel.setBackground(navPanelColor);
+                serviceIcon.setForeground(Color.WHITE);
+                serviceLabel.setForeground(Color.WHITE);
             }
 
             @Override
@@ -260,29 +267,28 @@ public class SellWindow extends JFrame {
         });
         serviceIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
         serviceLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
+
         exitPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-                exitPanel.setBackground(new Color(42, 58, 84));
-                exitIcon.setForeground(new Color(194, 208, 215));
-                exitLabel.setForeground(new Color(194, 208, 215));
+                exitPanel.setBackground(navPanelPressed);
+                exitIcon.setForeground(navIconLabelPressed);
+                exitLabel.setForeground(navIconLabelPressed);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                exitPanel.setBackground(new Color(52, 73, 94));
-                exitIcon.setForeground(new Color(255, 255, 255));
-                exitLabel.setForeground(new Color(255, 255, 255));
+                exitPanel.setBackground(navPanelColor);
+                exitIcon.setForeground(Color.WHITE);
+                exitLabel.setForeground(Color.WHITE);
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
             }
 
             @Override
