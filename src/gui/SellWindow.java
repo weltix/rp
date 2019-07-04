@@ -4,10 +4,13 @@
 
 package gui;
 
+import gui.custom_components.KeypadPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 import static gui.FontProvider.*;
 
@@ -24,23 +27,6 @@ public class SellWindow extends JFrame {
     private JLabel discountSumLabel;
     private JButton discountButton;
     private JButton paymentButton;
-
-    private JLabel searchLabel;
-    private JTextField barcodeTextField;
-    private JButton backSpaceButton;
-    private JButton a1Button;
-    private JButton a2Button;
-    private JButton a3Button;
-    private JButton a4Button;
-    private JButton a5Button;
-    private JButton a6Button;
-    private JButton a7Button;
-    private JButton a8Button;
-    private JButton a9Button;
-    private JButton a0Button;
-    private JButton dotButton;
-    private JButton cButton;
-    private JButton searchButton;
 
 
     private JLabel resposLabel;
@@ -65,6 +51,10 @@ public class SellWindow extends JFrame {
     private JPanel infoKeyPadPanel;
     private JPanel keyPadPanel;
     private JTable sellTable;
+    private KeypadPanel keypadPanel1;
+    private JButton button6;
+    private JButton button2;
+    private JButton button3;
 
     private GraphicsDevice graphicsDevice;
 
@@ -73,15 +63,16 @@ public class SellWindow extends JFrame {
     }
 
     private void init() {
-//        // hide cursor from current JFrame
-//        setCursor(getToolkit().createCustomCursor(
-//                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-//                new Point(),
-//                null));
-//
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setUndecorated(true);        //need for full screen mode
-//        setResizable(false);         //need for full screen mode
+        // hide cursor from current JFrame
+        setCursor(getToolkit().createCustomCursor(
+                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+                new Point(),
+                null));
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setUndecorated(true);        //need for full screen mode
+        setResizable(false);         //need for full screen mode
+
         // set full screen exclusive mode
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         graphicsDevice = ge.getDefaultScreenDevice();
@@ -95,34 +86,24 @@ public class SellWindow extends JFrame {
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-        setSize(1050, 618);
+//        setSize(1050, 618);
+
+        JWindow win2 = new JWindow(this);
+        win2.setCursor(getToolkit().createCustomCursor(
+                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+                new Point(),
+                null));
+        button2.addActionListener(actionEvent -> win2.setVisible(true));
+        win2.setSize(1920, 1080);
+        Button closeButton = new Button("CLOSE");
+        closeButton.addActionListener(actionEvent -> win2.setVisible(false));
+        win2.add(closeButton);
     }
 
     private void initComponents() {
         FontProvider fontProvider = new FontProvider();
         discountButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 30f));
         paymentButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 30f));
-        searchButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 34f));
-
-        a1Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a2Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a3Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a4Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a5Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a6Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a7Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a8Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a9Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        a0Button.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        dotButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-        cButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 50f));
-
-        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 22f));
-
-        barcodeTextField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
-        barcodeTextField.setBorder(BorderFactory.createEmptyBorder());
-
-        backSpaceButton.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 54f));
 
         toPayLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 38f));
         toPaySumLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 38f));
