@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.aspect_ratio_16x9.SellWindow">
+  <grid id="ffc61" binding="mainPanel" layout-manager="CardLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="768" height="503"/>
+    </constraints>
+    <properties>
+      <preferredSize width="-1" height="-1"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="b6c5f" binding="mainSellPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <card name="cardSellPanel"/>
+        </constraints>
+        <properties>
+          <minimumSize width="0" height="0"/>
+          <preferredSize width="-1" height="-1"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="ddf4a" binding="navigatePanel" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="5.2" weighty="1.0"/>
+            </constraints>
+            <properties>
+              <autoscrolls value="false"/>
+              <background color="-13350562"/>
+              <maximumSize width="-1" height="-1"/>
+              <minimumSize width="-1" height="-1"/>
+              <name value=""/>
+              <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="true"/>
+              <toolTipText value=""/>
+              <verifyInputWhenFocusTarget value="true"/>
+            </properties>
+            <border type="none">
+              <color color="-2357732"/>
+            </border>
+            <children>
+              <grid id="25af4" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="6.3"/>
+                </constraints>
+                <properties>
+                  <background color="-13350562"/>
+                  <maximumSize width="-1" height="-1"/>
+                  <minimumSize width="-1" height="-1"/>
+                  <preferredSize width="-1" height="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="75559" class="javax.swing.JLabel" binding="resposLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text value="RESPOS"/>
+                    </properties>
+                  </component>
+                  <component id="d0a24" class="javax.swing.JLabel" binding="marketLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text value="MARKET"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="49ce0" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-10586997"/>
+                  <maximumSize width="0" height="2"/>
+                  <minimumSize width="0" height="2"/>
+                  <preferredSize width="0" height="2"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="82365" binding="addProductPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="2.0" weighty="10.35"/>
+                </constraints>
+                <properties>
+                  <background color="-13350562"/>
+                  <maximumSize width="-1" height="-1"/>
+                  <minimumSize width="-1" height="-1"/>
+                  <preferredSize width="-1" height="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="8e33b" class="javax.swing.JLabel" binding="addProductLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="add_product"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="0"/>
+                    </properties>
+                  </component>
+                  <component id="329c" class="javax.swing.JLabel" binding="addProductIcon">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="add_product_icon"/>
+                      <verticalAlignment value="3"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="284fb" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-10586997"/>
+                  <maximumSize width="0" height="1"/>
+                  <minimumSize width="0" height="1"/>
+                  <preferredSize width="0" height="1"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="d491d" binding="workWithReceiptPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="10.35"/>
+                </constraints>
+                <properties>
+                  <background color="-13350562"/>
+                  <maximumSize width="-1" height="-1"/>
+                  <minimumSize width="-1" height="-1"/>
+                  <preferredSize width="-1" height="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="ec84e" class="javax.swing.JLabel" binding="workWithReceiptLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <alignmentX value="0.0"/>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="work_with_receipt"/>
+                    </properties>
+                    <clientProperties>
+                      <html.disable class="java.lang.Boolean" value="false"/>
+                    </clientProperties>
+                  </component>
+                  <component id="7f7e6" class="javax.swing.JLabel" binding="workWithReceiptIcon">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="work_with_receipt_icon"/>
+                      <verticalAlignment value="3"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="b769a" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-10586997"/>
+                  <maximumSize width="0" height="1"/>
+                  <minimumSize width="0" height="1"/>
+                  <preferredSize width="0" height="1"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="42b81" binding="cashboxPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="10.35"/>
+                </constraints>
+                <properties>
+                  <background color="-13350562"/>
+                  <maximumSize width="-1" height="-1"/>
+                  <minimumSize width="-1" height="-1"/>
+                  <preferredSize width="-1" height="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="cf694" class="javax.swing.JLabel" binding="cashboxIcon">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="cashbox_icon"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="0"/>
+                    </properties>
+                  </component>
+                  <component id="f2152" class="javax.swing.JLabel" binding="cashboxLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="cashbox"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="8a6c6" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-10586997"/>
+                  <maximumSize width="0" height="1"/>
+                  <minimumSize width="0" height="1"/>
+                  <preferredSize width="0" height="1"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="da70a" binding="servicePanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="10.35"/>
+                </constraints>
+                <properties>
+                  <background color="-13350562"/>
+                  <maximumSize width="-1" height="-1"/>
+                  <minimumSize width="-1" height="-1"/>
+                  <preferredSize width="-1" height="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="d1d5e" class="javax.swing.JLabel" binding="serviceIcon">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="service_icon"/>
+                    </properties>
+                  </component>
+                  <component id="79ead" class="javax.swing.JLabel" binding="serviceLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="service"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="ac139" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-10586997"/>
+                  <maximumSize width="0" height="1"/>
+                  <minimumSize width="0" height="1"/>
+                  <preferredSize width="0" height="1"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="21f55" binding="exitPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="10.35"/>
+                </constraints>
+                <properties>
+                  <background color="-13350562"/>
+                  <maximumSize width="-1" height="-1"/>
+                  <minimumSize width="-1" height="-1"/>
+                  <preferredSize width="-1" height="-1"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="34d91" class="javax.swing.JLabel" binding="exitIcon">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="exit_icon"/>
+                    </properties>
+                  </component>
+                  <component id="f80d3" class="javax.swing.JLabel" binding="exitLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <foreground color="-1"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <text resource-bundle="resources/strings" key="exit"/>
+                      <verticalAlignment value="3"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="4e145" layout-manager="CardLayout" hgap="0" vgap="0">
+                <constraints>
+                  <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
+                </constraints>
+                <properties>
+                  <background color="-10586997"/>
+                  <maximumSize width="0" height="1"/>
+                  <minimumSize width="0" height="1"/>
+                  <preferredSize width="0" height="1"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="d7292" layout-manager="GridBagLayout">
+                <constraints>
+                  <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="41.95"/>
+                </constraints>
+                <properties>
+                  <background color="-13350562"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+          <grid id="23da2" binding="navigatePanelCards" layout-manager="CardLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="94.8" weighty="1.0"/>
+            </constraints>
+            <properties>
+              <autoscrolls value="false"/>
+              <background color="-16777216"/>
+              <maximumSize width="-1" height="-1"/>
+              <minimumSize width="-1" height="-1"/>
+              <preferredSize width="-1" height="-1"/>
+              <verifyInputWhenFocusTarget value="true"/>
+              <visible value="true"/>
+            </properties>
+            <clientProperties>
+              <html.disable class="java.lang.Boolean" value="false"/>
+            </clientProperties>
+            <border type="none"/>
+            <children>
+              <grid id="ec3e8" binding="sellPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <card name="Card6"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <grid id="e2bec" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.25"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1183240"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <opaque value="true"/>
+                      <preferredSize width="-1" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <grid id="d586f" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="3.4"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1183240"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <grid id="39103" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1183240"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <grid id="4e3a6" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="95.35"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1183240"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <grid id="c3c6" binding="tablePanel" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="73.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <autoscrolls value="false"/>
+                      <background color="-1183240"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <visible value="true"/>
+                    </properties>
+                    <border type="none">
+                      <color color="-16777216"/>
+                    </border>
+                    <children>
+                      <scrollpane id="5e44a">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="1.0"/>
+                        </constraints>
+                        <properties/>
+                        <border type="none"/>
+                        <children>
+                          <component id="d33f8" class="javax.swing.JTable" binding="sellTable">
+                            <constraints/>
+                            <properties>
+                              <autoCreateColumnsFromModel value="true"/>
+                              <autoResizeMode value="2"/>
+                              <autoscrolls value="true"/>
+                              <editingColumn value="-1"/>
+                              <editingRow value="-1"/>
+                              <enabled value="true"/>
+                              <fillsViewportHeight value="true"/>
+                              <font size="20"/>
+                              <intercellSpacing width="5" height="1"/>
+                              <preferredScrollableViewportSize width="400" height="400"/>
+                              <preferredSize width="400" height="700"/>
+                              <rowHeight value="51"/>
+                              <surrendersFocusOnKeystroke value="false"/>
+                              <visible value="true"/>
+                            </properties>
+                            <clientProperties>
+                              <JTable.autoStartsEdit class="java.lang.Boolean" value="false"/>
+                              <Table.isFileList class="java.lang.Boolean" value="false"/>
+                            </clientProperties>
+                          </component>
+                        </children>
+                      </scrollpane>
+                    </children>
+                  </grid>
+                  <grid id="e664" binding="infoKeyPadPanel" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="26.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1183240"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <grid id="42e57" binding="keyPadPanel" layout-manager="GridBagLayout">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="62.2"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="-1" height="-1"/>
+                          <preferredSize width="-1" height="-1"/>
+                        </properties>
+                        <border type="line">
+                          <color color="-3618616"/>
+                        </border>
+                        <children>
+                          <nested-form id="ae2f7" form-file="gui/custom_components/keypad_panel.form" binding="keypadPanel1" default-binding="true">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="1.0" weighty="1.0"/>
+                            </constraints>
+                          </nested-form>
+                        </children>
+                      </grid>
+                      <grid id="e76fa" binding="paymentInfoPanel" layout-manager="GridBagLayout">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="1.0" weighty="27.75"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1183240"/>
+                          <maximumSize width="-1" height="-1"/>
+                          <minimumSize width="-1" height="-1"/>
+                          <preferredSize width="-1" height="-1"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="6ce3a" class="javax.swing.JButton" binding="discountButton">
+                            <constraints>
+                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="1.0" weighty="26.0"/>
+                            </constraints>
+                            <properties>
+                              <background color="-13350562"/>
+                              <borderPainted value="false"/>
+                              <focusPainted value="false"/>
+                              <focusTraversalPolicyProvider value="false"/>
+                              <font/>
+                              <foreground color="-1"/>
+                              <margin top="0" left="0" bottom="0" right="0"/>
+                              <maximumSize width="-1" height="-1"/>
+                              <minimumSize width="0" height="0"/>
+                              <preferredSize width="0" height="0"/>
+                              <text resource-bundle="resources/strings" key="discount"/>
+                            </properties>
+                          </component>
+                          <grid id="e157" layout-manager="GridBagLayout">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="1.0" weighty="74.0"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children>
+                              <component id="9357" class="javax.swing.JLabel" binding="toPaySumLabel">
+                                <constraints>
+                                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                  <gridbag top="5" left="0" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+                                </constraints>
+                                <properties>
+                                  <maximumSize width="-1" height="-1"/>
+                                  <minimumSize width="-1" height="-1"/>
+                                  <preferredSize width="-1" height="-1"/>
+                                  <text value="0.00"/>
+                                </properties>
+                              </component>
+                              <component id="38822" class="javax.swing.JLabel" binding="toPayLabel">
+                                <constraints>
+                                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                  <gridbag top="5" left="10" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+                                </constraints>
+                                <properties>
+                                  <maximumSize width="-1" height="-1"/>
+                                  <minimumSize width="-1" height="-1"/>
+                                  <preferredSize width="-1" height="-1"/>
+                                  <text resource-bundle="resources/strings" key="to_pay"/>
+                                  <verticalAlignment value="0"/>
+                                </properties>
+                              </component>
+                              <component id="6e626" class="javax.swing.JLabel" binding="discountLabel">
+                                <constraints>
+                                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                  <gridbag top="0" left="10" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
+                                </constraints>
+                                <properties>
+                                  <maximumSize width="-1" height="-1"/>
+                                  <minimumSize width="-1" height="-1"/>
+                                  <preferredSize width="-1" height="-1"/>
+                                  <text resource-bundle="resources/strings" key="discount:"/>
+                                  <verticalAlignment value="1"/>
+                                  <verticalTextPosition value="0"/>
+                                </properties>
+                              </component>
+                              <component id="c3e48" class="javax.swing.JLabel" binding="discountSumLabel">
+                                <constraints>
+                                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                                  <gridbag weightx="1.0" weighty="1.0"/>
+                                </constraints>
+                                <properties>
+                                  <maximumSize width="-1" height="-1"/>
+                                  <minimumSize width="-1" height="-1"/>
+                                  <preferredSize width="-1" height="-1"/>
+                                  <text value="0.00 грн"/>
+                                  <verticalAlignment value="1"/>
+                                </properties>
+                              </component>
+                            </children>
+                          </grid>
+                          <component id="b7bf4" class="javax.swing.JButton" binding="paymentButton">
+                            <constraints>
+                              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="1.0" weighty="26.0"/>
+                            </constraints>
+                            <properties>
+                              <background color="-13264677"/>
+                              <borderPainted value="false"/>
+                              <focusPainted value="false"/>
+                              <font/>
+                              <foreground color="-1"/>
+                              <margin top="0" left="0" bottom="0" right="0"/>
+                              <maximumSize width="-1" height="-1"/>
+                              <minimumSize width="0" height="0"/>
+                              <preferredSize width="0" height="0"/>
+                              <text resource-bundle="resources/strings" key="payment"/>
+                            </properties>
+                          </component>
+                        </children>
+                      </grid>
+                      <grid id="97b36" layout-manager="CardLayout" hgap="0" vgap="0">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="0.0" weighty="5.4"/>
+                        </constraints>
+                        <properties>
+                          <background color="-1183240"/>
+                        </properties>
+                        <border type="none"/>
+                        <children/>
+                      </grid>
+                    </children>
+                  </grid>
+                  <grid id="7fe30" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1183240"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 06.06.2019
+ * Copyright (c) RESONANCE JSC, 17.07.2019
  */
 
 package gui;
@@ -22,7 +22,7 @@ public class FontProvider {
         // We need DPI, but it's unreal to determine it. We will use resolution in pixels at least.
         double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();    //our screen width in pixels
         scaleValue = (float) (1920 / screenWidth);                                //1920px screen width - starting point
-        scaleValue = scaleValue * 1.32f;        //scaleValue * 1,32f to test on my display as it is 14' POS DELETE
+//        scaleValue = scaleValue * 1.32f;        //scaleValue * 1,32f to test on my display as it is 14' POS DELETE
     }
 
     public Font getFont(String fontName, float size) {

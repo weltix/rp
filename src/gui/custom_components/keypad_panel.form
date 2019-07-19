@@ -66,21 +66,6 @@
             </properties>
             <border type="none"/>
             <children>
-              <grid id="71d8c" layout-manager="CardLayout" hgap="0" vgap="0">
-                <constraints>
-                  <grid row="15" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <alignmentX value="0.5"/>
-                  <background color="-12566464"/>
-                  <maximumSize width="-1" height="1"/>
-                  <minimumSize width="-1" height="1"/>
-                  <preferredSize width="-1" height="1"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </grid>
               <grid id="d7471" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="13" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -89,7 +74,7 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <autoscrolls value="false"/>
-                  <background color="-12566464"/>
+                  <background color="-3618616"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
@@ -116,36 +101,6 @@
                   <verticalAlignment value="0"/>
                 </properties>
               </component>
-              <grid id="aa3a8" layout-manager="CardLayout" hgap="0" vgap="0">
-                <constraints>
-                  <grid row="13" column="0" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipadx="1"/>
-                </constraints>
-                <properties>
-                  <alignmentX value="0.5"/>
-                  <background color="-12566464"/>
-                  <maximumSize width="-1" height="-1"/>
-                  <minimumSize width="-1" height="-1"/>
-                  <preferredSize width="-1" height="-1"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </grid>
-              <grid id="d550d" layout-manager="CardLayout" hgap="0" vgap="0">
-                <constraints>
-                  <grid row="13" column="6" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <alignmentX value="0.5"/>
-                  <background color="-12566464"/>
-                  <maximumSize width="1" height="-1"/>
-                  <minimumSize width="1" height="-1"/>
-                  <preferredSize width="1" height="-1"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </grid>
               <component id="840ba" class="javax.swing.JButton" binding="a0Button" default-binding="true">
                 <constraints>
                   <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -232,7 +187,7 @@
               </grid>
               <grid id="4f919" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
-                  <grid row="5" column="6" row-span="8" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="6" row-span="9" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
@@ -247,7 +202,7 @@
               </grid>
               <grid id="a42f4" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
-                  <grid row="5" column="0" row-span="8" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="9" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="0.0"/>
                 </constraints>
                 <properties>
@@ -488,6 +443,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <opaque value="true"/>
                   <preferredSize width="-1" height="-1"/>
                   <text value="1"/>
                 </properties>
@@ -702,7 +658,7 @@
               </grid>
               <grid id="8aed0" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
-                  <grid row="16" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="15" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="2.8"/>
                 </constraints>
                 <properties>
@@ -716,18 +672,25 @@
               </grid>
               <grid id="157b8" binding="actionButtonPanel" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
-                  <grid row="14" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="14" column="0" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="14.83"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-3618616"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <grid id="4eaa2" layout-manager="GridBagLayout">
                     <constraints>
                       <card name="Card2"/>
                     </constraints>
-                    <properties/>
-                    <border type="none"/>
+                    <properties>
+                      <opaque value="false"/>
+                      <visible value="false"/>
+                    </properties>
+                    <border type="none">
+                      <title-color color="-16777216"/>
+                    </border>
                     <children>
                       <component id="4adfc" class="javax.swing.JButton" binding="searchButton">
                         <constraints>
@@ -757,65 +720,47 @@
                     </constraints>
                     <properties>
                       <alignmentX value="0.5"/>
+                      <autoscrolls value="false"/>
+                      <background color="-855310"/>
+                      <opaque value="false"/>
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="8f16e" class="javax.swing.JButton" binding="button1" default-binding="true">
-                        <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="1.0"/>
-                        </constraints>
-                        <properties>
-                          <alignmentX value="0.0"/>
-                          <background color="-3118109"/>
-                          <borderPainted value="false"/>
-                          <focusPainted value="false"/>
-                          <maximumSize width="2147483647" height="2147483647"/>
-                          <minimumSize width="0" height="0"/>
-                          <preferredSize width="0" height="0"/>
-                          <text value="Button"/>
-                        </properties>
-                      </component>
-                      <component id="a88a1" class="javax.swing.JButton" binding="button2" default-binding="true">
+                      <component id="4dfc8" class="javax.swing.JButton" binding="actionButton2">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="1.0"/>
+                          <gridbag weightx="50.0" weighty="1.0"/>
                         </constraints>
                         <properties>
                           <alignmentX value="0.0"/>
+                          <background color="-13264677"/>
                           <borderPainted value="false"/>
                           <focusPainted value="false"/>
+                          <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
                           <preferredSize width="0" height="0"/>
-                          <text value="Button"/>
+                          <text resource-bundle="resources/strings" key="cancel"/>
                         </properties>
                       </component>
-                      <component id="4dfc8" class="javax.swing.JButton" binding="button3" default-binding="true">
+                      <component id="8f16e" class="javax.swing.JButton" binding="actionButton1">
                         <constraints>
-                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="1.0"/>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                          <gridbag weightx="50.0" weighty="1.0"/>
                         </constraints>
                         <properties>
                           <alignmentX value="0.0"/>
-                          <background color="-11423261"/>
+                          <background color="-13350562"/>
                           <borderPainted value="false"/>
                           <focusPainted value="false"/>
+                          <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
                           <preferredSize width="0" height="0"/>
-                          <text value="Button"/>
+                          <text resource-bundle="resources/strings" key="ok"/>
                         </properties>
                       </component>
                     </children>
-                  </grid>
-                  <grid id="d7f67" layout-manager="GridBagLayout">
-                    <constraints>
-                      <card name="Card3"/>
-                    </constraints>
-                    <properties/>
-                    <border type="none"/>
-                    <children/>
                   </grid>
                 </children>
               </grid>

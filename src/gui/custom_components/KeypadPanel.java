@@ -13,9 +13,8 @@ import java.awt.event.MouseListener;
 
 import static gui.FontProvider.FONTAWESOME_REGULAR;
 import static gui.FontProvider.ROBOTO_REGULAR;
-import static javax.swing.JLayeredPane.DRAG_LAYER;
 
-public class KeypadPanel extends JFrame {
+public class KeypadPanel {
     private JLabel searchLabel;
     private JButton searchButton;
     private JButton a0Button;
@@ -35,16 +34,19 @@ public class KeypadPanel extends JFrame {
     private JPanel keyPadPanel;
     private JPanel parentPanel;
     private JPanel actionButtonPanel;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton actionButton1;
+    private JButton actionButton2;
     private JPanel centerPanel;
 
     public KeypadPanel() {
+
         FontProvider fontProvider = new FontProvider();
+        Font robotoRegular34 = fontProvider.getFont(ROBOTO_REGULAR, 34f);
         Font robotoRegular50 = fontProvider.getFont(ROBOTO_REGULAR, 50f);
 
-        searchButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 34f));
+        searchButton.setFont(robotoRegular34);
+        actionButton1.setFont(robotoRegular34);
+        actionButton2.setFont(robotoRegular34);
 
         a1Button.setFont(robotoRegular50);
         a2Button.setFont(robotoRegular50);
@@ -79,17 +81,17 @@ public class KeypadPanel extends JFrame {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                a1Button.setBackground(new Color(255, 255, 255));
+
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
+                a1Button.setBackground(new Color(237, 246, 255));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-
+                a1Button.setBackground(new Color(255, 255, 255));
             }
         });
 
@@ -104,10 +106,5 @@ public class KeypadPanel extends JFrame {
 //        constraintsForA0Button.gridwidth = 1;
 //        centerPanel.add(dotButton, constraintsForDotButton);
 //        centerPanel.add(a0Button, constraintsForA0Button);
-
-        JLayeredPane layeredPane = getRootPane().getLayeredPane();
-        layeredPane.add(new Label("2135412354234"), DRAG_LAYER);
-        setContentPane(parentPanel);
-//        setVisible(true);
     }
 }

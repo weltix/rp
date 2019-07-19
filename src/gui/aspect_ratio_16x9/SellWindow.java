@@ -1,12 +1,14 @@
 /*
- * Copyright (c) RESONANCE JSC, 28.05.2019
+ * Copyright (c) RESONANCE JSC, 17.07.2019
  */
 
-package gui;
+package gui.aspect_ratio_16x9;
 
+import gui.FontProvider;
 import gui.custom_components.KeypadPanel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,7 +21,6 @@ import static gui.FontProvider.*;
  */
 
 public class SellWindow extends JFrame {
-    private JPanel contentPane;
 
     private JLabel toPayLabel;
     private JLabel toPaySumLabel;
@@ -46,15 +47,19 @@ public class SellWindow extends JFrame {
     private JPanel exitPanel;
     private JLabel exitIcon;
     private JLabel exitLabel;
-    private JPanel sellTablePanel;
-    private JPanel paymentInfoPanel;
-    private JPanel infoKeyPadPanel;
-    private JPanel keyPadPanel;
-    private JTable sellTable;
-    private KeypadPanel keypadPanel1;
-    private JButton button6;
     private JButton button2;
     private JButton button3;
+    private JTable sellTable;
+    private JPanel mainPanel;
+    private JPanel navigatePanel;
+    private JPanel mainSellPanel;
+    private JPanel sellPanel;
+    private JPanel tablePanel;
+    private JPanel infoKeyPadPanel;
+    private JPanel keyPadPanel;
+    private KeypadPanel keypadPanel1;
+    private JPanel paymentInfoPanel;
+    private JPanel navigatePanelCards;
 
     private GraphicsDevice graphicsDevice;
 
@@ -76,10 +81,11 @@ public class SellWindow extends JFrame {
         // set full screen exclusive mode
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         graphicsDevice = ge.getDefaultScreenDevice();
-        graphicsDevice.setFullScreenWindow(this);
+        if (graphicsDevice.isFullScreenSupported())
+            graphicsDevice.setFullScreenWindow(this);
 
         initComponents();
-        setContentPane(contentPane);
+        setContentPane(mainPanel);
         setVisible(true);
 
 
@@ -88,16 +94,9 @@ public class SellWindow extends JFrame {
         // next parameters make window for my monitor with physical dimensions like real 14' POS
 //        setSize(1050, 618);
 
-        JWindow win2 = new JWindow(this);
-        win2.setCursor(getToolkit().createCustomCursor(
-                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-                new Point(),
-                null));
-        button2.addActionListener(actionEvent -> win2.setVisible(true));
-        win2.setSize(1920, 1080);
-        Button closeButton = new Button("CLOSE");
-        closeButton.addActionListener(actionEvent -> win2.setVisible(false));
-        win2.add(closeButton);
+        CardLayout cl = (CardLayout) (mainPanel.getLayout());
+        cl.show(mainPanel, "cardSellPanel");
+
     }
 
     private void initComponents() {
@@ -279,5 +278,49 @@ public class SellWindow extends JFrame {
         });
         exitIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
         exitLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
+
+
+        String[] columnNames = {"First Name",
+                "Last Name",
+                "Sport",
+                "# of Years",
+                "Vegetarian"};
+
+        Object[][] data = {
+                {"Kathy", "Smith",
+                        "Snowboarding", new Integer(5), new Boolean(false)},
+                {"John", "Doe",
+                        "Rowing", new Integer(3), new Boolean(true)},
+                {"Sue", "Black",
+                        "Knitting", new Integer(2), new Boolean(false)},
+                {"Jane", "White",
+                        "Speed reading", new Integer(20), new Boolean(true)},
+                {"Joe", "Brown",
+                        "Pool", new Integer(10), new Boolean(false)}
+        };
+
+
+        String data1 = "Kathy";
+        String data2 = "John";
+        String data3 = "Sue";
+        String data4 = "Jane";
+
+        Object[] row = {data1, data2, data3, data4};
+
+//        sellTable.setPreferredScrollableViewportSize(new Dimension(500, 70));
+//        sellTable.setFillsViewportHeight(true);
+
+        DefaultTableModel sellTableModel = (DefaultTableModel) sellTable.getModel();
+        sellTableModel.addColumn("1");
+        sellTableModel.addColumn("2");
+        sellTableModel.addColumn("3");
+        sellTableModel.addColumn("4");
+        sellTableModel.addColumn("5");
+        sellTableModel.addRow(row);
+//        sellTableModel.
+
+        sellTableModel.setRowCount(20);
+
     }
+
 }
