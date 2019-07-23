@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 
 import static gui.FontProvider.*;
 
@@ -68,11 +67,11 @@ public class SellWindow extends JFrame {
     }
 
     private void init() {
-        // hide cursor from current JFrame
-        setCursor(getToolkit().createCustomCursor(
-                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-                new Point(),
-                null));
+//        // hide cursor from current JFrame
+//        setCursor(getToolkit().createCustomCursor(
+//                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+//                new Point(),
+//                null));
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setUndecorated(true);        //need for full screen mode
@@ -287,7 +286,7 @@ public class SellWindow extends JFrame {
                 "Vegetarian"};
 
         Object[][] data = {
-                {"Kathy", "Smith",
+                {"Kathy", "Smith3w4t3q4vqw4tgv4wgt4gt34gt4evtegvw4t",
                         "Snowboarding", new Integer(5), new Boolean(false)},
                 {"John", "Doe",
                         "Rowing", new Integer(3), new Boolean(true)},
@@ -300,12 +299,13 @@ public class SellWindow extends JFrame {
         };
 
 
-        String data1 = "Kathy";
+        String data1 = "Kathy32465312542346243523524 45745y45herghesrgerg";
         String data2 = "John";
         String data3 = "Sue";
         String data4 = "Jane";
+        String data5 = "Jane";
 
-        Object[] row = {data1, data2, data3, data4};
+        Object[] row = {data1, data2, data3, data4, data5};
 
 //        sellTable.setPreferredScrollableViewportSize(new Dimension(500, 70));
 //        sellTable.setFillsViewportHeight(true);
@@ -317,9 +317,9 @@ public class SellWindow extends JFrame {
         sellTableModel.addColumn("4");
         sellTableModel.addColumn("5");
         sellTableModel.addRow(row);
-//        sellTableModel.
+        sellTableModel.setDataVector(data, row);
 
-        sellTableModel.setRowCount(20);
+        sellTableModel.setRowCount(25);
 
     }
 

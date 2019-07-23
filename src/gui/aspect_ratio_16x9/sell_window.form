@@ -492,17 +492,21 @@
                             <constraints/>
                             <properties>
                               <autoCreateColumnsFromModel value="true"/>
+                              <autoCreateRowSorter value="false"/>
                               <autoResizeMode value="2"/>
                               <autoscrolls value="true"/>
+                              <cellSelectionEnabled value="false"/>
+                              <columnSelectionAllowed value="false"/>
                               <editingColumn value="-1"/>
                               <editingRow value="-1"/>
                               <enabled value="true"/>
                               <fillsViewportHeight value="true"/>
                               <font size="20"/>
                               <intercellSpacing width="5" height="1"/>
-                              <preferredScrollableViewportSize width="400" height="400"/>
+                              <preferredScrollableViewportSize width="100" height="100"/>
                               <preferredSize width="400" height="700"/>
                               <rowHeight value="51"/>
+                              <rowSelectionAllowed value="false"/>
                               <surrendersFocusOnKeystroke value="false"/>
                               <visible value="true"/>
                             </properties>
