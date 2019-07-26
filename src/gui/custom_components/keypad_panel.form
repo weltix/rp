@@ -53,7 +53,7 @@
             <border type="none"/>
             <children/>
           </grid>
-          <grid id="50935" binding="centerPanel" layout-manager="GridBagLayout">
+          <grid id="50935" binding="mainPanel" layout-manager="GridBagLayout">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="90.3" weighty="0.0"/>
@@ -603,7 +603,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="44176" class="javax.swing.JTextField" binding="barcodeTextField">
+                  <component id="44176" class="javax.swing.JTextField" binding="textField">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -611,10 +611,13 @@
                       <gridbag top="0" left="5" bottom="0" right="0" weightx="80.0" weighty="1.0"/>
                     </constraints>
                     <properties>
+                      <autoscrolls value="true"/>
+                      <doubleBuffered value="false"/>
                       <margin top="2" left="5" bottom="2" right="5"/>
                       <maximumSize width="-1" height="-1"/>
                       <minimumSize width="-1" height="-1"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="true"/>
                     </properties>
                   </component>
                   <component id="3d620" class="javax.swing.JButton" binding="backSpaceButton">
@@ -682,11 +685,11 @@
                 <children>
                   <grid id="4eaa2" layout-manager="GridBagLayout">
                     <constraints>
-                      <card name="Card2"/>
+                      <card name="searchButtonPanel"/>
                     </constraints>
                     <properties>
                       <opaque value="false"/>
-                      <visible value="false"/>
+                      <visible value="true"/>
                     </properties>
                     <border type="none">
                       <title-color color="-16777216"/>
@@ -716,7 +719,7 @@
                   </grid>
                   <grid id="e45b8" layout-manager="GridBagLayout">
                     <constraints>
-                      <card name="Card1"/>
+                      <card name="twoButtonPanel"/>
                     </constraints>
                     <properties>
                       <alignmentX value="0.5"/>

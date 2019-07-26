@@ -10,8 +10,6 @@ import java.util.List;
 
 /**
  * Класс, описывающий чек
- *
- * @author Dmitriy Bludov
  */
 
 public class Receipt {
@@ -30,7 +28,7 @@ public class Receipt {
         receiptItems.remove(itemIndex);
     }
 
-    void setItemQuantity(int itemIndex, float newQuantity){
+    void setItemQuantity(int itemIndex, float newQuantity) {
         receiptItems.get(itemIndex).setQuantity(newQuantity);
     }
 }

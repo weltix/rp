@@ -122,6 +122,9 @@
       <item class="gui.custom_components.KeypadPanel" icon="" removable="true" auto-create-binding="true" can-attach-label="false" is-container="true">
         <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
       </item>
+      <item class="gui.custom_components.BackgroundPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="true" auto-create-binding="true" can-attach-label="false" is-container="true">
+        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
+      </item>
     </group>
   </component>
   <component name="uidesigner-configuration">

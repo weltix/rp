@@ -2,13 +2,13 @@
  * Copyright (c) RESONANCE JSC, 28.05.2019
  */
 
-import gui.aspect_ratio_16x9.SellWindow;
+import gui.aspect_ratio_16x9.MainFrame;
 import resources.Resources;
 
 import javax.swing.*;
 
 /**
- * @author Dmitriy Bludov
+ * Главный класс, с которого начинается работа приложения.
  */
 
 public class Main {
@@ -20,6 +20,6 @@ public class Main {
     }
 
     private static void createAndShowGUI() {
-        new SellWindow();
+        new MainFrame();
     }
 }

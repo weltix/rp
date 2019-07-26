@@ -11,8 +11,6 @@ import java.util.Objects;
 
 /**
  * Класс, описывающий одну позицию чека
- *
- * @author Dmitriy Bludov
  */
 
 public class ReceiptItem {

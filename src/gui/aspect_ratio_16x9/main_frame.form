@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.aspect_ratio_16x9.SellWindow">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.aspect_ratio_16x9.MainFrame">
   <grid id="ffc61" binding="mainPanel" layout-manager="CardLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="768" height="503"/>
+      <xy x="20" y="20" width="1920" height="1080"/>
     </constraints>
     <properties>
       <preferredSize width="-1" height="-1"/>
     </properties>
     <border type="none"/>
     <children>
+      <grid id="a309f" binding="splashScreenPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <card name="splashScreenPanel"/>
+        </constraints>
+        <properties>
+          <minimumSize width="1920" height="1080"/>
+          <preferredSize width="1920" height="1080"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
       <grid id="b6c5f" binding="mainSellPanel" layout-manager="GridBagLayout">
         <constraints>
-          <card name="cardSellPanel"/>
+          <card name="mainSellPanel"/>
         </constraints>
         <properties>
           <minimumSize width="0" height="0"/>
@@ -92,7 +103,7 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="82365" binding="addProductPanel" layout-manager="GridBagLayout">
+              <grid id="82365" binding="addProductButton" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="2.0" weighty="10.35"/>
@@ -149,7 +160,7 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="d491d" binding="workWithReceiptPanel" layout-manager="GridBagLayout">
+              <grid id="d491d" binding="workWithReceiptButton" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="10.35"/>
@@ -208,7 +219,7 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="42b81" binding="cashboxPanel" layout-manager="GridBagLayout">
+              <grid id="42b81" binding="cashboxButton" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="10.35"/>
@@ -263,7 +274,7 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="da70a" binding="servicePanel" layout-manager="GridBagLayout">
+              <grid id="da70a" binding="serviceButton" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="10.35"/>
@@ -316,7 +327,7 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="21f55" binding="exitPanel" layout-manager="GridBagLayout">
+              <grid id="21f55" binding="exitButton" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="10.35"/>
@@ -405,7 +416,7 @@
             <children>
               <grid id="ec3e8" binding="sellPanel" layout-manager="GridBagLayout">
                 <constraints>
-                  <card name="Card6"/>
+                  <card name="sellPanel"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -532,7 +543,7 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <grid id="42e57" binding="keyPadPanel" layout-manager="GridBagLayout">
+                      <grid id="42e57" binding="searchKeyPadPanel" layout-manager="GridBagLayout">
                         <constraints>
                           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="1.0" weighty="62.2"/>
@@ -698,6 +709,38 @@
                     <children/>
                   </grid>
                 </children>
+              </grid>
+              <grid id="4f20b" binding="addGoodPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <card name="addGoodPanel"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="6aec4" binding="workWithReceiptPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <card name="workWithReceiptPanel"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="846d1" binding="cashboxPanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <card name="cashboxPanel"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
+              </grid>
+              <grid id="89f23" binding="servicePanel" layout-manager="GridBagLayout">
+                <constraints>
+                  <card name="servicePanel"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children/>
               </grid>
             </children>
           </grid>

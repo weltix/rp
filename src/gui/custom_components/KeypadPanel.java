@@ -16,6 +16,11 @@ import java.awt.event.MouseListener;
 import static gui.FontProvider.FONTAWESOME_REGULAR;
 import static gui.FontProvider.ROBOTO_REGULAR;
 
+/**
+ * Класс, содержащий в себе блок цифровой клавиатуры.
+ * Использует форму keypad_panel.form
+ */
+
 public class KeypadPanel implements ActionListener {
     private JLabel searchLabel;
     private JButton searchButton;
@@ -31,19 +36,20 @@ public class KeypadPanel implements ActionListener {
     private JButton a1Button;
     private JButton a2Button;
     private JButton a3Button;
-    private JTextField barcodeTextField;
+    private JTextField textField;
     private JButton backSpaceButton;
     private JPanel keyPadPanel;
     private JPanel parentPanel;
     private JPanel actionButtonPanel;
     private JButton actionButton1;
     private JButton actionButton2;
-    private JPanel centerPanel;
-
-    StringBuilder tempStr = new StringBuilder();
+    private JPanel mainPanel;
 
     public KeypadPanel() {
+        initComponents();
+    }
 
+    private void initComponents() {
         FontProvider fontProvider = new FontProvider();
         Font robotoRegular34 = fontProvider.getFont(ROBOTO_REGULAR, 34f);
         Font robotoRegular50 = fontProvider.getFont(ROBOTO_REGULAR, 50f);
@@ -52,57 +58,30 @@ public class KeypadPanel implements ActionListener {
         actionButton1.setFont(robotoRegular34);
         actionButton2.setFont(robotoRegular34);
 
-        a1Button.setFont(robotoRegular50);
-        a2Button.setFont(robotoRegular50);
-        a3Button.setFont(robotoRegular50);
-        a4Button.setFont(robotoRegular50);
-        a5Button.setFont(robotoRegular50);
-        a6Button.setFont(robotoRegular50);
-        a7Button.setFont(robotoRegular50);
-        a8Button.setFont(robotoRegular50);
-        a9Button.setFont(robotoRegular50);
-        a0Button.setFont(robotoRegular50);
-        dotButton.setFont(robotoRegular50);
-        cButton.setFont(robotoRegular50);
-
         searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 22f));
-
-        barcodeTextField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
-        barcodeTextField.setBorder(BorderFactory.createEmptyBorder());
-
         backSpaceButton.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 54f));
+        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
+        textField.setBorder(BorderFactory.createEmptyBorder());
 
-        a0Button.addActionListener(e -> changeBarcodeTextField('0'));
-        a1Button.addActionListener(e -> changeBarcodeTextField('1'));
-        a2Button.addActionListener(e -> changeBarcodeTextField('2'));
-        a3Button.addActionListener(e -> changeBarcodeTextField('3'));
-        a4Button.addActionListener(e -> changeBarcodeTextField('4'));
-        a5Button.addActionListener(e -> changeBarcodeTextField('5'));
-        a6Button.addActionListener(e -> changeBarcodeTextField('6'));
-        a7Button.addActionListener(e -> changeBarcodeTextField('7'));
-        a8Button.addActionListener(e -> changeBarcodeTextField('8'));
-        a9Button.addActionListener(e -> changeBarcodeTextField('9'));
-        dotButton.addActionListener(e -> changeBarcodeTextField('.'));
-        cButton.addActionListener(e -> changeBarcodeTextField('C'));
-        backSpaceButton.addActionListener(e -> changeBarcodeTextField('\b'));
+        // таймер для генерации повторных срабатываний цифровых клавиш при их удержании в нажатом состоянии
+        Timer timer = new Timer(30, this);
+        timer.setInitialDelay(500);
 
-
-        Timer timer = new Timer(0, this);
-        timer.setInitialDelay(250);
-
-        if (centerPanel instanceof Container) {
-            for (Component child : centerPanel.getComponents()) {
+        // циклически задаём свойства цифровым клавишам (12 шт.) (getComponents() возвращает компоненты 1-го уровня вложенности)
+        if (mainPanel instanceof Container) {
+            for (Component child : mainPanel.getComponents()) {
                 if (child instanceof JButton) {
-
+                    child.setFont(robotoRegular50);
                     child.addMouseListener(new MouseListener() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
-                            System.out.println(e.getSource().getText);
                         }
 
                         @Override
                         public void mousePressed(MouseEvent e) {
-//                            timer.setActionCommand(ch);
+                            String buttonText = ((JButton) e.getSource()).getText();
+                            changeTextField(buttonText.charAt(0));
+                            timer.setActionCommand(buttonText);
                             timer.start();
                         }
 
@@ -117,40 +96,98 @@ public class KeypadPanel implements ActionListener {
 
                         @Override
                         public void mouseExited(MouseEvent e) {
+                            timer.stop();
                         }
                     });
                 }
             }
         }
 
+        backSpaceButton.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
 
-//        GridBagLayout centerPanelLayout = (GridBagLayout) centerPanel.getLayout();
+            @Override
+            public void mousePressed(MouseEvent e) {
+                String buttonText = String.valueOf('\b');
+                changeTextField(buttonText.charAt(0));
+                timer.setActionCommand(buttonText);
+                timer.start();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                timer.stop();
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                timer.stop();
+            }
+        });
+    }
+
+    /**
+     * Обеспечивает изменение текстового поля при нажатии на цифровые клавиши
+     *
+     * @param ch символ-идентификатор нажатой цифровой клавиши (в основном, это - символ на самой кнопке)
+     */
+    private void changeTextField(char ch) {
+        int caretPosition = textField.getCaretPosition();
+        if (ch == '\b') {
+            textField.select(caretPosition - 1, caretPosition);
+            textField.replaceSelection("");
+        } else if (ch == 'C')
+            textField.setText("");
+        else
+            textField.replaceSelection(String.valueOf(ch));
+    }
+
+    /**
+     * Метод обеспечивает генерацию повторных срабатываний при длительном нажатии на цифровую клавишу.
+     * Выполняется с заданной в таймере частотой после его срабатыванию.
+     *
+     * @param e событие, произошедшее по срабатыванию таймера
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        changeTextField(e.getActionCommand().charAt(0));
+    }
+
+    /**
+     * Обеспечивает определение названия-идентификатора окна (диалога), содержащего данную клавиатуру.
+     * Это необходимо для того, чтобы определить какие кнопки показывать внизу
+     * (например, одну кнопку "Поиск", или же 2 кнопки "ОК" и "Отмена" и т.д.).
+     *
+     * @param context произвольное название-идентификатор окна (диалога), содержащего данную клавиатуру
+     */
+    public void setContext(String context) {
+        CardLayout cardLayout = (CardLayout) (actionButtonPanel.getLayout());
+        if (context.equals("searchButtonPanel"))
+            cardLayout.show(actionButtonPanel, "searchButtonPanel");
+        else
+            cardLayout.show(actionButtonPanel, "twoButtonPanel");
+
+        // TODO: 25.07.2019 доработать данный метод (когда будут известны все варианты самой нижней(-их) кнопок)
+//        GridBagLayout centerPanelLayout = (GridBagLayout) mainPanel.getLayout();
 //        GridBagConstraints constraintsForA0Button = centerPanelLayout.getConstraints(a0Button);
 //        GridBagConstraints constraintsForDotButton = centerPanelLayout.getConstraints(dotButton);
 //
 //        constraintsForA0Button.gridwidth = 3;
-//        centerPanel.remove(dotButton);
-//        centerPanel.add(a0Button, constraintsForA0Button);
+//        mainPanel.remove(dotButton);
+//        mainPanel.add(a0Button, constraintsForA0Button);
 //
 //        constraintsForA0Button.gridwidth = 1;
-//        centerPanel.add(dotButton, constraintsForDotButton);
-//        centerPanel.add(a0Button, constraintsForA0Button);
+//        mainPanel.add(dotButton, constraintsForDotButton);
+//        mainPanel.add(a0Button, constraintsForA0Button);
     }
 
-    private void changeBarcodeTextField(char ch) {
-        tempStr = new StringBuilder(barcodeTextField.getText());
-        if (ch == '\b') {
-            if (tempStr.length() > 0)
-                tempStr.delete(tempStr.length() - 1, tempStr.length());
-        } else if (ch == 'C')
-            tempStr.delete(0, tempStr.length());
-        else
-            tempStr.append(ch);
-        barcodeTextField.setText(tempStr.toString());
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        backSpaceButton.doClick();
-    }
+    // TODO: 25.07.2019 Можно сделать выделение текста в текстовом поле по долгому нажатию левой кнопки мыши, а также по двойному щелчку
+    // TODO: 26.07.2019 Подобрать более оптимальный фон кнопки при её нажатии
 }

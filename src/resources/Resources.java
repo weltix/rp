@@ -14,10 +14,9 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
- * Класс служит для получения строк для указанного языка.
+ * Класс служит для локализации приложения. Обеспечивает получение строк для указанного языка.
  * Строки для разных языков хранятся в *.properties файлах.
- *
- * @author Dmitriy Bludov
+ * Всегда должен быть один *.properties файл по умолчанию, без кода языка (например, {@code strings.properties})
  */
 // TODO: 29.05.2019 Save lang to file as preferences
 // TODO: 29.05.2019 Get saved lang from file
@@ -30,10 +29,21 @@ public class Resources {
         setLocale(RU_LANG);
     }
 
+    /**
+     * Возвращает по ключу строку из файла *.properties на установленном для {@code resourceBundle} языке
+     *
+     * @param key ключ, по которому возвращается соответствующая строка
+     */
     public String getString(String key) {
         return resourceBundle.getString(key);
     }
 
+    /**
+     * Устанавливает локализацию по умолчанию для данного экземпляра JRE, используя заданный язык.
+     * Создаёт объект класса ResourceBundle с заданным языком.
+     *
+     * @param language желаемый язык интерфейса программы
+     */
     private void setLocale(String language) {
         Locale currentLocale = new Locale(language);
         Locale.setDefault(currentLocale);
@@ -41,17 +51,14 @@ public class Resources {
     }
 }
 
-
 /**
  * Класс, исправляющий проблему с русской кодировкой для ResourceBundle.
  * При этом, файлы *.properties должны иметь кодировку UTF-8.
  */
-//
 class UTF8Control extends ResourceBundle.Control {
     public ResourceBundle newBundle
             (String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-            throws IllegalAccessException, InstantiationException, IOException
-    {
+            throws IllegalAccessException, InstantiationException, IOException {
         // The below is a copy of the default implementation.
         String bundleName = toBundleName(baseName, locale);
         String resourceName = toResourceName(bundleName, "properties");
