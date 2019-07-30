@@ -6,6 +6,7 @@ package gui.aspect_ratio_16x9;
 
 import gui.FontProvider;
 import gui.custom_components.BackgroundPanel;
+import gui.custom_components.DisabledGlassPane;
 import gui.custom_components.KeypadPanel;
 
 import javax.imageio.ImageIO;
@@ -63,7 +64,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel tablePanel;
     private JPanel infoKeyPadPanel;
     private JPanel searchKeyPadPanel;
-    private KeypadPanel keypadPanel1;
+    private KeypadPanel keypadPanel;
     private JPanel paymentInfoPanel;
     private JPanel navigatePanelCards;
     private JPanel addGoodPanel;
@@ -71,13 +72,14 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel cashboxPanel;
     private JPanel servicePanel;
     private JPanel splashScreenPanel;
+    private JLabel searchLabel;
 
     private GraphicsDevice graphicsDevice;
     private CardLayout cardLayout;
-    /**
-     * Таймер для отсчёта времени показа splash screen
-     */
+    // Таймер для отсчёта времени показа splash screen
     private Timer splashScreenTimer;
+    // GlassPane для эмуляции неактивного (disabled) фонового окна (аналог modality в JDialog)
+    private DisabledGlassPane glassPane = new DisabledGlassPane();
 
     public MainFrame() {
         init();
@@ -110,8 +112,9 @@ public class MainFrame extends JFrame implements ActionListener {
         // next parameters make window for my monitor with physical dimensions like real 14' POS
 //        setSize(1050, 618);
 
+        setGlassPane(glassPane);
         cardLayout = (CardLayout) (mainPanel.getLayout());
-        cardLayout.show(mainPanel, "splashScreenPanel");
+        cardLayout.show(mainPanel, "mainSellPanel");
     }
 
     /**
@@ -120,7 +123,7 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void setSplashScreen() {
         splashScreenTimer = new Timer(0, this);
-        splashScreenTimer.setInitialDelay(1000);
+        splashScreenTimer.setInitialDelay(2000);
         splashScreenTimer.start();
         Image splashScreenImage = null;
         try {
@@ -136,6 +139,21 @@ public class MainFrame extends JFrame implements ActionListener {
         constraints.weighty = 1;
         JPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
         splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
+
+//        JComponent glassPane = this.getLayeredPane();
+//        this.setGlassPane(glassPane);
+//        Label label = new Label("2134123412341234");
+//        glassPane.add(label);
+//
+//        label.setForeground(Color.WHITE);
+////        layeredPane.add(label, 300);
+
+//        JLayeredPane layeredPane = this.getLayeredPane();
+//        Label label = new Label("2134123412341234");
+//        label.setForeground(Color.WHITE);
+//        splashScreenPanel.add(label);
+//        splashScreenPanel.repaint();
+        // TODO: 29.07.2019 Сделать Label на главной заставке
     }
 
     private void initComponents() {
@@ -150,12 +168,13 @@ public class MainFrame extends JFrame implements ActionListener {
 
         resposLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 22f));
         marketLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 12f));
+        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 22f));
 
         Color navPanelColor = new Color(52, 73, 94);
         Color navPanelPressed = new Color(65, 91, 122);
         Color navIconLabelPressed = new Color(230, 238, 243);
 
-        keypadPanel1.setContext("searchButtonPanel");           // задаём внешний вид цифровой клавиатуры
+        keypadPanel.setActionButtons("oneActionButton");           // задаём внешний вид цифровой клавиатуры
 
         addProductButton.addMouseListener(new MouseListener() {
             @Override
@@ -299,6 +318,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 exitButton.setBackground(navPanelPressed);
                 exitIcon.setForeground(navIconLabelPressed);
                 exitLabel.setForeground(navIconLabelPressed);
+                launchLoginWindow();
             }
 
             @Override
@@ -392,31 +412,18 @@ public class MainFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         splashScreenTimer.stop();
+        launchLoginWindow();
+    }
 
-        Dialog dialog = new JDialog(this);
-        //Show it.
-//        dialog.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        dialog.setUndecorated(true);
-        dialog.setSize(new Dimension(400, 500));
-        dialog.setLocationRelativeTo(this);
-        JButton okButton = new JButton("OK");
-        dialog.add(okButton);
-        okButton.addActionListener(q -> dialog.dispose());
-        dialog.setVisible(true);
+    /**
+     * Создаёт, настраивает и показывает окно входа в систему по паролю
+     */
+    private void launchLoginWindow() {
+        JWindow window = new LoginWindow(this);
+        window.setSize(keypadPanel.getSize());
+        window.setLocationRelativeTo(this);
+        window.setVisible(true);
 
-        //        cardLayout.show(mainPanel, "mainSellPanel");
-
-//        JWindow window = new JWindow(this);
-//        //Show it.
-////        window.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-////        dialog.setUndecorated(true);
-//        window.setSize(new Dimension(400, 500));
-//        window.setLocationRelativeTo(this);
-//
-//        JButton okButton = new JButton("OK");
-//        okButton.addActionListener(q -> window.dispose());
-//        window.add(okButton);
-//        window.setVisible(true);
-
+        glassPane.activate("");
     }
 }

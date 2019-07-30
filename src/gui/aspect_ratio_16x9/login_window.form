@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.aspect_ratio_16x9.LoginWindow">
+  <grid id="cbd77" binding="contentPane" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="48" y="54" width="347" height="425"/>
+    </constraints>
+    <properties/>
+    <border type="line">
+      <color color="-3618616"/>
+    </border>
+    <children>
+      <nested-form id="2172a" form-file="gui/custom_components/keypad_panel.form" binding="keypadPanel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="1.0"/>
+        </constraints>
+      </nested-form>
+    </children>
+  </grid>
+</form>

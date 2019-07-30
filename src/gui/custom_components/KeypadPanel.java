@@ -20,11 +20,14 @@ import static gui.FontProvider.ROBOTO_REGULAR;
  * Класс, содержащий в себе блок цифровой клавиатуры.
  * Использует форму keypad_panel.form
  */
+public class KeypadPanel extends JComponent implements ActionListener {
+    public JButton actionButton0;
+    public JButton actionButton1;
+    public JButton actionButton2;
+    public JTextField textField;
 
-public class KeypadPanel implements ActionListener {
-    private JLabel searchLabel;
-    private JButton searchButton;
     private JButton a0Button;
+    private JPanel mainPanel;
     private JButton dotButton;
     private JButton cButton;
     private JButton a7Button;
@@ -36,29 +39,27 @@ public class KeypadPanel implements ActionListener {
     private JButton a1Button;
     private JButton a2Button;
     private JButton a3Button;
-    private JTextField textField;
     private JButton backSpaceButton;
     private JPanel keyPadPanel;
     private JPanel parentPanel;
     private JPanel actionButtonPanel;
-    private JButton actionButton1;
-    private JButton actionButton2;
-    private JPanel mainPanel;
+    private JPanel verticalLine;
+    private JPanel textFieldPanel;
+
+    private FontProvider fontProvider = new FontProvider();
 
     public KeypadPanel() {
         initComponents();
     }
 
     private void initComponents() {
-        FontProvider fontProvider = new FontProvider();
         Font robotoRegular34 = fontProvider.getFont(ROBOTO_REGULAR, 34f);
         Font robotoRegular50 = fontProvider.getFont(ROBOTO_REGULAR, 50f);
 
-        searchButton.setFont(robotoRegular34);
+        actionButton0.setFont(robotoRegular34);
         actionButton1.setFont(robotoRegular34);
         actionButton2.setFont(robotoRegular34);
 
-        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 22f));
         backSpaceButton.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 54f));
         textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
         textField.setBorder(BorderFactory.createEmptyBorder());
@@ -161,31 +162,53 @@ public class KeypadPanel implements ActionListener {
     }
 
     /**
-     * Обеспечивает определение названия-идентификатора окна (диалога), содержащего данную клавиатуру.
-     * Это необходимо для того, чтобы определить какие кнопки показывать внизу
+     * Обеспечивает выбор количества кнопок действий внизу клавиатуры.
+     * Метод определяет какие кнопки показывать внизу
      * (например, одну кнопку "Поиск", или же 2 кнопки "ОК" и "Отмена" и т.д.).
      *
-     * @param context произвольное название-идентификатор окна (диалога), содержащего данную клавиатуру
+     * @param mode название-идентификатор используемого режима.
+     *             Заранее определены режимы {@code oneActionButton} и {@code twoActionButtons}
      */
-    public void setContext(String context) {
+    public void setActionButtons(String mode) {
         CardLayout cardLayout = (CardLayout) (actionButtonPanel.getLayout());
-        if (context.equals("searchButtonPanel"))
-            cardLayout.show(actionButtonPanel, "searchButtonPanel");
-        else
-            cardLayout.show(actionButtonPanel, "twoButtonPanel");
+        if (mode.equals("oneActionButton"))
+            cardLayout.show(actionButtonPanel, "oneActionButton");
+        else if (mode.equals("twoActionButtons"))
+            cardLayout.show(actionButtonPanel, "twoActionButtons");
+        else System.err.println("Unknown mode for choosing amount of action buttons.");
+    }
 
-        // TODO: 25.07.2019 доработать данный метод (когда будут известны все варианты самой нижней(-их) кнопок)
-//        GridBagLayout centerPanelLayout = (GridBagLayout) mainPanel.getLayout();
-//        GridBagConstraints constraintsForA0Button = centerPanelLayout.getConstraints(a0Button);
-//        GridBagConstraints constraintsForDotButton = centerPanelLayout.getConstraints(dotButton);
-//
-//        constraintsForA0Button.gridwidth = 3;
-//        mainPanel.remove(dotButton);
-//        mainPanel.add(a0Button, constraintsForA0Button);
-//
-//        constraintsForA0Button.gridwidth = 1;
-//        mainPanel.add(dotButton, constraintsForDotButton);
-//        mainPanel.add(a0Button, constraintsForA0Button);
+    /**
+     * Клавиша ноль получает двойную ширину. Клавиша "точка" и вертикальная полоса-делитель удаляются.
+     */
+    public void doubleWidthA0Button() {
+        GridBagLayout mainPanelLayout = (GridBagLayout) mainPanel.getLayout();
+        GridBagConstraints constraintsA0Button = mainPanelLayout.getConstraints(a0Button);
+        constraintsA0Button.gridwidth = 3;
+        mainPanel.remove(dotButton);
+        mainPanel.remove(verticalLine);
+        mainPanel.add(a0Button, constraintsA0Button);
+    }
+
+    /**
+     * Код делает из обычного текстового поля поле для ввода паролей.
+     */
+    public void switchToPasswordTextField() {
+        GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();
+        GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
+        textFieldPanel.remove(textField);
+        textField = new JPasswordField();
+        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 60f));
+        textField.setBorder(BorderFactory.createEmptyBorder());
+        textFieldPanel.add(textField, constraintsTextField);
+    }
+
+    /**
+     * Код переопределяет возвращаемый размер цифровой клавиатуры.
+     */
+    @Override
+    public Dimension getSize() {
+        return keyPadPanel.getSize();
     }
 
     // TODO: 25.07.2019 Можно сделать выделение текста в текстовом поле по долгому нажатию левой кнопки мыши, а также по двойному щелчку

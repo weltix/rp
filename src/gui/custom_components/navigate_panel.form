@@ -113,7 +113,7 @@
                   <foreground color="-1"/>
                   <horizontalAlignment value="0"/>
                   <horizontalTextPosition value="0"/>
-                  <text resource-bundle="resources/strings" key="add_product"/>
+                  <text resource-bundle="resources/strings" key="add_product_html"/>
                   <verticalAlignment value="0"/>
                   <verticalTextPosition value="0"/>
                 </properties>
