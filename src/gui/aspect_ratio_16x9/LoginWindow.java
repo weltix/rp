@@ -32,17 +32,24 @@ public class LoginWindow extends JWindow {
         keypadPanel.doubleWidthA0Button();
         keypadPanel.switchToPasswordTextField();
 
-        JFrame parentFrame = null;
-        if (getParent() instanceof JFrame) {
-            parentFrame = (JFrame) getParent();
-        }
+        JFrame parentFrame = (JFrame) getParent();
         if (parentFrame.getGlassPane() instanceof DisabledGlassPane) {
             disabledGlassPane = (DisabledGlassPane) parentFrame.getGlassPane();
         }
 
         keypadPanel.getActionButton1().addActionListener(e -> {
+            JPanel card = null;
+            for (Component comp : parentFrame.getContentPane().getComponents()) {
+                if (comp.isVisible() == true) {
+                    card = (JPanel) comp;
+                }
+            }
+            if ((card.getName() != null) && (card.getName().equals("splashScreenPanel"))) {
+                ((MainFrame) parentFrame).setCardOfMainPanel("mainSellPanel");
+                ((MainFrame) parentFrame).setCardOfMainSellPanelScreens("sellPanel");
+            }
             disabledGlassPane.deactivate();
-             this.dispose();
+            this.dispose();
         });
         keypadPanel.getActionButton2().addActionListener(e -> {
             this.dispose();
@@ -59,10 +66,10 @@ public class LoginWindow extends JWindow {
             @Override
             public void windowOpened(WindowEvent e) {
                 System.out.println("windowOpened");
-                Color baseColor = Color.WHITE;
-                //alpha originally was 128
-                Color backgroundColor = new Color(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), 100);
-                disabledGlassPane.activate(null, backgroundColor);
+//                Color baseColor = Color.WHITE;
+//                //alpha originally was 128
+//                Color backgroundColor = new Color(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), 100);
+//                disabledGlassPane.activate(null, backgroundColor);
             }
 
             @Override

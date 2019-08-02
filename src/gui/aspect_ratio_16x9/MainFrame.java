@@ -80,9 +80,8 @@ public class MainFrame extends JFrame implements ActionListener {
     private Timer splashScreenTimer;
     private CardLayout mainPanelCardLayout = (CardLayout) (mainPanel.getLayout());
     private CardLayout mainSellPanelScreensLayout = (CardLayout) (mainSellPanelScreens.getLayout());
-    private FontProvider fontProvider = new FontProvider();
-    private Font robotoRegular16 = fontProvider.getFont(ROBOTO_REGULAR, 16f);
-    private Font menuIcons58 = fontProvider.getFont(MENU_ICONS, 58f);
+    private Font robotoRegular16 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 16f);
+    private Font menuIcons58 = FontProvider.getInstance().getFont(MENU_ICONS, 58f);
     // Таймер для отсчёта времени показа splash screen
     private GraphicsDevice graphicsDevice;
     // GlassPane для эмуляции неактивного (disabled) фонового окна (аналог modality в JDialog)
@@ -117,8 +116,7 @@ public class MainFrame extends JFrame implements ActionListener {
         initComponents();
         initSplashScreen();
         initNavigationPanel();
-        mainPanelCardLayout.show(mainPanel, "mainSellPanel");
-        mainSellPanelScreensLayout.show(mainSellPanelScreens, "sellPanel");
+        setCardOfMainPanel("splashScreenPanel");
 
         setVisible(true);
 
@@ -128,20 +126,28 @@ public class MainFrame extends JFrame implements ActionListener {
 //        setSize(1050, 618);
     }
 
+    public void setCardOfMainPanel(String cardName) {
+        mainPanelCardLayout.show(mainPanel, cardName);
+    }
+
+    public void setCardOfMainSellPanelScreens(String cardName) {
+        mainSellPanelScreensLayout.show(mainSellPanelScreens, cardName);
+    }
+
     private void initComponents() {
-        Font robotoRegular30 = fontProvider.getFont(ROBOTO_REGULAR, 30f);
+        Font robotoRegular30 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 30f);
 
         discountButton.setFont(robotoRegular30);
         paymentButton.setFont(robotoRegular30);
 
-        toPayLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 38f));
-        toPaySumLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 38f));
+        toPayLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38f));
+        toPaySumLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38f));
         discountLabel.setFont(robotoRegular30);
         discountSumLabel.setFont(robotoRegular30);
 
-        resposLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 22f));
-        marketLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 12f));
-        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 26f));
+        resposLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 22f));
+        marketLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 12f));
+        searchLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 26f));
 
         keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
         loginWindow = new LoginWindow(this);
@@ -231,6 +237,9 @@ public class MainFrame extends JFrame implements ActionListener {
         constraints.weighty = 1;
         JPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
         splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
+
+        Color backgroundColor = new Color(0, 0, 0, 0);
+        glassPane.activate("Подождите, выполняется загрузка программы", backgroundColor);
 
 //        JComponent glassPane = this.getLayeredPane();
 //        this.setGlassPane(glassPane);
@@ -332,6 +341,8 @@ public class MainFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         splashScreenTimer.stop();
+        if (splashScreenPanel.isVisible() == true)
+            glassPane.deactivate();
         launchLoginWindow();
     }
 
@@ -348,7 +359,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * Код настраивает и показывает кнопку "Назад" в навигационной панели, скрывая при этом остальные ненужные кнопки.
      */
     public void showNavigationPanelBackButton() {
-        addGoodIcon.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 58f));
+        addGoodIcon.setFont(FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 58f));
         addGoodIcon.setText(Resources.getInstance().getString("back_icon"));
         addGoodLabel.setText(Resources.getInstance().getString("back_html"));
 

@@ -4,6 +4,8 @@
 
 package gui.custom_components;
 
+import gui.FontProvider;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -13,6 +15,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
+
+import static gui.FontProvider.ROBOTO_REGULAR;
 
 /*
  *  Simple implementation of a Glass Pane that will capture and ignore all
@@ -42,7 +46,7 @@ public class DisabledGlassPane extends JComponent
         //  Add a message label to the glass pane
 
         add(message, new GridBagConstraints());
-        message.setOpaque(true);
+        message.setOpaque(false);
         message.setBorder(MESSAGE_BORDER);
 
         //  Disable Mouse, Key and Focus events for the glass pane
@@ -74,14 +78,11 @@ public class DisabledGlassPane extends JComponent
     @Override
     public void setBackground(Color background) {
         super.setBackground(background);
-
-        Color messageBackground = new Color(background.getRGB());
-        message.setBackground(messageBackground);
     }
 
-    //
-//  Implement the KeyListener to consume events
-//
+    /*
+     *  Implement the KeyListener to consume events
+     */
     public void keyPressed(KeyEvent e) {
         e.consume();
     }
@@ -102,7 +103,8 @@ public class DisabledGlassPane extends JComponent
         if (text != null && text.length() > 0) {
             message.setVisible(true);
             message.setText(text);
-            message.setForeground(getForeground());
+            message.setForeground(Color.WHITE);
+            message.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 50f));
         } else
             message.setVisible(false);
 

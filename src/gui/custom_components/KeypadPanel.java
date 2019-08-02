@@ -48,21 +48,19 @@ public class KeypadPanel extends JComponent implements ActionListener {
     private JPanel verticalLine;
     private JPanel textFieldPanel;
 
-    private FontProvider fontProvider = new FontProvider();
-
     public KeypadPanel() {
         initComponents();
     }
 
     private void initComponents() {
-        Font robotoRegular34 = fontProvider.getFont(ROBOTO_REGULAR, 34f);
-        Font robotoRegular50 = fontProvider.getFont(ROBOTO_REGULAR, 50f);
+        Font robotoRegular34 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34f);
+        Font robotoRegular50 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 50f);
 
         actionButton0.setFont(robotoRegular34);
         actionButton1.setFont(robotoRegular34);
         actionButton2.setFont(robotoRegular34);
 
-        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
+        textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40f));
         textField.setBorder(BorderFactory.createEmptyBorder());
 
         // таймер для генерации повторных срабатываний цифровых клавиш при их удержании в нажатом состоянии
@@ -108,7 +106,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
                     });
                 }
             }
-            backSpaceButton.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 54f));
+            backSpaceButton.setFont(FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 54f));
         }
     }
 
@@ -179,7 +177,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
         GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
         textFieldPanel.remove(textField);
         textField = new JPasswordField();
-        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 60f));
+        textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 60f));
         textField.setBorder(BorderFactory.createEmptyBorder());
         textFieldPanel.add(textField, constraintsTextField);
     }
