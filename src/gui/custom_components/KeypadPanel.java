@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static gui.FontProvider.FONTAWESOME_REGULAR;
 import static gui.FontProvider.ROBOTO_REGULAR;
@@ -21,11 +24,10 @@ import static gui.FontProvider.ROBOTO_REGULAR;
  * Использует форму keypad_panel.form
  */
 public class KeypadPanel extends JComponent implements ActionListener {
-    public JButton actionButton0;
-    public JButton actionButton1;
-    public JButton actionButton2;
-    public JTextField textField;
-
+    private JButton actionButton0;
+    private JButton actionButton1;
+    private JButton actionButton2;
+    private JTextField textField;
     private JButton a0Button;
     private JPanel mainPanel;
     private JButton dotButton;
@@ -60,7 +62,6 @@ public class KeypadPanel extends JComponent implements ActionListener {
         actionButton1.setFont(robotoRegular34);
         actionButton2.setFont(robotoRegular34);
 
-        backSpaceButton.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 54f));
         textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 40f));
         textField.setBorder(BorderFactory.createEmptyBorder());
 
@@ -70,7 +71,12 @@ public class KeypadPanel extends JComponent implements ActionListener {
 
         // циклически задаём свойства цифровым клавишам (12 шт.) (getComponents() возвращает компоненты 1-го уровня вложенности)
         if (mainPanel instanceof Container) {
-            for (Component child : mainPanel.getComponents()) {
+            // добавим кнопку backSpaceButton к обрабатываемому списку кнопок, так как она не входит в mainPanel
+            List<Component> mainPanelComponentsList = Arrays.asList(mainPanel.getComponents());
+            List<Component> processingComponents = new ArrayList<>(mainPanelComponentsList);
+            processingComponents.add(backSpaceButton);
+
+            for (Component child : processingComponents) {
                 if (child instanceof JButton) {
                     child.setFont(robotoRegular50);
                     child.addMouseListener(new MouseListener() {
@@ -102,36 +108,8 @@ public class KeypadPanel extends JComponent implements ActionListener {
                     });
                 }
             }
+            backSpaceButton.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 54f));
         }
-
-        backSpaceButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                String buttonText = String.valueOf('\b');
-                changeTextField(buttonText.charAt(0));
-                timer.setActionCommand(buttonText);
-                timer.start();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                timer.stop();
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                timer.stop();
-            }
-        });
     }
 
     /**
@@ -141,7 +119,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
      */
     private void changeTextField(char ch) {
         int caretPosition = textField.getCaretPosition();
-        if (ch == '\b') {
+        if (ch == '\uf104') {       // backspace button's char code
             textField.select(caretPosition - 1, caretPosition);
             textField.replaceSelection("");
         } else if (ch == 'C')
@@ -162,20 +140,23 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Обеспечивает выбор количества кнопок действий внизу клавиатуры.
-     * Метод определяет какие кнопки показывать внизу
+     * Метод определяет сколько кнопок показывать внизу цифровой клавиатуры
      * (например, одну кнопку "Поиск", или же 2 кнопки "ОК" и "Отмена" и т.д.).
+     * Детальная настройка вида кнопок (цвет, текст)
      *
-     * @param mode название-идентификатор используемого режима.
-     *             Заранее определены режимы {@code oneActionButton} и {@code twoActionButtons}
+     * @param amount количество кнопок.
      */
-    public void setActionButtons(String mode) {
+    public void setActionButtonsAmount(int amount) {
         CardLayout cardLayout = (CardLayout) (actionButtonPanel.getLayout());
-        if (mode.equals("oneActionButton"))
-            cardLayout.show(actionButtonPanel, "oneActionButton");
-        else if (mode.equals("twoActionButtons"))
-            cardLayout.show(actionButtonPanel, "twoActionButtons");
-        else System.err.println("Unknown mode for choosing amount of action buttons.");
+        switch (amount) {
+            case 2:
+                cardLayout.show(actionButtonPanel, "twoActionButtons");
+                break;
+            case 1:
+            default:
+                cardLayout.show(actionButtonPanel, "oneActionButton");
+                break;
+        }
     }
 
     /**
@@ -191,7 +172,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Код делает из обычного текстового поля поле для ввода паролей.
+     * Код заменяет обычное текстовое поле полем для ввода паролей.
      */
     public void switchToPasswordTextField() {
         GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();
@@ -209,6 +190,22 @@ public class KeypadPanel extends JComponent implements ActionListener {
     @Override
     public Dimension getSize() {
         return keyPadPanel.getSize();
+    }
+
+    public JButton getActionButton0() {
+        return actionButton0;
+    }
+
+    public JButton getActionButton1() {
+        return actionButton1;
+    }
+
+    public JButton getActionButton2() {
+        return actionButton2;
+    }
+
+    public JTextField getTextField() {
+        return textField;
     }
 
     // TODO: 25.07.2019 Можно сделать выделение текста в текстовом поле по долгому нажатию левой кнопки мыши, а также по двойному щелчку

@@ -106,20 +106,22 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <grid id="82365" binding="addProductButton" layout-manager="GridBagLayout">
+              <grid id="82365" binding="addGoodButton" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="2.0" weighty="10.35"/>
                 </constraints>
                 <properties>
                   <background color="-13350562"/>
+                  <doubleBuffered value="true"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="addGoodButton"/>
                   <preferredSize width="-1" height="-1"/>
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="8e33b" class="javax.swing.JLabel" binding="addProductLabel">
+                  <component id="8e33b" class="javax.swing.JLabel" binding="addGoodLabel">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="0.0" weighty="0.0"/>
@@ -128,12 +130,13 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="addProductLabel"/>
                       <text resource-bundle="resources/strings" key="add_product_html"/>
                       <verticalAlignment value="0"/>
                       <verticalTextPosition value="0"/>
                     </properties>
                   </component>
-                  <component id="329c" class="javax.swing.JLabel" binding="addProductIcon">
+                  <component id="329c" class="javax.swing.JLabel" binding="addGoodIcon">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="0.0" weighty="0.0"/>
@@ -142,6 +145,7 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="addProductIcon"/>
                       <text resource-bundle="resources/strings" key="add_product_icon"/>
                       <verticalAlignment value="3"/>
                       <verticalTextPosition value="3"/>
@@ -149,7 +153,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="284fb" layout-manager="CardLayout" hgap="0" vgap="0">
+              <grid id="284fb" binding="horizontalLine1" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.0"/>
@@ -170,8 +174,10 @@
                 </constraints>
                 <properties>
                   <background color="-13350562"/>
+                  <doubleBuffered value="true"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="workWithReceiptButton"/>
                   <preferredSize width="-1" height="-1"/>
                 </properties>
                 <border type="none"/>
@@ -186,6 +192,7 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="workWithReceiptLabel"/>
                       <text resource-bundle="resources/strings" key="work_with_receipt_html"/>
                     </properties>
                     <clientProperties>
@@ -201,6 +208,7 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="workWithReceiptIcon"/>
                       <text resource-bundle="resources/strings" key="work_with_receipt_icon"/>
                       <verticalAlignment value="3"/>
                       <verticalTextPosition value="3"/>
@@ -208,7 +216,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="b769a" layout-manager="CardLayout" hgap="0" vgap="0">
+              <grid id="b769a" binding="horizontalLine2" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.0"/>
@@ -217,6 +225,7 @@
                   <background color="-10586997"/>
                   <maximumSize width="0" height="1"/>
                   <minimumSize width="0" height="1"/>
+                  <opaque value="true"/>
                   <preferredSize width="0" height="1"/>
                 </properties>
                 <border type="none"/>
@@ -229,8 +238,10 @@
                 </constraints>
                 <properties>
                   <background color="-13350562"/>
+                  <doubleBuffered value="true"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="cashboxButton"/>
                   <preferredSize width="-1" height="-1"/>
                 </properties>
                 <border type="none"/>
@@ -244,6 +255,7 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="cashboxIcon"/>
                       <text resource-bundle="resources/strings" key="cashbox_icon"/>
                       <verticalAlignment value="0"/>
                       <verticalTextPosition value="0"/>
@@ -258,12 +270,13 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="cashboxLabel"/>
                       <text resource-bundle="resources/strings" key="cashbox_html"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <grid id="8a6c6" layout-manager="CardLayout" hgap="0" vgap="0">
+              <grid id="8a6c6" binding="horizontalLine3" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.0"/>
@@ -284,8 +297,10 @@
                 </constraints>
                 <properties>
                   <background color="-13350562"/>
+                  <doubleBuffered value="true"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="serviceButton"/>
                   <preferredSize width="-1" height="-1"/>
                 </properties>
                 <border type="none"/>
@@ -299,6 +314,7 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="serviceIcon"/>
                       <text resource-bundle="resources/strings" key="service_icon"/>
                     </properties>
                   </component>
@@ -311,12 +327,13 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="serviceLabel"/>
                       <text resource-bundle="resources/strings" key="service_html"/>
                     </properties>
                   </component>
                 </children>
               </grid>
-              <grid id="ac139" layout-manager="CardLayout" hgap="0" vgap="0">
+              <grid id="ac139" binding="horizontalLine4" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.0"/>
@@ -337,8 +354,10 @@
                 </constraints>
                 <properties>
                   <background color="-13350562"/>
+                  <doubleBuffered value="true"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="exitButton"/>
                   <preferredSize width="-1" height="-1"/>
                 </properties>
                 <border type="none"/>
@@ -352,6 +371,7 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="exitIcon"/>
                       <text resource-bundle="resources/strings" key="exit_icon"/>
                     </properties>
                   </component>
@@ -364,6 +384,7 @@
                       <foreground color="-1"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <name value="exitLabel"/>
                       <text resource-bundle="resources/strings" key="exit_html"/>
                       <verticalAlignment value="3"/>
                       <verticalTextPosition value="3"/>
@@ -371,7 +392,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="4e145" layout-manager="CardLayout" hgap="0" vgap="0">
+              <grid id="4e145" binding="horizontalLine5" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="0.0"/>
@@ -398,7 +419,7 @@
               </grid>
             </children>
           </grid>
-          <grid id="23da2" binding="navigatePanelCards" layout-manager="CardLayout" hgap="0" vgap="0">
+          <grid id="23da2" binding="mainSellPanelScreens" layout-manager="CardLayout" hgap="0" vgap="0">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="94.8" weighty="1.0"/>
@@ -551,7 +572,7 @@
                       <grid id="42e57" binding="searchKeyPadPanel" layout-manager="GridBagLayout">
                         <constraints>
                           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="1.0" weighty="62.2"/>
+                          <gridbag weightx="1.0" weighty="64.6"/>
                         </constraints>
                         <properties>
                           <background color="-1"/>
@@ -707,7 +728,7 @@
                       <grid id="97b36" layout-manager="CardLayout" hgap="0" vgap="0">
                         <constraints>
                           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                          <gridbag weightx="0.0" weighty="5.4"/>
+                          <gridbag weightx="0.0" weighty="3.0"/>
                         </constraints>
                         <properties>
                           <background color="-1183240"/>

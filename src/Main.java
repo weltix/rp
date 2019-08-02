@@ -9,13 +9,13 @@ import javax.swing.*;
 
 /**
  * Главный класс, с которого начинается работа приложения.
+ * Resources.getInstance() вызываем для нормального отображения русскоязычных символов.
  */
 
 public class Main {
-    public static Resources resources;
 
     public static void main(String[] args) {
-        resources = new Resources();
+        Resources.getInstance();
         SwingUtilities.invokeLater(Main::createAndShowGUI);
     }
 

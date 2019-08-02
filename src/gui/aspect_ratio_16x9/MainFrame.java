@@ -8,15 +8,13 @@ import gui.FontProvider;
 import gui.custom_components.BackgroundPanel;
 import gui.custom_components.DisabledGlassPane;
 import gui.custom_components.KeypadPanel;
+import resources.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -39,9 +37,9 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private JLabel resposLabel;
     private JLabel marketLabel;
-    private JPanel addProductButton;
-    private JLabel addProductIcon;
-    private JLabel addProductLabel;
+    private JPanel addGoodButton;
+    private JLabel addGoodIcon;
+    private JLabel addGoodLabel;
     private JPanel workWithReceiptButton;
     private JLabel workWithReceiptIcon;
     private JLabel workWithReceiptLabel;
@@ -66,20 +64,30 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel searchKeyPadPanel;
     private KeypadPanel keypadPanel;
     private JPanel paymentInfoPanel;
-    private JPanel navigatePanelCards;
+    private JPanel mainSellPanelScreens;
     private JPanel addGoodPanel;
     private JPanel workWithReceiptPanel;
     private JPanel cashboxPanel;
     private JPanel servicePanel;
     private JPanel splashScreenPanel;
     private JLabel searchLabel;
+    private JPanel horizontalLine1;
+    private JPanel horizontalLine2;
+    private JPanel horizontalLine3;
+    private JPanel horizontalLine4;
+    private JPanel horizontalLine5;
 
-    private GraphicsDevice graphicsDevice;
-    private CardLayout cardLayout;
-    // Таймер для отсчёта времени показа splash screen
     private Timer splashScreenTimer;
+    private CardLayout mainPanelCardLayout = (CardLayout) (mainPanel.getLayout());
+    private CardLayout mainSellPanelScreensLayout = (CardLayout) (mainSellPanelScreens.getLayout());
+    private FontProvider fontProvider = new FontProvider();
+    private Font robotoRegular16 = fontProvider.getFont(ROBOTO_REGULAR, 16f);
+    private Font menuIcons58 = fontProvider.getFont(MENU_ICONS, 58f);
+    // Таймер для отсчёта времени показа splash screen
+    private GraphicsDevice graphicsDevice;
     // GlassPane для эмуляции неактивного (disabled) фонового окна (аналог modality в JDialog)
     private DisabledGlassPane glassPane = new DisabledGlassPane();
+    private JWindow loginWindow;
 
     public MainFrame() {
         init();
@@ -102,244 +110,41 @@ public class MainFrame extends JFrame implements ActionListener {
         if (graphicsDevice.isFullScreenSupported())
             graphicsDevice.setFullScreenWindow(this);
 
-        setSplashScreen();
-        initComponents();
+
         setContentPane(mainPanel);
+        setGlassPane(glassPane);
+
+        initComponents();
+        initSplashScreen();
+        initNavigationPanel();
+        mainPanelCardLayout.show(mainPanel, "mainSellPanel");
+        mainSellPanelScreensLayout.show(mainSellPanelScreens, "sellPanel");
+
         setVisible(true);
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
 //        setSize(1050, 618);
-
-        setGlassPane(glassPane);
-        cardLayout = (CardLayout) (mainPanel.getLayout());
-        cardLayout.show(mainPanel, "mainSellPanel");
-    }
-
-    /**
-     * Устанавливает изображение из файла в виде фона на JPanel (рисует в кастомной панели BackgroundPanel).
-     * Запускает таймер, отсчитывающий время показа стартового экрана (splash screen) с данным изображением.
-     */
-    private void setSplashScreen() {
-        splashScreenTimer = new Timer(0, this);
-        splashScreenTimer.setInitialDelay(2000);
-        splashScreenTimer.start();
-        Image splashScreenImage = null;
-        try {
-            String imageFile = "images/splash_screen_1920x1080.png";
-            InputStream inputStream = MainFrame.class.getResourceAsStream(imageFile);
-            splashScreenImage = ImageIO.read(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;                         // заполняем всего родителя по обеим осям
-        constraints.weightx = 1;
-        constraints.weighty = 1;
-        JPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
-        splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
-
-//        JComponent glassPane = this.getLayeredPane();
-//        this.setGlassPane(glassPane);
-//        Label label = new Label("2134123412341234");
-//        glassPane.add(label);
-//
-//        label.setForeground(Color.WHITE);
-////        layeredPane.add(label, 300);
-
-//        JLayeredPane layeredPane = this.getLayeredPane();
-//        Label label = new Label("2134123412341234");
-//        label.setForeground(Color.WHITE);
-//        splashScreenPanel.add(label);
-//        splashScreenPanel.repaint();
-        // TODO: 29.07.2019 Сделать Label на главной заставке
     }
 
     private void initComponents() {
-        FontProvider fontProvider = new FontProvider();
-        discountButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 30f));
-        paymentButton.setFont(fontProvider.getFont(ROBOTO_REGULAR, 30f));
+        Font robotoRegular30 = fontProvider.getFont(ROBOTO_REGULAR, 30f);
+
+        discountButton.setFont(robotoRegular30);
+        paymentButton.setFont(robotoRegular30);
 
         toPayLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 38f));
         toPaySumLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 38f));
-        discountLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 30f));
-        discountSumLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 30f));
+        discountLabel.setFont(robotoRegular30);
+        discountSumLabel.setFont(robotoRegular30);
 
         resposLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 22f));
         marketLabel.setFont(fontProvider.getFont(ROBOTO_BOLD, 12f));
-        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 22f));
+        searchLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 26f));
 
-        Color navPanelColor = new Color(52, 73, 94);
-        Color navPanelPressed = new Color(65, 91, 122);
-        Color navIconLabelPressed = new Color(230, 238, 243);
-
-        keypadPanel.setActionButtons("oneActionButton");           // задаём внешний вид цифровой клавиатуры
-
-        addProductButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                addProductButton.setBackground(navPanelPressed);
-                addProductIcon.setForeground(navIconLabelPressed);
-                addProductLabel.setForeground(navIconLabelPressed);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                addProductButton.setBackground(navPanelColor);
-                addProductIcon.setForeground(Color.WHITE);
-                addProductLabel.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                mouseReleased(e);
-            }
-        });
-        addProductIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
-        addProductLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
-
-        workWithReceiptButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                workWithReceiptButton.setBackground(navPanelPressed);
-                workWithReceiptIcon.setForeground(navIconLabelPressed);
-                workWithReceiptLabel.setForeground(navIconLabelPressed);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                workWithReceiptButton.setBackground(navPanelColor);
-                workWithReceiptIcon.setForeground(Color.WHITE);
-                workWithReceiptLabel.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                mouseReleased(e);
-            }
-        });
-        workWithReceiptIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
-        workWithReceiptLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
-
-        cashboxButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                cashboxButton.setBackground(navPanelPressed);
-                cashboxIcon.setForeground(navIconLabelPressed);
-                cashboxLabel.setForeground(navIconLabelPressed);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                cashboxButton.setBackground(navPanelColor);
-                cashboxIcon.setForeground(Color.WHITE);
-                cashboxLabel.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                mouseReleased(e);
-            }
-        });
-        cashboxIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
-        cashboxLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
-
-        serviceButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                serviceButton.setBackground(navPanelPressed);
-                serviceIcon.setForeground(navIconLabelPressed);
-                serviceLabel.setForeground(navIconLabelPressed);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                serviceButton.setBackground(navPanelColor);
-                serviceIcon.setForeground(Color.WHITE);
-                serviceLabel.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                mouseReleased(e);
-            }
-        });
-        serviceIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
-        serviceLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
-
-        exitButton.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                exitButton.setBackground(navPanelPressed);
-                exitIcon.setForeground(navIconLabelPressed);
-                exitLabel.setForeground(navIconLabelPressed);
-                launchLoginWindow();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                exitButton.setBackground(navPanelColor);
-                exitIcon.setForeground(Color.WHITE);
-                exitLabel.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                mouseReleased(e);
-            }
-        });
-        exitIcon.setFont(fontProvider.getFont(MENU_ICONS, 58f));
-        exitLabel.setFont(fontProvider.getFont(ROBOTO_REGULAR, 16f));
-
+        keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
+        loginWindow = new LoginWindow(this);
 
         String[] columnNames = {"First Name",
                 "Last Name",
@@ -405,6 +210,121 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
+     * Устанавливает изображение из файла в виде фона на JPanel (рисует в кастомной панели BackgroundPanel).
+     * Запускает таймер, отсчитывающий время показа стартового экрана (splash screen) с данным изображением.
+     */
+    private void initSplashScreen() {
+        splashScreenTimer = new Timer(0, this);
+        splashScreenTimer.setInitialDelay(2000);
+        splashScreenTimer.start();
+        Image splashScreenImage = null;
+        try {
+            String imageFile = "images/splash_screen_1920x1080.png";
+            InputStream inputStream = MainFrame.class.getResourceAsStream(imageFile);
+            splashScreenImage = ImageIO.read(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;                         // заполняем всего родителя по обеим осям
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        JPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
+        splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
+
+//        JComponent glassPane = this.getLayeredPane();
+//        this.setGlassPane(glassPane);
+//        Label label = new Label("2134123412341234");
+//        glassPane.add(label);
+//
+//        label.setForeground(Color.WHITE);
+////        layeredPane.add(label, 300);
+
+//        JLayeredPane layeredPane = this.getLayeredPane();
+//        Label label = new Label("2134123412341234");
+//        label.setForeground(Color.WHITE);
+//        splashScreenPanel.add(label);
+//        splashScreenPanel.repaint();
+        // TODO: 29.07.2019 Сделать Label на главной заставке
+    }
+
+    /**
+     * Код настраивает look and feel кнопок навигационной панели
+     */
+    private void initNavigationPanel() {
+        Color navPanelColor = new Color(52, 73, 94);
+        Color navPanelPressed = new Color(65, 91, 122);
+        Color navIconLabelPressed = new Color(230, 238, 243);
+
+        // циклически задаём свойства кнопкам в навигационной панели (getComponents() возвращает компоненты 1-го уровня вложенности)
+        for (Component child : navigatePanel.getComponents()) {
+            if ((child.getName() != null) && (child.getName().contains("Button"))) {    // отбираем только панели-кнопки
+                JLabel tempIconLabel = null;
+                JLabel tempTextLabel = null;
+                for (Component innerChild : ((JPanel) child).getComponents()) {
+                    if (innerChild.getName().contains("Icon")) {
+                        tempIconLabel = (JLabel) innerChild;
+                        tempIconLabel.setFont(menuIcons58);
+                    }
+                    if (innerChild.getName().contains("Label")) {
+                        tempTextLabel = (JLabel) innerChild;
+                        tempTextLabel.setFont(robotoRegular16);
+                    }
+                }
+                final JLabel iconLabel = tempIconLabel;
+                final JLabel textLabel = tempTextLabel;
+
+                // ставим слушалки на кнопки навигационной панели
+                child.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        switch (child.getName()) {
+                            case "addGoodButton":       // имя кнопок навигационной панели (задано в .form в поле name)
+                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
+                                break;
+                            case "workWithReceiptButton":
+                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "workWithReceiptPanel");
+                                break;
+                            case "cashboxButton":
+                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "cashboxPanel");
+                                break;
+                            case "serviceButton":
+                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
+                                break;
+                            case "exitButton":
+                                launchLoginWindow();
+                                break;
+                            default:
+                                break;
+                        }
+                        if (!child.getName().equals("exitButton"))
+                            showNavigationPanelBackButton();
+                    }
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        child.setBackground(navPanelPressed);
+                        iconLabel.setForeground(navIconLabelPressed);
+                        textLabel.setForeground(navIconLabelPressed);
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+                        child.setBackground(navPanelColor);
+                        iconLabel.setForeground(Color.WHITE);
+                        textLabel.setForeground(Color.WHITE);
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        mouseReleased(e);
+                    }
+                });
+            }
+        }
+    }
+
+    /**
      * Вызывается по срабатыванию таймера, который отсчитывает время показа начальной заставки (splash screen)
      *
      * @param e событие, произошедшее по срабатыванию таймера
@@ -419,11 +339,160 @@ public class MainFrame extends JFrame implements ActionListener {
      * Создаёт, настраивает и показывает окно входа в систему по паролю
      */
     private void launchLoginWindow() {
-        JWindow window = new LoginWindow(this);
-        window.setSize(keypadPanel.getSize());
-        window.setLocationRelativeTo(this);
-        window.setVisible(true);
-
-        glassPane.activate("");
+        loginWindow.setSize(keypadPanel.getSize());
+        loginWindow.setLocationRelativeTo(this);
+        loginWindow.setVisible(true);
     }
+
+    /**
+     * Код настраивает и показывает кнопку "Назад" в навигационной панели, скрывая при этом остальные ненужные кнопки.
+     */
+    public void showNavigationPanelBackButton() {
+        addGoodIcon.setFont(fontProvider.getFont(FONTAWESOME_REGULAR, 58f));
+        addGoodIcon.setText(Resources.getInstance().getString("back_icon"));
+        addGoodLabel.setText(Resources.getInstance().getString("back_html"));
+
+        addGoodButton.removeMouseListener(addGoodButtonMouseListener);
+        addGoodButton.addMouseListener(backButtonMouseListener);
+
+        workWithReceiptButton.setEnabled(false);
+        cashboxButton.setEnabled(false);
+        serviceButton.setEnabled(false);
+        exitButton.setEnabled(false);
+
+        workWithReceiptButton.setOpaque(false);
+        cashboxButton.setOpaque(false);
+        serviceButton.setOpaque(false);
+        exitButton.setOpaque(false);
+
+        workWithReceiptIcon.setVisible(false);
+        cashboxIcon.setVisible(false);
+        serviceIcon.setVisible(false);
+        exitIcon.setVisible(false);
+
+        workWithReceiptLabel.setVisible(false);
+        cashboxLabel.setVisible(false);
+        serviceLabel.setVisible(false);
+        exitLabel.setVisible(false);
+
+        horizontalLine2.setOpaque(false);
+        horizontalLine3.setOpaque(false);
+        horizontalLine4.setOpaque(false);
+        horizontalLine5.setOpaque(false);
+
+        navigatePanel.repaint();
+        navigatePanel.revalidate();
+//        GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();
+//        GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
+//        textFieldPanel.remove(textField);
+//        textField = new JPasswordField();
+//        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 60f));
+//        textField.setBorder(BorderFactory.createEmptyBorder());
+//        textFieldPanel.add(textField, constraintsTextField);
+    }
+
+    public void hideNavigationPanelBackButton() {
+        addGoodIcon.setFont(menuIcons58);
+        addGoodIcon.setText(Resources.getInstance().getString("add_product_icon"));
+        addGoodLabel.setText(Resources.getInstance().getString("add_product_html"));
+
+        addGoodButton.removeMouseListener(backButtonMouseListener);
+        addGoodButton.addMouseListener(addGoodButtonMouseListener);
+
+        workWithReceiptButton.setEnabled(true);
+        cashboxButton.setEnabled(true);
+        serviceButton.setEnabled(true);
+        exitButton.setEnabled(true);
+
+        workWithReceiptButton.setOpaque(true);
+        cashboxButton.setOpaque(true);
+        serviceButton.setOpaque(true);
+        exitButton.setOpaque(true);
+
+        workWithReceiptIcon.setVisible(true);
+        cashboxIcon.setVisible(true);
+        serviceIcon.setVisible(true);
+        exitIcon.setVisible(true);
+
+        workWithReceiptLabel.setVisible(true);
+        cashboxLabel.setVisible(true);
+        serviceLabel.setVisible(true);
+        exitLabel.setVisible(true);
+
+        horizontalLine2.setOpaque(true);
+        horizontalLine3.setOpaque(true);
+        horizontalLine4.setOpaque(true);
+        horizontalLine5.setOpaque(true);
+
+        navigatePanel.repaint();
+        navigatePanel.revalidate();
+
+//        GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();
+//        GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
+//        textFieldPanel.remove(textField);
+//        textField = new JPasswordField();
+//        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 60f));
+//        textField.setBorder(BorderFactory.createEmptyBorder());
+//        textFieldPanel.add(textField, constraintsTextField);
+    }
+
+    MouseListener addGoodButtonMouseListener = new MouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
+            showNavigationPanelBackButton();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
+
+    MouseListener backButtonMouseListener = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            mainSellPanelScreensLayout.show(mainSellPanelScreens, "sellPanel");
+            hideNavigationPanelBackButton();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
+
+    // TODO: 01.08.2019  Переделать слушалки для кнопки Добавить товар - Назад. Слушалка всегда должна быть в одном экземпляре.
+    // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
+    // TODO: 01.08.2019  Навигационная панель должна показываться синхронно со всем экраном.
 }

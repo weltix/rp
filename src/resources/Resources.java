@@ -16,17 +16,23 @@ import java.util.ResourceBundle;
 /**
  * Класс служит для локализации приложения. Обеспечивает получение строк для указанного языка.
  * Строки для разных языков хранятся в *.properties файлах.
- * Всегда должен быть один *.properties файл по умолчанию, без кода языка (например, {@code strings.properties})
+ * Всегда должен быть один *.properties файл по умолчанию, без кода языка (например, {@code strings.properties}).
+ * Класс - Singleton, так как нам достаточно единственного его объекта.
  */
 // TODO: 29.05.2019 Save lang to file as preferences
 // TODO: 29.05.2019 Get saved lang from file
 public class Resources {
+    private final static Resources INSTANCE = new Resources();
     private ResourceBundle resourceBundle;
     private final static String RU_LANG = "ru";
     private final static String UA_LANG = "uk";
 
-    public Resources() {
+    private Resources() {
         setLocale(RU_LANG);
+    }
+
+    public static Resources getInstance(){
+        return INSTANCE;
     }
 
     /**
@@ -54,6 +60,8 @@ public class Resources {
 /**
  * Класс, исправляющий проблему с русской кодировкой для ResourceBundle.
  * При этом, файлы *.properties должны иметь кодировку UTF-8.
+ * Код должен выполниться в самом начале программы, чтобы *.form файлы могли обращаться к *.properties файлам,
+ * и получать читабельные русскоязычные строки.
  */
 class UTF8Control extends ResourceBundle.Control {
     public ResourceBundle newBundle
