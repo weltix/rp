@@ -59,6 +59,10 @@ public class LoginWindow extends JWindow {
             @Override
             public void windowOpened(WindowEvent e) {
                 System.out.println("windowOpened");
+                Color baseColor = Color.WHITE;
+                //alpha originally was 128
+                Color backgroundColor = new Color(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), 100);
+                disabledGlassPane.activate(null, backgroundColor);
             }
 
             @Override
@@ -73,7 +77,6 @@ public class LoginWindow extends JWindow {
 
             @Override
             public void windowActivated(WindowEvent e) {
-                disabledGlassPane.activate(null);
                 System.out.println("windowActivated");
             }
 

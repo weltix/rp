@@ -33,10 +33,11 @@ public class DisabledGlassPane extends JComponent
         //  Set glass pane properties
 
         setOpaque(false);
+        setLayout(new GridBagLayout());
+
         Color base = UIManager.getColor("inactiveCaptionBorder");
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 100);   //alpha originally was 128
         setBackground(background);
-        setLayout(new GridBagLayout());
 
         //  Add a message label to the glass pane
 
@@ -97,13 +98,16 @@ public class DisabledGlassPane extends JComponent
      *
      *  A message can be displayed and it will be centered on the frame.
      */
-    public void activate(String text) {
+    public void activate(String text, Color backgroundColor) {
         if (text != null && text.length() > 0) {
             message.setVisible(true);
             message.setText(text);
             message.setForeground(getForeground());
         } else
             message.setVisible(false);
+
+        if (backgroundColor != null)
+            setBackground(backgroundColor);
 
         // hide cursor from current JFrame
         setCursor(getToolkit().createCustomCursor(
