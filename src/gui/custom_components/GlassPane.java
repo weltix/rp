@@ -28,12 +28,12 @@ import static gui.FontProvider.ROBOTO_REGULAR;
  * P.S. Позволяет отлавливать и отменять все нажатия кнопок мыши и клавиатуры.
  * Заменяет JFrame.setEnable(false), которое вызывает мерцание экрана.
  */
-public class DisabledGlassPane extends JComponent
+public class GlassPane extends JComponent
         implements KeyListener {
     private final static Border MESSAGE_BORDER = new EmptyBorder(10, 10, 10, 10);
     private JLabel message = new JLabel();
 
-    public DisabledGlassPane() {
+    public GlassPane() {
         //  Set glass pane properties
 
         setOpaque(false);

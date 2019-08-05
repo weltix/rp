@@ -6,7 +6,7 @@ package gui.aspect_ratio_16x9;
 
 import gui.FontProvider;
 import gui.custom_components.BackgroundPanel;
-import gui.custom_components.DisabledGlassPane;
+import gui.custom_components.GlassPane;
 import gui.custom_components.KeypadPanel;
 import resources.Resources;
 
@@ -85,7 +85,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // Таймер для отсчёта времени показа splash screen
     private GraphicsDevice graphicsDevice;
     // GlassPane для эмуляции неактивного (disabled) фонового окна (аналог modality в JDialog)
-    private DisabledGlassPane glassPane = new DisabledGlassPane();
+    private GlassPane glassPane = new GlassPane();
     private JWindow loginWindow;
 
     public MainFrame() {

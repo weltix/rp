@@ -4,7 +4,7 @@
 
 package gui.aspect_ratio_16x9;
 
-import gui.custom_components.DisabledGlassPane;
+import gui.custom_components.GlassPane;
 import gui.custom_components.KeypadPanel;
 import resources.Resources;
 
@@ -21,7 +21,7 @@ import java.awt.image.BufferedImage;
 public class LoginWindow extends JWindow {
     private JPanel contentPane;
     private KeypadPanel keypadPanel;
-    private DisabledGlassPane disabledGlassPane;
+    private GlassPane glassPane;
 
     public LoginWindow(Frame owner) {
         super(owner);
@@ -33,8 +33,8 @@ public class LoginWindow extends JWindow {
         keypadPanel.switchToPasswordTextField();
 
         JFrame parentFrame = (JFrame) getParent();
-        if (parentFrame.getGlassPane() instanceof DisabledGlassPane) {
-            disabledGlassPane = (DisabledGlassPane) parentFrame.getGlassPane();
+        if (parentFrame.getGlassPane() instanceof GlassPane) {
+            glassPane = (GlassPane) parentFrame.getGlassPane();
         }
 
         keypadPanel.getActionButton1().addActionListener(e -> {
@@ -48,7 +48,7 @@ public class LoginWindow extends JWindow {
                 ((MainFrame) parentFrame).setCardOfMainPanel("mainSellPanel");
                 ((MainFrame) parentFrame).setCardOfMainSellPanelScreens("sellPanel");
             }
-            disabledGlassPane.deactivate();
+            glassPane.deactivate();
             this.dispose();
         });
         keypadPanel.getActionButton2().addActionListener(e -> {
@@ -69,7 +69,7 @@ public class LoginWindow extends JWindow {
 //                Color baseColor = Color.WHITE;
 //                //alpha originally was 128
 //                Color backgroundColor = new Color(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), 100);
-//                disabledGlassPane.activate(null, backgroundColor);
+//                glassPane.activate(null, backgroundColor);
             }
 
             @Override
@@ -89,7 +89,7 @@ public class LoginWindow extends JWindow {
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-                disabledGlassPane.deactivate();
+                glassPane.deactivate();
                 System.out.println("windowGainedFocus");
             }
 
