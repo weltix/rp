@@ -10,8 +10,6 @@ import resources.Resources;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 /**
@@ -61,62 +59,5 @@ public class LoginWindow extends JWindow {
                 new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
                 new Point(),
                 null));
-
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-                System.out.println("windowOpened");
-//                Color baseColor = Color.WHITE;
-//                //alpha originally was 128
-//                Color backgroundColor = new Color(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), 100);
-//                glassPane.activate(null, backgroundColor);
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.out.println("windowClosing");
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                System.out.println("windowClosed");
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-                System.out.println("windowActivated");
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-                glassPane.deactivate();
-                System.out.println("windowGainedFocus");
-            }
-
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-                System.out.println("windowGainedFocus");
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent e) {
-                System.out.println("windowDeactivated");
-            }
-
-            @Override
-            public void windowStateChanged(WindowEvent e) {
-                System.out.println("windowStateChanged");
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-                System.out.println("windowIconified");
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-                System.out.println("windowDeiconified");
-            }
-        });
     }
 }

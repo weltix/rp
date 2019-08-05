@@ -26,6 +26,12 @@ import static gui.FontProvider.*;
  * JFrame - единственное окно, в котором будет отрисовываться всё приложение.
  * CardLayout будет обеспечивать показ разных экранов (разных cards-окон).
  * Window обеспечивают показ диалоговых окон (Window - основа-тело всех JFrame и JDialogs).
+ * <p>
+ * Можно использовать для показа диалогов JDialog (чтобы экран не мерцал при появлении диалога, setModal = true).
+ * Но, в Windows придётся отключить FullScreenMode, иначе приложение сворачивается в трей при появлении диалога.
+ * В Linux похожая ситуация - при появлении диалога показываются панель управления и пр., их надо скрывать заранее.
+ * Также необходимо позаботиться об отсутствии курсора, он всё равно показывается за пределами диалога
+ * (использовать glassPane со скрытым курсором во всём приложении).
  */
 public class MainFrame extends JFrame implements ActionListener {
     private JLabel toPayLabel;
@@ -77,14 +83,11 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel horizontalLine4;
     private JPanel horizontalLine5;
 
-    private Timer splashScreenTimer;
+    private GraphicsDevice graphicsDevice;
     private CardLayout mainPanelCardLayout = (CardLayout) (mainPanel.getLayout());
     private CardLayout mainSellPanelScreensLayout = (CardLayout) (mainSellPanelScreens.getLayout());
     private Font robotoRegular16 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 16f);
     private Font menuIcons58 = FontProvider.getInstance().getFont(MENU_ICONS, 58f);
-    // Таймер для отсчёта времени показа splash screen
-    private GraphicsDevice graphicsDevice;
-    // GlassPane для эмуляции неактивного (disabled) фонового окна (аналог modality в JDialog)
     private GlassPane glassPane = new GlassPane();
     private JWindow loginWindow;
 
@@ -112,6 +115,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setContentPane(mainPanel);
         setGlassPane(glassPane);
+        add(glassPane.jlayer);
 
         initComponents();
         initSplashScreen();
@@ -124,6 +128,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
 //        setSize(1050, 618);
+//        setSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
     public void setCardOfMainPanel(String cardName) {
@@ -220,9 +225,10 @@ public class MainFrame extends JFrame implements ActionListener {
      * Запускает таймер, отсчитывающий время показа стартового экрана (splash screen) с данным изображением.
      */
     private void initSplashScreen() {
-        splashScreenTimer = new Timer(0, this);
-        splashScreenTimer.setInitialDelay(2000);
-        splashScreenTimer.start();
+        Timer timer = new Timer(0, this);
+        timer.setInitialDelay(2000);
+        timer.setActionCommand("splashScreenShowingTime");
+        timer.start();
         Image splashScreenImage = null;
         try {
             String imageFile = "images/splash_screen_1920x1080.png";
@@ -301,7 +307,7 @@ public class MainFrame extends JFrame implements ActionListener {
                                 mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
                                 break;
                             case "exitButton":
-                                launchLoginWindow();
+                                launchLoginWindow(true);
                                 break;
                             default:
                                 break;
@@ -340,19 +346,35 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        splashScreenTimer.stop();
-        if (splashScreenPanel.isVisible() == true)
-            glassPane.deactivate();
-        launchLoginWindow();
+        if ("splashScreenShowingTime".equals(e.getActionCommand())) {
+            ((Timer) e.getSource()).stop();
+            if (splashScreenPanel.isVisible() == true)
+                glassPane.deactivate();
+            launchLoginWindow(false);
+        }
+
+        if ("delayBeforeShowingLoginWindow".equals(e.getActionCommand())) {
+            ((Timer) e.getSource()).stop();
+            loginWindow.setSize(keypadPanel.getSize());
+            loginWindow.setLocationRelativeTo(this);
+            loginWindow.setVisible(true);
+        }
     }
 
     /**
      * Создаёт, настраивает и показывает окно входа в систему по паролю
      */
-    private void launchLoginWindow() {
-        loginWindow.setSize(keypadPanel.getSize());
-        loginWindow.setLocationRelativeTo(this);
-        loginWindow.setVisible(true);
+    private void launchLoginWindow(boolean glassPaneHasBackground) {
+        Color base = UIManager.getColor("inactiveCaptionBorder");
+        Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   //alpha originally was 128
+        if (!glassPaneHasBackground)
+            background = null;
+        glassPane.activate(null, background);
+
+        Timer timer = new Timer(0, this);
+        timer.setInitialDelay(5);
+        timer.setActionCommand("delayBeforeShowingLoginWindow");
+        timer.start();
     }
 
     /**
