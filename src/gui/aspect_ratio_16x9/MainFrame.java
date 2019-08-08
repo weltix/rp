@@ -36,6 +36,8 @@ import static gui.FontProvider.*;
  * (использовать glassPane со скрытым курсором во всём приложении).
  */
 public class MainFrame extends JFrame implements ActionListener {
+    public static final String APP_VERSION = "1.0";
+
     private JLabel toPayLabel;
     private JLabel toPaySumLabel;
     private JLabel discountLabel;
@@ -248,24 +250,11 @@ public class MainFrame extends JFrame implements ActionListener {
         constraints.fill = GridBagConstraints.BOTH;                         // заполняем всего родителя по обеим осям
         constraints.weightx = 1;
         constraints.weighty = 1;
-        JPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
+        BackgroundPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
+        backgroundPanel.setVersionLabel(Resources.getInstance().getString("version:") + APP_VERSION);
         splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
 
-        glassPane.showText("Подождите, выполняется загрузка программы");
 
-//        JComponent glassPane = this.getLayeredPane();
-//        this.setGlassPane(glassPane);
-//        Label label = new Label("2134123412341234");
-//        glassPane.add(label);
-//
-//        label.setForeground(Color.WHITE);
-////        layeredPane.add(label, 300);
-
-//        JLayeredPane layeredPane = this.getLayeredPane();
-//        Label label = new Label("2134123412341234");
-//        label.setForeground(Color.WHITE);
-//        splashScreenPanel.add(label);
-//        splashScreenPanel.repaint();
         // TODO: 29.07.2019 Сделать Label на главной заставке
     }
 
@@ -357,7 +346,6 @@ public class MainFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("splashScreenShowingTime".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            glassPane.showText(null);
             launchLoginWindow(false);
         }
 

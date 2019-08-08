@@ -4,6 +4,8 @@
 
 package gui.custom_components;
 
+import gui.FontProvider;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,7 +46,7 @@ public class BackgroundPanel extends JPanel {
         setDoubleBuffered(true);
         setImage(image);
         setStyle(style);
-        setLayout(new BorderLayout());
+        setLayout(new GridBagLayout());
     }
 
     /*
@@ -64,6 +66,23 @@ public class BackgroundPanel extends JPanel {
     public BackgroundPanel(Paint painter) {
         setPaint(painter);
         setLayout(new BorderLayout());
+    }
+
+    public void setVersionLabel(String version) {
+        JLabel versionLabel = new JLabel();
+        versionLabel.setText(version);
+        versionLabel.setForeground(Color.WHITE);
+        versionLabel.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 22f));
+        versionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        versionLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;                         // заполняем всего родителя по обеим осям
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.insets = new Insets(0, 0, 5, 10);
+
+        add(versionLabel, constraints);
     }
 
     /*
