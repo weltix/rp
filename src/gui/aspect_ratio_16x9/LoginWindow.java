@@ -20,6 +20,7 @@ public class LoginWindow extends JWindow {
     private JPanel contentPane;
     private KeypadPanel keypadPanel;
     private GlassPane glassPane;
+    private MainFrame parentFrame;
 
     public LoginWindow(Frame owner) {
         super(owner);
@@ -30,25 +31,26 @@ public class LoginWindow extends JWindow {
         keypadPanel.doubleWidthA0Button();
         keypadPanel.switchToPasswordTextField();
 
-        JFrame parentFrame = (JFrame) getParent();
+        if (getParent() instanceof MainFrame)
+            parentFrame = (MainFrame) getParent();
         if (parentFrame.getGlassPane() instanceof GlassPane) {
             glassPane = (GlassPane) parentFrame.getGlassPane();
         }
 
         keypadPanel.getActionButton1().addActionListener(e -> {
-            JPanel card = null;
-            for (Component comp : parentFrame.getContentPane().getComponents()) {
-                if (comp.isVisible() == true) {
-                    card = (JPanel) comp;
-                }
-            }
-            if ((card.getName() != null) && (card.getName().equals("splashScreenPanel"))) {
-                ((MainFrame) parentFrame).setCardOfMainPanel("mainSellPanel");
-                ((MainFrame) parentFrame).setCardOfMainSellPanelScreens("sellPanel");
+            // Возвращаем первоначальный contentPane (следующий метод переопределён). Не влияет на производительность.
+            // Нужно из-за того, что было установлено setContentPane(jlayer) для достижения размытого фона.
+            parentFrame.setContentPane(null);
+
+            if (parentFrame.getSplashScreenPanel().isVisible()) {
+                parentFrame.setCardOfMainPanel("mainSellPanel");
+                parentFrame.setCardOfMainSellPanelScreens("sellPanel");
             }
             glassPane.deactivate();
+
             this.dispose();
         });
+
         keypadPanel.getActionButton2().addActionListener(e -> {
             this.dispose();
             System.exit(0);

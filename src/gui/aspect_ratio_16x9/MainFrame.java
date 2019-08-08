@@ -6,12 +6,14 @@ package gui.aspect_ratio_16x9;
 
 import gui.FontProvider;
 import gui.custom_components.BackgroundPanel;
+import gui.custom_components.BlurLayerUI;
 import gui.custom_components.GlassPane;
 import gui.custom_components.KeypadPanel;
 import resources.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.LayerUI;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
@@ -25,7 +27,7 @@ import static gui.FontProvider.*;
  * Класс, содержащий описание окна графического интерфейса.
  * JFrame - единственное окно, в котором будет отрисовываться всё приложение.
  * CardLayout будет обеспечивать показ разных экранов (разных cards-окон).
- * Window обеспечивают показ диалоговых окон (Window - основа-тело всех JFrame и JDialogs).
+ * JWindow обеспечивают показ диалоговых окон (JWindow - основа-тело всех JFrame и JDialogs).
  * <p>
  * Можно использовать для показа диалогов JDialog (чтобы экран не мерцал при появлении диалога, setModal = true).
  * Но, в Windows придётся отключить FullScreenMode, иначе приложение сворачивается в трей при появлении диалога.
@@ -91,6 +93,12 @@ public class MainFrame extends JFrame implements ActionListener {
     private GlassPane glassPane = new GlassPane();
     private JWindow loginWindow;
 
+    // объект класса, который выполняет рисование для JLayer
+    private LayerUI<JComponent> layerUI = new BlurLayerUI();
+    // компонент-декоратор для других компонентов, при этом не изменяет их, а рисует поверх
+    private JLayer<JComponent> jlayer = new JLayer<>();
+    public boolean blurBackground = false;
+
     public MainFrame() {
         init();
     }
@@ -112,10 +120,8 @@ public class MainFrame extends JFrame implements ActionListener {
         if (graphicsDevice.isFullScreenSupported())
             graphicsDevice.setFullScreenWindow(this);
 
-
         setContentPane(mainPanel);
         setGlassPane(glassPane);
-        add(glassPane.jlayer);
 
         initComponents();
         initSplashScreen();
@@ -156,6 +162,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
         loginWindow = new LoginWindow(this);
+        jlayer.setUI(layerUI);
 
         String[] columnNames = {"First Name",
                 "Last Name",
@@ -244,8 +251,7 @@ public class MainFrame extends JFrame implements ActionListener {
         JPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
         splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
 
-        Color backgroundColor = new Color(0, 0, 0, 0);
-        glassPane.activate("Подождите, выполняется загрузка программы", backgroundColor);
+        glassPane.showText("Подождите, выполняется загрузка программы");
 
 //        JComponent glassPane = this.getLayeredPane();
 //        this.setGlassPane(glassPane);
@@ -272,71 +278,74 @@ public class MainFrame extends JFrame implements ActionListener {
         Color navIconLabelPressed = new Color(230, 238, 243);
 
         // циклически задаём свойства кнопкам в навигационной панели (getComponents() возвращает компоненты 1-го уровня вложенности)
-        for (Component child : navigatePanel.getComponents()) {
-            if ((child.getName() != null) && (child.getName().contains("Button"))) {    // отбираем только панели-кнопки
-                JLabel tempIconLabel = null;
-                JLabel tempTextLabel = null;
-                for (Component innerChild : ((JPanel) child).getComponents()) {
-                    if (innerChild.getName().contains("Icon")) {
-                        tempIconLabel = (JLabel) innerChild;
-                        tempIconLabel.setFont(menuIcons58);
-                    }
-                    if (innerChild.getName().contains("Label")) {
-                        tempTextLabel = (JLabel) innerChild;
-                        tempTextLabel.setFont(robotoRegular16);
-                    }
-                }
-                final JLabel iconLabel = tempIconLabel;
-                final JLabel textLabel = tempTextLabel;
-
-                // ставим слушалки на кнопки навигационной панели
-                child.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        switch (child.getName()) {
-                            case "addGoodButton":       // имя кнопок навигационной панели (задано в .form в поле name)
-                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
-                                break;
-                            case "workWithReceiptButton":
-                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "workWithReceiptPanel");
-                                break;
-                            case "cashboxButton":
-                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "cashboxPanel");
-                                break;
-                            case "serviceButton":
-                                mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
-                                break;
-                            case "exitButton":
-                                launchLoginWindow(true);
-                                break;
-                            default:
-                                break;
+        if (navigatePanel instanceof Container)
+            for (Component child : navigatePanel.getComponents()) {
+                if (child.getName() != null &&
+                        child instanceof JPanel &&
+                        child.getName().contains("Button")) {    // отбираем только панели-кнопки
+                    JLabel tempIconLabel = null;
+                    JLabel tempTextLabel = null;
+                    for (Component innerChild : ((JPanel) child).getComponents()) {
+                        if (innerChild.getName().contains("Icon")) {
+                            tempIconLabel = (JLabel) innerChild;
+                            tempIconLabel.setFont(menuIcons58);
                         }
-                        if (!child.getName().equals("exitButton"))
-                            showNavigationPanelBackButton();
+                        if (innerChild.getName().contains("Label")) {
+                            tempTextLabel = (JLabel) innerChild;
+                            tempTextLabel.setFont(robotoRegular16);
+                        }
                     }
+                    final JLabel iconLabel = tempIconLabel;
+                    final JLabel textLabel = tempTextLabel;
 
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                        child.setBackground(navPanelPressed);
-                        iconLabel.setForeground(navIconLabelPressed);
-                        textLabel.setForeground(navIconLabelPressed);
-                    }
+                    // ставим слушалки на кнопки навигационной панели
+                    child.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            switch (child.getName()) {
+                                case "addGoodButton":       // имя кнопок навигационной панели (задано в .form в поле name)
+                                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
+                                    break;
+                                case "workWithReceiptButton":
+                                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "workWithReceiptPanel");
+                                    break;
+                                case "cashboxButton":
+                                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "cashboxPanel");
+                                    break;
+                                case "serviceButton":
+                                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
+                                    break;
+                                case "exitButton":
+                                    launchLoginWindow(true);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            if (!child.getName().equals("exitButton"))
+                                showNavigationPanelBackButton();
+                        }
 
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                        child.setBackground(navPanelColor);
-                        iconLabel.setForeground(Color.WHITE);
-                        textLabel.setForeground(Color.WHITE);
-                    }
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            child.setBackground(navPanelPressed);
+                            iconLabel.setForeground(navIconLabelPressed);
+                            textLabel.setForeground(navIconLabelPressed);
+                        }
 
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                        mouseReleased(e);
-                    }
-                });
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                            child.setBackground(navPanelColor);
+                            iconLabel.setForeground(Color.WHITE);
+                            textLabel.setForeground(Color.WHITE);
+                        }
+
+                        @Override
+                        public void mouseExited(MouseEvent e) {
+                            mouseReleased(e);
+                        }
+                    });
+                }
             }
-        }
     }
 
     /**
@@ -348,8 +357,7 @@ public class MainFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("splashScreenShowingTime".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            if (splashScreenPanel.isVisible() == true)
-                glassPane.deactivate();
+            glassPane.showText(null);
             launchLoginWindow(false);
         }
 
@@ -369,12 +377,38 @@ public class MainFrame extends JFrame implements ActionListener {
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   //alpha originally was 128
         if (!glassPaneHasBackground)
             background = null;
-        glassPane.activate(null, background);
+
+        if (!splashScreenPanel.isVisible()) {
+            glassPane.activate(background);
+            //код сделает размытым фон вне диалогового окна
+            if (blurBackground) {
+                jlayer.setView(mainPanel);
+                setContentPane(jlayer);
+                repaint();
+                revalidate();
+            }
+        }
 
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(5);
         timer.setActionCommand("delayBeforeShowingLoginWindow");
         timer.start();
+    }
+
+    /**
+     * Код для установки contentPane для нашего главного JFrame из-за пределов данного класса.
+     * В основном, используем чтобы вернуть чёткий фон после закрытия диалогового окна
+     * (если использовалось размытие {@link BlurLayerUI}).
+     */
+    @Override
+    public void setContentPane(Container contentPane) {
+        if (contentPane == null)
+            contentPane = mainPanel;
+        super.setContentPane(contentPane);
+    }
+
+    public JPanel getSplashScreenPanel() {
+        return splashScreenPanel;
     }
 
     /**
@@ -528,4 +562,5 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 01.08.2019  Переделать слушалки для кнопки Добавить товар - Назад. Слушалка всегда должна быть в одном экземпляре.
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 01.08.2019  Навигационная панель должна показываться синхронно со всем экраном.
+    // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
 }
