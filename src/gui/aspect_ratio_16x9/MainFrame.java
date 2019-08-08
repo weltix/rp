@@ -255,7 +255,7 @@ public class MainFrame extends JFrame implements ActionListener {
         splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
 
 
-        // TODO: 29.07.2019 Сделать Label на главной заставке
+        // TODO: 29.07.2019 Разобраться, где хранить APP_VERSION
     }
 
     /**

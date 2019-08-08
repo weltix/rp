@@ -68,6 +68,9 @@ public class BackgroundPanel extends JPanel {
         setLayout(new BorderLayout());
     }
 
+    /*
+     *  Код настраивает вид и расположение JLabel для вывода версии приложения
+     */
     public void setVersionLabel(String version) {
         JLabel versionLabel = new JLabel();
         versionLabel.setText(version);
