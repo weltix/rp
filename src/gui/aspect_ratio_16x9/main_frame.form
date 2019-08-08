@@ -10,7 +10,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="a309f" binding="splashScreenPanel" layout-manager="GridBagLayout">
+      <grid id="a309f" binding="splashScreenPanel" custom-create="true" layout-manager="GridBagLayout">
         <constraints>
           <card name="splashScreenPanel"/>
         </constraints>
@@ -21,7 +21,27 @@
           <preferredSize width="1920" height="1080"/>
         </properties>
         <border type="none"/>
-        <children/>
+        <children>
+          <component id="7e1f7" class="javax.swing.JLabel" binding="versionLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag top="0" left="0" bottom="5" right="10" weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties>
+              <font/>
+              <foreground color="-1"/>
+              <horizontalAlignment value="4"/>
+              <horizontalTextPosition value="11"/>
+              <maximumSize width="-1" height="-1"/>
+              <minimumSize width="-1" height="-1"/>
+              <opaque value="false"/>
+              <preferredSize width="-1" height="-1"/>
+              <text resource-bundle="resources/strings" key="version:"/>
+              <verticalAlignment value="3"/>
+              <verticalTextPosition value="0"/>
+            </properties>
+          </component>
+        </children>
       </grid>
       <grid id="b6c5f" binding="mainSellPanel" layout-manager="GridBagLayout">
         <constraints>

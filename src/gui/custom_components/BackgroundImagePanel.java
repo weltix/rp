@@ -4,8 +4,6 @@
 
 package gui.custom_components;
 
-import gui.FontProvider;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -20,7 +18,7 @@ import java.awt.*;
  *
  *  P.S. Позволяет создать фон из картинки (нарисовать) на самой панели без использования других компонентов.
  */
-public class BackgroundPanel extends JPanel {
+public class BackgroundImagePanel extends JPanel {
     public static final int SCALED = 0;
     public static final int TILED = 1;
     public static final int ACTUAL = 2;
@@ -35,14 +33,14 @@ public class BackgroundPanel extends JPanel {
     /*
      *  Set image as the background with the SCALED style
      */
-    public BackgroundPanel(Image image) {
+    public BackgroundImagePanel(Image image) {
         this(image, SCALED);
     }
 
     /*
      *  Set image as the background with the specified style
      */
-    public BackgroundPanel(Image image, int style) {
+    public BackgroundImagePanel(Image image, int style) {
         setDoubleBuffered(true);
         setImage(image);
         setStyle(style);
@@ -52,7 +50,7 @@ public class BackgroundPanel extends JPanel {
     /*
      *  Set image as the backround with the specified style and alignment
      */
-    public BackgroundPanel(Image image, int style, float alignmentX, float alignmentY) {
+    public BackgroundImagePanel(Image image, int style, float alignmentX, float alignmentY) {
         setImage(image);
         setStyle(style);
         setImageAlignmentX(alignmentX);
@@ -63,29 +61,9 @@ public class BackgroundPanel extends JPanel {
     /*
      *  Use the Paint interface to paint a background
      */
-    public BackgroundPanel(Paint painter) {
+    public BackgroundImagePanel(Paint painter) {
         setPaint(painter);
         setLayout(new BorderLayout());
-    }
-
-    /*
-     *  Код настраивает вид и расположение JLabel для вывода версии приложения
-     */
-    public void setVersionLabel(String version) {
-        JLabel versionLabel = new JLabel();
-        versionLabel.setText(version);
-        versionLabel.setForeground(Color.WHITE);
-        versionLabel.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 22f));
-        versionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        versionLabel.setVerticalAlignment(SwingConstants.BOTTOM);
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;                         // заполняем всего родителя по обеим осям
-        constraints.weightx = 1;
-        constraints.weighty = 1;
-        constraints.insets = new Insets(0, 0, 5, 10);
-
-        add(versionLabel, constraints);
     }
 
     /*

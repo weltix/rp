@@ -5,7 +5,7 @@
 package gui.aspect_ratio_16x9;
 
 import gui.FontProvider;
-import gui.custom_components.BackgroundPanel;
+import gui.custom_components.BackgroundImagePanel;
 import gui.custom_components.BlurLayerUI;
 import gui.custom_components.GlassPane;
 import gui.custom_components.KeypadPanel;
@@ -17,7 +17,6 @@ import javax.swing.plaf.LayerUI;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -86,6 +85,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel horizontalLine3;
     private JPanel horizontalLine4;
     private JPanel horizontalLine5;
+    private JLabel versionLabel;
 
     private GraphicsDevice graphicsDevice;
     private CardLayout mainPanelCardLayout = (CardLayout) (mainPanel.getLayout());
@@ -106,11 +106,11 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     private void init() {
-        // hide cursor from current JFrame
-        setCursor(getToolkit().createCustomCursor(
-                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-                new Point(),
-                null));
+//        // hide cursor from current JFrame
+//        setCursor(getToolkit().createCustomCursor(
+//                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+//                new Point(),
+//                null));
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setUndecorated(true);                       //need for full screen mode
@@ -126,11 +126,15 @@ public class MainFrame extends JFrame implements ActionListener {
         setGlassPane(glassPane);
 
         initComponents();
-        initSplashScreen();
         initNavigationPanel();
-        setCardOfMainPanel("splashScreenPanel");
+        setCardOfMainPanel("mainSellPanel");
 
         setVisible(true);
+
+        Timer timer = new Timer(0, this);
+        timer.setInitialDelay(2000);
+        timer.setActionCommand("splashScreenShowingTime");
+        timer.start();
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
@@ -161,6 +165,10 @@ public class MainFrame extends JFrame implements ActionListener {
         resposLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 22f));
         marketLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 12f));
         searchLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 26f));
+
+        // TODO: 29.07.2019 Решить, где лучше хранить APP_VERSION
+        versionLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 24f));
+        versionLabel.setText(Resources.getInstance().getString("version:") + "1.0");
 
         keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
         loginWindow = new LoginWindow(this);
@@ -227,35 +235,6 @@ public class MainFrame extends JFrame implements ActionListener {
         sellTableModel.setDataVector(data, row);
 
         sellTableModel.setRowCount(25);
-    }
-
-    /**
-     * Устанавливает изображение из файла в виде фона на JPanel (рисует в кастомной панели BackgroundPanel).
-     * Запускает таймер, отсчитывающий время показа стартового экрана (splash screen) с данным изображением.
-     */
-    private void initSplashScreen() {
-        Timer timer = new Timer(0, this);
-        timer.setInitialDelay(2000);
-        timer.setActionCommand("splashScreenShowingTime");
-        timer.start();
-        Image splashScreenImage = null;
-        try {
-            String imageFile = "images/splash_screen_1920x1080.png";
-            InputStream inputStream = MainFrame.class.getResourceAsStream(imageFile);
-            splashScreenImage = ImageIO.read(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;                         // заполняем всего родителя по обеим осям
-        constraints.weightx = 1;
-        constraints.weighty = 1;
-        BackgroundPanel backgroundPanel = new BackgroundPanel(splashScreenImage);    // получаем панель с картинкой в фоне
-        backgroundPanel.setVersionLabel(Resources.getInstance().getString("version:") + APP_VERSION);
-        splashScreenPanel.add(backgroundPanel, constraints);                // устанавливаем полученную панель в родителя
-
-
-        // TODO: 29.07.2019 Разобраться, где хранить APP_VERSION
     }
 
     /**
@@ -546,6 +525,28 @@ public class MainFrame extends JFrame implements ActionListener {
 
         }
     };
+
+    /**
+     * Код, в котором инициализируем вручную некоторые выбранные нами компоненты формы, связанной с данным классом.
+     */
+    private void createUIComponents() {
+        splashScreenPanelInit();
+    }
+
+    /**
+     * Устанавливает изображение из файла в виде фона на JPanel (рисует в кастомной панели BackgroundImagePanel).
+     */
+    private void splashScreenPanelInit() {
+        Image splashScreenImage = null;
+        try {
+            String imageFile = "images/splash_screen_1920x1080.png";
+            InputStream inputStream = MainFrame.class.getResourceAsStream(imageFile);
+            splashScreenImage = ImageIO.read(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        splashScreenPanel = new BackgroundImagePanel(splashScreenImage);
+    }
 
     // TODO: 01.08.2019  Переделать слушалки для кнопки Добавить товар - Назад. Слушалка всегда должна быть в одном экземпляре.
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.

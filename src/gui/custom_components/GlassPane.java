@@ -111,7 +111,6 @@ public class GlassPane extends JComponent
                 null));
 
         setVisible(true);
-//        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         requestFocusInWindow();
     }
 
@@ -143,3 +142,5 @@ public class GlassPane extends JComponent
         }
     }
 }
+
+// TODO: 08.08.2019 Надо ли в данном классе поле message?

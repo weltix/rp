@@ -15,7 +15,7 @@ import java.awt.image.Kernel;
 /**
  * Используем для создания размытости (при показе диалоговых окон).
  * Объект класса передаётся как аргумент для JLayer, который и служит видимым компонентом с определёнными
- * графическими эффектами.
+ * графическими эффектами (размытость в нашем случае).
  */
 public class BlurLayerUI extends LayerUI<JComponent> {
     private BufferedImage mOffscreenImage;
