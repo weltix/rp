@@ -607,14 +607,14 @@
                         <children>
                           <nested-form id="ae2f7" form-file="gui/custom_components/keypad_panel.form" binding="keypadPanel">
                             <constraints>
-                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                              <gridbag weightx="1.0" weighty="94.4"/>
+                              <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="1.0" weighty="92.5"/>
                             </constraints>
                           </nested-form>
                           <component id="265f7" class="javax.swing.JLabel" binding="searchLabel">
                             <constraints>
-                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                              <gridbag top="0" left="20" bottom="0" right="0" weightx="1.0" weighty="5.6"/>
+                              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="95.0" weighty="7.5"/>
                             </constraints>
                             <properties>
                               <background color="-855310"/>
@@ -628,6 +628,17 @@
                               <visible value="true"/>
                             </properties>
                           </component>
+                          <grid id="6edf" layout-manager="GridBagLayout">
+                            <constraints>
+                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                              <gridbag weightx="5.0" weighty="0.0"/>
+                            </constraints>
+                            <properties>
+                              <background color="-1"/>
+                            </properties>
+                            <border type="none"/>
+                            <children/>
+                          </grid>
                         </children>
                       </grid>
                       <grid id="e76fa" binding="paymentInfoPanel" layout-manager="GridBagLayout">

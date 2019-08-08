@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 01.07.2019
+ * Copyright (c) RESONANCE JSC, 08.08.2019
  */
 
 package gui.custom_components;
@@ -29,7 +29,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
     private JButton actionButton2;
     private JTextField textField;
     private JButton a0Button;
-    private JPanel mainPanel;
+    private JPanel centerPanel;
     private JButton dotButton;
     private JButton cButton;
     private JButton a7Button;
@@ -43,7 +43,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
     private JButton a3Button;
     private JButton backSpaceButton;
     private JPanel keyPadPanel;
-    private JPanel parentPanel;
+    private JPanel mainPanel;
     private JPanel actionButtonPanel;
     private JPanel verticalLine;
     private JPanel textFieldPanel;
@@ -68,9 +68,9 @@ public class KeypadPanel extends JComponent implements ActionListener {
         timer.setInitialDelay(500);
 
         // циклически задаём свойства цифровым клавишам (12 шт.) (getComponents() возвращает компоненты 1-го уровня вложенности)
-        if (mainPanel instanceof Container) {
-            // добавим кнопку backSpaceButton к обрабатываемому списку кнопок, так как она не входит в mainPanel
-            List<Component> mainPanelComponentsList = Arrays.asList(mainPanel.getComponents());
+        if (centerPanel instanceof Container) {
+            // добавим кнопку backSpaceButton к обрабатываемому списку кнопок, так как она не входит в centerPanel
+            List<Component> mainPanelComponentsList = Arrays.asList(centerPanel.getComponents());
             List<Component> processingComponents = new ArrayList<>(mainPanelComponentsList);
             processingComponents.add(backSpaceButton);
 
@@ -161,12 +161,12 @@ public class KeypadPanel extends JComponent implements ActionListener {
      * Клавиша ноль получает двойную ширину. Клавиша "точка" и вертикальная полоса-делитель удаляются.
      */
     public void doubleWidthA0Button() {
-        GridBagLayout mainPanelLayout = (GridBagLayout) mainPanel.getLayout();
+        GridBagLayout mainPanelLayout = (GridBagLayout) centerPanel.getLayout();
         GridBagConstraints constraintsA0Button = mainPanelLayout.getConstraints(a0Button);
         constraintsA0Button.gridwidth = 3;
-        mainPanel.remove(dotButton);
-        mainPanel.remove(verticalLine);
-        mainPanel.add(a0Button, constraintsA0Button);
+        centerPanel.remove(dotButton);
+        centerPanel.remove(verticalLine);
+        centerPanel.add(a0Button, constraintsA0Button);
     }
 
     /**

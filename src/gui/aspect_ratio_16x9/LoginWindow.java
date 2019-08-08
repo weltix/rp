@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 26.07.2019
+ * Copyright (c) RESONANCE JSC, 08.08.2019
  */
 
 package gui.aspect_ratio_16x9;
@@ -17,14 +17,14 @@ import java.awt.image.BufferedImage;
  * Использует форму login_window.form
  */
 public class LoginWindow extends JWindow {
-    private JPanel contentPane;
+    private JPanel mainPanel;
     private KeypadPanel keypadPanel;
     private GlassPane glassPane;
     private MainFrame parentFrame;
 
     public LoginWindow(Frame owner) {
         super(owner);
-        this.setContentPane(contentPane);
+        this.setContentPane(mainPanel);
         keypadPanel.setActionButtonsAmount(2);
         keypadPanel.getActionButton1().setText(Resources.getInstance().getString("ok"));
         keypadPanel.getActionButton2().setText(Resources.getInstance().getString("exit"));
@@ -38,7 +38,7 @@ public class LoginWindow extends JWindow {
         }
 
         keypadPanel.getActionButton1().addActionListener(e -> {
-            // Возвращаем первоначальный contentPane (следующий метод переопределён). Не влияет на производительность.
+            // Возвращаем первоначальный mainPanel (следующий метод переопределён). Не влияет на производительность.
             // Нужно из-за того, что было установлено setContentPane(jlayer) для достижения размытого фона.
             parentFrame.setContentPane(null);
 

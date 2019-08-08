@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 17.07.2019
+ * Copyright (c) RESONANCE JSC, 08.08.2019
  */
 
 package gui.aspect_ratio_16x9;
@@ -330,7 +330,11 @@ public class MainFrame extends JFrame implements ActionListener {
 
         if ("delayBeforeShowingLoginWindow".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            loginWindow.setSize(keypadPanel.getSize());
+
+            Dimension dim = keypadPanel.getSize();
+            dim.setSize(dim.getWidth(), dim.getHeight() / 90 * 100);
+
+            loginWindow.setSize(dim);
             loginWindow.setLocationRelativeTo(this);
             loginWindow.setVisible(true);
         }
