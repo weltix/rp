@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.08.2019
+ * Copyright (c) RESONANCE JSC, 09.08.2019
  */
 
 package gui.aspect_ratio_16x9;
@@ -112,9 +112,9 @@ public class MainFrame extends JFrame implements ActionListener {
 //                new Point(),
 //                null));
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setUndecorated(true);                       //need for full screen mode
-        setResizable(false);                        //need for full screen mode
+//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        setUndecorated(true);                       //need for full screen mode
+//        setResizable(false);                        //need for full screen mode
 
         // set full screen exclusive mode
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -139,7 +139,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-//        setSize(1050, 618);
+        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
@@ -171,7 +171,7 @@ public class MainFrame extends JFrame implements ActionListener {
         versionLabel.setText(Resources.getInstance().getString("version:") + "1.0");
 
         keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
-        loginWindow = new LoginWindow(this);
+        loginWindow = new KeypadDialog(this, "login");
         jlayer.setUI(layerUI);
 
         String[] columnNames = {"First Name",
@@ -331,9 +331,10 @@ public class MainFrame extends JFrame implements ActionListener {
         if ("delayBeforeShowingLoginWindow".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
 
+            // получаем размер клавиатуры в главном окне
             Dimension dim = keypadPanel.getSize();
-            dim.setSize(dim.getWidth(), dim.getHeight() / 90 * 100);
-
+            // 86% от высоты занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
+            dim.setSize(dim.getWidth(), (dim.getHeight() / 86) * 100);
             loginWindow.setSize(dim);
             loginWindow.setLocationRelativeTo(this);
             loginWindow.setVisible(true);

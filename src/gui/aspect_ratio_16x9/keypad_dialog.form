@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.aspect_ratio_16x9.LoginWindow">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.aspect_ratio_16x9.KeypadDialog">
   <grid id="cbd77" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="48" y="54" width="515" height="431"/>
+      <xy x="48" y="54" width="322" height="461"/>
     </constraints>
     <properties>
       <background color="-1"/>
@@ -11,22 +11,35 @@
       <color color="-3618616"/>
     </border>
     <children>
-      <component id="49755" class="javax.swing.JLabel">
+      <component id="49755" class="javax.swing.JLabel" binding="dialogTitle">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="94.0" weighty="5.0"/>
+          <gridbag weightx="95.0" weighty="7.0"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <foreground color="-13350562"/>
+          <maximumSize width="2147483647" height="2147483647"/>
+          <minimumSize width="0" height="0"/>
+          <preferredSize width="-1" height="-1"/>
+          <text resource-bundle="resources/strings" key="login_to_system"/>
+          <verticalAlignment value="3"/>
+          <verticalTextPosition value="0"/>
         </properties>
       </component>
-      <component id="3142f" class="javax.swing.JLabel">
+      <component id="3142f" class="javax.swing.JLabel" binding="dialogHint">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="1.0" weighty="5.0"/>
+          <gridbag weightx="0.0" weighty="7.0"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <background color="-855310"/>
+          <foreground color="-3618616"/>
+          <maximumSize width="2147483647" height="2147483647"/>
+          <minimumSize width="0" height="0"/>
+          <preferredSize width="-1" height="-1"/>
+          <text resource-bundle="resources/strings" key="confirm_rights"/>
+          <verticalAlignment value="0"/>
+          <verticalTextPosition value="0"/>
         </properties>
       </component>
       <grid id="5c294" layout-manager="GridBagLayout">
@@ -38,22 +51,25 @@
           <background color="-3618616"/>
           <preferredSize width="-1" height="1"/>
         </properties>
-        <border type="none"/>
+        <border type="none">
+          <color color="-3618616"/>
+        </border>
         <children/>
       </grid>
       <nested-form id="2172a" form-file="gui/custom_components/keypad_panel.form" binding="keypadPanel">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="1.0" weighty="90.0"/>
+          <gridbag weightx="1.0" weighty="86.0"/>
         </constraints>
       </nested-form>
       <grid id="523ff" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="6.0" weighty="0.0"/>
+          <gridbag weightx="5.0" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-1"/>
+          <preferredSize width="-1" height="-1"/>
         </properties>
         <border type="none"/>
         <children/>

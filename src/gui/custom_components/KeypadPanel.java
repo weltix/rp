@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.08.2019
+ * Copyright (c) RESONANCE JSC, 09.08.2019
  */
 
 package gui.custom_components;
@@ -161,8 +161,8 @@ public class KeypadPanel extends JComponent implements ActionListener {
      * Клавиша ноль получает двойную ширину. Клавиша "точка" и вертикальная полоса-делитель удаляются.
      */
     public void doubleWidthA0Button() {
-        GridBagLayout mainPanelLayout = (GridBagLayout) centerPanel.getLayout();
-        GridBagConstraints constraintsA0Button = mainPanelLayout.getConstraints(a0Button);
+        GridBagLayout gbLayout = (GridBagLayout) centerPanel.getLayout();
+        GridBagConstraints constraintsA0Button = gbLayout.getConstraints(a0Button);
         constraintsA0Button.gridwidth = 3;
         centerPanel.remove(dotButton);
         centerPanel.remove(verticalLine);

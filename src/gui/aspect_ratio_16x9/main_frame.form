@@ -619,8 +619,8 @@
                             <properties>
                               <background color="-855310"/>
                               <foreground color="-13264677"/>
-                              <maximumSize width="-1" height="-1"/>
-                              <minimumSize width="-1" height="-1"/>
+                              <maximumSize width="2147483647" height="2147483647"/>
+                              <minimumSize width="0" height="0"/>
                               <preferredSize width="-1" height="-1"/>
                               <text resource-bundle="resources/strings" key="search_goods_and_cards"/>
                               <verticalAlignment value="3"/>
@@ -635,6 +635,7 @@
                             </constraints>
                             <properties>
                               <background color="-1"/>
+                              <preferredSize width="-1" height="-1"/>
                             </properties>
                             <border type="none"/>
                             <children/>
