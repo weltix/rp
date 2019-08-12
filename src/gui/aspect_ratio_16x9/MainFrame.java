@@ -330,7 +330,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
         if ("delayBeforeShowingLoginWindow".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-
             // получаем размер клавиатуры в главном окне
             Dimension dim = keypadPanel.getSize();
             // 86% от высоты занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
@@ -361,7 +360,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 revalidate();
             }
         }
-
+        // данная задержка - workaround для слабого железа, ускоряет прорисовку
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(5);
         timer.setActionCommand("delayBeforeShowingLoginWindow");

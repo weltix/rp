@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.08.2019
+ * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
 package gui.aspect_ratio_16x9;
@@ -11,13 +11,15 @@ import resources.Resources;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 /**
  * Класс, содержащий окно ввода пароля и цифровую клавиатуру для входа в систему.
  * Использует форму keypad_dialog.form
  */
-public class KeypadDialog extends JWindow {
+public class KeypadDialog extends JWindow implements ActionListener {
     private JPanel mainPanel;
     private KeypadPanel keypadPanel;
     private JLabel dialogTitle;
@@ -70,13 +72,25 @@ public class KeypadDialog extends JWindow {
                 parentFrame.setCardOfMainSellPanelScreens("sellPanel");
             }
             glassPane.deactivate();
-
-            this.dispose();
+            // данная задержка - workaround для слабого железа, ускоряет прорисовку
+            Timer timer = new Timer(0, this);
+            timer.setInitialDelay(5);
+            timer.setActionCommand("delayBeforeClosingThisWindow");
+            timer.start();
         });
         keypadPanel.getActionButton2().addActionListener(e -> {
             this.dispose();
             System.exit(0);
         });
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
+            ((Timer) e.getSource()).stop();
+            keypadPanel.getTextField().setText("");
+            this.dispose();
+        }
     }
 }
