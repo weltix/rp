@@ -171,7 +171,7 @@ public class MainFrame extends JFrame implements ActionListener {
         versionLabel.setText(Resources.getInstance().getString("version:") + "1.0");
 
         keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
-        loginWindow = new KeypadDialog(this, "login");
+        loginWindow = new LoginKeypadDialog(this);
         jlayer.setUI(layerUI);
 
         String[] columnNames = {"First Name",
@@ -360,16 +360,16 @@ public class MainFrame extends JFrame implements ActionListener {
                 revalidate();
             }
         }
-        // данная задержка - workaround для слабого железа, ускоряет прорисовку
+        // данная задержка - workaround для слабого железа (убирает задержку прорисовки при появлении glassPane)
         Timer timer = new Timer(0, this);
-        timer.setInitialDelay(5);
+        timer.setInitialDelay(10);
         timer.setActionCommand("delayBeforeShowingLoginWindow");
         timer.start();
     }
 
     /**
      * Код для установки contentPane для нашего главного JFrame из-за пределов данного класса.
-     * В основном, используем чтобы вернуть чёткий фон после закрытия диалогового окна
+     * В основном, используем, чтобы вернуть чёткий фон после закрытия диалогового окна
      * (если использовалось размытие {@link BlurLayerUI}).
      */
     @Override
@@ -379,6 +379,9 @@ public class MainFrame extends JFrame implements ActionListener {
         super.setContentPane(contentPane);
     }
 
+    /**
+     * Код возвращает объект панели-заставки (в основном для того, чтобы проверить показывается ли она в данный момент)
+     */
     public JPanel getSplashScreenPanel() {
         return splashScreenPanel;
     }
