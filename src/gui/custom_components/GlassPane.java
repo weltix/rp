@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 30.07.2019
+ * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
 package gui.custom_components;
@@ -40,7 +40,8 @@ public class GlassPane extends JComponent
         setOpaque(false);
         setLayout(new GridBagLayout());
 
-        Color base = UIManager.getColor("inactiveCaptionBorder");
+//        Color base = UIManager.getColor("inactiveCaptionBorder");
+        Color base = new Color(184, 207, 229);
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   //alpha originally was 128
         setBackground(background);
 
