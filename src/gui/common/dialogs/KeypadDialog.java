@@ -2,11 +2,12 @@
  * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
-package gui.aspect_ratio_16x9;
+package gui.common.dialogs;
 
-import gui.FontProvider;
-import gui.custom_components.GlassPane;
-import gui.custom_components.KeypadPanel;
+import gui.common.KeypadPanel;
+import gui.common.MainFrame;
+import gui.common.utility_components.GlassPane;
+import gui.fonts.FontProvider;
 
 import javax.swing.*;
 import java.awt.*;

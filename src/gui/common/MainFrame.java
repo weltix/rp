@@ -2,13 +2,14 @@
  * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
-package gui.aspect_ratio_16x9;
+package gui.common;
 
-import gui.FontProvider;
-import gui.custom_components.BackgroundImagePanel;
-import gui.custom_components.BlurLayerUI;
-import gui.custom_components.GlassPane;
-import gui.custom_components.KeypadPanel;
+import gui.common.dialogs.DialogType;
+import gui.common.dialogs.KeypadDialogLogin;
+import gui.common.utility_components.BackgroundImagePanel;
+import gui.common.utility_components.BlurLayerUI;
+import gui.common.utility_components.GlassPane;
+import gui.fonts.FontProvider;
 import resources.Resources;
 
 import javax.imageio.ImageIO;
@@ -20,7 +21,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static gui.FontProvider.*;
+import static gui.fonts.FontProvider.*;
 
 /**
  * Класс, содержащий описание окна графического интерфейса.
@@ -171,7 +172,7 @@ public class MainFrame extends JFrame implements ActionListener {
         versionLabel.setText(Resources.getInstance().getString("version:") + "1.0");
 
         keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
-        loginWindow = new LoginKeypadDialog(this);
+        loginWindow = new KeypadDialogLogin(this);
         jlayer.setUI(layerUI);
 
         String[] columnNames = {"First Name",
@@ -284,7 +285,7 @@ public class MainFrame extends JFrame implements ActionListener {
                                     mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
                                     break;
                                 case "exitButton":
-                                    launchLoginWindow(true);
+                                    launchDialog(true, DialogType.LOGIN);
                                     break;
                                 default:
                                     break;
@@ -325,10 +326,10 @@ public class MainFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("splashScreenShowingTime".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            launchLoginWindow(false);
+            launchDialog(false, DialogType.LOGIN);
         }
 
-        if ("delayBeforeShowingLoginWindow".equals(e.getActionCommand())) {
+        if ("login".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
             // получаем размер клавиатуры в главном окне
             Dimension dim = keypadPanel.getSize();
@@ -344,7 +345,7 @@ public class MainFrame extends JFrame implements ActionListener {
     /**
      * Создаёт, настраивает и показывает окно входа в систему по паролю
      */
-    private void launchLoginWindow(boolean glassPaneHasBackground) {
+    private void launchDialog(boolean glassPaneHasBackground, DialogType dialogType) {
         Color base = UIManager.getColor("inactiveCaptionBorder");
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   //alpha originally was 128
         if (!glassPaneHasBackground)
@@ -363,7 +364,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // данная задержка - workaround для слабого железа (убирает задержку прорисовки при появлении glassPane)
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(10);
-        timer.setActionCommand("delayBeforeShowingLoginWindow");
+        timer.setActionCommand(dialogType);
         timer.start();
     }
 
@@ -547,7 +548,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private void splashScreenPanelInit() {
         Image splashScreenImage = null;
         try {
-            String imageFile = "images/splash_screen_1920x1080.png";
+            String imageFile = "../aspect_ratio_16x9/images/splash_screen_1920x1080.png";
             InputStream inputStream = MainFrame.class.getResourceAsStream(imageFile);
             splashScreenImage = ImageIO.read(inputStream);
         } catch (IOException e) {

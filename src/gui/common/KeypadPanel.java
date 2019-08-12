@@ -1,10 +1,10 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.08.2019
+ * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
-package gui.custom_components;
+package gui.common;
 
-import gui.FontProvider;
+import gui.fonts.FontProvider;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static gui.FontProvider.FONTAWESOME_REGULAR;
-import static gui.FontProvider.ROBOTO_REGULAR;
+import static gui.fonts.FontProvider.FONTAWESOME_REGULAR;
+import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
  * Класс, содержащий в себе блок цифровой клавиатуры.

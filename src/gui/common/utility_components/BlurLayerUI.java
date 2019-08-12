@@ -1,8 +1,8 @@
 /*
- * Copyright (c) RESONANCE JSC, 07.08.2019
+ * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
-package gui.custom_components;
+package gui.common.utility_components;
 
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;

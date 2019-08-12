@@ -2,7 +2,7 @@
  * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
-package gui;
+package gui.fonts;
 
 import java.awt.*;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class FontProvider {
      * @param size     размер шрифта
      */
     public Font getFont(String fontName, float size) {
-        InputStream inputStream = FontProvider.class.getResourceAsStream("fonts/" + fontName);
+        InputStream inputStream = FontProvider.class.getResourceAsStream(fontName);
         Font font = null;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(size / scaleValue);

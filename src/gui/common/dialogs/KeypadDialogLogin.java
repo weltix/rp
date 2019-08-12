@@ -2,21 +2,24 @@
  * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
-package gui.aspect_ratio_16x9;
+package gui.common.dialogs;
 
 import resources.Resources;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginKeypadDialog extends KeypadDialog {
+/**
+ * Класс, содержащий окно ввода пароля и цифровую клавиатуру для входа в систему.
+ */
+public class KeypadDialogLogin extends KeypadDialog {
     /**
      * Конструктор настраивает вид логин-диалога, задаёт действия для кнопок действия.
      * При этом, первоначально вызывается конструктор родителя {@link KeypadDialog}
      *
      * @param owner объект, из которого было вызвано данное окно
      */
-    public LoginKeypadDialog(Frame owner) {
+    public KeypadDialogLogin(Frame owner) {
         super(owner);
 
         keypadPanel.setActionButtonsAmount(2);

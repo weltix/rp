@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.aspect_ratio_16x9.MainFrame">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.MainFrame">
   <grid id="ffc61" binding="mainPanel" layout-manager="CardLayout" hgap="0" vgap="0">
     <constraints>
       <xy x="20" y="20" width="1920" height="1080"/>
@@ -605,7 +605,7 @@
                           <color color="-3618616"/>
                         </border>
                         <children>
-                          <nested-form id="ae2f7" form-file="gui/custom_components/keypad_panel.form" binding="keypadPanel">
+                          <nested-form id="ae2f7" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
                             <constraints>
                               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                               <gridbag weightx="1.0" weighty="92.5"/>

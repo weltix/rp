@@ -2,9 +2,9 @@
  * Copyright (c) RESONANCE JSC, 12.08.2019
  */
 
-package gui.custom_components;
+package gui.common.utility_components;
 
-import gui.FontProvider;
+import gui.fonts.FontProvider;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 
-import static gui.FontProvider.ROBOTO_REGULAR;
+import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /*
  *  Simple implementation of a Glass Pane that will capture and ignore all
