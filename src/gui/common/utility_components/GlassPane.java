@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 13.08.2019
  */
 
 package gui.common.utility_components;
@@ -135,7 +135,7 @@ public class GlassPane extends JComponent
             message.setVisible(true);
             message.setText(text);
             message.setForeground(Color.WHITE);
-            message.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 50f));
+            message.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 50));
             activate(background);
         } else {
             message.setVisible(false);

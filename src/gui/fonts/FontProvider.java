@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 13.08.2019
  */
 
 package gui.fonts;
@@ -43,11 +43,18 @@ public class FontProvider {
      * @param fontName название файла шрифта
      * @param size     размер шрифта
      */
-    public Font getFont(String fontName, float size) {
-        InputStream inputStream = FontProvider.class.getResourceAsStream(fontName);
+    public Font getFont(String fontName, int size) {
         Font font = null;
+        float actualSize = size / scaleValue;
+
+        if (fontName == null) {
+            font = new Font(Font.SANS_SERIF, Font.PLAIN, Math.round(actualSize));
+            return font;
+        }
+
+        InputStream inputStream = FontProvider.class.getResourceAsStream(fontName);
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(size / scaleValue);
+            font = Font.createFont(Font.TRUETYPE_FONT, inputStream).deriveFont(actualSize);
         } catch (FontFormatException e) {
             e.printStackTrace();
         } catch (IOException e) {

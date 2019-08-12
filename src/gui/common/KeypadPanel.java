@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 13.08.2019
  */
 
 package gui.common;
@@ -53,14 +53,14 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     private void initComponents() {
-        Font robotoRegular34 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34f);
-        Font robotoRegular50 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 50f);
+        Font robotoRegular34 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34);
+        Font robotoRegular50 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 50);
 
         actionButton0.setFont(robotoRegular34);
         actionButton1.setFont(robotoRegular34);
         actionButton2.setFont(robotoRegular34);
 
-        textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40f));
+        textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         textField.setBorder(BorderFactory.createEmptyBorder());
 
         // таймер для генерации повторных срабатываний цифровых клавиш при их удержании в нажатом состоянии
@@ -106,7 +106,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
                     });
                 }
             }
-            backSpaceButton.setFont(FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 54f));
+            backSpaceButton.setFont(FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 54));
         }
     }
 
@@ -177,7 +177,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
         GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
         textFieldPanel.remove(textField);
         textField = new JPasswordField();
-        textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 60f));
+        textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 60));
         textField.setBorder(BorderFactory.createEmptyBorder());
         textFieldPanel.add(textField, constraintsTextField);
     }

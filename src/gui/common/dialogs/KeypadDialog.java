@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 13.08.2019
  */
 
 package gui.common.dialogs;
@@ -32,8 +32,8 @@ public class KeypadDialog extends JWindow implements ActionListener {
         this.setContentPane(mainPanel);
 
         // тип и размер шрифтов в заголовке
-        dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26f));
-        dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20f));
+        dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
+        dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
 
         // hide cursor from current JWindow
         setCursor(getToolkit().createCustomCursor(
