@@ -5,6 +5,8 @@
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.common.MainFrame;
+import gui.common.utility_components.GlassPane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,14 +28,29 @@ public class PaymentDialog  extends JWindow implements ActionListener {
     private JLabel mustBePaidSumLabel;
     private JPanel centerPanel;
 
+    private GlassPane glassPane;
+    private MainFrame parentFrame;
+
     public PaymentDialog(Frame owner) {
         super(owner);
         this.setContentPane(mainPanel);
+
+        if (getParent() instanceof MainFrame)
+            parentFrame = (MainFrame) getParent();
+        if (parentFrame.getGlassPane() instanceof GlassPane) {
+            glassPane = (GlassPane) parentFrame.getGlassPane();
+        }
+
+        cancelButton.addActionListener(e -> {
+            glassPane.deactivate();
+            this.dispose();
+        });
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand() + " ");
         if ("cancelButton".equals(e.getActionCommand()))
             this.dispose();
 

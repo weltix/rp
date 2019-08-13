@@ -137,6 +137,8 @@
                 </constraints>
                 <properties>
                   <background color="-3618616"/>
+                  <maximumSize width="-1" height="1"/>
+                  <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
                 </properties>
                 <border type="none"/>
@@ -193,6 +195,8 @@
                 </constraints>
                 <properties>
                   <background color="-3618616"/>
+                  <maximumSize width="-1" height="1"/>
+                  <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
                 </properties>
                 <border type="none"/>
@@ -355,12 +359,6 @@
           </grid>
         </children>
       </grid>
-      <nested-form id="1e3a5" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="33.0" weighty="70.0"/>
-        </constraints>
-      </nested-form>
       <grid id="dc4e3" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -372,6 +370,24 @@
         </properties>
         <border type="none"/>
         <children/>
+      </grid>
+      <grid id="dd2bf" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="33.0" weighty="70.0"/>
+        </constraints>
+        <properties>
+          <preferredSize width="500" height="400"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <nested-form id="1e3a5" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="33.0" weighty="70.0"/>
+            </constraints>
+          </nested-form>
+        </children>
       </grid>
     </children>
   </grid>

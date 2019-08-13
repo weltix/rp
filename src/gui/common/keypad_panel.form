@@ -31,10 +31,12 @@
             </constraints>
             <properties>
               <background color="-1"/>
-              <maximumSize width="-1" height="-1"/>
-              <minimumSize width="-1" height="-1"/>
+              <focusable value="false"/>
+              <maximumSize width="2147483647" height="2147483647"/>
+              <minimumSize width="0" height="0"/>
               <name value=""/>
               <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -46,9 +48,11 @@
             </constraints>
             <properties>
               <background color="-1"/>
-              <maximumSize width="-1" height="-1"/>
-              <minimumSize width="-1" height="-1"/>
+              <focusable value="false"/>
+              <maximumSize width="2147483647" height="2147483647"/>
+              <minimumSize width="0" height="0"/>
               <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -75,9 +79,11 @@
                   <alignmentX value="0.5"/>
                   <autoscrolls value="false"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -144,9 +150,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -159,9 +167,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -174,9 +184,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -189,9 +201,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -204,9 +218,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -273,9 +289,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -288,9 +306,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -303,9 +323,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -372,9 +394,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -387,9 +411,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -402,9 +428,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -473,9 +501,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -488,9 +518,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -503,9 +535,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -518,8 +552,9 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-1"/>
-                  <maximumSize width="-1" height="-1"/>
-                  <minimumSize width="-1" height="-1"/>
+                  <focusable value="false"/>
+                  <maximumSize width="2147483647" height="2147483647"/>
+                  <minimumSize width="0" height="0"/>
                   <preferredSize width="-1" height="-1"/>
                 </properties>
                 <border type="none"/>
@@ -533,9 +568,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -548,9 +585,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
                   <preferredSize width="1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -563,9 +602,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -633,8 +674,9 @@
                 </constraints>
                 <properties>
                   <background color="-1"/>
-                  <maximumSize width="-1" height="-1"/>
-                  <minimumSize width="-1" height="-1"/>
+                  <focusable value="false"/>
+                  <maximumSize width="2147483647" height="2147483647"/>
+                  <minimumSize width="0" height="0"/>
                   <preferredSize width="-1" height="-1"/>
                 </properties>
                 <border type="none"/>
@@ -656,7 +698,7 @@
                     </constraints>
                     <properties>
                       <opaque value="false"/>
-                      <visible value="false"/>
+                      <visible value="true"/>
                     </properties>
                     <border type="none">
                       <title-color color="-16777216"/>
@@ -756,9 +798,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
