@@ -16,10 +16,11 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 /**
- * Класс, содержащий окно ввода пароля и цифровую клавиатуру для входа в систему.
+ * Общий класс, описывающий диалоговое окно, содержащее поле ввода текста и цифровую клавиатуру.
+ * Предназначен для наследования другими производными классами.
  * Использует форму keypad_dialog.form
  */
-public class KeypadDialog extends JWindow implements ActionListener {
+public abstract class KeypadDialog extends JWindow implements ActionListener {
     private JPanel mainPanel;
     protected KeypadPanel keypadPanel;
     private JLabel dialogTitle;

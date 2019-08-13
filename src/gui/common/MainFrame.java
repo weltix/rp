@@ -6,6 +6,7 @@ package gui.common;
 
 import gui.common.dialogs.DialogType;
 import gui.common.dialogs.KeypadDialogLogin;
+import gui.common.dialogs.PaymentDialog;
 import gui.common.utility_components.BackgroundImagePanel;
 import gui.common.utility_components.BlurLayerUI;
 import gui.common.utility_components.GlassPane;
@@ -95,6 +96,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private Font menuIcons58 = FontProvider.getInstance().getFont(MENU_ICONS, 58);
     private GlassPane glassPane = new GlassPane();
     private JWindow loginWindow;
+    private JWindow paymentWindow;
 
     // объект класса, который выполняет рисование для JLayer
     private LayerUI<JComponent> layerUI = new BlurLayerUI();
@@ -135,7 +137,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(2000);
         timer.setActionCommand("splashScreenShowingTime");
-        timer.start();
+//        timer.start();
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
@@ -157,6 +159,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         discountButton.setFont(robotoRegular30);
         paymentButton.setFont(robotoRegular30);
+        paymentButton.addActionListener(e -> launchDialog(true, DialogType.PAYMENT));
 
         toPayLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38));
         toPaySumLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38));
@@ -173,6 +176,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         keypadPanel.setActionButtonsAmount(1);     // задаём количество нижних клавиш нашей цифровой клавиатуры
         loginWindow = new KeypadDialogLogin(this);
+        paymentWindow = new PaymentDialog(this);
         jlayer.setUI(layerUI);
 
         String[] columnNames = {"First Name",
@@ -271,21 +275,20 @@ public class MainFrame extends JFrame implements ActionListener {
                     // ставим слушалки на кнопки навигационной панели
                     child.addMouseListener(new MouseAdapter() {
                         // определяет, активна ли кнопка к выполнению действия (workaround метода mouseClicked).
-                        // Причина: в некоторых системах при клике не должна изменяться координата указателя.
-                        private boolean trigged = false;
+                        // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
+                        private boolean isPressed = false;
+                        private boolean isMouseOver = false;
 
                         @Override
                         public void mousePressed(MouseEvent e) {
-                            child.setBackground(navPanelPressed);
-                            iconLabel.setForeground(navIconLabelPressed);
-                            textLabel.setForeground(navIconLabelPressed);
-                            trigged = true;
+                            setPressedState();
+                            isPressed = true;
                         }
 
                         @Override
                         public void mouseReleased(MouseEvent e) {
                             setNormalState();
-                            if (trigged) {
+                            if (isPressed && isMouseOver) {
                                 switch (child.getName()) {
                                     case "addGoodButton":       // имя кнопок навигационной панели (задано в .form в поле name)
                                         mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
@@ -308,12 +311,20 @@ public class MainFrame extends JFrame implements ActionListener {
                                 if (!child.getName().equals("exitButton"))
                                     showNavigationPanelBackButton();
                             }
+                            isPressed = false;
+                        }
+
+                        @Override
+                        public void mouseEntered(MouseEvent e) {
+                            if (isPressed)
+                                setPressedState();
+                            isMouseOver = true;
                         }
 
                         @Override
                         public void mouseExited(MouseEvent e) {
                             setNormalState();
-                            trigged = false;
+                            isMouseOver = false;
                         }
 
                         // задаёт вид кнопок навигационной панели в нормальном состоянии
@@ -321,6 +332,13 @@ public class MainFrame extends JFrame implements ActionListener {
                             child.setBackground(navPanelColor);
                             iconLabel.setForeground(Color.WHITE);
                             textLabel.setForeground(Color.WHITE);
+                        }
+
+                        // задаёт вид кнопок навигационной панели в нажатом состоянии
+                        private void setPressedState() {
+                            child.setBackground(navPanelPressed);
+                            iconLabel.setForeground(navIconLabelPressed);
+                            textLabel.setForeground(navIconLabelPressed);
                         }
                     });
                 }
@@ -349,6 +367,18 @@ public class MainFrame extends JFrame implements ActionListener {
             loginWindow.setSize(dim);
             loginWindow.setLocationRelativeTo(this);
             loginWindow.setVisible(true);
+        }
+
+        if (DialogType.PAYMENT.name().equals(e.getActionCommand())) {
+            ((Timer) e.getSource()).stop();
+            // получаем размер клавиатуры в главном окне
+            Dimension dim = keypadPanel.getSize();
+            // 86% от высоты занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
+            // Остальные цифры - коррекция (необязательно, можно опустить).
+            dim.setSize(dim.getWidth() * 2.5, dim.getHeight() * 1.3);
+            paymentWindow.setSize(dim);
+            paymentWindow.setLocationRelativeTo(this);
+            paymentWindow.setVisible(true);
         }
     }
 
@@ -411,16 +441,6 @@ public class MainFrame extends JFrame implements ActionListener {
         addGoodButton.removeMouseListener(addGoodButtonMouseListener);
         addGoodButton.addMouseListener(backButtonMouseListener);
 
-        workWithReceiptButton.setEnabled(false);
-        cashboxButton.setEnabled(false);
-        serviceButton.setEnabled(false);
-        exitButton.setEnabled(false);
-
-        workWithReceiptButton.setOpaque(false);
-        cashboxButton.setOpaque(false);
-        serviceButton.setOpaque(false);
-        exitButton.setOpaque(false);
-
         workWithReceiptIcon.setVisible(false);
         cashboxIcon.setVisible(false);
         serviceIcon.setVisible(false);
@@ -438,13 +458,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
         navigatePanel.repaint();
         navigatePanel.revalidate();
-//        GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();
-//        GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
-//        textFieldPanel.remove(textField);
-//        textField = new JPasswordField();
-//        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 60));
-//        textField.setBorder(BorderFactory.createEmptyBorder());
-//        textFieldPanel.add(textField, constraintsTextField);
     }
 
     public void hideNavigationPanelBackButton() {
@@ -454,16 +467,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
         addGoodButton.removeMouseListener(backButtonMouseListener);
         addGoodButton.addMouseListener(addGoodButtonMouseListener);
-
-        workWithReceiptButton.setEnabled(true);
-        cashboxButton.setEnabled(true);
-        serviceButton.setEnabled(true);
-        exitButton.setEnabled(true);
-
-        workWithReceiptButton.setOpaque(true);
-        cashboxButton.setOpaque(true);
-        serviceButton.setOpaque(true);
-        exitButton.setOpaque(true);
 
         workWithReceiptIcon.setVisible(true);
         cashboxIcon.setVisible(true);
@@ -482,66 +485,67 @@ public class MainFrame extends JFrame implements ActionListener {
 
         navigatePanel.repaint();
         navigatePanel.revalidate();
-
-//        GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();
-//        GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
-//        textFieldPanel.remove(textField);
-//        textField = new JPasswordField();
-//        textField.setFont(fontProvider.getFont(ROBOTO_REGULAR, 60));
-//        textField.setBorder(BorderFactory.createEmptyBorder());
-//        textFieldPanel.add(textField, constraintsTextField);
     }
 
     MouseListener addGoodButtonMouseListener = new MouseAdapter() {
         // определяет, активна ли кнопка к выполнению действия (workaround метода mouseClicked).
-        // Причина: в некоторых системах при клике не должна изменяться координата указателя.
-        private boolean trigged = false;
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-
-        }
+        // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
+        private boolean isPressed = false;
+        private boolean isMouseOver = false;
 
         @Override
         public void mousePressed(MouseEvent e) {
-            trigged = true;
+            isPressed = true;
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if (trigged) {
+            if (isPressed && isMouseOver) {
                 mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
                 showNavigationPanelBackButton();
             }
+            isPressed = false;
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            isMouseOver = true;
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            trigged = false;
+            isMouseOver = false;
         }
     };
 
     MouseListener backButtonMouseListener = new MouseAdapter() {
         // определяет, активна ли кнопка к выполнению действия (workaround метода mouseClicked).
-        // Причина: в некоторых системах при клике не должна изменяться координата указателя.
-        private boolean trigged = false;
+        // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
+        private boolean isPressed = false;
+        private boolean isMouseOver = false;
 
         @Override
         public void mousePressed(MouseEvent e) {
-            trigged = true;
+            isPressed = true;
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            if (trigged) {
+            if (isPressed && isMouseOver) {
                 mainSellPanelScreensLayout.show(mainSellPanelScreens, "sellPanel");
                 hideNavigationPanelBackButton();
             }
+            isPressed = false;
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            isMouseOver = true;
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            trigged = false;
+            isMouseOver = false;
         }
     };
 
@@ -571,4 +575,5 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 01.08.2019  Навигационная панель должна показываться синхронно со всем экраном.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
+    // TODO: 13.08.2019  Перелать навигационную панель (алгоритм работы верный, есть ошибки в режиме кнопки назад (работают невидимые кнопки))
 }
