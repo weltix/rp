@@ -2,10 +2,12 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.dialogs.KeypadDialog">
   <grid id="cbd77" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="48" y="54" width="309" height="442"/>
+      <xy x="48" y="54" width="299" height="470"/>
     </constraints>
     <properties>
       <background color="-1"/>
+      <minimumSize width="0" height="0"/>
+      <preferredSize width="-1" height="-1"/>
     </properties>
     <border type="line">
       <color color="-3618616"/>
@@ -74,6 +76,7 @@
         <properties>
           <background color="-1"/>
           <focusable value="false"/>
+          <minimumSize width="0" height="0"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>

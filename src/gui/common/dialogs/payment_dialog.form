@@ -300,7 +300,9 @@
                     </constraints>
                     <properties>
                       <background color="-1"/>
+                      <focusable value="false"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
                     <children/>
@@ -316,7 +318,9 @@
             </constraints>
             <properties>
               <background color="-1"/>
+              <focusable value="false"/>
               <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -328,7 +332,9 @@
             </constraints>
             <properties>
               <background color="-1"/>
+              <focusable value="false"/>
               <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -340,7 +346,9 @@
             </constraints>
             <properties>
               <background color="-1"/>
+              <focusable value="false"/>
               <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -352,7 +360,9 @@
             </constraints>
             <properties>
               <background color="-1"/>
+              <focusable value="false"/>
               <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
             </properties>
             <border type="none"/>
             <children/>
@@ -362,11 +372,13 @@
       <grid id="dc4e3" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="30.0"/>
+          <gridbag weightx="0.0" weighty="21.5"/>
         </constraints>
         <properties>
           <background color="-1"/>
+          <focusable value="false"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
         </properties>
         <border type="none"/>
         <children/>
@@ -374,7 +386,7 @@
       <nested-form id="1e3a5" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="37.2" weighty="70.0"/>
+          <gridbag weightx="37.2" weighty="78.5"/>
         </constraints>
       </nested-form>
     </children>

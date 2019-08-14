@@ -5,6 +5,7 @@
 package gui.common;
 
 import gui.common.dialogs.DialogType;
+import gui.common.dialogs.KeypadDialog;
 import gui.common.dialogs.KeypadDialogLogin;
 import gui.common.dialogs.PaymentDialog;
 import gui.common.utility_components.BackgroundImagePanel;
@@ -95,7 +96,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private Font robotoRegular16 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 16);
     private Font menuIcons58 = FontProvider.getInstance().getFont(MENU_ICONS, 58);
     private GlassPane glassPane = new GlassPane();
-    private JWindow loginWindow;
+    private KeypadDialog loginWindow;
     private JWindow paymentWindow;
 
     // объект класса, который выполняет рисование для JLayer
@@ -388,9 +389,10 @@ public class MainFrame extends JFrame implements ActionListener {
             ((Timer) e.getSource()).stop();
             // получаем размер клавиатуры в главном окне
             Dimension dim = keypadPanel.getSize();
+            loginWindow.getKeypadPanel().setPreferredSize(dim);
             // 86% от высоты занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
-            // Остальные цифры - коррекция (необязательно, можно опустить).
-            dim.setSize(dim.getWidth() + 4, (dim.getHeight() / 86) * 100 + 3);
+            // 1.01 - коррекция (необязательно, можно опустить).
+            dim.setSize(dim.getWidth(), (dim.getHeight() / 86) * 100);
             loginWindow.setSize(dim);
             loginWindow.setLocationRelativeTo(this);
             loginWindow.setVisible(true);
@@ -400,9 +402,9 @@ public class MainFrame extends JFrame implements ActionListener {
             ((Timer) e.getSource()).stop();
             // получаем размер клавиатуры в главном окне
             Dimension dim = keypadPanel.getSize();
-            // 86% от высоты занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
+            // 37.2% от ширины занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
             // Остальные цифры - коррекция (необязательно, можно опустить).
-            dim.setSize(dim.getWidth() * 2.5, dim.getHeight() * 1.3);
+            dim.setSize((dim.getWidth() / 37.2) * 100, (dim.getHeight() / 78.5) * 100);
             paymentWindow.setSize(dim);
             paymentWindow.setLocationRelativeTo(this);
             paymentWindow.setVisible(true);

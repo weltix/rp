@@ -66,6 +66,10 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
         dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
     }
 
+    public KeypadPanel getKeypadPanel() {
+        return keypadPanel;
+    }
+
     public JTextField getTextField() {
         return keypadPanel.getTextField();
     }
