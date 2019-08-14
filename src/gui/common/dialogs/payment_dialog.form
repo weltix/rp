@@ -16,7 +16,7 @@
       <grid id="cc404" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="62.8" weighty="1.0"/>
+          <gridbag weightx="62.5" weighty="1.0"/>
         </constraints>
         <properties>
           <background color="-1"/>
@@ -40,7 +40,7 @@
               <grid id="3d8ae" layout-manager="GridBagLayout">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="15.0"/>
+                  <gridbag weightx="1.0" weighty="10.0"/>
                 </constraints>
                 <properties>
                   <minimumSize width="0" height="0"/>
@@ -59,6 +59,7 @@
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <foreground color="-1"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
@@ -75,6 +76,7 @@
                       <background color="-1315861"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
@@ -99,7 +101,7 @@
                   <component id="547e3" class="javax.swing.JLabel" binding="toPayLabel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="1.0"/>
+                      <gridbag weightx="60.0" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <foreground color="-13264677"/>
@@ -115,7 +117,7 @@
                   <component id="121f1" class="javax.swing.JLabel" binding="toPaySumLabel">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="0.0"/>
+                      <gridbag weightx="40.0" weighty="0.0"/>
                     </constraints>
                     <properties>
                       <foreground color="-13264677"/>
@@ -217,7 +219,7 @@
                   <component id="3153f" class="javax.swing.JLabel" binding="mustBePaidLabel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="1.0"/>
+                      <gridbag weightx="65.0" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <foreground color="-13264677"/>
@@ -233,7 +235,7 @@
                   <component id="1d92" class="javax.swing.JLabel" binding="mustBePaidSumLabel">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="1.0"/>
+                      <gridbag weightx="35.0" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <foreground color="-13264677"/>
@@ -262,7 +264,7 @@
                   <component id="b8c1e" class="javax.swing.JButton" binding="cancelButton">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="30.0" weighty="1.0"/>
+                      <gridbag weightx="25.0" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="cancelButton"/>
@@ -270,6 +272,7 @@
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <foreground color="-1"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
@@ -279,7 +282,7 @@
                   <component id="d8a66" class="javax.swing.JButton" binding="payButton">
                     <constraints>
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="30.0" weighty="0.0"/>
+                      <gridbag weightx="50.0" weighty="0.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="payButton"/>
@@ -287,21 +290,57 @@
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
                       <foreground color="-16777216"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
                       <text resource-bundle="resources/strings" key="pay"/>
                     </properties>
                   </component>
-                  <grid id="d62be" layout-manager="GridBagLayout">
+                  <component id="ddb0d" class="javax.swing.JButton" binding="clearButton">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="40.0" weighty="0.0"/>
+                      <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="25.0" weighty="0.0"/>
                     </constraints>
                     <properties>
-                      <background color="-1"/>
-                      <focusable value="false"/>
+                      <actionCommand value="clearButton"/>
+                      <background color="-1315861"/>
+                      <borderPainted value="false"/>
+                      <focusPainted value="false"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <text resource-bundle="resources/strings" key="clear"/>
+                    </properties>
+                  </component>
+                  <grid id="c437a" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-3618616"/>
+                      <focusable value="false"/>
+                      <maximumSize width="1" height="-1"/>
+                      <minimumSize width="1" height="-1"/>
+                      <preferredSize width="1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <grid id="36f30" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="0.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-3618616"/>
+                      <focusable value="false"/>
+                      <maximumSize width="1" height="-1"/>
+                      <minimumSize width="1" height="-1"/>
+                      <preferredSize width="1" height="-1"/>
                       <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
@@ -314,7 +353,7 @@
           <grid id="77c17" layout-manager="GridBagLayout">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="3.5"/>
+              <gridbag weightx="0.0" weighty="2.0"/>
             </constraints>
             <properties>
               <background color="-1"/>
@@ -342,7 +381,7 @@
           <grid id="39fd6" layout-manager="GridBagLayout">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="5.0" weighty="0.0"/>
+              <gridbag weightx="3.0" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-1"/>
@@ -356,7 +395,7 @@
           <grid id="82c67" layout-manager="GridBagLayout">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="5.0" weighty="0.0"/>
+              <gridbag weightx="3.0" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-1"/>
@@ -372,7 +411,7 @@
       <grid id="dc4e3" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="21.5"/>
+          <gridbag weightx="0.0" weighty="20.0"/>
         </constraints>
         <properties>
           <background color="-1"/>
@@ -386,7 +425,7 @@
       <nested-form id="1e3a5" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="37.2" weighty="78.5"/>
+          <gridbag weightx="37.5" weighty="80.0"/>
         </constraints>
       </nested-form>
     </children>

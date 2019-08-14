@@ -31,7 +31,9 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
         super(owner);
         this.setContentPane(mainPanel);
 
-        setFonts();
+        // тип и размер шрифтов в заголовке
+        dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
+        dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
 
 //        // hide cursor from current JWindow
 //        setCursor(getToolkit().createCustomCursor(
@@ -55,15 +57,6 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
             ((Timer) e.getSource()).stop();
             this.dispose();
         }
-    }
-
-    /**
-     * Код устанавливает размер и типы шрифтов для разных компонентов диалога
-     */
-    private void setFonts() {
-        // тип и размер шрифтов в заголовке
-        dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
-        dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
     }
 
     public KeypadPanel getKeypadPanel() {

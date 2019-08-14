@@ -392,7 +392,7 @@ public class MainFrame extends JFrame implements ActionListener {
             loginWindow.getKeypadPanel().setPreferredSize(dim);
             // 86% от высоты занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
             // 1.01 - коррекция (необязательно, можно опустить).
-            dim.setSize(dim.getWidth(), (dim.getHeight() / 86) * 100);
+            dim.setSize(dim.getWidth() * 1.01, (dim.getHeight() / 86) * 100 * 1.01);
             loginWindow.setSize(dim);
             loginWindow.setLocationRelativeTo(this);
             loginWindow.setVisible(true);
@@ -402,11 +402,12 @@ public class MainFrame extends JFrame implements ActionListener {
             ((Timer) e.getSource()).stop();
             // получаем размер клавиатуры в главном окне
             Dimension dim = keypadPanel.getSize();
-            // 37.2% от ширины занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
-            // Остальные цифры - коррекция (необязательно, можно опустить).
-            dim.setSize((dim.getWidth() / 37.2) * 100, (dim.getHeight() / 78.5) * 100);
+            // 37.3% от ширины занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
+            // 1.01 (или 1.005) - коррекция (необязательно, можно опустить).
+            dim.setSize((dim.getWidth() / 37.5) * 100 * 1.005, (dim.getHeight() / 80) * 100 * 1.01);
             paymentWindow.setSize(dim);
             paymentWindow.setLocationRelativeTo(this);
+            paymentWindow.setLocation(0,0);
             paymentWindow.setVisible(true);
         }
     }
