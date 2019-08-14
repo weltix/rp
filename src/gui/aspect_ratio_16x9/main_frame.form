@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.MainFrame">
   <grid id="ffc61" binding="mainPanel" layout-manager="CardLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="1920" height="1080"/>
+      <xy x="111" y="121" width="770" height="518"/>
     </constraints>
     <properties>
       <background color="-855310"/>
@@ -15,10 +15,10 @@
           <card name="splashScreenPanel"/>
         </constraints>
         <properties>
-          <minimumSize width="1920" height="1080"/>
+          <minimumSize width="0" height="0"/>
           <name value="splashScreenPanel"/>
           <opaque value="true"/>
-          <preferredSize width="1920" height="1080"/>
+          <preferredSize width="-1" height="-1"/>
         </properties>
         <border type="none"/>
         <children>

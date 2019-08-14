@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.dialogs.KeypadDialog">
   <grid id="cbd77" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="48" y="54" width="345" height="484"/>
+      <xy x="48" y="54" width="309" height="442"/>
     </constraints>
     <properties>
       <background color="-1"/>

@@ -13,7 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 /**
  * Общий класс, описывающий диалоговое окно, содержащее поле ввода текста и цифровую клавиатуру.
@@ -34,11 +33,11 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
 
         setFonts();
 
-        // hide cursor from current JWindow
-        setCursor(getToolkit().createCustomCursor(
-                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-                new Point(),
-                null));
+//        // hide cursor from current JWindow
+//        setCursor(getToolkit().createCustomCursor(
+//                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+//                new Point(),
+//                null));
 
         if (getParent() instanceof MainFrame)
             parentFrame = (MainFrame) getParent();
@@ -48,7 +47,7 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
     }
 
     /**
-     * Код используется для обработки событий таймера
+     * Код используется для обработки событий таймера.
      */
     @Override
     public void actionPerformed(ActionEvent e) {

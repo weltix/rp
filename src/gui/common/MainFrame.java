@@ -115,9 +115,9 @@ public class MainFrame extends JFrame implements ActionListener {
 //                new Point(),
 //                null));
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setUndecorated(true);                       //need for full screen mode
-        setResizable(false);                        //need for full screen mode
+//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        setUndecorated(true);                       //need for full screen mode
+//        setResizable(false);                        //need for full screen mode
 
         // set full screen exclusive mode
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -142,7 +142,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-//        setSize(1050, 618);
+        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
@@ -375,9 +375,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Вызывается по срабатыванию таймера.
-     *
-     * @param e событие, произошедшее по срабатыванию таймера
+     * Код используется для обработки событий таймера.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
