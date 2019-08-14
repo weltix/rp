@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 13.08.2019
+ * Copyright (c) RESONANCE JSC, 14.08.2019
  */
 
 package gui.common;
@@ -346,6 +346,35 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
+     * Создаёт, настраивает и показывает диалоговое окно определённого типа.
+     *
+     * @param glassPaneHasBackground определяет, затемнять ли фон вокруг диалогового окна
+     * @param dialogType             определяет тип диалога из заранее заданного перечисления {@link DialogType}
+     */
+    private void launchDialog(boolean glassPaneHasBackground, DialogType dialogType) {
+        Color base = UIManager.getColor("inactiveCaptionBorder");
+        Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   //alpha originally was 128
+        if (!glassPaneHasBackground)
+            background = null;
+
+        if (!splashScreenPanel.isVisible()) {
+            glassPane.activate(background);
+            //код сделает размытым фон вне диалогового окна
+            if (blurBackground) {
+                jlayer.setView(mainPanel);
+                setContentPane(jlayer);
+                repaint();
+                revalidate();
+            }
+        }
+        // данная задержка - workaround для слабого железа (убирает задержку прорисовки при появлении glassPane)
+        Timer timer = new Timer(0, this);
+        timer.setInitialDelay(10);
+        timer.setActionCommand(dialogType.name());
+        timer.start();
+    }
+
+    /**
      * Вызывается по срабатыванию таймера.
      *
      * @param e событие, произошедшее по срабатыванию таймера
@@ -380,35 +409,6 @@ public class MainFrame extends JFrame implements ActionListener {
             paymentWindow.setLocationRelativeTo(this);
             paymentWindow.setVisible(true);
         }
-    }
-
-    /**
-     * Создаёт, настраивает и показывает диалоговое окно определённого типа.
-     *
-     * @param glassPaneHasBackground определяет, затемнять ли фон вокруг диалогового окна
-     * @param dialogType             определяет тип диалога из заранее заданного перечисления {@link DialogType}
-     */
-    private void launchDialog(boolean glassPaneHasBackground, DialogType dialogType) {
-        Color base = UIManager.getColor("inactiveCaptionBorder");
-        Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   //alpha originally was 128
-        if (!glassPaneHasBackground)
-            background = null;
-
-        if (!splashScreenPanel.isVisible()) {
-            glassPane.activate(background);
-            //код сделает размытым фон вне диалогового окна
-            if (blurBackground) {
-                jlayer.setView(mainPanel);
-                setContentPane(jlayer);
-                repaint();
-                revalidate();
-            }
-        }
-        // данная задержка - workaround для слабого железа (убирает задержку прорисовки при появлении glassPane)
-        Timer timer = new Timer(0, this);
-        timer.setInitialDelay(10);
-        timer.setActionCommand(dialogType.name());
-        timer.start();
     }
 
     /**

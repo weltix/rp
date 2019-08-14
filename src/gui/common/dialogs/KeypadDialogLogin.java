@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 14.08.2019
  */
 
 package gui.common.dialogs;
@@ -37,6 +37,7 @@ public class KeypadDialogLogin extends KeypadDialog {
                 parentFrame.setCardOfMainSellPanelScreens("sellPanel");
             }
             glassPane.deactivate();
+            keypadPanel.getTextField().setText("");
             // данная задержка - workaround для слабого железа (убирает задержку прорисовки при исчезновении glassPane)
             Timer timer = new Timer(0, this);
             timer.setInitialDelay(10);

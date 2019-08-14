@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 13.08.2019
+ * Copyright (c) RESONANCE JSC, 14.08.2019
  */
 
 package gui.common.dialogs;
@@ -13,7 +13,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PaymentDialog  extends JWindow implements ActionListener {
+/**
+ * Код, описывающий диалог оплаты товаров.
+ * Использует форму payment_dialog.form
+ */
+public class PaymentDialog extends JWindow implements ActionListener {
     private JPanel mainPanel;
     private KeypadPanel keypadPanel;
     private JButton cashButton;
@@ -43,16 +47,30 @@ public class PaymentDialog  extends JWindow implements ActionListener {
 
         cancelButton.addActionListener(e -> {
             glassPane.deactivate();
-            this.dispose();
+            keypadPanel.getTextField().setText("");
+            // данная задержка - workaround для слабого железа (убирает задержку прорисовки при исчезновении glassPane)
+            Timer timer = new Timer(0, this);
+            timer.setInitialDelay(10);
+            timer.setActionCommand("delayBeforeClosingThisWindow");
+            timer.start();
         });
+
+//        keypadPanel.setActionButtonsAmount(2);
+//        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("ok"));
+//        keypadPanel.getActionButton2().setText(Resources.getInstance().getString("exit"));
+//        keypadPanel.doubleWidthA0Button();
+//        keypadPanel.switchToPasswordTextField();
 
     }
 
+    /**
+     * Код используется для обработки событий таймера
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand() + " ");
-        if ("cancelButton".equals(e.getActionCommand()))
+        if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
+            ((Timer) e.getSource()).stop();
             this.dispose();
-
+        }
     }
 }
