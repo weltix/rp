@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Код, описывающий диалог оплаты товаров.
+ * Это отдельно стоящий диалог, не наследующий и не имеющий производных кастомных классов.
  * Использует форму payment_dialog.form
  */
 public class PaymentDialog extends JWindow implements ActionListener {
