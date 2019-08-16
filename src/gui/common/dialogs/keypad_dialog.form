@@ -13,40 +13,9 @@
       <color color="-3618616"/>
     </border>
     <children>
-      <component id="49755" class="javax.swing.JLabel" binding="dialogTitle">
-        <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="95.0" weighty="7.0"/>
-        </constraints>
-        <properties>
-          <foreground color="-13350562"/>
-          <maximumSize width="2147483647" height="2147483647"/>
-          <minimumSize width="0" height="0"/>
-          <preferredSize width="-1" height="-1"/>
-          <text resource-bundle="resources/strings" key="login_to_system"/>
-          <verticalAlignment value="3"/>
-          <verticalTextPosition value="0"/>
-        </properties>
-      </component>
-      <component id="3142f" class="javax.swing.JLabel" binding="dialogHint">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="7.0"/>
-        </constraints>
-        <properties>
-          <background color="-855310"/>
-          <foreground color="-3618616"/>
-          <maximumSize width="2147483647" height="2147483647"/>
-          <minimumSize width="0" height="0"/>
-          <preferredSize width="-1" height="-1"/>
-          <text resource-bundle="resources/strings" key="confirm_rights"/>
-          <verticalAlignment value="0"/>
-          <verticalTextPosition value="0"/>
-        </properties>
-      </component>
       <grid id="5c294" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -64,24 +33,70 @@
       </grid>
       <nested-form id="2172a" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="86.0"/>
         </constraints>
       </nested-form>
-      <grid id="523ff" layout-manager="GridBagLayout">
+      <grid id="40fc7" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="5.0" weighty="0.0"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="14.0"/>
         </constraints>
         <properties>
           <background color="-1"/>
           <focusable value="false"/>
-          <minimumSize width="0" height="0"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
         <border type="none"/>
-        <children/>
+        <children>
+          <component id="49755" class="javax.swing.JLabel" binding="dialogTitle">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="95.0" weighty="7.0"/>
+            </constraints>
+            <properties>
+              <foreground color="-13350562"/>
+              <maximumSize width="2147483647" height="2147483647"/>
+              <minimumSize width="0" height="0"/>
+              <preferredSize width="-1" height="-1"/>
+              <text resource-bundle="resources/strings" key="login_to_system"/>
+              <verticalAlignment value="3"/>
+              <verticalTextPosition value="0"/>
+            </properties>
+          </component>
+          <component id="3142f" class="javax.swing.JLabel" binding="dialogHint">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="7.0"/>
+            </constraints>
+            <properties>
+              <background color="-855310"/>
+              <foreground color="-3618616"/>
+              <maximumSize width="2147483647" height="2147483647"/>
+              <minimumSize width="0" height="0"/>
+              <preferredSize width="-1" height="-1"/>
+              <text resource-bundle="resources/strings" key="confirm_rights"/>
+              <verticalAlignment value="0"/>
+              <verticalTextPosition value="0"/>
+            </properties>
+          </component>
+          <grid id="523ff" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="5.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <focusable value="false"/>
+              <minimumSize width="0" height="0"/>
+              <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
       </grid>
     </children>
   </grid>

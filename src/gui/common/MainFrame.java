@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 14.08.2019
+ * Copyright (c) RESONANCE JSC, 16.08.2019
  */
 
 package gui.common;
@@ -387,27 +387,27 @@ public class MainFrame extends JFrame implements ActionListener {
 
         if (DialogType.LOGIN.name().equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            // получаем размер клавиатуры в главном окне
+            // get actual keypad dimensions in px in MainFrame. All another keypads must have the same dimensions.
             Dimension dim = keypadPanel.getSize();
             loginWindow.getKeypadPanel().setPreferredSize(dim);
-            // 86% от высоты занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
-            // 1.01 - коррекция (необязательно, можно опустить).
-            dim.setSize(dim.getWidth() * 1.01, (dim.getHeight() / 86) * 100 * 1.01);
+            // 86% - keypad height to dialog height ratio. It is impossible to get this value from *.form file.
+            // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+            dim.setSize(dim.getWidth() + 2, (dim.getHeight() / 86) * 100 + 3);
             loginWindow.setSize(dim);
-            loginWindow.setLocationRelativeTo(this);
+            loginWindow.setLocation(778, 199);
             loginWindow.setVisible(true);
         }
 
         if (DialogType.PAYMENT.name().equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            // получаем размер клавиатуры в главном окне
+            // get actual keypad dimensions in px in MainFrame. All another keypads must have the same dimensions.
             Dimension dim = keypadPanel.getSize();
-            // 37.3% от ширины занимает клавиатура в диалоговом окне. Считать это значение из .form не получается.
+            // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file.
             // 1.01 (или 1.005) - коррекция (необязательно, можно опустить).
             dim.setSize((dim.getWidth() / 37.5) * 100 * 1.005, (dim.getHeight() / 80) * 100 * 1.01);
             paymentWindow.setSize(dim);
             paymentWindow.setLocationRelativeTo(this);
-            paymentWindow.setLocation(0,0);
+            paymentWindow.setLocation(0, 0);
             paymentWindow.setVisible(true);
         }
     }

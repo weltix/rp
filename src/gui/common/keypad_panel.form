@@ -619,8 +619,8 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-1"/>
-                  <maximumSize width="-1" height="-1"/>
-                  <minimumSize width="-1" height="-1"/>
+                  <maximumSize width="2147483647" height="2147483647"/>
+                  <minimumSize width="0" height="0"/>
                   <preferredSize width="-1" height="-1"/>
                   <visible value="true"/>
                 </properties>
@@ -637,8 +637,8 @@
                       <autoscrolls value="true"/>
                       <doubleBuffered value="false"/>
                       <margin top="2" left="5" bottom="2" right="5"/>
-                      <maximumSize width="-1" height="-1"/>
-                      <minimumSize width="-1" height="-1"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
                       <requestFocusEnabled value="true"/>
                     </properties>
@@ -657,8 +657,8 @@
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
-                      <maximumSize width="-1" height="-1"/>
-                      <minimumSize width="-1" height="-1"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
                       <text resource-bundle="resources/strings" key="backspace_button"/>
                       <verticalAlignment value="0"/>
