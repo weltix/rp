@@ -389,13 +389,24 @@ public class MainFrame extends JFrame implements ActionListener {
             ((Timer) e.getSource()).stop();
             // get actual keypad dimensions in px in MainFrame. All another keypads must have the same dimensions.
             Dimension dim = keypadPanel.getSize();
-            loginWindow.getKeypadPanel().setPreferredSize(dim);
-            // 86% - keypad height to dialog height ratio. It is impossible to get this value from *.form file.
+            Point point = keypadPanel.getLocationOnScreen();
+            System.out.println(dim + " main frame keypad's dimensions");
+            System.out.println(point + " main frame keypad's top left point");
+
+            // keypad height to dialog height ratio. It is impossible to get this value from *.form file.
+            double kpHRatio = 86.0 / 100;
             // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
-            dim.setSize(dim.getWidth() + 2, (dim.getHeight() / 86) * 100 + 3);
+            dim.setSize(dim.getWidth() + 2, dim.getHeight() / kpHRatio + 3);
+            System.out.println(dim + " login dialog's dimensions");
+
+            point.translate(-1, -(int) (dim.getHeight() - 1 - keypadPanel.getSize().getHeight()));
+            System.out.println(point + " login dialog's keypad top left point");
+
             loginWindow.setSize(dim);
-            loginWindow.setLocation(778, 199);
+            loginWindow.setLocation(point);
+//            loginWindow.setLocation(778, 199);
             loginWindow.setVisible(true);
+            System.out.println(loginWindow.getKeypadPanel().getSize() + " login dialog's keypad top left point");
         }
 
         if (DialogType.PAYMENT.name().equals(e.getActionCommand())) {

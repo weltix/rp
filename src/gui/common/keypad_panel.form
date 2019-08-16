@@ -6,6 +6,9 @@
     </constraints>
     <properties>
       <background color="-1"/>
+      <focusable value="false"/>
+      <preferredSize width="-1" height="-1"/>
+      <requestFocusEnabled value="false"/>
     </properties>
     <border type="none"/>
     <children>
@@ -16,9 +19,11 @@
         </constraints>
         <properties>
           <background color="-1"/>
+          <focusable value="false"/>
           <maximumSize width="2147483647" height="2147483647"/>
           <minimumSize width="0" height="0"/>
-          <preferredSize width="0" height="0"/>
+          <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
         </properties>
         <border type="none">
           <color color="-3618616"/>

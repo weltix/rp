@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 13.08.2019
+ * Copyright (c) RESONANCE JSC, 16.08.2019
  */
 
 package gui.common;
@@ -181,12 +181,14 @@ public class KeypadPanel extends JComponent implements ActionListener {
         textFieldPanel.add(textField, constraintsTextField);
     }
 
-    /**
-     * Код переопределяет возвращаемый размер цифровой клавиатуры.
-     */
     @Override
     public Dimension getSize() {
-        return keyPadPanel.getSize();
+        return mainPanel.getSize();
+    }
+
+    @Override
+    public Point getLocationOnScreen() {
+        return mainPanel.getLocationOnScreen();
     }
 
     public JButton getActionButton0() {
