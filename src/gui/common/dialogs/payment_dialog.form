@@ -281,7 +281,7 @@
                   </component>
                   <component id="d8a66" class="javax.swing.JButton" binding="payButton">
                     <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="50.0" weighty="0.0"/>
                     </constraints>
                     <properties>
@@ -299,14 +299,15 @@
                   </component>
                   <component id="ddb0d" class="javax.swing.JButton" binding="clearButton">
                     <constraints>
-                      <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="25.0" weighty="0.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="clearButton"/>
-                      <background color="-1315861"/>
+                      <background color="-13350562"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <foreground color="-1"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
@@ -314,38 +315,6 @@
                       <text resource-bundle="resources/strings" key="clear"/>
                     </properties>
                   </component>
-                  <grid id="c437a" layout-manager="GridBagLayout">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="0.0" weighty="1.0"/>
-                    </constraints>
-                    <properties>
-                      <background color="-3618616"/>
-                      <focusable value="false"/>
-                      <maximumSize width="1" height="-1"/>
-                      <minimumSize width="1" height="-1"/>
-                      <preferredSize width="1" height="-1"/>
-                      <requestFocusEnabled value="false"/>
-                    </properties>
-                    <border type="none"/>
-                    <children/>
-                  </grid>
-                  <grid id="36f30" layout-manager="GridBagLayout">
-                    <constraints>
-                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="0.0" weighty="1.0"/>
-                    </constraints>
-                    <properties>
-                      <background color="-3618616"/>
-                      <focusable value="false"/>
-                      <maximumSize width="1" height="-1"/>
-                      <minimumSize width="1" height="-1"/>
-                      <preferredSize width="1" height="-1"/>
-                      <requestFocusEnabled value="false"/>
-                    </properties>
-                    <border type="none"/>
-                    <children/>
-                  </grid>
                 </children>
               </grid>
             </children>

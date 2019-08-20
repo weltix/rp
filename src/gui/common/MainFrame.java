@@ -115,10 +115,10 @@ public class MainFrame extends JFrame implements ActionListener {
 //                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
 //                new Point(),
 //                null));
-//
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setUndecorated(true);                       //need for full screen mode
-//        setResizable(false);                        //need for full screen mode
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setUndecorated(true);                       //need for full screen mode
+        setResizable(false);                        //need for full screen mode
 
         // set full screen exclusive mode
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -143,7 +143,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-        setSize(1050, 618);
+//        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
@@ -363,7 +363,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         if (!splashScreenPanel.isVisible()) {
             glassPane.activate(background);
-            // code will make blurred background around dialog window
+            // code will make background around dialog window blurred
             if (blurBackground) {
                 jlayer.setView(mainPanel);
                 setContentPane(jlayer);
@@ -448,6 +448,11 @@ public class MainFrame extends JFrame implements ActionListener {
         addGoodButton.removeMouseListener(addGoodButtonMouseListener);
         addGoodButton.addMouseListener(backButtonMouseListener);
 
+        workWithReceiptButton.setEnabled(false);
+        cashboxButton.setEnabled(false);
+        serviceButton.setEnabled(false);
+        exitButton.setEnabled(false);
+
         workWithReceiptIcon.setVisible(false);
         cashboxIcon.setVisible(false);
         serviceIcon.setVisible(false);
@@ -462,9 +467,6 @@ public class MainFrame extends JFrame implements ActionListener {
         horizontalLine3.setOpaque(false);
         horizontalLine4.setOpaque(false);
         horizontalLine5.setOpaque(false);
-
-        navigatePanel.repaint();
-        navigatePanel.revalidate();
     }
 
     public void hideNavigationPanelBackButton() {
@@ -474,6 +476,11 @@ public class MainFrame extends JFrame implements ActionListener {
 
         addGoodButton.removeMouseListener(backButtonMouseListener);
         addGoodButton.addMouseListener(addGoodButtonMouseListener);
+
+        workWithReceiptButton.setEnabled(true);
+        cashboxButton.setEnabled(true);
+        serviceButton.setEnabled(true);
+        exitButton.setEnabled(true);
 
         workWithReceiptIcon.setVisible(true);
         cashboxIcon.setVisible(true);
@@ -489,9 +496,6 @@ public class MainFrame extends JFrame implements ActionListener {
         horizontalLine3.setOpaque(true);
         horizontalLine4.setOpaque(true);
         horizontalLine5.setOpaque(true);
-
-        navigatePanel.repaint();
-        navigatePanel.revalidate();
     }
 
     MouseListener addGoodButtonMouseListener = new MouseAdapter() {
