@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 14.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.common.dialogs;
@@ -15,15 +15,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Общий класс, описывающий диалоговое окно, содержащее поле ввода текста и цифровую клавиатуру.
- * Предназначен для наследования другими производными классами.
- * Использует форму keypad_dialog.form
+ * General abstract class for dialog window, that contains {@link JTextField} and {@link KeypadPanel}.
+ * Used for inheritance by another descent classes. Bounded to keypad_dialog.form
  */
 public abstract class KeypadDialog extends JWindow implements ActionListener {
     private JPanel mainPanel;
     protected KeypadPanel keypadPanel;
-    private JLabel dialogTitle;
-    private JLabel dialogHint;
+    public JLabel dialogTitle;
+    public JLabel dialogHint;
     protected GlassPane glassPane;
     protected MainFrame parentFrame;
 
@@ -31,7 +30,7 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
         super(owner);
         this.setContentPane(mainPanel);
 
-        // тип и размер шрифтов в заголовке
+        // type and size of fonts in heading
         dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
         dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
 
@@ -49,7 +48,9 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
     }
 
     /**
-     * Код используется для обработки событий таймера.
+     * Method is called when action occurs (button pressed or timer triggers).
+     *
+     * @param e event, that occurs.
      */
     @Override
     public void actionPerformed(ActionEvent e) {

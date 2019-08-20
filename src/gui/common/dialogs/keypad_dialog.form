@@ -31,12 +31,6 @@
         </border>
         <children/>
       </grid>
-      <nested-form id="2172a" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="1.0" weighty="86.0"/>
-        </constraints>
-      </nested-form>
       <grid id="40fc7" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -56,6 +50,8 @@
               <gridbag weightx="95.0" weighty="7.0"/>
             </constraints>
             <properties>
+              <alignmentY value="0.5"/>
+              <background color="-1"/>
               <foreground color="-13350562"/>
               <maximumSize width="2147483647" height="2147483647"/>
               <minimumSize width="0" height="0"/>
@@ -71,10 +67,12 @@
               <gridbag weightx="0.0" weighty="7.0"/>
             </constraints>
             <properties>
-              <background color="-855310"/>
+              <alignmentY value="0.5"/>
+              <background color="-1"/>
               <foreground color="-3618616"/>
               <maximumSize width="2147483647" height="2147483647"/>
               <minimumSize width="0" height="0"/>
+              <opaque value="true"/>
               <preferredSize width="-1" height="-1"/>
               <text resource-bundle="resources/strings" key="confirm_rights"/>
               <verticalAlignment value="0"/>
@@ -98,6 +96,12 @@
           </grid>
         </children>
       </grid>
+      <nested-form id="2172a" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="86.0"/>
+        </constraints>
+      </nested-form>
     </children>
   </grid>
 </form>

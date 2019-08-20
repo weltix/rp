@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.common.utility_components;
@@ -16,7 +16,7 @@ import java.awt.*;
  *  Also, any component added directly to this panel will be made
  *  non-opaque so that the custom painting can show through.
  *
- *  P.S. Позволяет создать фон из картинки (нарисовать) на самой панели без использования других компонентов.
+ *  P.S. Class helps to create background from image (paint it) right on the panel without using any other components.
  */
 public class BackgroundImagePanel extends JPanel {
     public static final int SCALED = 0;

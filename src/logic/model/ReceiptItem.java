@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 18.07.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package logic.model;
@@ -10,7 +10,7 @@ import java.math.RoundingMode;
 import java.util.Objects;
 
 /**
- * Класс, описывающий одну позицию чека
+ * Describes one item of receipt.
  */
 
 public class ReceiptItem {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 18.07.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package logic.model;
@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Класс, описывающий чек
+ * Describes receipt.
  */
 
 public class Receipt {

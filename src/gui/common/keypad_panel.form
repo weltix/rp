@@ -69,9 +69,11 @@
             </constraints>
             <properties>
               <background color="-1"/>
+              <focusable value="false"/>
               <maximumSize width="-1" height="-1"/>
               <minimumSize width="-1" height="-1"/>
               <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
             </properties>
             <border type="none"/>
             <children>
@@ -184,7 +186,7 @@
               <grid id="4f919" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="5" column="6" row-span="9" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
@@ -201,7 +203,7 @@
               <grid id="a42f4" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="5" column="0" row-span="9" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
@@ -218,7 +220,7 @@
               <grid id="24077" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="11" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
@@ -323,7 +325,7 @@
               <grid id="42580" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="9" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
@@ -428,7 +430,7 @@
               <grid id="201e0" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="7" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
@@ -535,7 +537,7 @@
               <grid id="9ace1" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="5" column="1" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="1.0" weighty="0.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
@@ -561,6 +563,7 @@
                   <maximumSize width="2147483647" height="2147483647"/>
                   <minimumSize width="0" height="0"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -568,15 +571,15 @@
               <grid id="bebc1" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="2" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0" ipadx="1"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-3618616"/>
                   <focusable value="false"/>
-                  <maximumSize width="-1" height="-1"/>
-                  <minimumSize width="-1" height="-1"/>
-                  <preferredSize width="-1" height="-1"/>
+                  <maximumSize width="1" height="-1"/>
+                  <minimumSize width="1" height="-1"/>
+                  <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
@@ -585,7 +588,7 @@
               <grid id="d910c" layout-manager="CardLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="2" column="6" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
                   <alignmentX value="0.5"/>
@@ -624,9 +627,11 @@
                 <properties>
                   <alignmentX value="0.5"/>
                   <background color="-1"/>
+                  <focusable value="false"/>
                   <maximumSize width="2147483647" height="2147483647"/>
                   <minimumSize width="0" height="0"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <visible value="true"/>
                 </properties>
                 <border type="none"/>
@@ -683,6 +688,7 @@
                   <maximumSize width="2147483647" height="2147483647"/>
                   <minimumSize width="0" height="0"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -694,6 +700,9 @@
                 </constraints>
                 <properties>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
+                  <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children>
@@ -702,8 +711,11 @@
                       <card name="oneActionButton"/>
                     </constraints>
                     <properties>
+                      <focusable value="false"/>
                       <opaque value="false"/>
-                      <visible value="true"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <visible value="false"/>
                     </properties>
                     <border type="none">
                       <title-color color="-16777216"/>
@@ -725,7 +737,7 @@
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
                           <opaque value="true"/>
-                          <preferredSize width="0" height="0"/>
+                          <preferredSize width="-1" height="-1"/>
                           <text resource-bundle="resources/strings" key="search"/>
                         </properties>
                       </component>
@@ -739,7 +751,10 @@
                       <alignmentX value="0.5"/>
                       <autoscrolls value="false"/>
                       <background color="-855310"/>
+                      <focusable value="false"/>
                       <opaque value="false"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
                     <children>
@@ -756,7 +771,7 @@
                           <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
-                          <preferredSize width="0" height="0"/>
+                          <preferredSize width="-1" height="-1"/>
                           <text resource-bundle="resources/strings" key="ok"/>
                         </properties>
                       </component>
@@ -773,7 +788,7 @@
                           <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
-                          <preferredSize width="0" height="0"/>
+                          <preferredSize width="-1" height="-1"/>
                           <text resource-bundle="resources/strings" key="cancel"/>
                         </properties>
                       </component>
@@ -790,6 +805,7 @@
                   <background color="-1"/>
                   <focusable value="false"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <visible value="true"/>
                 </properties>
                 <border type="none"/>

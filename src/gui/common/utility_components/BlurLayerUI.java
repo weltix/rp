@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.common.utility_components;
@@ -13,9 +13,9 @@ import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 
 /**
- * Используем для создания размытости (при показе диалоговых окон).
- * Объект класса передаётся как аргумент для JLayer, который и служит видимым компонентом с определёнными
- * графическими эффектами (размытость в нашем случае).
+ * Class for creating blurring effect when dialog window is showing.
+ * Object of this class is passed as argument for {@link JLayer},
+ * which serves as visible component with certain graphic effects (blurring in our case).
  */
 public class BlurLayerUI extends LayerUI<JComponent> {
     private BufferedImage mOffscreenImage;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 13.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.common.utility_components;
@@ -25,8 +25,8 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  *  The background color of the glass pane should use a color with an
  *  alpha value to create the disabled look.
  *
- * P.S. Позволяет отлавливать и отменять все нажатия кнопок мыши и клавиатуры.
- * Нам, в основном, нужен как замена JFrame.setEnable(false), которое вызывает мерцание экрана.
+ * P.S. Glass pane helps us to catch and cancel all key events of mouse and keyboard.
+ * We basically need it as replacement for JFrame.setEnable(false), which causes screen blinking.
  */
 public class GlassPane extends JComponent
         implements KeyListener {
@@ -124,9 +124,7 @@ public class GlassPane extends JComponent
     }
 
     /**
-     * Выводит текст на glassPanel.
-     *
-     * @param text текст, который надо вывести на glassPanel
+     * Shows text on glassPanel.
      */
     public void showText(String text) {
         Color background = new Color(0, 0, 0, 0);   //alpha originally was 128
@@ -144,4 +142,4 @@ public class GlassPane extends JComponent
     }
 }
 
-// TODO: 08.08.2019 Надо ли в данном классе поле message?
+// TODO: 08.08.2019 Is message field necessary?

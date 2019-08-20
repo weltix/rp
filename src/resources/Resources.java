@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 29.05.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package resources;
@@ -14,10 +14,10 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
- * Класс служит для локализации приложения. Обеспечивает получение строк для указанного языка.
- * Строки для разных языков хранятся в *.properties файлах.
- * Всегда должен быть один *.properties файл по умолчанию, без кода языка (например, {@code strings.properties}).
- * Класс - Singleton, так как нам достаточно единственного его объекта.
+ * Class for application localization. Provides specified strings for specified language.
+ * Strings for different languages are stored in *.properties files.
+ * Always need to be one *.properties default file without language code (e.g. {@code strings.properties}).
+ * Class - Singleton, because it is enough one object of it.
  */
 // TODO: 29.05.2019 Save lang to file as preferences
 // TODO: 29.05.2019 Get saved lang from file
@@ -36,19 +36,19 @@ public class Resources {
     }
 
     /**
-     * Возвращает по ключу строку из файла *.properties на установленном для {@code resourceBundle} языке
+     * Returns a string by specified key from file *.properties for selected for {@code resourceBundle} language.
      *
-     * @param key ключ, по которому возвращается соответствующая строка
+     * @param key key, by which specified string returned.
      */
     public String getString(String key) {
         return resourceBundle.getString(key);
     }
 
     /**
-     * Устанавливает локализацию по умолчанию для данного экземпляра JRE, используя заданный язык.
-     * Создаёт объект класса ResourceBundle с заданным языком.
+     * Sets default localization for current instance of JRE, using specified language.
+     * Creates object of {@link ResourceBundle} using specified language.
      *
-     * @param language желаемый язык интерфейса программы
+     * @param language language of application
      */
     private void setLocale(String language) {
         Locale currentLocale = new Locale(language);
@@ -58,10 +58,9 @@ public class Resources {
 }
 
 /**
- * Класс, исправляющий проблему с русской кодировкой для ResourceBundle.
- * При этом, файлы *.properties должны иметь кодировку UTF-8.
- * Код должен выполниться в самом начале программы, чтобы *.form файлы могли обращаться к *.properties файлам,
- * и получать читабельные русскоязычные строки.
+ * Class solves problem with cyrillic symbols for ResourceBundle.
+ * ATTENTION: all *.properties files must have UTF-8 codetable.
+ * Code should be executed at the very beginning of the program to allow *.form files get right strings from *.properties files.
  */
 class UTF8Control extends ResourceBundle.Control {
     public ResourceBundle newBundle

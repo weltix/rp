@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 16.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.common;
@@ -20,8 +20,7 @@ import static gui.fonts.FontProvider.FONTAWESOME_REGULAR;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Класс, содержащий в себе блок цифровой клавиатуры.
- * Использует форму keypad_panel.form
+ * Class contains numeric keyboard block. Bounded to keypad_panel.form
  */
 public class KeypadPanel extends JComponent implements ActionListener {
     private JButton actionButton0;
@@ -63,15 +62,15 @@ public class KeypadPanel extends JComponent implements ActionListener {
         textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         textField.setBorder(BorderFactory.createEmptyBorder());
 
-        // таймер для генерации повторных срабатываний цифровых клавиш при их удержании в нажатом состоянии
+        // timer for generation repeated clicks of numeric keys when a key is in pressed state
         Timer timer = new Timer(30, this);
         timer.setInitialDelay(500);
 
-        // циклически задаём свойства цифровым клавишам (12 шт.) (getComponents() возвращает компоненты 1-го уровня вложенности)
+        // cycle sets properties for numeric keys (12 buttons) (getComponents() returns only components of first level of nesting)
         if (centerPanel instanceof Container) {
-            // добавим кнопку backSpaceButton к обрабатываемому списку кнопок, так как она не входит в centerPanel
-            List<Component> mainPanelComponentsList = Arrays.asList(centerPanel.getComponents());
-            List<Component> processingComponents = new ArrayList<>(mainPanelComponentsList);
+            // add backSpaceButton to processing list of buttons, because it is not direct child of centerPanel (not included in component list)
+            List<Component> componentsList = Arrays.asList(centerPanel.getComponents());
+            List<Component> processingComponents = new ArrayList<>(componentsList);
             processingComponents.add(backSpaceButton);
 
             for (Component child : processingComponents) {
@@ -111,9 +110,9 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Обеспечивает изменение текстового поля при нажатии на цифровые клавиши
+     * Changes the text in text field when digital keys are pressing.
      *
-     * @param ch символ-идентификатор нажатой цифровой клавиши (в основном, это - символ на самой кнопке)
+     * @param ch symbol identifier of pressed digital key (basically it is symbol represented on the certain button)
      */
     private void changeTextField(char ch) {
         int caretPosition = textField.getCaretPosition();
@@ -127,10 +126,9 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Метод обеспечивает генерацию повторных срабатываний при длительном нажатии на цифровую клавишу.
-     * Выполняется с заданной в таймере частотой после его срабатыванию.
+     * Method is called when action occurs (button pressed or timer triggers).
      *
-     * @param e событие, произошедшее по срабатыванию таймера
+     * @param e event, that occurs.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -138,10 +136,10 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Метод определяет сколько кнопок показывать внизу цифровой клавиатуры
-     * (например, одну кнопку "Поиск", или же 2 кнопки "ОК" и "Отмена" и т.д.).
+     * Method defines how many keys to show in bottom part of numeric keyboard.
+     * (for example, 1 key "Search", or 2 keys "OK" or "Cancel")
      *
-     * @param amount количество кнопок.
+     * @param amount amount of keys.
      */
     public void setActionButtonsAmount(int amount) {
         CardLayout cardLayout = (CardLayout) (actionButtonPanel.getLayout());
@@ -157,7 +155,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Клавиша ноль получает двойную ширину. Клавиша "точка" и вертикальная полоса-делитель удаляются.
+     * Key "0" gets double width. Key "." and vertical line-delimiter deleted.
      */
     public void doubleWidthA0Button() {
         GridBagLayout gbLayout = (GridBagLayout) centerPanel.getLayout();
@@ -169,7 +167,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Код заменяет обычное текстовое поле полем для ввода паролей.
+     * Method changes {@link JTextField} with {@link JPasswordField}.
      */
     public void switchToPasswordTextField() {
         GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();

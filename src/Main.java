@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 import gui.common.MainFrame;
@@ -8,8 +8,8 @@ import resources.Resources;
 import javax.swing.*;
 
 /**
- * Главный класс, с которого начинается работа приложения.
- * Resources.getInstance() вызываем для нормального отображения русскоязычных символов.
+ * The main class from which the application starts.
+ * Resources.getInstance() is called for normal displaying of cyrillic symbols.
  */
 
 public class Main {

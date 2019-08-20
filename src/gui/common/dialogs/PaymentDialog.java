@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 14.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.common.dialogs;
@@ -19,9 +19,8 @@ import static gui.fonts.FontProvider.ROBOTO_BOLD;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Код, описывающий диалог оплаты товаров.
- * Это отдельно стоящий диалог, не наследующий и не имеющий производных кастомных классов.
- * Использует форму payment_dialog.form
+ * Class for payment dialog window. Bounded to payment_dialog.form
+ * It is separately standing dialog window that nor inherit any classes nor have derivative classes.
  */
 public class PaymentDialog extends JWindow implements ActionListener {
     private JPanel mainPanel;
@@ -44,8 +43,6 @@ public class PaymentDialog extends JWindow implements ActionListener {
 
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
-
-//    private int
 
     public PaymentDialog(Frame owner) {
         super(owner);
@@ -77,7 +74,7 @@ public class PaymentDialog extends JWindow implements ActionListener {
         cancelButton.addActionListener(e -> {
             glassPane.deactivate();
             keypadPanel.getTextField().setText("");
-            // данная задержка - workaround для слабого железа (убирает задержку прорисовки при исчезновении glassPane)
+            // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
             Timer timer = new Timer(0, this);
             timer.setInitialDelay(10);
             timer.setActionCommand("delayBeforeClosingThisWindow");
@@ -89,7 +86,9 @@ public class PaymentDialog extends JWindow implements ActionListener {
     }
 
     /**
-     * Код используется для обработки событий таймера и нажатий кнопок.
+     * Method is called when action occurs (button pressed or timer triggers).
+     *
+     * @param e event, that occurs.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -113,3 +112,4 @@ public class PaymentDialog extends JWindow implements ActionListener {
         }
     }
 }
+// TODO: 20.08.2019 Format 1000000.00 max (no less)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 14.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.fonts;
@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Класс, предоставляющий объекты типа Font (шрифт заданного размера, созданный из файла *.ttf).
- * Класс - Singleton, так как нам достаточно единственного его объекта.
+ * Class provides objects of {@link Font} type (font of specified size, created from *.ttf file).
+ * Class - Singleton, because it is enough one object of it.
  */
 
 public class FontProvider {
@@ -22,8 +22,8 @@ public class FontProvider {
     public static final FontProvider INSTANCE = new FontProvider();
 
     /**
-     * Приблизительное значение масштабирования текста по отношению к шаблонному дисплею FullHD.
-     * Нам необходимо значение DPI, но определить его программно нереально. Будет опираться хоть на разрешение экрана.
+     * Approximate value for text scaling in relation to the template FullHD display.
+     * We need DPI value, but it is unreal to get it programmatically. We will rely at least on screen resolution.
      */
     private float scaleValue;
 
@@ -38,10 +38,10 @@ public class FontProvider {
     }
 
     /**
-     * Возвращает объект заданного шрифта c заданным размером
+     * Returns an object of specified font with specified size.
      *
-     * @param fontName название файла шрифта
-     * @param size     размер шрифта
+     * @param fontName the name of font file
+     * @param size     the size of font
      */
     public Font getFont(String fontName, int size) {
         Font font = null;

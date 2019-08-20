@@ -1,23 +1,24 @@
 /*
- * Copyright (c) RESONANCE JSC, 14.08.2019
+ * Copyright (c) RESONANCE JSC, 20.08.2019
  */
 
 package gui.common.dialogs;
 
+import gui.common.KeypadPanel;
 import resources.Resources;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Класс, содержащий окно ввода пароля и цифровую клавиатуру для входа в систему.
+ * Class for dialog window, that contains {@link JPasswordField} and {@link KeypadPanel} for login to system.
  */
 public class KeypadDialogLogin extends KeypadDialog {
     /**
-     * Конструктор настраивает вид логин-диалога, задаёт действия для кнопок действия.
-     * При этом, первоначально вызывается конструктор родителя {@link KeypadDialog}
+     * Constructor sets the look of login dialog, and sets actions for action buttons.
+     * Constructor of parent is called initially.
      *
-     * @param owner объект, из которого было вызвано данное окно
+     * @param owner {@link Frame} object, from which this window was called
      */
     public KeypadDialogLogin(Frame owner) {
         super(owner);
@@ -29,8 +30,8 @@ public class KeypadDialogLogin extends KeypadDialog {
         keypadPanel.switchToPasswordTextField();
 
         keypadPanel.getActionButton1().addActionListener(e -> {
-            // Возвращаем первоначальный mainPanel (следующий метод переопределён). Не влияет на производительность.
-            // Нужно из-за того, что было установлено setContentPane(jlayer) для достижения размытого фона.
+            // Returns initial mainPanel of main_frame.form. Does not affect performance.
+            // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
             parentFrame.setContentPane(null);
             if (parentFrame.getSplashScreenPanel().isVisible()) {
                 parentFrame.setCardOfMainPanel("mainSellPanel");
@@ -38,7 +39,7 @@ public class KeypadDialogLogin extends KeypadDialog {
             }
             glassPane.deactivate();
             keypadPanel.getTextField().setText("");
-            // данная задержка - workaround для слабого железа (убирает задержку прорисовки при исчезновении glassPane)
+            // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
             Timer timer = new Timer(0, this);
             timer.setInitialDelay(10);
             timer.setActionCommand("delayBeforeClosingThisWindow");
