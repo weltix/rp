@@ -115,7 +115,7 @@ public class MainFrame extends JFrame implements ActionListener {
 //                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
 //                new Point(),
 //                null));
-
+//
 //        setDefaultCloseOperation(EXIT_ON_CLOSE);
 //        setUndecorated(true);                       //need for full screen mode
 //        setResizable(false);                        //need for full screen mode
@@ -312,6 +312,7 @@ public class MainFrame extends JFrame implements ActionListener {
                                 if (!child.getName().equals("exitButton"))
                                     showNavigationPanelBackButton();
                             }
+                            // make smooth simultaneous rendering of navigate panel buttons and rest part of screen
                             revalidate();
                             repaint();
                             isPressed = false;
