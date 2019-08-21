@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 21.08.2019
  */
 
 package gui.common;
@@ -19,11 +19,17 @@ import javax.swing.*;
 import javax.swing.plaf.LayerUI;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-import static gui.fonts.FontProvider.*;
+import static gui.fonts.FontProvider.MENU_ICONS;
+import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
  * Класс, содержащий описание окна графического интерфейса.
@@ -68,7 +74,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton button3;
     private JTable sellTable;
     private JPanel mainPanel;
-    private JPanel navigatePanel;
+    private JPanel navigatePanelContainer;
     private JPanel mainSellPanel;
     private JPanel sellPanel;
     private JPanel tablePanel;
@@ -83,12 +89,13 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel servicePanel;
     private JPanel splashScreenPanel;
     private JLabel searchLabel;
-    private JPanel horizontalLine1;
     private JPanel horizontalLine2;
     private JPanel horizontalLine3;
     private JPanel horizontalLine4;
     private JPanel horizontalLine5;
     private JLabel versionLabel;
+    private NavigatePanel navPanelMain;
+    private NavigatePanel navPanelBack;
 
     private GraphicsDevice graphicsDevice;
     private CardLayout mainPanelCardLayout = (CardLayout) (mainPanel.getLayout());
@@ -130,7 +137,6 @@ public class MainFrame extends JFrame implements ActionListener {
         setGlassPane(glassPane);
 
         initComponents();
-        initNavigationPanel();
         setCardOfMainPanel("mainSellPanel");
 
         setVisible(true);
@@ -167,8 +173,6 @@ public class MainFrame extends JFrame implements ActionListener {
         discountLabel.setFont(robotoRegular30);
         discountSumLabel.setFont(robotoRegular30);
 
-        resposLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 22));
-        marketLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 12));
         searchLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 26));
 
         // TODO: 29.07.2019 Решить, где лучше хранить APP_VERSION
@@ -243,52 +247,23 @@ public class MainFrame extends JFrame implements ActionListener {
         sellTableModel.setRowCount(25);
     }
 
-    /**
-     * Код настраивает look and feel кнопок навигационной панели
-     */
-    private void initNavigationPanel() {
-        Color navPanelColor = new Color(52, 73, 94);
-        Color navPanelPressed = new Color(65, 91, 122);
-        Color navIconLabelPressed = new Color(230, 238, 243);
 
+
+    private void initNavigationPanel() {
         // циклически задаём свойства кнопкам в навигационной панели (getComponents() возвращает компоненты 1-го уровня вложенности)
-        if (navigatePanel instanceof Container)
-            for (Component child : navigatePanel.getComponents()) {
+        if (navigatePanelContainer instanceof Container)
+            for (Component child : navigatePanelContainer.getComponents()) {
                 if (child.getName() != null &&
                         child instanceof JPanel &&
                         child.getName().contains("Button")) {    // отбираем только панели-кнопки
-                    JLabel tempIconLabel = null;
-                    JLabel tempTextLabel = null;
-                    for (Component innerChild : ((JPanel) child).getComponents()) {
-                        if (innerChild.getName().contains("Icon")) {
-                            tempIconLabel = (JLabel) innerChild;
-                            tempIconLabel.setFont(menuIcons58);
-                        }
-                        if (innerChild.getName().contains("Label")) {
-                            tempTextLabel = (JLabel) innerChild;
-                            // html не поддерживает сторонний шрифт, потому используем встроенный
-                            tempTextLabel.setFont(FontProvider.getInstance().getFont(null, 16));
-                        }
-                    }
-                    final JLabel iconLabel = tempIconLabel;
-                    final JLabel textLabel = tempTextLabel;
-
                     // ставим слушалки на кнопки навигационной панели
                     child.addMouseListener(new MouseAdapter() {
                         // определяет, активна ли кнопка к выполнению действия (workaround метода mouseClicked).
                         // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
                         private boolean isPressed = false;
                         private boolean isMouseOver = false;
-
-                        @Override
-                        public void mousePressed(MouseEvent e) {
-                            setPressedState();
-                            isPressed = true;
-                        }
-
                         @Override
                         public void mouseReleased(MouseEvent e) {
-                            setNormalState();
                             if (isPressed && isMouseOver) {
                                 switch (child.getName()) {
                                     case "addGoodButton":       // имя кнопок навигационной панели (задано в .form в поле name)
@@ -309,40 +284,8 @@ public class MainFrame extends JFrame implements ActionListener {
                                     default:
                                         break;
                                 }
-                                if (!child.getName().equals("exitButton"))
-                                    showNavigationPanelBackButton();
                             }
-                            // make smooth simultaneous rendering of navigate panel buttons and rest part of screen
-                            revalidate();
-                            repaint();
                             isPressed = false;
-                        }
-
-                        @Override
-                        public void mouseEntered(MouseEvent e) {
-                            if (isPressed)
-                                setPressedState();
-                            isMouseOver = true;
-                        }
-
-                        @Override
-                        public void mouseExited(MouseEvent e) {
-                            setNormalState();
-                            isMouseOver = false;
-                        }
-
-                        // задаёт вид кнопок навигационной панели в нормальном состоянии
-                        private void setNormalState() {
-                            child.setBackground(navPanelColor);
-                            iconLabel.setForeground(Color.WHITE);
-                            textLabel.setForeground(Color.WHITE);
-                        }
-
-                        // задаёт вид кнопок навигационной панели в нажатом состоянии
-                        private void setPressedState() {
-                            child.setBackground(navPanelPressed);
-                            iconLabel.setForeground(navIconLabelPressed);
-                            textLabel.setForeground(navIconLabelPressed);
                         }
                     });
                 }
@@ -438,137 +381,16 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Код настраивает и показывает кнопку "Назад" в навигационной панели, скрывая при этом остальные ненужные кнопки.
-     */
-    public void showNavigationPanelBackButton() {
-        addGoodIcon.setFont(FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 58));
-        addGoodIcon.setText(Resources.getInstance().getString("back_icon"));
-        addGoodLabel.setText(Resources.getInstance().getString("back_html"));
-
-        addGoodButton.removeMouseListener(addGoodButtonMouseListener);
-        addGoodButton.addMouseListener(backButtonMouseListener);
-
-        workWithReceiptButton.setEnabled(false);
-        cashboxButton.setEnabled(false);
-        serviceButton.setEnabled(false);
-        exitButton.setEnabled(false);
-
-        workWithReceiptIcon.setVisible(false);
-        cashboxIcon.setVisible(false);
-        serviceIcon.setVisible(false);
-        exitIcon.setVisible(false);
-
-        workWithReceiptLabel.setVisible(false);
-        cashboxLabel.setVisible(false);
-        serviceLabel.setVisible(false);
-        exitLabel.setVisible(false);
-
-        horizontalLine2.setOpaque(false);
-        horizontalLine3.setOpaque(false);
-        horizontalLine4.setOpaque(false);
-        horizontalLine5.setOpaque(false);
-    }
-
-    public void hideNavigationPanelBackButton() {
-        addGoodIcon.setFont(menuIcons58);
-        addGoodIcon.setText(Resources.getInstance().getString("add_product_icon"));
-        addGoodLabel.setText(Resources.getInstance().getString("add_product_html"));
-
-        addGoodButton.removeMouseListener(backButtonMouseListener);
-        addGoodButton.addMouseListener(addGoodButtonMouseListener);
-
-        workWithReceiptButton.setEnabled(true);
-        cashboxButton.setEnabled(true);
-        serviceButton.setEnabled(true);
-        exitButton.setEnabled(true);
-
-        workWithReceiptIcon.setVisible(true);
-        cashboxIcon.setVisible(true);
-        serviceIcon.setVisible(true);
-        exitIcon.setVisible(true);
-
-        workWithReceiptLabel.setVisible(true);
-        cashboxLabel.setVisible(true);
-        serviceLabel.setVisible(true);
-        exitLabel.setVisible(true);
-
-        horizontalLine2.setOpaque(true);
-        horizontalLine3.setOpaque(true);
-        horizontalLine4.setOpaque(true);
-        horizontalLine5.setOpaque(true);
-    }
-
-    MouseListener addGoodButtonMouseListener = new MouseAdapter() {
-        // определяет, активна ли кнопка к выполнению действия (workaround метода mouseClicked).
-        // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
-        private boolean isPressed = false;
-        private boolean isMouseOver = false;
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            isPressed = true;
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if (isPressed && isMouseOver) {
-                mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
-                showNavigationPanelBackButton();
-            }
-            isPressed = false;
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            isMouseOver = true;
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            isMouseOver = false;
-        }
-    };
-
-    MouseListener backButtonMouseListener = new MouseAdapter() {
-        // определяет, активна ли кнопка к выполнению действия (workaround метода mouseClicked).
-        // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
-        private boolean isPressed = false;
-        private boolean isMouseOver = false;
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            isPressed = true;
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if (isPressed && isMouseOver) {
-                mainSellPanelScreensLayout.show(mainSellPanelScreens, "sellPanel");
-                hideNavigationPanelBackButton();
-            }
-            isPressed = false;
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            isMouseOver = true;
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-            isMouseOver = false;
-        }
-    };
-
-    /**
-     * Код, в котором инициализируем вручную некоторые выбранные нами компоненты формы, связанной с данным классом.
+     * Custom initialization of specified components of form, that is bounded to this class.
+     *
      */
     private void createUIComponents() {
         splashScreenPanelInit();
+        navigatePanelInit();
     }
 
     /**
-     * Устанавливает изображение из файла в виде фона на JPanel (рисует в кастомной панели BackgroundImagePanel).
+     * Set image from file as background for JPanel (paint in custom JPanel BackgroundImagePanel).
      */
     private void splashScreenPanelInit() {
         Image splashScreenImage = null;
@@ -580,6 +402,26 @@ public class MainFrame extends JFrame implements ActionListener {
             e.printStackTrace();
         }
         splashScreenPanel = new BackgroundImagePanel(splashScreenImage);
+    }
+
+    private void navigatePanelInit() {
+        String[] names1 = {"add_product", "work_with_receipt", "cashbox", "service", "exit"};
+        List<String> buttonIcons = new ArrayList<>();
+        List<String> buttonTexts = new ArrayList<>();
+        for (int i = 0; i < names1.length; i++) {
+            buttonIcons.add(Resources.getInstance().getString(names1[i] + "_icon"));
+            buttonTexts.add(Resources.getInstance().getString(names1[i] + "_html"));
+        }
+        navPanelMain = new NavigatePanel(names1.length, buttonIcons, buttonTexts);
+
+        String[] names2 = {"back"};
+        buttonIcons.clear();
+        buttonTexts.clear();
+        for (int i = 0; i < names2.length; i++) {
+            buttonIcons.add(Resources.getInstance().getString(names2[i] + "_icon"));
+            buttonTexts.add(Resources.getInstance().getString(names2[i] + "_html"));
+        }
+        navPanelBack = new NavigatePanel(names2.length, buttonIcons, buttonTexts);
     }
 
     // TODO: 01.08.2019  Переделать слушалки для кнопки Добавить товар - Назад. Слушалка всегда должна быть в одном экземпляре.

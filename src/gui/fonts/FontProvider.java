@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 21.08.2019
  */
 
 package gui.fonts;
@@ -40,7 +40,7 @@ public class FontProvider {
     /**
      * Returns an object of specified font with specified size.
      *
-     * @param fontName the name of font file
+     * @param fontName the name of font file. If is {@code null}, then SansSerif font is choosing by default.
      * @param size     the size of font
      */
     public Font getFont(String fontName, int size) {

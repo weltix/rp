@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 21.08.2019
  */
 
 package gui.common;
@@ -66,7 +66,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
         Timer timer = new Timer(30, this);
         timer.setInitialDelay(500);
 
-        // cycle sets properties for numeric keys (12 buttons) (getComponents() returns only components of first level of nesting)
+        // cycle sets properties for numeric keys (12 buttons) (getComponents() returns only components of 1-st level of nesting)
         if (centerPanel instanceof Container) {
             // add backSpaceButton to processing list of buttons, because it is not direct child of centerPanel (not included in component list)
             List<Component> componentsList = Arrays.asList(centerPanel.getComponents());
@@ -138,8 +138,6 @@ public class KeypadPanel extends JComponent implements ActionListener {
     /**
      * Method defines how many keys to show in bottom part of numeric keyboard.
      * (for example, 1 key "Search", or 2 keys "OK" or "Cancel")
-     *
-     * @param amount amount of keys.
      */
     public void setActionButtonsAmount(int amount) {
         CardLayout cardLayout = (CardLayout) (actionButtonPanel.getLayout());
