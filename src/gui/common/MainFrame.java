@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 21.08.2019
+ * Copyright (c) RESONANCE JSC, 22.08.2019
  */
 
 package gui.common;
@@ -98,8 +98,9 @@ public class MainFrame extends JFrame implements ActionListener {
     private NavigatePanel navPanelBack;
 
     private GraphicsDevice graphicsDevice;
-    private CardLayout mainPanelCardLayout = (CardLayout) (mainPanel.getLayout());
-    private CardLayout mainSellPanelScreensLayout = (CardLayout) (mainSellPanelScreens.getLayout());
+    private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
+    private CardLayout mainSellPanelScreensLayout = (CardLayout) mainSellPanelScreens.getLayout();
+    private CardLayout navigatePanelContainerLayout = (CardLayout) navigatePanelContainer.getLayout();
     private Font robotoRegular16 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 16);
     private Font menuIcons58 = FontProvider.getInstance().getFont(MENU_ICONS, 58);
     private GlassPane glassPane = new GlassPane();
@@ -154,7 +155,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void setCardOfMainPanel(String cardName) {
-        mainPanelCardLayout.show(mainPanel, cardName);
+        mainPanelLayout.show(mainPanel, cardName);
     }
 
     public void setCardOfMainSellPanelScreens(String cardName) {
@@ -183,6 +184,8 @@ public class MainFrame extends JFrame implements ActionListener {
         loginWindow = new KeypadDialogLogin(this);
         paymentWindow = new PaymentDialog(this);
         jlayer.setUI(layerUI);
+
+        navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
 
         String[] columnNames = {"First Name",
                 "Last Name",
@@ -248,7 +251,6 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
 
-
     private void initNavigationPanel() {
         // циклически задаём свойства кнопкам в навигационной панели (getComponents() возвращает компоненты 1-го уровня вложенности)
         if (navigatePanelContainer instanceof Container)
@@ -262,6 +264,7 @@ public class MainFrame extends JFrame implements ActionListener {
                         // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
                         private boolean isPressed = false;
                         private boolean isMouseOver = false;
+
                         @Override
                         public void mouseReleased(MouseEvent e) {
                             if (isPressed && isMouseOver) {
@@ -382,7 +385,6 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /**
      * Custom initialization of specified components of form, that is bounded to this class.
-     *
      */
     private void createUIComponents() {
         splashScreenPanelInit();
@@ -404,6 +406,11 @@ public class MainFrame extends JFrame implements ActionListener {
         splashScreenPanel = new BackgroundImagePanel(splashScreenImage);
     }
 
+    /**
+     * Create {@link List} of icons and {@link List} of texts for buttons of each navigation panel.
+     * The size of either of two lists equals the amount of navigation buttons on specified navigation panel.
+     * The amount and names of navigation panels specified in main_frame.form. In this method we initialize them.
+     */
     private void navigatePanelInit() {
         String[] names1 = {"add_product", "work_with_receipt", "cashbox", "service", "exit"};
         List<String> buttonIcons = new ArrayList<>();
@@ -412,7 +419,7 @@ public class MainFrame extends JFrame implements ActionListener {
             buttonIcons.add(Resources.getInstance().getString(names1[i] + "_icon"));
             buttonTexts.add(Resources.getInstance().getString(names1[i] + "_html"));
         }
-        navPanelMain = new NavigatePanel(names1.length, buttonIcons, buttonTexts);
+        navPanelMain = new NavigatePanel(buttonIcons, buttonTexts);
 
         String[] names2 = {"back"};
         buttonIcons.clear();
@@ -421,7 +428,7 @@ public class MainFrame extends JFrame implements ActionListener {
             buttonIcons.add(Resources.getInstance().getString(names2[i] + "_icon"));
             buttonTexts.add(Resources.getInstance().getString(names2[i] + "_html"));
         }
-        navPanelBack = new NavigatePanel(names2.length, buttonIcons, buttonTexts);
+        navPanelBack = new NavigatePanel(buttonIcons, buttonTexts);
     }
 
     // TODO: 01.08.2019  Переделать слушалки для кнопки Добавить товар - Назад. Слушалка всегда должна быть в одном экземпляре.

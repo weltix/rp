@@ -45,7 +45,7 @@
           <grid id="fe7cc" binding="headerPanel" layout-manager="GridBagLayout">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="6.3"/>
+              <gridbag weightx="1.0" weighty="6.4"/>
             </constraints>
             <properties>
               <background color="-13350562"/>
@@ -103,360 +103,64 @@
             <border type="none"/>
             <children/>
           </grid>
-          <grid id="cbe0e" binding="naviButton0" layout-manager="GridBagLayout">
+          <nested-form id="b4b1c" form-file="gui/common/navigate_button.form" binding="navigateButton0">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="10.35"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-13350562"/>
-              <doubleBuffered value="true"/>
-              <focusable value="false"/>
-              <maximumSize width="-1" height="-1"/>
-              <minimumSize width="-1" height="-1"/>
-              <name value="naviButton0"/>
-              <preferredSize width="-1" height="-1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="85c99" class="javax.swing.JLabel" binding="naviText0">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviText0"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="add_product_html"/>
-                  <verticalAlignment value="0"/>
-                  <verticalTextPosition value="0"/>
-                </properties>
-                <clientProperties>
-                  <html.disable class="java.lang.Boolean" value="false"/>
-                </clientProperties>
-              </component>
-              <component id="785a5" class="javax.swing.JLabel" binding="naviIcon0">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviIcon0"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="add_product_icon"/>
-                  <verticalAlignment value="3"/>
-                  <verticalTextPosition value="3"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <grid id="e4d41" binding="horizontalLine0" layout-manager="CardLayout" hgap="0" vgap="0">
+          </nested-form>
+          <nested-form id="1dbc4" form-file="gui/common/navigate_button.form" binding="navigateButton1">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-10586997"/>
-              <focusable value="false"/>
-              <maximumSize width="0" height="1"/>
-              <minimumSize width="0" height="1"/>
-              <name value="horizontalLine0"/>
-              <preferredSize width="0" height="1"/>
-              <requestFocusEnabled value="false"/>
-              <verifyInputWhenFocusTarget value="true"/>
-            </properties>
-            <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="ccd4c" binding="naviButton1" layout-manager="GridBagLayout">
+          </nested-form>
+          <nested-form id="5e6cb" form-file="gui/common/navigate_button.form" binding="navigateButton2">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="10.35"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-13350562"/>
-              <doubleBuffered value="true"/>
-              <focusable value="false"/>
-              <maximumSize width="-1" height="-1"/>
-              <minimumSize width="-1" height="-1"/>
-              <name value="naviButton1"/>
-              <preferredSize width="-1" height="-1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="d8548" class="javax.swing.JLabel" binding="naviText1">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <alignmentX value="0.0"/>
-                  <focusable value="false"/>
-                  <font/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviText1"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="work_with_receipt_html"/>
-                </properties>
-                <clientProperties>
-                  <html.disable class="java.lang.Boolean" value="false"/>
-                </clientProperties>
-              </component>
-              <component id="648e" class="javax.swing.JLabel" binding="naviIcon1">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviIcon1"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="work_with_receipt_icon"/>
-                  <verticalAlignment value="3"/>
-                  <verticalTextPosition value="3"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <grid id="b1cd8" binding="horizontalLine1" layout-manager="CardLayout" hgap="0" vgap="0">
+          </nested-form>
+          <nested-form id="f70fe" form-file="gui/common/navigate_button.form" binding="navigateButton3">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-10586997"/>
-              <focusable value="false"/>
-              <maximumSize width="0" height="1"/>
-              <minimumSize width="0" height="1"/>
-              <name value="horizontalLine1"/>
-              <opaque value="true"/>
-              <preferredSize width="0" height="1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="f8c3f" binding="naviButton2" layout-manager="GridBagLayout">
+          </nested-form>
+          <nested-form id="3d851" form-file="gui/common/navigate_button.form" binding="navigateButton4">
             <constraints>
               <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="10.35"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-13350562"/>
-              <doubleBuffered value="true"/>
-              <focusable value="false"/>
-              <maximumSize width="-1" height="-1"/>
-              <minimumSize width="-1" height="-1"/>
-              <name value="naviButton2"/>
-              <preferredSize width="-1" height="-1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="46707" class="javax.swing.JLabel" binding="naviIcon2">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviIcon2"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="cashbox_icon"/>
-                  <verticalAlignment value="0"/>
-                  <verticalTextPosition value="0"/>
-                </properties>
-              </component>
-              <component id="375ec" class="javax.swing.JLabel" binding="naviText2">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviText2"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="cashbox_html"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <grid id="96856" binding="horizontalLine2" layout-manager="CardLayout" hgap="0" vgap="0">
+          </nested-form>
+          <nested-form id="b749c" form-file="gui/common/navigate_button.form" binding="navigateButton5">
             <constraints>
               <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-10586997"/>
-              <focusable value="false"/>
-              <maximumSize width="0" height="1"/>
-              <minimumSize width="0" height="1"/>
-              <name value="horizontalLine2"/>
-              <preferredSize width="0" height="1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="6b2b2" binding="naviButton3" layout-manager="GridBagLayout">
+          </nested-form>
+          <nested-form id="5447f" form-file="gui/common/navigate_button.form" binding="navigateButton6">
             <constraints>
               <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="10.35"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-13350562"/>
-              <doubleBuffered value="true"/>
-              <focusable value="false"/>
-              <maximumSize width="-1" height="-1"/>
-              <minimumSize width="-1" height="-1"/>
-              <name value="naviButton3"/>
-              <preferredSize width="-1" height="-1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="b3765" class="javax.swing.JLabel" binding="naviIcon3">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviIcon3"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="service_icon"/>
-                </properties>
-              </component>
-              <component id="cc1e3" class="javax.swing.JLabel" binding="naviText3">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviText3"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="service_html"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <grid id="4a34b" binding="horizontalLine3" layout-manager="CardLayout" hgap="0" vgap="0">
+          </nested-form>
+          <nested-form id="91c3a" form-file="gui/common/navigate_button.form" binding="navigateButton7">
             <constraints>
               <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-10586997"/>
-              <focusable value="false"/>
-              <maximumSize width="0" height="1"/>
-              <minimumSize width="0" height="1"/>
-              <name value="horizontalLine3"/>
-              <preferredSize width="0" height="1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="2732b" binding="naviButton4" layout-manager="GridBagLayout">
+          </nested-form>
+          <nested-form id="bef86" form-file="gui/common/navigate_button.form" binding="navigateButton8">
             <constraints>
               <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="10.35"/>
+              <gridbag weightx="0.0" weighty="10.4"/>
             </constraints>
-            <properties>
-              <background color="-13350562"/>
-              <doubleBuffered value="true"/>
-              <focusable value="false"/>
-              <maximumSize width="-1" height="-1"/>
-              <minimumSize width="-1" height="-1"/>
-              <name value="naviButton4"/>
-              <preferredSize width="-1" height="-1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="a4725" class="javax.swing.JLabel" binding="naviIcon4">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviIcon4"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="exit_icon"/>
-                </properties>
-              </component>
-              <component id="fa59b" class="javax.swing.JLabel" binding="naviText4">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="0.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <name value="naviText4"/>
-                  <requestFocusEnabled value="false"/>
-                  <text resource-bundle="resources/strings" key="exit_html"/>
-                  <verticalAlignment value="3"/>
-                  <verticalTextPosition value="3"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <grid id="83aad" binding="horizontalLine4" layout-manager="CardLayout" hgap="0" vgap="0">
+          </nested-form>
+          <grid id="9f8e6" binding="paddingPanel" layout-manager="GridBagLayout">
             <constraints>
               <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <background color="-10586997"/>
-              <focusable value="false"/>
-              <maximumSize width="0" height="1"/>
-              <minimumSize width="0" height="1"/>
-              <name value="horizontalLine4"/>
-              <preferredSize width="0" height="1"/>
-              <requestFocusEnabled value="false"/>
-            </properties>
-            <border type="none"/>
-            <children/>
-          </grid>
-          <grid id="9f8e6" layout-manager="GridBagLayout">
-            <constraints>
-              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="41.95"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-13350562"/>
