@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 23.08.2019
  */
 
 package logic.model;
@@ -15,7 +15,6 @@ import java.util.Objects;
 
 public class ReceiptItem {
     private String name;
-    // TODO: 24.04.2019 barcode, code and vendoreCode best types?
     private String barcode;
     private int code;
     private int vendorCode;

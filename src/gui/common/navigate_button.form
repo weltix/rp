@@ -29,17 +29,44 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="4b7dd" class="javax.swing.JLabel" binding="text">
+          <component id="2eb80" class="javax.swing.JLabel" binding="icon">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <alignmentX value="0.5"/>
               <focusable value="false"/>
               <foreground color="-1"/>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
+              <maximumSize width="2147483647" height="2147483647"/>
+              <minimumSize width="0" height="0"/>
+              <name value="icon"/>
+              <preferredSize width="-1" height="25"/>
+              <requestFocusEnabled value="false"/>
+              <text value="Icon (char of special font)"/>
+              <verticalAlignment value="0"/>
+              <verticalTextPosition value="0"/>
+            </properties>
+          </component>
+          <component id="4b7dd" class="javax.swing.JLabel" binding="text">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties>
+              <alignmentX value="0.5"/>
+              <autoscrolls value="false"/>
+              <focusable value="false"/>
+              <foreground color="-1"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <iconTextGap value="4"/>
+              <maximumSize width="2147483647" height="2147483647"/>
+              <minimumSize width="0" height="0"/>
               <name value="text"/>
+              <preferredSize width="-1" height="30"/>
               <requestFocusEnabled value="false"/>
               <text value="Text"/>
               <verticalAlignment value="0"/>
@@ -49,29 +76,9 @@
               <html.disable class="java.lang.Boolean" value="false"/>
             </clientProperties>
           </component>
-          <component id="2eb80" class="javax.swing.JLabel" binding="icon">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <focusable value="false"/>
-              <foreground color="-1"/>
-              <horizontalAlignment value="0"/>
-              <horizontalTextPosition value="0"/>
-              <maximumSize width="23" height="16"/>
-              <minimumSize width="23" height="16"/>
-              <name value="icon"/>
-              <preferredSize width="150" height="16"/>
-              <requestFocusEnabled value="false"/>
-              <text value="Icon (char of special font)"/>
-              <verticalAlignment value="3"/>
-              <verticalTextPosition value="3"/>
-            </properties>
-          </component>
         </children>
       </grid>
-      <grid id="656bc" binding="horizontalLine" layout-manager="CardLayout" hgap="0" vgap="0">
+      <grid id="656bc" binding="line" layout-manager="CardLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="0.0"/>
@@ -81,7 +88,7 @@
           <focusable value="false"/>
           <maximumSize width="0" height="1"/>
           <minimumSize width="0" height="1"/>
-          <name value="horizontalLine"/>
+          <name value="line"/>
           <preferredSize width="0" height="1"/>
           <requestFocusEnabled value="false"/>
           <verifyInputWhenFocusTarget value="true"/>

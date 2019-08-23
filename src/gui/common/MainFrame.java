@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 22.08.2019
+ * Copyright (c) RESONANCE JSC, 23.08.2019
  */
 
 package gui.common;
@@ -21,15 +21,13 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
-import static gui.fonts.FontProvider.MENU_ICONS;
-import static gui.fonts.FontProvider.ROBOTO_REGULAR;
+import static gui.fonts.FontProvider.*;
 
 /**
  * Класс, содержащий описание окна графического интерфейса.
@@ -250,51 +248,6 @@ public class MainFrame extends JFrame implements ActionListener {
         sellTableModel.setRowCount(25);
     }
 
-
-    private void initNavigationPanel() {
-        // циклически задаём свойства кнопкам в навигационной панели (getComponents() возвращает компоненты 1-го уровня вложенности)
-        if (navigatePanelContainer instanceof Container)
-            for (Component child : navigatePanelContainer.getComponents()) {
-                if (child.getName() != null &&
-                        child instanceof JPanel &&
-                        child.getName().contains("Button")) {    // отбираем только панели-кнопки
-                    // ставим слушалки на кнопки навигационной панели
-                    child.addMouseListener(new MouseAdapter() {
-                        // определяет, активна ли кнопка к выполнению действия (workaround метода mouseClicked).
-                        // Причина: в некоторых системах клик не срабатывает при малейшей смене координат курсора во время клика.
-                        private boolean isPressed = false;
-                        private boolean isMouseOver = false;
-
-                        @Override
-                        public void mouseReleased(MouseEvent e) {
-                            if (isPressed && isMouseOver) {
-                                switch (child.getName()) {
-                                    case "addGoodButton":       // имя кнопок навигационной панели (задано в .form в поле name)
-                                        mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
-                                        break;
-                                    case "workWithReceiptButton":
-                                        mainSellPanelScreensLayout.show(mainSellPanelScreens, "workWithReceiptPanel");
-                                        break;
-                                    case "cashboxButton":
-                                        mainSellPanelScreensLayout.show(mainSellPanelScreens, "cashboxPanel");
-                                        break;
-                                    case "serviceButton":
-                                        mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
-                                        break;
-                                    case "exitButton":
-                                        launchDialog(true, DialogType.LOGIN);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                            isPressed = false;
-                        }
-                    });
-                }
-            }
-    }
-
     /**
      * Создаёт, настраивает и показывает диалоговое окно определённого типа.
      *
@@ -313,8 +266,8 @@ public class MainFrame extends JFrame implements ActionListener {
             if (blurBackground) {
                 jlayer.setView(mainPanel);
                 setContentPane(jlayer);
-                repaint();
                 revalidate();
+                repaint();
             }
         }
         // данная задержка - workaround для слабого железа (убирает задержку прорисовки при появлении glassPane)
@@ -412,14 +365,36 @@ public class MainFrame extends JFrame implements ActionListener {
      * The amount and names of navigation panels specified in main_frame.form. In this method we initialize them.
      */
     private void navigatePanelInit() {
-        String[] names1 = {"add_product", "work_with_receipt", "cashbox", "service", "exit"};
+        String[] names1 = {"add_good", "work_with_receipt", "cashbox", "service", "exit"};
         List<String> buttonIcons = new ArrayList<>();
         List<String> buttonTexts = new ArrayList<>();
         for (int i = 0; i < names1.length; i++) {
             buttonIcons.add(Resources.getInstance().getString(names1[i] + "_icon"));
             buttonTexts.add(Resources.getInstance().getString(names1[i] + "_html"));
         }
-        navPanelMain = new NavigatePanel(buttonIcons, buttonTexts);
+        Consumer<Integer> actions = buttonAlias -> {
+            switch (buttonAlias) {
+                case 0:
+                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
+                    break;
+                case 1:
+                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "workWithReceiptPanel");
+                    break;
+                case 2:
+                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "cashboxPanel");
+                    break;
+                case 3:
+                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
+                    break;
+                case 4:
+                    launchDialog(true, DialogType.LOGIN);
+                    return;
+                default:
+                    break;
+            }
+            navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelBack");
+        };
+        navPanelMain = new NavigatePanel(buttonIcons, buttonTexts, null, actions);
 
         String[] names2 = {"back"};
         buttonIcons.clear();
@@ -428,12 +403,16 @@ public class MainFrame extends JFrame implements ActionListener {
             buttonIcons.add(Resources.getInstance().getString(names2[i] + "_icon"));
             buttonTexts.add(Resources.getInstance().getString(names2[i] + "_html"));
         }
-        navPanelBack = new NavigatePanel(buttonIcons, buttonTexts);
+        Font iconsFont = FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 58);
+        actions = buttonAlias -> {
+            navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
+            mainSellPanelScreensLayout.show(mainSellPanelScreens, "sellPanel");
+            revalidate();
+            repaint();
+        };
+        navPanelBack = new NavigatePanel(buttonIcons, buttonTexts, iconsFont, actions);
     }
 
-    // TODO: 01.08.2019  Переделать слушалки для кнопки Добавить товар - Назад. Слушалка всегда должна быть в одном экземпляре.
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
-    // TODO: 01.08.2019  Навигационная панель должна показываться синхронно со всем экраном.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
-    // TODO: 13.08.2019  Перелать навигационную панель (алгоритм работы верный, есть ошибки в режиме кнопки назад (работают невидимые кнопки))
 }

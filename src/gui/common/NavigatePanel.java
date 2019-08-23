@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 22.08.2019
+ * Copyright (c) RESONANCE JSC, 23.08.2019
  */
 
 package gui.common;
@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static gui.fonts.FontProvider.ROBOTO_BOLD;
 
@@ -37,11 +38,16 @@ public class NavigatePanel extends JPanel {
     // lists of icons and texts for navigate buttons. Icon is a text actually, but with special font, where no letters, but icons are.
     private List<String> navButtonIcons;
     private List<String> navButtonTexts;
+    // default icon font is set in NavigationButton.class, but it can be changed for certain NavigatePanel object.
+    private Font iconsFont;
+    private Consumer<Integer> navButtonActions;    // object of functional interface Consumer, hold actions for navigation buttons
     private int navButtonsAmount;
 
-    public NavigatePanel(List<String> icons, List<String> texts) {
+    public NavigatePanel(List<String> icons, List<String> texts, Font font, Consumer<Integer> actions) {
         navButtonIcons = icons;
         navButtonTexts = texts;
+        iconsFont = font;
+        navButtonActions = actions;
         navButtonsAmount = icons.size();
         initComponents();
     }
@@ -57,22 +63,27 @@ public class NavigatePanel extends JPanel {
         // Cycle sets properties for buttons of navigation panel (getComponents() returns only components of 1-st level of nesting).
         // Name of component is entered in *.form file in "name" field.
         int buttonNum = 0;
-        int removedButtonsAmount = 0;
         if (navigatePanel instanceof Container)
             for (Component child : navigatePanel.getComponents()) {
                 if (child.getName() != null &&
                         child instanceof JPanel &&
                         child.getName().contains("NavigateButton.mainPanel")) {
 
+                    JPanel naviButton = (JPanel) ((JPanel) child).getComponent(0);
+                    JLabel naviButtonIcon = (JLabel) naviButton.getComponent(0);
+                    JLabel naviButtonText = (JLabel) naviButton.getComponent(1);
+                    JPanel delimiterLine = (JPanel) ((JPanel) child).getComponent(1);
+
+                    if (iconsFont != null)
+                        naviButtonIcon.setFont(iconsFont);
+
                     if (buttonNum < navButtonsAmount) {
-                        JPanel naviButton = (JPanel) ((JPanel) child).getComponent(0);
-                        JLabel naviButtonIcon = (JLabel) naviButton.getComponent(1);
-                        JLabel naviButtonText = (JLabel) naviButton.getComponent(0);
                         naviButtonIcon.setText(navButtonIcons.get(buttonNum));
                         naviButtonText.setText(navButtonTexts.get(buttonNum));
+                        final int buttonNumFinal = buttonNum;
 
                         // set listeners for each button. Depending on event we change look of button, or perform specified action.
-                        child.addMouseListener(new MouseAdapter() {
+                        naviButton.addMouseListener(new MouseAdapter() {
                             /* isPressed and isMouseOver - workaround of mouseClicked method.
                                Reason: in some systems click doesn't work properly when mouse cursor coordinates changes at
                                least for 1px during click */
@@ -89,25 +100,7 @@ public class NavigatePanel extends JPanel {
                             public void mouseReleased(MouseEvent e) {
                                 setNormalState();
                                 if (isPressed && isMouseOver) {
-                                    switch (naviButton.getName()) {
-                                        case "navButton0":
-                                            navButton0Clicked();
-                                            break;
-                                        case "navButton1":
-                                            navButton1Clicked();
-                                            break;
-                                        case "navButton2":
-                                            navButton2Clicked();
-                                            break;
-                                        case "navButton3":
-                                            navButton3Clicked();
-                                            break;
-                                        case "navButton4":
-                                            navButton4Clicked();
-                                            break;
-                                        default:
-                                            break;
-                                    }
+                                    navButtonActions.accept(buttonNumFinal);
                                 }
                                 isPressed = false;
                             }
@@ -140,37 +133,13 @@ public class NavigatePanel extends JPanel {
                             }
                         });
                     } else {
-                        navigatePanel.remove(child);
-                        removedButtonsAmount++;
+                        naviButton.setOpaque(false);
+                        naviButtonIcon.setVisible(false);
+                        naviButtonText.setVisible(false);
+                        delimiterLine.setOpaque(false);
                     }
                     buttonNum++;
                 }
             }
-
-        GridBagLayout gbLayout = (GridBagLayout) navigatePanel.getLayout();
-        GridBagConstraints constraintsPaddingPanel = gbLayout.getConstraints(paddingPanel);
-        constraintsPaddingPanel.weighty = 10.4 * removedButtonsAmount;  // 10.4% - weight of navigating button by Y axis
-        navigatePanel.remove(paddingPanel);
-        navigatePanel.add(paddingPanel, constraintsPaddingPanel);
-    }
-
-    public void navButton0Clicked() {
-
-    }
-
-    public void navButton1Clicked() {
-
-    }
-
-    public void navButton2Clicked() {
-
-    }
-
-    public void navButton3Clicked() {
-
-    }
-
-    public void navButton4Clicked() {
-
     }
 }

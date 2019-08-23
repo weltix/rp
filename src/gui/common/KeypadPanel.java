@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 21.08.2019
+ * Copyright (c) RESONANCE JSC, 23.08.2019
  */
 
 package gui.common;
@@ -159,6 +159,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
         GridBagLayout gbLayout = (GridBagLayout) centerPanel.getLayout();
         GridBagConstraints constraintsA0Button = gbLayout.getConstraints(a0Button);
         constraintsA0Button.gridwidth = 3;
+        centerPanel.remove(a0Button);
         centerPanel.remove(dotButton);
         centerPanel.remove(verticalLine);
         centerPanel.add(a0Button, constraintsA0Button);

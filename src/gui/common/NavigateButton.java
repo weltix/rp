@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 22.08.2019
+ * Copyright (c) RESONANCE JSC, 23.08.2019
  */
 
 package gui.common;
@@ -15,14 +15,14 @@ import static gui.fonts.FontProvider.MENU_ICONS;
  */
 public class NavigateButton{
     private JPanel button;
-    private JLabel text;
     private JLabel icon;
-    private JPanel horizontalLine;
+    private JLabel text;
+    private JPanel line;
     private JPanel mainPanel;
 
     public NavigateButton() {
         icon.setFont(FontProvider.getInstance().getFont(MENU_ICONS, 58));
-        // html doesn't support external fonts, so will use built-in
+        // html doesn't support external fonts, so will use built-in (null as argument)
         text.setFont(FontProvider.getInstance().getFont(null, 16));
     }
 }
