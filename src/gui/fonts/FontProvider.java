@@ -1,8 +1,10 @@
 /*
- * Copyright (c) RESONANCE JSC, 21.08.2019
+ * Copyright (c) RESONANCE JSC, 25.08.2019
  */
 
 package gui.fonts;
+
+import com.sun.istack.internal.Nullable;
 
 import java.awt.*;
 import java.io.IOException;
@@ -43,7 +45,7 @@ public class FontProvider {
      * @param fontName the name of font file. If is {@code null}, then SansSerif font is choosing by default.
      * @param size     the size of font
      */
-    public Font getFont(String fontName, int size) {
+    public Font getFont(@Nullable String fontName, int size) {
         Font font = null;
         float actualSize = size / scaleValue;
 

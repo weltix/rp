@@ -1,9 +1,10 @@
 /*
- * Copyright (c) RESONANCE JSC, 23.08.2019
+ * Copyright (c) RESONANCE JSC, 25.08.2019
  */
 
 package gui.common;
 
+import com.sun.istack.internal.Nullable;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;
@@ -17,6 +18,8 @@ import static gui.fonts.FontProvider.ROBOTO_BOLD;
 
 /**
  * Class describes navigation panel. Bounded to navigate_panel.form.
+ * We enforced to create from start all navigate buttons, and then make unnecessary buttons invisible or transparent,
+ * because approach with adding buttons is not work properly (division inaccuracy when height is calculated).
  */
 public class NavigatePanel extends JPanel {
     private JPanel mainPanel;
@@ -43,7 +46,7 @@ public class NavigatePanel extends JPanel {
     private Consumer<Integer> navButtonActions;    // object of functional interface Consumer, hold actions for navigation buttons
     private int navButtonsAmount;
 
-    public NavigatePanel(List<String> icons, List<String> texts, Font font, Consumer<Integer> actions) {
+    public NavigatePanel(List<String> icons, List<String> texts, @Nullable Font font, Consumer<Integer> actions) {
         navButtonIcons = icons;
         navButtonTexts = texts;
         iconsFont = font;
@@ -81,7 +84,6 @@ public class NavigatePanel extends JPanel {
                         naviButtonIcon.setText(navButtonIcons.get(buttonNum));
                         naviButtonText.setText(navButtonTexts.get(buttonNum));
                         final int buttonNumFinal = buttonNum;
-
                         // set listeners for each button. Depending on event we change look of button, or perform specified action.
                         naviButton.addMouseListener(new MouseAdapter() {
                             /* isPressed and isMouseOver - workaround of mouseClicked method.

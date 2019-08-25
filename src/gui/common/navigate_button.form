@@ -31,8 +31,8 @@
         <children>
           <component id="2eb80" class="javax.swing.JLabel" binding="icon">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="65.0"/>
             </constraints>
             <properties>
               <alignmentX value="0.5"/>
@@ -40,20 +40,20 @@
               <foreground color="-1"/>
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
-              <maximumSize width="8" height="16"/>
-              <minimumSize width="8" height="16"/>
+              <maximumSize width="-1" height="-1"/>
+              <minimumSize width="-1" height="-1"/>
               <name value="icon"/>
-              <preferredSize width="8" height="16"/>
+              <preferredSize width="-1" height="-1"/>
               <requestFocusEnabled value="false"/>
               <text value="Icon (char of special font)"/>
-              <verticalAlignment value="0"/>
+              <verticalAlignment value="3"/>
               <verticalTextPosition value="0"/>
             </properties>
           </component>
           <component id="4b7dd" class="javax.swing.JLabel" binding="text">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="0.0" weighty="0.0"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="35.0"/>
             </constraints>
             <properties>
               <alignmentX value="0.5"/>
@@ -63,10 +63,11 @@
               <horizontalAlignment value="0"/>
               <horizontalTextPosition value="0"/>
               <iconTextGap value="4"/>
-              <maximumSize width="8" height="16"/>
-              <minimumSize width="8" height="16"/>
+              <inheritsPopupMenu value="true"/>
+              <maximumSize width="-1" height="-1"/>
+              <minimumSize width="-1" height="-1"/>
               <name value="text"/>
-              <preferredSize width="8" height="16"/>
+              <preferredSize width="-1" height="-1"/>
               <requestFocusEnabled value="false"/>
               <text value="Text"/>
               <verticalAlignment value="0"/>
