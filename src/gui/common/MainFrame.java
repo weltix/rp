@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 23.08.2019
+ * Copyright (c) RESONANCE JSC, 27.08.2019
  */
 
 package gui.common;
@@ -80,7 +80,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JPanel searchKeyPadPanel;
     private KeypadPanel keypadPanel;
     private JPanel paymentInfoPanel;
-    private JPanel mainSellPanelScreens;
+    private JPanel sellPanelScreens;
     private JPanel addGoodPanel;
     private JPanel workWithReceiptPanel;
     private JPanel cashboxPanel;
@@ -94,10 +94,13 @@ public class MainFrame extends JFrame implements ActionListener {
     private JLabel versionLabel;
     private NavigatePanel navPanelMain;
     private NavigatePanel navPanelBack;
+    private TiledPanel tiledPanel0;
+    private TiledPanel tiledPanel1;
+    private TiledPanel tiledPanel2;
 
     private GraphicsDevice graphicsDevice;
     private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
-    private CardLayout mainSellPanelScreensLayout = (CardLayout) mainSellPanelScreens.getLayout();
+    private CardLayout mainSellPanelScreensLayout = (CardLayout) sellPanelScreens.getLayout();
     private CardLayout navigatePanelContainerLayout = (CardLayout) navigatePanelContainer.getLayout();
     private Font robotoRegular16 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 16);
     private Font menuIcons58 = FontProvider.getInstance().getFont(MENU_ICONS, 58);
@@ -157,7 +160,7 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void setCardOfMainSellPanelScreens(String cardName) {
-        mainSellPanelScreensLayout.show(mainSellPanelScreens, cardName);
+        mainSellPanelScreensLayout.show(sellPanelScreens, cardName);
     }
 
     private void initComponents() {
@@ -375,16 +378,16 @@ public class MainFrame extends JFrame implements ActionListener {
         Consumer<Integer> actions = buttonAlias -> {
             switch (buttonAlias) {
                 case 0:
-                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "addGoodPanel");
+                    mainSellPanelScreensLayout.show(sellPanelScreens, "addGoodPanel");
                     break;
                 case 1:
-                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "workWithReceiptPanel");
+                    mainSellPanelScreensLayout.show(sellPanelScreens, "workWithReceiptPanel");
                     break;
                 case 2:
-                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "cashboxPanel");
+                    mainSellPanelScreensLayout.show(sellPanelScreens, "cashboxPanel");
                     break;
                 case 3:
-                    mainSellPanelScreensLayout.show(mainSellPanelScreens, "servicePanel");
+                    mainSellPanelScreensLayout.show(sellPanelScreens, "servicePanel");
                     break;
                 case 4:
                     launchDialog(true, DialogType.LOGIN);
@@ -406,7 +409,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Font iconsFont = FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 58);
         actions = buttonAlias -> {
             navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
-            mainSellPanelScreensLayout.show(mainSellPanelScreens, "sellPanel");
+            mainSellPanelScreensLayout.show(sellPanelScreens, "sellPanel");
             revalidate();
             repaint();
         };

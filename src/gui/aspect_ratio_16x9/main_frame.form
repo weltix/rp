@@ -87,7 +87,7 @@
               </nested-form>
             </children>
           </grid>
-          <grid id="23da2" binding="mainSellPanelScreens" layout-manager="CardLayout" hgap="0" vgap="0">
+          <grid id="23da2" binding="sellPanelScreens" layout-manager="CardLayout" hgap="0" vgap="0">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="94.8" weighty="1.0"/>
@@ -437,7 +437,12 @@
                 <constraints>
                   <card name="addGoodPanel"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-1183240"/>
+                  <focusable value="false"/>
+                  <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
+                </properties>
                 <border type="none"/>
                 <children/>
               </grid>
@@ -445,25 +450,65 @@
                 <constraints>
                   <card name="workWithReceiptPanel"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-1183240"/>
+                  <focusable value="false"/>
+                  <minimumSize width="0" height="0"/>
+                  <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
+                  <verifyInputWhenFocusTarget value="true"/>
+                </properties>
                 <border type="none"/>
-                <children/>
+                <children>
+                  <nested-form id="f5287" form-file="gui/common/tiled_panel.form" binding="tiledPanel0">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                  </nested-form>
+                </children>
               </grid>
               <grid id="846d1" binding="cashboxPanel" layout-manager="GridBagLayout">
                 <constraints>
                   <card name="cashboxPanel"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-1183240"/>
+                  <focusable value="false"/>
+                  <minimumSize width="0" height="0"/>
+                  <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
+                </properties>
                 <border type="none"/>
-                <children/>
+                <children>
+                  <nested-form id="2de73" form-file="gui/common/tiled_panel.form" binding="tiledPanel1">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                  </nested-form>
+                </children>
               </grid>
               <grid id="89f23" binding="servicePanel" layout-manager="GridBagLayout">
                 <constraints>
                   <card name="servicePanel"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <background color="-1183240"/>
+                  <focusable value="false"/>
+                  <minimumSize width="0" height="0"/>
+                  <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
+                </properties>
                 <border type="none"/>
-                <children/>
+                <children>
+                  <nested-form id="1671e" form-file="gui/common/tiled_panel.form" binding="tiledPanel2">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                  </nested-form>
+                </children>
               </grid>
             </children>
           </grid>
