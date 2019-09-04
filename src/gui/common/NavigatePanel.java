@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 25.08.2019
+ * Copyright (c) RESONANCE JSC, 04.09.2019
  */
 
 package gui.common;
@@ -68,9 +68,9 @@ public class NavigatePanel extends JPanel {
         int buttonNum = 0;
         if (navigatePanel instanceof Container)
             for (Component child : navigatePanel.getComponents()) {
-                if (child.getName() != null &&
-                        child instanceof JPanel &&
-                        child.getName().contains("NavigateButton.mainPanel")) {
+                if (child.getName() != null
+                        && child instanceof JPanel
+                        && child.getName().contains("NavigateButton.mainPanel")) {
 
                     JPanel naviButton = (JPanel) ((JPanel) child).getComponent(0);
                     JLabel naviButtonIcon = (JLabel) naviButton.getComponent(0);
