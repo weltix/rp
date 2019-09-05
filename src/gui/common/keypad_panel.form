@@ -461,6 +461,7 @@
                   <minimumSize width="-1" height="-1"/>
                   <opaque value="true"/>
                   <preferredSize width="-1" height="-1"/>
+                  <rolloverEnabled value="true"/>
                   <text value="1"/>
                 </properties>
               </component>

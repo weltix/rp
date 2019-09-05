@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 04.09.2019
+ * Copyright (c) RESONANCE JSC, 05.09.2019
  */
 
 package gui.common;
@@ -125,15 +125,15 @@ public class MainFrame extends JFrame implements ActionListener {
 //                new Point(),
 //                null));
 
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setUndecorated(true);                       //need for full screen mode
-//        setResizable(false);                        //need for full screen mode
-//
-//        // set full screen exclusive mode
-//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        graphicsDevice = ge.getDefaultScreenDevice();
-//        if (graphicsDevice.isFullScreenSupported())
-//            graphicsDevice.setFullScreenWindow(this);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setUndecorated(true);                       //need for full screen mode
+        setResizable(false);                        //need for full screen mode
+
+        // set full screen exclusive mode
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        graphicsDevice = ge.getDefaultScreenDevice();
+        if (graphicsDevice.isFullScreenSupported())
+            graphicsDevice.setFullScreenWindow(this);
 
         setContentPane(mainPanel);
         setGlassPane(glassPane);
@@ -150,7 +150,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-        setSize(1050, 618);
+//        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 
@@ -296,7 +296,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         if (DialogType.LOGIN.name().equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            // keypad height to dialog height ratio. It is impossible to get this value from *.form file.
+            // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
             double kpHRatio = 86.0 / 100;
             // Next code calculates dimensions and location of dialog on screen.
             // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
@@ -311,7 +311,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         if (DialogType.PAYMENT.name().equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file.
+            // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
             dim.setSize((dim.getWidth() / 37.5) * 100 * 1.005, (dim.getHeight() / 80) * 100 * 1.01);
             paymentWindow.setSize(dim);
             paymentWindow.setLocation(0, 0);
@@ -386,6 +386,14 @@ public class MainFrame extends JFrame implements ActionListener {
                     break;
             }
             navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelBack");
+
+            // Get height of header panel with title in top left corner of screen, then use this height in tilesPanels.
+            // Here is only place where height of header panel may be determined
+            // (even after this JFrame setVisible(true) it return 0 instead real value)
+            int height = navPanelBack.getHeaderPanelHeight();
+            tiledPanel0.setTopPanelHeight(height);
+            tiledPanel1.setTopPanelHeight(height);
+            tiledPanel2.setTopPanelHeight(height);
         };
         navPanelMain = new NavigatePanel(buttonIcons, buttonTexts, null, actions);
 
@@ -412,11 +420,10 @@ public class MainFrame extends JFrame implements ActionListener {
      * The amount and names of tiled panels specified in main_frame.form. In this method we initialize them.
      */
     private void initTiledPanel() {
-
-
         String[] names0 = {"clear_receipt", "return_receipt", "put_off_receipt", "load_receipt", "print_copy",
                 "last_receipt", "load_order", "profile_filling", "remove_discount", "particular_discount",
-                "set_displayed_columns"};
+                "set_displayed_columns",
+        "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy"};
         List<String> buttonTexts = new ArrayList<>();
         for (int i = 0; i < names0.length; i++) {
             buttonTexts.add(Resources.getInstance().getString(names0[i]));

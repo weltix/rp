@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 04.09.2019
+ * Copyright (c) RESONANCE JSC, 05.09.2019
  */
 
 package gui.common;
@@ -27,15 +27,6 @@ public class NavigatePanel extends JPanel {
     private JLabel headerLabel1;
     private JLabel headerLabel2;
     private JPanel headerPanel;
-    private NavigateButton navigateButton0;
-    private NavigateButton navigateButton1;
-    private NavigateButton navigateButton2;
-    private NavigateButton navigateButton3;
-    private NavigateButton navigateButton4;
-    private NavigateButton navigateButton5;
-    private NavigateButton navigateButton6;
-    private NavigateButton navigateButton7;
-    private NavigateButton navigateButton8;
     private JPanel paddingPanel;
 
     // lists of icons and texts for navigate buttons. Icon is a text actually, but with special font, where no letters, but icons are.
@@ -57,7 +48,7 @@ public class NavigatePanel extends JPanel {
 
     private void initComponents() {
         headerLabel1.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 22));
-        headerLabel2.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 12));
+        headerLabel2.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 14));
 
         Color backgroundColor = new Color(52, 73, 94);
         Color backgroundPressedColor = new Color(65, 91, 122);
@@ -143,5 +134,12 @@ public class NavigatePanel extends JPanel {
                     buttonNum++;
                 }
             }
+    }
+
+    /**
+     * Header panel is panel with title like "RESPOS MARKET" in top left corner of screen.
+     */
+    public int getHeaderPanelHeight() {
+        return headerPanel.getHeight();
     }
 }
