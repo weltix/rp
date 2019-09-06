@@ -52,9 +52,13 @@
           <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
         </constraints>
         <properties>
+          <alignmentX value="0.0"/>
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="11"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
