@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 05.09.2019
+ * Copyright (c) RESONANCE JSC, 06.09.2019
  */
 
 package gui.common;
@@ -24,6 +24,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * Only flaw is redundant work for garbage collector.
  * <p>
  * Top, right and bottom panels are customizing programmatically.
+ * Left panel's width and button's insets are adjusting in appropriate *.form file.
  */
 public class TiledPanel {
     private JPanel mainPanel;
@@ -106,9 +107,10 @@ public class TiledPanel {
 
     /**
      * Set the height of top panel. The width is not important and here may get any value.
+     * 1 - correction for height (repairs Swing inaccuracy)
      */
     public void setTopPanelHeight(int height) {
-        topPanel.setPreferredSize(new Dimension(1, height));
+        topPanel.setPreferredSize(new Dimension(10, height + 1));
         mainPanel.revalidate();
         mainPanel.repaint();
     }

@@ -14,6 +14,20 @@
     </properties>
     <border type="none"/>
     <children>
+      <grid id="89c63" binding="topPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-1183240"/>
+          <focusable value="false"/>
+          <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
       <component id="fd3f2" class="javax.swing.JButton">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -185,102 +199,9 @@
           <text value="Button"/>
         </properties>
       </component>
-      <grid id="30d8e" binding="bottomPanel" layout-manager="GridBagLayout">
-        <constraints>
-          <grid row="7" column="0" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="1.0" weighty="10.0"/>
-        </constraints>
-        <properties>
-          <background color="-1183240"/>
-          <focusable value="false"/>
-          <preferredSize width="-1" height="-1"/>
-          <requestFocusEnabled value="false"/>
-        </properties>
-        <border type="none"/>
-        <children/>
-      </grid>
-      <grid id="89c63" binding="topPanel" layout-manager="GridBagLayout">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="1.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <background color="-1183240"/>
-          <focusable value="false"/>
-          <preferredSize width="-1" height="-1"/>
-          <requestFocusEnabled value="false"/>
-        </properties>
-        <border type="none"/>
-        <children/>
-      </grid>
-      <grid id="fb764" binding="leftPanel" layout-manager="GridBagLayout">
-        <constraints>
-          <grid row="1" column="0" row-span="6" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="1.0" ipadx="4"/>
-        </constraints>
-        <properties>
-          <background color="-1183240"/>
-          <focusable value="false"/>
-          <preferredSize width="-1" height="-1"/>
-          <requestFocusEnabled value="false"/>
-        </properties>
-        <border type="none"/>
-        <children/>
-      </grid>
       <component id="a78a0" class="javax.swing.JButton" default-binding="true">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-          <borderPainted value="true"/>
-          <focusPainted value="false"/>
-          <margin top="0" left="0" bottom="0" right="0"/>
-          <maximumSize width="-1" height="-1"/>
-          <minimumSize width="-1" height="-1"/>
-          <preferredSize width="-1" height="-1"/>
-          <rolloverEnabled value="true"/>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="b3ed9" class="javax.swing.JButton" default-binding="true">
-        <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-          <borderPainted value="true"/>
-          <focusPainted value="false"/>
-          <margin top="0" left="0" bottom="0" right="0"/>
-          <maximumSize width="-1" height="-1"/>
-          <minimumSize width="-1" height="-1"/>
-          <preferredSize width="-1" height="-1"/>
-          <rolloverEnabled value="true"/>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="e723" class="javax.swing.JButton" default-binding="true">
-        <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-          <borderPainted value="true"/>
-          <focusPainted value="false"/>
-          <margin top="0" left="0" bottom="0" right="0"/>
-          <maximumSize width="-1" height="-1"/>
-          <minimumSize width="-1" height="-1"/>
-          <preferredSize width="-1" height="-1"/>
-          <rolloverEnabled value="true"/>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="ef8ec" class="javax.swing.JButton" default-binding="true">
-        <constraints>
-          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
         </constraints>
         <properties>
@@ -329,40 +250,6 @@
           <text value="Button"/>
         </properties>
       </component>
-      <component id="2a961" class="javax.swing.JButton" default-binding="true">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-          <borderPainted value="true"/>
-          <focusPainted value="false"/>
-          <margin top="0" left="0" bottom="0" right="0"/>
-          <maximumSize width="-1" height="-1"/>
-          <minimumSize width="-1" height="-1"/>
-          <preferredSize width="-1" height="-1"/>
-          <rolloverEnabled value="true"/>
-          <text value="Button"/>
-        </properties>
-      </component>
-      <component id="6d8a6" class="javax.swing.JButton" default-binding="true">
-        <constraints>
-          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-          <borderPainted value="true"/>
-          <focusPainted value="false"/>
-          <margin top="0" left="0" bottom="0" right="0"/>
-          <maximumSize width="-1" height="-1"/>
-          <minimumSize width="-1" height="-1"/>
-          <preferredSize width="-1" height="-1"/>
-          <rolloverEnabled value="true"/>
-          <text value="Button"/>
-        </properties>
-      </component>
       <component id="b847f" class="javax.swing.JButton" default-binding="true">
         <constraints>
           <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -397,7 +284,58 @@
           <text value="Button"/>
         </properties>
       </component>
-      <component id="dbdd1" class="javax.swing.JButton" default-binding="true">
+      <component id="a68a8" class="javax.swing.JButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <borderPainted value="true"/>
+          <focusPainted value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="-1" height="-1"/>
+          <minimumSize width="-1" height="-1"/>
+          <preferredSize width="-1" height="-1"/>
+          <rolloverEnabled value="true"/>
+          <text value="Button"/>
+        </properties>
+      </component>
+      <component id="c1dcd" class="javax.swing.JButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <borderPainted value="true"/>
+          <focusPainted value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="-1" height="-1"/>
+          <minimumSize width="-1" height="-1"/>
+          <preferredSize width="-1" height="-1"/>
+          <rolloverEnabled value="true"/>
+          <text value="Button"/>
+        </properties>
+      </component>
+      <component id="785e3" class="javax.swing.JButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <borderPainted value="true"/>
+          <focusPainted value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="-1" height="-1"/>
+          <minimumSize width="-1" height="-1"/>
+          <preferredSize width="-1" height="-1"/>
+          <rolloverEnabled value="true"/>
+          <text value="Button"/>
+        </properties>
+      </component>
+      <component id="fb9d1" class="javax.swing.JButton" default-binding="true">
         <constraints>
           <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
@@ -414,7 +352,7 @@
           <text value="Button"/>
         </properties>
       </component>
-      <component id="b03fe" class="javax.swing.JButton" default-binding="true">
+      <component id="ffeec" class="javax.swing.JButton" default-binding="true">
         <constraints>
           <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
@@ -431,7 +369,24 @@
           <text value="Button"/>
         </properties>
       </component>
-      <component id="a68a8" class="javax.swing.JButton" default-binding="true">
+      <component id="54553" class="javax.swing.JButton" default-binding="true">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <borderPainted value="true"/>
+          <focusPainted value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="-1" height="-1"/>
+          <minimumSize width="-1" height="-1"/>
+          <preferredSize width="-1" height="-1"/>
+          <rolloverEnabled value="true"/>
+          <text value="Button"/>
+        </properties>
+      </component>
+      <component id="83a30" class="javax.swing.JButton" default-binding="true">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
@@ -485,6 +440,23 @@
       <component id="fbc0f" class="javax.swing.JButton" default-binding="true">
         <constraints>
           <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <borderPainted value="true"/>
+          <focusPainted value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="-1" height="-1"/>
+          <minimumSize width="-1" height="-1"/>
+          <preferredSize width="-1" height="-1"/>
+          <rolloverEnabled value="true"/>
+          <text value="Button"/>
+        </properties>
+      </component>
+      <component id="449f6" class="javax.swing.JButton" default-binding="true">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag top="0" left="0" bottom="5" right="5" weightx="20.0" weighty="15.0"/>
         </constraints>
         <properties>
@@ -567,6 +539,20 @@
           <text value="Button"/>
         </properties>
       </component>
+      <grid id="30d8e" binding="bottomPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="10.0"/>
+        </constraints>
+        <properties>
+          <background color="-1183240"/>
+          <focusable value="false"/>
+          <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
       <grid id="3a400" binding="rightPanel" layout-manager="GridBagLayout">
         <constraints>
           <grid row="1" column="6" row-span="6" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -576,6 +562,20 @@
           <background color="-1183240"/>
           <focusable value="false"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="fb764" binding="leftPanel" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="1" column="0" row-span="6" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="1.0"/>
+        </constraints>
+        <properties>
+          <background color="-1183240"/>
+          <focusable value="false"/>
+          <preferredSize width="5" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
         <border type="none"/>

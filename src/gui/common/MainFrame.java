@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 05.09.2019
+ * Copyright (c) RESONANCE JSC, 06.09.2019
  */
 
 package gui.common;
@@ -27,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static gui.fonts.FontProvider.*;
+import static gui.fonts.FontProvider.FONTAWESOME_REGULAR;
+import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
  * Class describes main window of our graphic interface. Bounded to main_frame.form.
@@ -35,11 +36,13 @@ import static gui.fonts.FontProvider.*;
  * CardLayout will provide showing of different screens (i.e. different cards-panels).
  * {@link JWindow} will provide showing of dialog windows ({@link JWindow} is parent class for {@link JFrame} and {@link JDialog}).
  * <p>
- * Можно использовать для показа диалогов JDialog (чтобы экран не мерцал при появлении диалога, setModal = true).
- * Но, в Windows придётся отключить FullScreenMode, иначе приложение сворачивается в трей при появлении диалога.
- * В Linux похожая ситуация - при появлении диалога показываются панель управления и пр., их надо скрывать заранее.
- * Также необходимо позаботиться об отсутствии курсора, он всё равно показывается за пределами диалога
- * (glassPane with hidden cursor for whole application may be used).
+ * We use special Full Screen mode to paint directly to screen without using windows system of operation system.
+ * <p>
+ * JDialog may be used for dialog windows showing (set {@code setModal=true} to prevent screen blinking when dialog appears).
+ * But it is necessary to switch off FullScreenMode, because in Windows systems app minimizes to tray when dialog appears.
+ * In Linux the same situation - task palel is showing when dialog appears, so it must be hidden in advance.
+ * Another one issue when JDialog is used is cursor visibility outside dialog window
+ * (glassPane with hidden cursor for whole application is solution).
  */
 public class MainFrame extends JFrame implements ActionListener {
     public static final String APP_VERSION = "1.0";
@@ -98,12 +101,10 @@ public class MainFrame extends JFrame implements ActionListener {
     private TiledPanel tiledPanel1;
     private TiledPanel tiledPanel2;
 
-    private GraphicsDevice graphicsDevice;
+    private GraphicsDevice graphicsDevice;      // used to set full screen mode
     private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
     private CardLayout mainSellPanelScreensLayout = (CardLayout) sellPanelScreens.getLayout();
     private CardLayout navigatePanelContainerLayout = (CardLayout) navigatePanelContainer.getLayout();
-    private Font robotoRegular16 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 16);
-    private Font menuIcons58 = FontProvider.getInstance().getFont(MENU_ICONS, 58);
     private GlassPane glassPane = new GlassPane();
     private KeypadDialog loginWindow;
     private JWindow paymentWindow;
@@ -422,8 +423,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private void initTiledPanel() {
         String[] names0 = {"clear_receipt", "return_receipt", "put_off_receipt", "load_receipt", "print_copy",
                 "last_receipt", "load_order", "profile_filling", "remove_discount", "particular_discount",
-                "set_displayed_columns",
-        "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy", "print_copy"};
+                "set_displayed_columns"};
         List<String> buttonTexts = new ArrayList<>();
         for (int i = 0; i < names0.length; i++) {
             buttonTexts.add(Resources.getInstance().getString(names0[i]));
