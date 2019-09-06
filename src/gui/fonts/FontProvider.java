@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 25.08.2019
+ * Copyright (c) RESONANCE JSC, 06.09.2019
  */
 
 package gui.fonts;
@@ -22,6 +22,8 @@ public class FontProvider {
     public static final String MENU_ICONS = "MenuIcons.ttf";
 
     public static final FontProvider INSTANCE = new FontProvider();
+    // we need GraphicsEnvironment here to register certain font in JVM. It is necessary for html text in buttons basically.
+    private static GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
     /**
      * Approximate value for text scaling in relation to the template FullHD display.
@@ -62,6 +64,9 @@ public class FontProvider {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // font registering provides proper font for html text in buttons
+        ge.registerFont(font);
+
         return font;
     }
 
