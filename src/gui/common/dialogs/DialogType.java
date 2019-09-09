@@ -9,6 +9,7 @@ package gui.common.dialogs;
 public enum DialogType {
     LOGIN,
     PAYMENT,
-    CONFIRM
+    CONFIRM,
+    MESSAGE
 }
 

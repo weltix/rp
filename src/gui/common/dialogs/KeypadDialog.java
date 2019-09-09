@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common.dialogs;
@@ -48,12 +48,13 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
     }
 
     /**
-     * Method is called when action occurs (button pressed or timer triggers).
+     * Method is called when action occurs (i.e. button pressed or timer triggers).
      *
      * @param e event, that occurs.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        // if timer for closing this dialog triggered
         if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
             this.dispose();

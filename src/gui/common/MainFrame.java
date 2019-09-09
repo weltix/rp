@@ -105,7 +105,9 @@ public class MainFrame extends JFrame implements ActionListener {
     private GlassPane glassPane = new GlassPane();
     private KeypadDialog loginDialog;
     private JWindow paymentDialog;
-    private JWindow confirmDialog;
+    private ConfirmDialog confirmDialog;
+    private Dimension kpSize;   // size of this MainFrame's keypadPanel in px
+    private Point kpPoint;      // location of this MainFrame's keypadPanel on screen
 
     // object of the class, that paints for JLayer
     private LayerUI<JComponent> layerUI = new BlurLayerUI();
@@ -151,6 +153,10 @@ public class MainFrame extends JFrame implements ActionListener {
         // next parameters make window for my monitor with physical dimensions like real 14' POS
 //        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+
+        // get actual keypad dimensions and location on screen in MainFrame. All another keypads must have the same dimensions.
+        kpSize = keypadPanel.getSize();
+        kpPoint = keypadPanel.getLocationOnScreen();
     }
 
     public void setCardOfMainPanel(String cardName) {
@@ -296,10 +302,8 @@ public class MainFrame extends JFrame implements ActionListener {
             return;
         }
 
-        // get actual keypad dimensions and location on screen in MainFrame. All another keypads must have the same dimensions.
-        Dimension dim = keypadPanel.getSize();
-        Point point = keypadPanel.getLocationOnScreen();
-
+        Dimension size = new Dimension(kpSize);
+        Point location = new Point(kpPoint);
         switch (e.getActionCommand()) {
             case "LOGIN":
                 // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
@@ -308,26 +312,27 @@ public class MainFrame extends JFrame implements ActionListener {
                 // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
                 // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
                 // container using they weights, the sizes of components are rounding to down.
-                dim.setSize(dim.getWidth() + 2, dim.getHeight() / kpHRatio + 3);
-                point.translate(-1, -(int) ((dim.getHeight() - 3) * (1 - kpHRatio)) - 2);
-                loginDialog.setSize(dim);
-                loginDialog.setLocation(point);
+                size.setSize(size.getWidth() + 2, size.getHeight() / kpHRatio + 3);
+                location.translate(-1, -(int) ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
+                loginDialog.setSize(size);
+                loginDialog.setLocation(location);
                 loginDialog.setVisible(true);
                 break;
             case "PAYMENT":
                 // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
-                dim.setSize((dim.getWidth() / 37.5) * 100 * 1.005, (dim.getHeight() / 80) * 100 * 1.01);
-                paymentDialog.setSize(dim);
+                size.setSize((size.getWidth() / 37.5) * 100 * 1.005, (size.getHeight() / 80) * 100 * 1.01);
+                paymentDialog.setSize(size);
                 paymentDialog.setLocation(0, 0);
                 paymentDialog.setVisible(true);
                 break;
             case "CONFIRM":
-                System.out.println("confirm");
-                // 36% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
-                dim.setSize((getWidth() * 36) / 100, (getHeight() * 28) / 100);
-                loginDialog.setSize(dim);
-                loginDialog.setLocationRelativeTo(this);
-                loginDialog.setVisible(true);
+                // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
+                size.setSize((this.getWidth() * 36.5) / 100, (this.getHeight() * 28) / 100);
+                confirmDialog.setSize(size);
+                confirmDialog.setLocationRelativeTo(this);
+                confirmDialog.setVisible(true);
+                break;
+            default:
                 break;
         }
     }
@@ -378,8 +383,8 @@ public class MainFrame extends JFrame implements ActionListener {
             buttonIcons.add(Resources.getInstance().getString(names0[i] + "_icon"));
             buttonTexts.add(Resources.getInstance().getString(names0[i] + "_html"));
         }
-        Consumer<Integer> actions = buttonAlias -> {
-            switch (buttonAlias) {
+        Consumer<Integer> actions = buttonNumber -> {
+            switch (buttonNumber) {
                 case 0:
                     mainSellPanelScreensLayout.show(sellPanelScreens, "addGoodPanel");
                     break;
@@ -418,7 +423,7 @@ public class MainFrame extends JFrame implements ActionListener {
             buttonTexts.add(Resources.getInstance().getString(names1[i] + "_html"));
         }
         Font iconsFont = FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 58);
-        actions = buttonAlias -> {
+        actions = buttonNumber -> {
             navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
             mainSellPanelScreensLayout.show(sellPanelScreens, "sellPanel");
             revalidate();
@@ -443,9 +448,18 @@ public class MainFrame extends JFrame implements ActionListener {
         Consumer<Integer> actions = buttonNumber -> {
             switch (buttonNumber) {
                 case 0:
+                    Consumer<Integer> action = e -> this.dispose();
+                    confirmDialog.setProperties(Resources.getInstance().getString("receipt_cleaning"),
+                            Resources.getInstance().getString("clear_receipt_question"),
+                            action);
                     launchDialog(true, DialogType.CONFIRM);
                     break;
                 case 1:
+                    action = e -> this.dispose();
+                    confirmDialog.setProperties(Resources.getInstance().getString("return_receipt"),
+                            Resources.getInstance().getString("return_receipt_question"),
+                            action);
+                    launchDialog(true, DialogType.CONFIRM);
                     break;
                 case 2:
                     break;
@@ -529,4 +543,5 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
+    // TODO: 09.09.2019 Вынести в отдельный метод настройки диалоговых окон
 }

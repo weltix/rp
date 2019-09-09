@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common.dialogs;
@@ -61,7 +61,6 @@ public class PaymentDialog extends JWindow implements ActionListener {
         mustBePaidLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 46));
         mustBePaidSumLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 46));
 
-
         if (getParent() instanceof MainFrame)
             parentFrame = (MainFrame) getParent();
         if (parentFrame.getGlassPane() instanceof GlassPane) {
@@ -86,29 +85,35 @@ public class PaymentDialog extends JWindow implements ActionListener {
     }
 
     /**
-     * Method is called when action occurs (button pressed or timer triggers).
+     * Method is called when action occurs (i.e. button pressed or timer triggers).
      *
      * @param e event, that occurs.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        // if timer for closing this dialog triggered
         if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
             this.dispose();
         }
-        if ("cashButton".equals(e.getActionCommand())) {
-            cashButton.setBackground(blueColor);
-            cashButton.setForeground(Color.WHITE);
-            cardButton.setBackground(beigeColor);
-            cardButton.setForeground(Color.BLACK);
-            paymentFormLabel.setText(Resources.getInstance().getString("cash"));
-        }
-        if ("cardButton".equals(e.getActionCommand())) {
-            cashButton.setBackground(beigeColor);
-            cashButton.setForeground(Color.BLACK);
-            cardButton.setBackground(blueColor);
-            cardButton.setForeground(Color.WHITE);
-            paymentFormLabel.setText(Resources.getInstance().getString("card"));
+        // actionCommands for buttons assigned in appropriate *.form file
+        switch (e.getActionCommand()) {
+            case "cashButton":
+                cashButton.setBackground(blueColor);
+                cashButton.setForeground(Color.WHITE);
+                cardButton.setBackground(beigeColor);
+                cardButton.setForeground(Color.BLACK);
+                paymentFormLabel.setText(Resources.getInstance().getString("cash"));
+                break;
+            case "cardButton":
+                cashButton.setBackground(beigeColor);
+                cashButton.setForeground(Color.BLACK);
+                cardButton.setBackground(blueColor);
+                cardButton.setForeground(Color.WHITE);
+                paymentFormLabel.setText(Resources.getInstance().getString("card"));
+                break;
+            default:
+                break;
         }
     }
 }

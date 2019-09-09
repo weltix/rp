@@ -728,6 +728,7 @@
                           <gridbag weightx="1.0" weighty="1.0"/>
                         </constraints>
                         <properties>
+                          <actionCommand value="actionButton0"/>
                           <alignmentX value="0.5"/>
                           <background color="-13350562"/>
                           <borderPainted value="false"/>
@@ -765,6 +766,7 @@
                           <gridbag weightx="50.0" weighty="1.0"/>
                         </constraints>
                         <properties>
+                          <actionCommand value="actionButton1"/>
                           <alignmentX value="0.0"/>
                           <background color="-13350562"/>
                           <borderPainted value="false"/>
@@ -782,6 +784,7 @@
                           <gridbag weightx="50.0" weighty="1.0"/>
                         </constraints>
                         <properties>
+                          <actionCommand value="actionButton2"/>
                           <alignmentX value="0.0"/>
                           <background color="-13264677"/>
                           <borderPainted value="false"/>
