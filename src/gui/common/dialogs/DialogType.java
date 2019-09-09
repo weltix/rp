@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 12.08.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common.dialogs;
@@ -8,6 +8,7 @@ package gui.common.dialogs;
 
 public enum DialogType {
     LOGIN,
-    PAYMENT
+    PAYMENT,
+    CONFIRM
 }
 

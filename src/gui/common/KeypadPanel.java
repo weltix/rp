@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 23.08.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common;
@@ -10,8 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,11 +76,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
             for (Component child : processingComponents) {
                 if (child instanceof JButton) {
                     child.setFont(robotoRegular50);
-                    child.addMouseListener(new MouseListener() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                        }
-
+                    child.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mousePressed(MouseEvent e) {
                             String buttonText = ((JButton) e.getSource()).getText();
@@ -92,10 +88,6 @@ public class KeypadPanel extends JComponent implements ActionListener {
                         @Override
                         public void mouseReleased(MouseEvent e) {
                             timer.stop();
-                        }
-
-                        @Override
-                        public void mouseEntered(MouseEvent e) {
                         }
 
                         @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 06.09.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common;
@@ -26,3 +26,5 @@ public class NavigateButton{
         text.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 16));
     }
 }
+
+// TODO: 09.09.2019 Переделать панельки на кнопки

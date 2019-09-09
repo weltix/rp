@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 05.09.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common;

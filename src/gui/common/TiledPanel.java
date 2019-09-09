@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 06.09.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common;
@@ -63,34 +63,9 @@ public class TiledPanel {
                         final int buttonNumFinal = buttonNum;
                         // set listeners for each button. Depending on event we perform specified action.
                         button.addMouseListener(new MouseAdapter() {
-                            /* isPressed and isMouseOver - workaround of mouseClicked method.
-                               Reason: in some systems click doesn't work properly when mouse cursor coordinates changes at
-                               least for 1px during click */
-                            private boolean isPressed = false;
-                            private boolean isMouseOver = false;
-
-                            @Override
-                            public void mousePressed(MouseEvent e) {
-                                isPressed = true;
-                            }
-
                             @Override
                             public void mouseReleased(MouseEvent e) {
-                                if (isPressed && isMouseOver) {
-                                    buttonsActions.accept(buttonNumFinal);
-                                }
-                                isPressed = false;
-                            }
-
-                            @Override
-                            public void mouseEntered(MouseEvent e) {
-                                if (isPressed)
-                                    isMouseOver = true;
-                            }
-
-                            @Override
-                            public void mouseExited(MouseEvent e) {
-                                isMouseOver = false;
+                                buttonsActions.accept(buttonNumFinal);
                             }
                         });
                     } else {

@@ -1,13 +1,10 @@
 /*
- * Copyright (c) RESONANCE JSC, 06.09.2019
+ * Copyright (c) RESONANCE JSC, 09.09.2019
  */
 
 package gui.common;
 
-import gui.common.dialogs.DialogType;
-import gui.common.dialogs.KeypadDialog;
-import gui.common.dialogs.KeypadDialogLogin;
-import gui.common.dialogs.PaymentDialog;
+import gui.common.dialogs.*;
 import gui.common.utility_components.BackgroundImagePanel;
 import gui.common.utility_components.BlurLayerUI;
 import gui.common.utility_components.GlassPane;
@@ -106,8 +103,9 @@ public class MainFrame extends JFrame implements ActionListener {
     private CardLayout mainSellPanelScreensLayout = (CardLayout) sellPanelScreens.getLayout();
     private CardLayout navigatePanelContainerLayout = (CardLayout) navigatePanelContainer.getLayout();
     private GlassPane glassPane = new GlassPane();
-    private KeypadDialog loginWindow;
-    private JWindow paymentWindow;
+    private KeypadDialog loginDialog;
+    private JWindow paymentDialog;
+    private JWindow confirmDialog;
 
     // object of the class, that paints for JLayer
     private LayerUI<JComponent> layerUI = new BlurLayerUI();
@@ -182,8 +180,9 @@ public class MainFrame extends JFrame implements ActionListener {
         versionLabel.setText(Resources.getInstance().getString("version:") + "1.0");
 
         keypadPanel.setActionButtonsAmount(1);     // set the amount of action buttons of our keypadPanel
-        loginWindow = new KeypadDialogLogin(this);
-        paymentWindow = new PaymentDialog(this);
+        loginDialog = new KeypadDialogLogin(this);
+        paymentDialog = new PaymentDialog(this);
+        confirmDialog = new ConfirmDialog(this);
         jlayer.setUI(layerUI);
 
         setCardOfMainPanel("mainSellPanel");
@@ -254,6 +253,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /**
      * Creates, tunes and shows a dialog window of certain type.
+     * All dialogs are launched using timer with very small delay, that make dialog appearance faster on weak hardware.
      *
      * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
      * @param dialogType             defines dialog type using {@link DialogType} enumeration
@@ -286,37 +286,49 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof Timer) {
+            ((Timer) e.getSource()).stop();
+        }
+
+        // if timer for splashScreen appearing triggered
+        if ("splashScreenShowingTime".equals(e.getActionCommand())) {
+            launchDialog(false, DialogType.LOGIN);
+            return;
+        }
+
         // get actual keypad dimensions and location on screen in MainFrame. All another keypads must have the same dimensions.
         Dimension dim = keypadPanel.getSize();
         Point point = keypadPanel.getLocationOnScreen();
 
-        if ("splashScreenShowingTime".equals(e.getActionCommand())) {
-            ((Timer) e.getSource()).stop();
-            launchDialog(false, DialogType.LOGIN);
-        }
-
-        if (DialogType.LOGIN.name().equals(e.getActionCommand())) {
-            ((Timer) e.getSource()).stop();
-            // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-            double kpHRatio = 86.0 / 100;
-            // Next code calculates dimensions and location of dialog on screen.
-            // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
-            // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
-            // container using they weights, the sizes of components are rounding to down.
-            dim.setSize(dim.getWidth() + 2, dim.getHeight() / kpHRatio + 3);
-            point.translate(-1, -(int) ((dim.getHeight() - 3) * (1 - kpHRatio)) - 2);
-            loginWindow.setSize(dim);
-            loginWindow.setLocation(point);
-            loginWindow.setVisible(true);
-        }
-
-        if (DialogType.PAYMENT.name().equals(e.getActionCommand())) {
-            ((Timer) e.getSource()).stop();
-            // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
-            dim.setSize((dim.getWidth() / 37.5) * 100 * 1.005, (dim.getHeight() / 80) * 100 * 1.01);
-            paymentWindow.setSize(dim);
-            paymentWindow.setLocation(0, 0);
-            paymentWindow.setVisible(true);
+        switch (e.getActionCommand()) {
+            case "LOGIN":
+                // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
+                double kpHRatio = 86.0 / 100;
+                // Next code calculates dimensions and location of dialog on screen.
+                // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+                // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
+                // container using they weights, the sizes of components are rounding to down.
+                dim.setSize(dim.getWidth() + 2, dim.getHeight() / kpHRatio + 3);
+                point.translate(-1, -(int) ((dim.getHeight() - 3) * (1 - kpHRatio)) - 2);
+                loginDialog.setSize(dim);
+                loginDialog.setLocation(point);
+                loginDialog.setVisible(true);
+                break;
+            case "PAYMENT":
+                // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
+                dim.setSize((dim.getWidth() / 37.5) * 100 * 1.005, (dim.getHeight() / 80) * 100 * 1.01);
+                paymentDialog.setSize(dim);
+                paymentDialog.setLocation(0, 0);
+                paymentDialog.setVisible(true);
+                break;
+            case "CONFIRM":
+                System.out.println("confirm");
+                // 36% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
+                dim.setSize((getWidth() * 36) / 100, (getHeight() * 28) / 100);
+                loginDialog.setSize(dim);
+                loginDialog.setLocationRelativeTo(this);
+                loginDialog.setVisible(true);
+                break;
         }
     }
 
@@ -421,7 +433,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * The amount and names of tiled panels specified in main_frame.form. In this method we initialize them.
      */
     private void initTiledPanel() {
-        String[] names0 = {"clear_receipt", "return_receipt", "put_off_receipt", "load_receipt", "print_copy",
+        String[] names0 = {"receipt_cleaning", "return_receipt", "put_off_receipt", "load_receipt", "print_copy",
                 "last_receipt", "load_order", "profile_filling", "remove_discount", "particular_discount",
                 "set_displayed_columns"};
         List<String> buttonTexts = new ArrayList<>();
@@ -431,6 +443,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Consumer<Integer> actions = buttonNumber -> {
             switch (buttonNumber) {
                 case 0:
+                    launchDialog(true, DialogType.CONFIRM);
                     break;
                 case 1:
                     break;
