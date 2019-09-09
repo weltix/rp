@@ -75,12 +75,12 @@
               <color color="-2357732"/>
             </border>
             <children>
-              <nested-form id="afd45" form-file="gui/common/navigate_panel.form" binding="navPanelMain" custom-create="true">
+              <nested-form id="94d39" form-file="gui/aspect_ratio_16x9/navigate_panel.form" binding="navPanelMain" custom-create="true">
                 <constraints>
                   <card name="navPanelMain"/>
                 </constraints>
               </nested-form>
-              <nested-form id="1d6f7" form-file="gui/common/navigate_panel.form" binding="navPanelBack" custom-create="true">
+              <nested-form id="10a66" form-file="gui/aspect_ratio_16x9/navigate_panel.form" binding="navPanelBack" custom-create="true">
                 <constraints>
                   <card name="navPanelBack"/>
                 </constraints>
