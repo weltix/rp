@@ -173,7 +173,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         discountButton.setFont(robotoRegular30);
         paymentButton.setFont(robotoRegular30);
-        paymentButton.addActionListener(e -> launchDialog(true, DialogType.PAYMENT));
+        paymentButton.addActionListener(e -> launchDialog(true, paymentDialog));
 
         toPayLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38));
         toPaySumLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38));
@@ -256,18 +256,19 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Creates, tunes and shows a dialog window of certain type.
+     * Provides glassPane showing, then runs timer, that after triggering will show specified dialog window.
      * All dialogs are launched using timer with very small delay, that make dialog appearance faster on weak hardware.
      *
      * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
-     * @param dialogType             defines dialog type using {@link DialogType} enumeration
+     * @param dialogWindow           object of dialog window
      */
-    private void launchDialog(boolean glassPaneHasBackground, DialogType dialogType) {
+    private void launchDialog(boolean glassPaneHasBackground, JWindow dialogWindow) {
         Color base = UIManager.getColor("inactiveCaptionBorder");
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
         if (!glassPaneHasBackground)
             background = null;
 
+        // optional using of blurring feature
         if (!splashScreenPanel.isVisible()) {
             glassPane.activate(background);
             // code will make background around dialog window blurred
@@ -277,6 +278,25 @@ public class MainFrame extends JFrame implements ActionListener {
                 revalidate();
                 repaint();
             }
+        }
+
+        // determines DialogType of current dialog window object
+        DialogType dialogType = null;
+        switch (dialogWindow.getClass().getSimpleName()) {
+            case "KeypadDialogLogin":
+                dialogType = DialogType.LOGIN;
+                break;
+            case "PaymentDialog":
+                dialogType = DialogType.PAYMENT;
+                break;
+            case "ConfirmDialog":
+                dialogType = DialogType.CONFIRM;
+                break;
+            case "MessageDialog":
+                dialogType = DialogType.MESSAGE;
+                break;
+            default:
+                break;
         }
         // this delay - workaround for weak hardware (for fast appearance of glassPane without delays)
         Timer timer = new Timer(0, this);
@@ -343,7 +363,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         // if timer for splashScreen appearing triggered
         if ("splashScreenShowingTime".equals(e.getActionCommand())) {
-            launchDialog(false, DialogType.LOGIN);
+            launchDialog(false, loginDialog);
             return;
         }
         // show appropriate dialog after timer triggering (timer, that makes very small delay, see method launchDialog)
@@ -426,7 +446,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     mainSellPanelScreensLayout.show(sellPanelScreens, "servicePanel");
                     break;
                 case 4:
-                    launchDialog(true, DialogType.LOGIN);
+                    launchDialog(true, loginDialog);
                     return;
                 default:
                     break;
@@ -480,19 +500,19 @@ public class MainFrame extends JFrame implements ActionListener {
                     confirmDialog.setProperties(Resources.getInstance().getString("receipt_cleaning"),
                             Resources.getInstance().getString("question_clear_receipt"),
                             action);
-                    launchDialog(true, DialogType.CONFIRM);
+                    launchDialog(true, confirmDialog);
                     break;
                 case 1:
                     action = e -> this.dispose();
                     confirmDialog.setProperties(Resources.getInstance().getString("return_receipt"),
                             Resources.getInstance().getString("question_return_receipt"),
                             action);
-                    launchDialog(true, DialogType.CONFIRM);
+                    launchDialog(true, confirmDialog);
                     break;
                 case 2:
                     messageDialog.setProperties(Resources.getInstance().getString("put_off_receipt"),
                             Resources.getInstance().getString("msg_receipt_should_not_be_empty"));
-                    launchDialog(true, DialogType.MESSAGE);
+                    launchDialog(true, messageDialog);
                     break;
                 case 3:
                     break;
@@ -505,14 +525,14 @@ public class MainFrame extends JFrame implements ActionListener {
                 case 7:
                     messageDialog.setProperties(Resources.getInstance().getString("profile_filling"),
                             Resources.getInstance().getString("msg_not_found_profiles"));
-                    launchDialog(true, DialogType.MESSAGE);
+                    launchDialog(true, messageDialog);
                     break;
                 case 8:
                     action = e -> this.dispose();
                     confirmDialog.setProperties(Resources.getInstance().getString("remove_discounts"),
                             Resources.getInstance().getString("msg_remove_discounts"),
                             action);
-                    launchDialog(true, DialogType.CONFIRM);
+                    launchDialog(true, confirmDialog);
                     break;
                 case 9:
                     break;
@@ -573,6 +593,8 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /**
      * Custom initialization of specified components of form, that is bounded to this class.
+     * This method is mandatory if "Custom Create" option is marked for at least one component of bounded to this
+     * class *.form file. Method is intended to initialize this specified component(s).
      */
     private void createUIComponents() {
         initSplashScreenPanel();
@@ -582,5 +604,4 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
-    // TODO: 09.09.2019 Вынести в отдельный метод настройки диалоговых окон
 }
