@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.09.2019
+ * Copyright (c) RESONANCE JSC, 10.09.2019
  */
 
 package gui.common;
@@ -106,6 +106,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private KeypadDialog loginDialog;
     private JWindow paymentDialog;
     private ConfirmDialog confirmDialog;
+    private MessageDialog messageDialog;
     private Dimension kpSize;   // size of this MainFrame's keypadPanel in px
     private Point kpPoint;      // location of this MainFrame's keypadPanel on screen
 
@@ -154,9 +155,9 @@ public class MainFrame extends JFrame implements ActionListener {
 //        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
 
-        // get actual keypad dimensions and location on screen in MainFrame. All another keypads must have the same dimensions.
-        kpSize = keypadPanel.getSize();
-        kpPoint = keypadPanel.getLocationOnScreen();
+        // Initialization of dialogs can be done only after this MainFrame is set to visible state (setVisible(true)).
+        // It is because we need to receive actual MainFrame keypad's size and location.
+        initDialogWindows();
     }
 
     public void setCardOfMainPanel(String cardName) {
@@ -186,9 +187,6 @@ public class MainFrame extends JFrame implements ActionListener {
         versionLabel.setText(Resources.getInstance().getString("version:") + "1.0");
 
         keypadPanel.setActionButtonsAmount(1);     // set the amount of action buttons of our keypadPanel
-        loginDialog = new KeypadDialogLogin(this);
-        paymentDialog = new PaymentDialog(this);
-        confirmDialog = new ConfirmDialog(this);
         jlayer.setUI(layerUI);
 
         setCardOfMainPanel("mainSellPanel");
@@ -287,6 +285,53 @@ public class MainFrame extends JFrame implements ActionListener {
         timer.start();
     }
 
+    public void initDialogWindows() {
+        // get actual keypad dimensions and location on screen in MainFrame. All another keypads must have the same dimensions.
+        kpSize = keypadPanel.getSize();
+        kpPoint = keypadPanel.getLocationOnScreen();
+
+        // utility variables
+        Dimension size = new Dimension();
+        Point location = new Point();
+        double kpWRatio;
+        double kpHRatio;
+
+        /** {@link KeypadDialogLogin} initialization */
+        loginDialog = new KeypadDialogLogin(this);
+        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
+        kpHRatio = 86.0 / 100;
+        // Next code calculates dimensions and location of dialog on screen.
+        // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
+        // container using they weights, the sizes of components are rounding to down.
+        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
+        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
+        loginDialog.setSize(size);
+        loginDialog.setLocation(location);
+
+        /** {@link PaymentDialog} initialization */
+        paymentDialog = new PaymentDialog(this);
+        // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
+        size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
+        paymentDialog.setSize(size);
+        paymentDialog.setLocation(0, 0);
+
+        /** {@link ConfirmDialog} initialization */
+        confirmDialog = new ConfirmDialog(this);
+        // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
+        // It is impossible to get this value from *.form file programmatically.
+        kpWRatio = 36.5 / 100;
+        kpHRatio = 28.0 / 100;
+        size.setSize(this.getWidth() * kpWRatio, this.getHeight() * kpHRatio);
+        confirmDialog.setSize(size);
+        confirmDialog.setLocationRelativeTo(this);
+
+        /** {@link MessageDialog} initialization */
+        messageDialog = new MessageDialog(this);
+        messageDialog.setSize(size);
+        messageDialog.setLocationRelativeTo(this);
+    }
+
     /**
      * Basically is using for timer events handling.
      */
@@ -301,36 +346,19 @@ public class MainFrame extends JFrame implements ActionListener {
             launchDialog(false, DialogType.LOGIN);
             return;
         }
-
-        Dimension size = new Dimension(kpSize);
-        Point location = new Point(kpPoint);
+        // show appropriate dialog after timer triggering (timer, that makes very small delay, see method launchDialog)
         switch (e.getActionCommand()) {
             case "LOGIN":
-                // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-                double kpHRatio = 86.0 / 100;
-                // Next code calculates dimensions and location of dialog on screen.
-                // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
-                // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
-                // container using they weights, the sizes of components are rounding to down.
-                size.setSize(size.getWidth() + 2, size.getHeight() / kpHRatio + 3);
-                location.translate(-1, -(int) ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
-                loginDialog.setSize(size);
-                loginDialog.setLocation(location);
                 loginDialog.setVisible(true);
                 break;
             case "PAYMENT":
-                // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
-                size.setSize((size.getWidth() / 37.5) * 100 * 1.005, (size.getHeight() / 80) * 100 * 1.01);
-                paymentDialog.setSize(size);
-                paymentDialog.setLocation(0, 0);
                 paymentDialog.setVisible(true);
                 break;
             case "CONFIRM":
-                // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
-                size.setSize((this.getWidth() * 36.5) / 100, (this.getHeight() * 28) / 100);
-                confirmDialog.setSize(size);
-                confirmDialog.setLocationRelativeTo(this);
                 confirmDialog.setVisible(true);
+                break;
+            case "MESSAGE":
+                messageDialog.setVisible(true);
                 break;
             default:
                 break;
@@ -439,7 +467,7 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initTiledPanel() {
         String[] names0 = {"receipt_cleaning", "return_receipt", "put_off_receipt", "load_receipt", "print_copy",
-                "last_receipt", "load_order", "profile_filling", "remove_discount", "particular_discount",
+                "last_receipt", "load_order", "profile_filling", "remove_discounts", "particular_discount",
                 "set_displayed_columns"};
         List<String> buttonTexts = new ArrayList<>();
         for (int i = 0; i < names0.length; i++) {
@@ -450,18 +478,21 @@ public class MainFrame extends JFrame implements ActionListener {
                 case 0:
                     Consumer<Integer> action = e -> this.dispose();
                     confirmDialog.setProperties(Resources.getInstance().getString("receipt_cleaning"),
-                            Resources.getInstance().getString("clear_receipt_question"),
+                            Resources.getInstance().getString("question_clear_receipt"),
                             action);
                     launchDialog(true, DialogType.CONFIRM);
                     break;
                 case 1:
                     action = e -> this.dispose();
                     confirmDialog.setProperties(Resources.getInstance().getString("return_receipt"),
-                            Resources.getInstance().getString("return_receipt_question"),
+                            Resources.getInstance().getString("question_return_receipt"),
                             action);
                     launchDialog(true, DialogType.CONFIRM);
                     break;
                 case 2:
+                    messageDialog.setProperties(Resources.getInstance().getString("put_off_receipt"),
+                            Resources.getInstance().getString("msg_receipt_should_not_be_empty"));
+                    launchDialog(true, DialogType.MESSAGE);
                     break;
                 case 3:
                     break;
@@ -472,8 +503,16 @@ public class MainFrame extends JFrame implements ActionListener {
                 case 6:
                     break;
                 case 7:
+                    messageDialog.setProperties(Resources.getInstance().getString("profile_filling"),
+                            Resources.getInstance().getString("msg_not_found_profiles"));
+                    launchDialog(true, DialogType.MESSAGE);
                     break;
                 case 8:
+                    action = e -> this.dispose();
+                    confirmDialog.setProperties(Resources.getInstance().getString("remove_discounts"),
+                            Resources.getInstance().getString("msg_remove_discounts"),
+                            action);
+                    launchDialog(true, DialogType.CONFIRM);
                     break;
                 case 9:
                     break;
