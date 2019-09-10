@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.09.2019
+ * Copyright (c) RESONANCE JSC, 10.09.2019
  */
 
 package gui.common.dialogs;
@@ -23,6 +23,11 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
     protected KeypadPanel keypadPanel;
     public JLabel dialogTitle;
     public JLabel dialogHint;
+    private JPanel extraPanel;
+    private JButton percentButton;
+    private JButton moneyButton;
+    private JButton productButton;
+    private JButton receiptButton;
     protected GlassPane glassPane;
     protected MainFrame parentFrame;
 

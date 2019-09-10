@@ -424,7 +424,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * The amount and names of navigation panels specified in main_frame.form. In this method we initialize them.
      */
     private void initNavigatePanel() {
-        String[] names0 = {"add_good", "work_with_receipt", "cashbox", "service", "exit"};
+        String[] names0 = {"add_product", "work_with_receipt", "cashbox", "service", "exit"};
         List<String> buttonIcons = new ArrayList<>();
         List<String> buttonTexts = new ArrayList<>();
         for (int i = 0; i < names0.length; i++) {

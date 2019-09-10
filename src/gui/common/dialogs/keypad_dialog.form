@@ -13,24 +13,6 @@
       <color color="-3618616"/>
     </border>
     <children>
-      <grid id="5c294" layout-manager="GridBagLayout">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="1.0" weighty="0.0"/>
-        </constraints>
-        <properties>
-          <background color="-3618616"/>
-          <focusable value="false"/>
-          <maximumSize width="-1" height="1"/>
-          <minimumSize width="-1" height="1"/>
-          <preferredSize width="-1" height="1"/>
-          <requestFocusEnabled value="false"/>
-        </properties>
-        <border type="none">
-          <color color="-3618616"/>
-        </border>
-        <children/>
-      </grid>
       <grid id="40fc7" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -81,7 +63,145 @@
           </component>
           <grid id="523ff" layout-manager="GridBagLayout">
             <constraints>
-              <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="5.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <focusable value="false"/>
+              <minimumSize width="0" height="0"/>
+              <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <grid id="a196c" binding="extraPanel" layout-manager="CardLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="20.0"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <doubleBuffered value="true"/>
+              <preferredSize width="-1" height="-1"/>
+              <requestFocusEnabled value="false"/>
+              <visible value="true"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <grid id="a9f1d" layout-manager="GridBagLayout">
+                <constraints>
+                  <card name="discountPanel"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <focusable value="false"/>
+                  <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="fede7" class="javax.swing.JButton" binding="percentButton">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag top="6" left="0" bottom="6" right="0" weightx="23.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <actionCommand value="percentButton"/>
+                      <background color="-13264677"/>
+                      <borderPainted value="false"/>
+                      <focusPainted value="false"/>
+                      <foreground color="-1"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text value="%"/>
+                    </properties>
+                  </component>
+                  <component id="7e5aa" class="javax.swing.JButton" binding="moneyButton">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag top="6" left="0" bottom="6" right="0" weightx="23.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <actionCommand value="moneyButton"/>
+                      <background color="-1315861"/>
+                      <borderPainted value="false"/>
+                      <focusPainted value="false"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text value="\u20b4"/>
+                    </properties>
+                  </component>
+                  <grid id="f0122" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="8.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                      <focusable value="false"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <component id="3f802" class="javax.swing.JButton" binding="productButton">
+                    <constraints>
+                      <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag top="6" left="0" bottom="6" right="0" weightx="23.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <actionCommand value="productButton"/>
+                      <background color="-13264677"/>
+                      <borderPainted value="false"/>
+                      <focusPainted value="false"/>
+                      <foreground color="-1"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text resource-bundle="resources/strings" key="product"/>
+                    </properties>
+                  </component>
+                  <component id="266c1" class="javax.swing.JButton" binding="receiptButton">
+                    <constraints>
+                      <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag top="6" left="0" bottom="6" right="0" weightx="23.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <actionCommand value="receiptButton"/>
+                      <background color="-1315861"/>
+                      <borderPainted value="false"/>
+                      <focusPainted value="false"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text resource-bundle="resources/strings" key="receipt"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="38659" layout-manager="GridBagLayout">
+                <constraints>
+                  <card name="depositWithdrawPanel"/>
+                </constraints>
+                <properties>
+                  <background color="-1"/>
+                  <focusable value="false"/>
+                  <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
+          <grid id="13901" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="5.0" weighty="0.0"/>
             </constraints>
             <properties>
@@ -95,6 +215,24 @@
             <children/>
           </grid>
         </children>
+      </grid>
+      <grid id="5c294" layout-manager="GridBagLayout">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-3618616"/>
+          <focusable value="false"/>
+          <maximumSize width="-1" height="1"/>
+          <minimumSize width="-1" height="1"/>
+          <preferredSize width="-1" height="1"/>
+          <requestFocusEnabled value="false"/>
+        </properties>
+        <border type="none">
+          <color color="-3618616"/>
+        </border>
+        <children/>
       </grid>
       <nested-form id="2172a" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
         <constraints>
