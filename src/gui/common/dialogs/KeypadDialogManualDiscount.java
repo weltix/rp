@@ -12,26 +12,27 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Class for dialog window, that contains {@link JPasswordField} and {@link KeypadPanel} for login to system.
+ * Class for dialog window, that contains {@link KeypadPanel} and additional toggle buttons for choosing
+ * ("percents" or "money") and {"product" or "receipt"}. Class is intended to set particular discount.
+ * Parent abstract class {@link KeypadDialog} contains JPanel {@link KeypadDialog#extraPanel}, which has
+ * CardLayout as layout manager, and contains another JPanels different for different subclasses.
  */
-public class KeypadDialogLogin extends KeypadDialog {
+public class KeypadDialogManualDiscount extends KeypadDialog {
     /**
-     * Constructor tunes the look of this dialog, and sets actions for action buttons.
+     * Constructor tunes the look of this dialog, and sets action for action button.
      * Constructor of parent is called initially.
      *
      * @param owner {@link Frame} object, from which this window was called
      */
-    public KeypadDialogLogin(Frame owner) {
+    public KeypadDialogManualDiscount(Frame owner) {
         super(owner);
 
-        keypadPanel.setActionButtonsAmount(2);
-        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("ok"));
-        keypadPanel.getActionButton2().setText(Resources.getInstance().getString("exit"));
-        keypadPanel.doubleWidthA0Button();
-        keypadPanel.switchToPasswordTextField();
+        extraPanel.setVisible(true);
+        extraPanelLayout.show(extraPanel, "discountPanel");
 
+        keypadPanel.setActionButtonsAmount(1);
+        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("set_discount"));
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
-        keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
     }
 
     /**
@@ -44,15 +45,12 @@ public class KeypadDialogLogin extends KeypadDialog {
         super.actionPerformed(e);
         // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
-            case "actionButton1":
+            case "actionButton0":
                 // Returns initial mainPanel of main_frame.form. Does not affect performance.
                 // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
                 parentFrame.setContentPane(null);
 
-                if (parentFrame.getSplashScreenPanel().isVisible()) {
-                    parentFrame.setCardOfMainPanel("mainSellPanel");
-                    parentFrame.setCardOfMainSellPanelScreens("sellPanel");
-                }
+//                parentFrame.setCardOfMainSellPanelScreens("sellPanel");
 
                 glassPane.deactivate();
                 keypadPanel.getTextField().setText("");
@@ -62,14 +60,8 @@ public class KeypadDialogLogin extends KeypadDialog {
                 timer.setActionCommand("delayBeforeClosingThisWindow");
                 timer.start();
                 break;
-            case "actionButton2":
-                this.dispose();
-                System.exit(0);
-                break;
             default:
                 break;
         }
-
-
     }
 }

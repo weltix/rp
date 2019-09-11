@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 10.09.2019
+ * Copyright (c) RESONANCE JSC, 11.09.2019
  */
 
 package gui.common;
@@ -104,6 +104,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private CardLayout navigatePanelContainerLayout = (CardLayout) navigatePanelContainer.getLayout();
     private GlassPane glassPane = new GlassPane();
     private KeypadDialog loginDialog;
+    private KeypadDialog manualDiscountDialog;
     private JWindow paymentDialog;
     private ConfirmDialog confirmDialog;
     private MessageDialog messageDialog;
@@ -286,6 +287,9 @@ public class MainFrame extends JFrame implements ActionListener {
             case "KeypadDialogLogin":
                 dialogType = DialogType.LOGIN;
                 break;
+            case "KeypadDialogManualDiscount":
+                dialogType = DialogType.MANUAL_DISCOUNT;
+                break;
             case "PaymentDialog":
                 dialogType = DialogType.PAYMENT;
                 break;
@@ -329,6 +333,19 @@ public class MainFrame extends JFrame implements ActionListener {
         loginDialog.setSize(size);
         loginDialog.setLocation(location);
 
+        /** {@link KeypadDialogManualDiscount} initialization */
+        manualDiscountDialog = new KeypadDialogManualDiscount(this);
+        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
+        kpHRatio = 86.0 / 120;     /** 120% - 100% + 20% of {@link KeypadDialog#extraPanel}, which is visible in this dialog */
+        // Next code calculates dimensions and location of dialog on screen.
+        // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
+        // container using they weights, the sizes of components are rounding to down.
+        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
+        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
+        manualDiscountDialog.setSize(size);
+        manualDiscountDialog.setLocation(location);
+
         /** {@link PaymentDialog} initialization */
         paymentDialog = new PaymentDialog(this);
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
@@ -370,6 +387,9 @@ public class MainFrame extends JFrame implements ActionListener {
         switch (e.getActionCommand()) {
             case "LOGIN":
                 loginDialog.setVisible(true);
+                break;
+            case "MANUAL_DISCOUNT":
+                manualDiscountDialog.setVisible(true);
                 break;
             case "PAYMENT":
                 paymentDialog.setVisible(true);
@@ -487,7 +507,7 @@ public class MainFrame extends JFrame implements ActionListener {
      */
     private void initTiledPanel() {
         String[] names0 = {"receipt_cleaning", "return_receipt", "put_off_receipt", "load_receipt", "print_copy",
-                "last_receipt", "load_order", "profile_filling", "remove_discounts", "particular_discount",
+                "last_receipt", "load_order", "profile_filling", "remove_discounts", "manual_discount",
                 "set_displayed_columns"};
         List<String> buttonTexts = new ArrayList<>();
         for (int i = 0; i < names0.length; i++) {
@@ -535,6 +555,8 @@ public class MainFrame extends JFrame implements ActionListener {
                     launchDialog(true, confirmDialog);
                     break;
                 case 9:
+                    action = e -> this.dispose();
+                    launchDialog(true, manualDiscountDialog);
                     break;
                 case 10:
                     break;
@@ -604,4 +626,5 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
+    // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel 
 }

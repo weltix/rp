@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 10.09.2019
+ * Copyright (c) RESONANCE JSC, 11.09.2019
  */
 
 package gui.common.dialogs;
@@ -64,7 +64,7 @@ public class MessageDialog extends JWindow implements ActionListener {
             ((Timer) e.getSource()).stop();
             this.dispose();
         }
-        // actionCommands for buttons assigned in appropriate *.form file
+        // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "okButton":
                 glassPane.deactivate();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.09.2019
+ * Copyright (c) RESONANCE JSC, 11.09.2019
  */
 
 package gui.common.dialogs;
@@ -96,7 +96,7 @@ public class PaymentDialog extends JWindow implements ActionListener {
             ((Timer) e.getSource()).stop();
             this.dispose();
         }
-        // actionCommands for buttons assigned in appropriate *.form file
+        // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "cashButton":
                 cashButton.setBackground(blueColor);

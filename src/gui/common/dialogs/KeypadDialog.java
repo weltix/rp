@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 10.09.2019
+ * Copyright (c) RESONANCE JSC, 11.09.2019
  */
 
 package gui.common.dialogs;
@@ -23,17 +23,21 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
     protected KeypadPanel keypadPanel;
     public JLabel dialogTitle;
     public JLabel dialogHint;
-    private JPanel extraPanel;
+    protected JPanel extraPanel;
     private JButton percentButton;
     private JButton moneyButton;
     private JButton productButton;
     private JButton receiptButton;
     protected GlassPane glassPane;
     protected MainFrame parentFrame;
+    // get layout to operate with cards-JPanels, that contained in appropriate container
+    protected CardLayout extraPanelLayout = (CardLayout) extraPanel.getLayout();
 
     public KeypadDialog(Frame owner) {
         super(owner);
         this.setContentPane(mainPanel);
+
+        extraPanel.setVisible(false);       // default value
 
         // type and size of fonts in heading
         dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
