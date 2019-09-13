@@ -34,7 +34,7 @@ public class FontProvider {
     private FontProvider() {
         double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();    //our screen width in pixels
         scaleValue = (float) (1920 / screenWidth);                                      //1920px screen width - starting point
-        scaleValue = scaleValue * 1.32f;        //scaleValue * 1,32f to test on my display as it is 14' POS, DELETE this later
+//        scaleValue = scaleValue * 1.32f;        //scaleValue * 1,32f to test on my display as it is 14' POS, DELETE this later
     }
 
     public static FontProvider getInstance() {

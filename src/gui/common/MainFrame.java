@@ -128,15 +128,15 @@ public class MainFrame extends JFrame implements ActionListener {
 //                new Point(),
 //                null));
 
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setUndecorated(true);                       //need for full screen mode
-//        setResizable(false);                        //need for full screen mode
-//
-//        // set full screen exclusive mode
-//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//        graphicsDevice = ge.getDefaultScreenDevice();
-//        if (graphicsDevice.isFullScreenSupported())
-//            graphicsDevice.setFullScreenWindow(this);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setUndecorated(true);                       //need for full screen mode
+        setResizable(false);                        //need for full screen mode
+
+        // set full screen exclusive mode
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        graphicsDevice = ge.getDefaultScreenDevice();
+        if (graphicsDevice.isFullScreenSupported())
+            graphicsDevice.setFullScreenWindow(this);
 
         setContentPane(mainPanel);
         setGlassPane(glassPane);
@@ -148,13 +148,15 @@ public class MainFrame extends JFrame implements ActionListener {
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(2000);
         timer.setActionCommand("splashScreenShowingTime");
-        timer.start();
+//        timer.start();
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-        setSize(1050, 618);
+//        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
+
+        initDialogWindows();
     }
 
     public void setCardOfMainPanel(String cardName) {
@@ -186,7 +188,7 @@ public class MainFrame extends JFrame implements ActionListener {
         keypadPanel.setActionButtonsAmount(1);     // set the amount of action buttons of our keypadPanel
         jlayer.setUI(layerUI);
 
-        setCardOfMainPanel("splashScreenPanel");
+        setCardOfMainPanel("mainSellPanel");
         navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
 
         String[] columnNames = {"First Name",
@@ -385,7 +387,7 @@ public class MainFrame extends JFrame implements ActionListener {
         if (e.getSource() instanceof Timer) {
             ((Timer) e.getSource()).stop();
         }
-
+        // the call of next methos is here, because we need some time to get all components visible
         initDialogWindows();
 
         // if timer for splashScreen appearing triggered

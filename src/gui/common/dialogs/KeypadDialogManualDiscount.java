@@ -19,6 +19,10 @@ import java.awt.event.ActionEvent;
  * CardLayout as layout manager, and contains another JPanels different for different subclasses.
  */
 public class KeypadDialogManualDiscount extends KeypadDialog {
+
+    private Color blueColor = new Color(53, 152, 219);
+    private Color beigeColor = new Color(235, 235, 235);
+
     /**
      * Constructor tunes the look of this dialog, and sets action for action button.
      * Constructor of parent is called initially.
@@ -32,12 +36,18 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         cardPanelLayout.show(cardPanel, "discountPanel");
 
         dialogTitle.setText(Resources.getInstance().getString("manual_discount"));
+        dialogHint.setText(Resources.getInstance().getString("hint_set_discount"));
 
         Font robotoRegular30 = FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 30);
         percentButton.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_BOLD, 38));
         moneyButton.setFont(robotoRegular30);
         productButton.setFont(robotoRegular30);
         receiptButton.setFont(robotoRegular30);
+
+        percentButton.addActionListener(this::actionPerformed);
+        moneyButton.addActionListener(this::actionPerformed);
+        productButton.addActionListener(this::actionPerformed);
+        receiptButton.addActionListener(this::actionPerformed);
 
         keypadPanel.setActionButtonsAmount(1);
         keypadPanel.getActionButton0().setText(Resources.getInstance().getString("set_discount"));
@@ -58,9 +68,7 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
                 // Returns initial mainPanel of main_frame.form. Does not affect performance.
                 // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
                 parentFrame.setContentPane(null);
-
 //                parentFrame.setCardOfMainSellPanelScreens("sellPanel");
-
                 glassPane.deactivate();
                 keypadPanel.getTextField().setText("");
                 // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
@@ -68,6 +76,30 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
                 timer.setInitialDelay(10);
                 timer.setActionCommand("delayBeforeClosingThisWindow");
                 timer.start();
+                break;
+            case "percentButton":
+                percentButton.setBackground(blueColor);
+                percentButton.setForeground(Color.WHITE);
+                moneyButton.setBackground(beigeColor);
+                moneyButton.setForeground(Color.BLACK);
+                break;
+            case "moneyButton":
+                percentButton.setBackground(beigeColor);
+                percentButton.setForeground(Color.BLACK);
+                moneyButton.setBackground(blueColor);
+                moneyButton.setForeground(Color.WHITE);
+                break;
+            case "productButton":
+                productButton.setBackground(blueColor);
+                productButton.setForeground(Color.WHITE);
+                receiptButton.setBackground(beigeColor);
+                receiptButton.setForeground(Color.BLACK);
+                break;
+            case "receiptButton":
+                productButton.setBackground(beigeColor);
+                productButton.setForeground(Color.BLACK);
+                receiptButton.setBackground(blueColor);
+                receiptButton.setForeground(Color.WHITE);
                 break;
             default:
                 break;
