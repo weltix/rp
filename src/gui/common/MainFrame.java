@@ -105,6 +105,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private GlassPane glassPane = new GlassPane();
     private KeypadDialog loginDialog;
     private KeypadDialog manualDiscountDialog;
+    private KeypadDialog depositWithdrawDialog;
     private JWindow paymentDialog;
     private ConfirmDialog confirmDialog;
     private MessageDialog messageDialog;
@@ -288,6 +289,9 @@ public class MainFrame extends JFrame implements ActionListener {
             case "KeypadDialogManualDiscount":
                 dialogType = DialogType.MANUAL_DISCOUNT;
                 break;
+            case "KeypadDialogDepositWithdraw":
+                dialogType = DialogType.DEPOSIT_WITHDRAW;
+                break;
             case "PaymentDialog":
                 dialogType = DialogType.PAYMENT;
                 break;
@@ -316,6 +320,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
             loginDialog = new KeypadDialogLogin(this);
             manualDiscountDialog = new KeypadDialogManualDiscount(this);
+            depositWithdrawDialog = new KeypadDialogDepositWithdraw(this);
             paymentDialog = new PaymentDialog(this);
             confirmDialog = new ConfirmDialog(this);
             messageDialog = new MessageDialog(this);
@@ -358,6 +363,18 @@ public class MainFrame extends JFrame implements ActionListener {
         location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
         manualDiscountDialog.setSize(size);
         manualDiscountDialog.setLocation(location);
+
+        /** {@link KeypadDialogDepositWithdraw} customization */
+        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
+        kpHRatio = 86.0 / 119;     /** 119% = 100% + 19% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
+        // Next code calculates dimensions and location of dialog on screen.
+        // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
+        // container using they weights, the sizes of components are rounding to down.
+        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
+        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
+        depositWithdrawDialog.setSize(size);
+        depositWithdrawDialog.setLocation(location);
 
         /** {@link PaymentDialog} customization */
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
@@ -402,6 +419,9 @@ public class MainFrame extends JFrame implements ActionListener {
                 break;
             case "MANUAL_DISCOUNT":
                 manualDiscountDialog.setVisible(true);
+                break;
+            case "DEPOSIT_WITHDRAW":
+                depositWithdrawDialog.setVisible(true);
                 break;
             case "PAYMENT":
                 paymentDialog.setVisible(true);
@@ -586,6 +606,8 @@ public class MainFrame extends JFrame implements ActionListener {
         actions = buttonNumber -> {
             switch (buttonNumber) {
                 case 0:
+                    Consumer<Integer> action = e -> this.dispose();
+                    launchDialog(true, depositWithdrawDialog);
                     break;
                 case 1:
                     break;

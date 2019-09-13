@@ -145,7 +145,7 @@
           <grid id="aff0f" binding="cardPanel" layout-manager="CardLayout" hgap="0" vgap="0">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="90.0" weighty="60.0"/>
+              <gridbag weightx="90.0" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-1"/>
@@ -298,7 +298,102 @@
                   <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
-                <children/>
+                <children>
+                  <component id="894fe" class="javax.swing.JButton" binding="depositButton">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="45.0" weighty="40.0"/>
+                    </constraints>
+                    <properties>
+                      <actionCommand value="depositButton"/>
+                      <background color="-13264677"/>
+                      <borderPainted value="false"/>
+                      <focusPainted value="false"/>
+                      <foreground color="-1"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text resource-bundle="resources/strings" key="deposit"/>
+                    </properties>
+                  </component>
+                  <component id="8bcbe" class="javax.swing.JButton" binding="withdrawButton">
+                    <constraints>
+                      <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="45.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <actionCommand value="withdrawButton"/>
+                      <background color="-1315861"/>
+                      <borderPainted value="false"/>
+                      <focusPainted value="false"/>
+                      <font/>
+                      <label value="Изъятие"/>
+                      <margin top="0" left="0" bottom="0" right="0"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text resource-bundle="resources/strings" key="withdraw"/>
+                    </properties>
+                  </component>
+                  <grid id="151bd" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="15.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                      <focusable value="false"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <grid id="c3dfe" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="15.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                      <focusable value="false"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                  <component id="42713" class="javax.swing.JLabel" binding="cashAmountLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="15.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <foreground color="-13264677"/>
+                      <maximumSize width="-1" height="-1"/>
+                      <minimumSize width="-1" height="-1"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text resource-bundle="resources/strings" key="cash_in_cashbox"/>
+                    </properties>
+                  </component>
+                  <grid id="544ef" layout-manager="GridBagLayout">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="15.0"/>
+                    </constraints>
+                    <properties>
+                      <background color="-1"/>
+                      <focusable value="false"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                    </properties>
+                    <border type="none"/>
+                    <children/>
+                  </grid>
+                </children>
               </grid>
             </children>
           </grid>

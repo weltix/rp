@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
  * Used for inheritance by another descent classes. Bounded to keypad_dialog.form
  */
 public abstract class KeypadDialog extends JWindow implements ActionListener {
-    private JPanel mainPanel;
+    protected JPanel mainPanel;
     protected KeypadPanel keypadPanel;
     public JLabel dialogTitle;
     public JLabel dialogHint;
@@ -31,8 +31,12 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
     protected JButton receiptButton;
     private JPanel discountPanel;
     private JPanel depositWithdrawPanel;
+    protected JButton depositButton;
+    protected JButton withdrawButton;
+    protected JLabel cashAmountLabel;
     protected GlassPane glassPane;
     protected MainFrame parentFrame;
+    protected GridBagLayout gbLayoutMainPanel = (GridBagLayout) mainPanel.getLayout();
     // get layout to operate with cards-JPanels, that contained in appropriate container
     protected CardLayout cardPanelLayout = (CardLayout) cardPanel.getLayout();
 
