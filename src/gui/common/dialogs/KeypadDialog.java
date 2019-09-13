@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.09.2019
+ * Copyright (c) RESONANCE JSC, 13.09.2019
  */
 
 package gui.common.dialogs;
@@ -24,14 +24,17 @@ public abstract class KeypadDialog extends JWindow implements ActionListener {
     public JLabel dialogTitle;
     public JLabel dialogHint;
     protected JPanel extraPanel;
-    private JButton percentButton;
-    private JButton moneyButton;
-    private JButton productButton;
-    private JButton receiptButton;
+    protected JPanel cardPanel;
+    protected JButton percentButton;
+    protected JButton moneyButton;
+    protected JButton productButton;
+    protected JButton receiptButton;
+    private JPanel discountPanel;
+    private JPanel depositWithdrawPanel;
     protected GlassPane glassPane;
     protected MainFrame parentFrame;
     // get layout to operate with cards-JPanels, that contained in appropriate container
-    protected CardLayout extraPanelLayout = (CardLayout) extraPanel.getLayout();
+    protected CardLayout cardPanelLayout = (CardLayout) cardPanel.getLayout();
 
     public KeypadDialog(Frame owner) {
         super(owner);

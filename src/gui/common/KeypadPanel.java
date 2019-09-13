@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 10.09.2019
+ * Copyright (c) RESONANCE JSC, 13.09.2019
  */
 
 package gui.common;
@@ -176,7 +176,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     @Override
-    public Point getLocationOnScreen() {
+    public Point getLocationOnScreen() throws IllegalComponentStateException{
         return mainPanel.getLocationOnScreen();
     }
 

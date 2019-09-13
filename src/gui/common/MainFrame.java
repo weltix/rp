@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.09.2019
+ * Copyright (c) RESONANCE JSC, 13.09.2019
  */
 
 package gui.common;
@@ -128,15 +128,15 @@ public class MainFrame extends JFrame implements ActionListener {
 //                new Point(),
 //                null));
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setUndecorated(true);                       //need for full screen mode
-        setResizable(false);                        //need for full screen mode
-
-        // set full screen exclusive mode
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        graphicsDevice = ge.getDefaultScreenDevice();
-        if (graphicsDevice.isFullScreenSupported())
-            graphicsDevice.setFullScreenWindow(this);
+//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        setUndecorated(true);                       //need for full screen mode
+//        setResizable(false);                        //need for full screen mode
+//
+//        // set full screen exclusive mode
+//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        graphicsDevice = ge.getDefaultScreenDevice();
+//        if (graphicsDevice.isFullScreenSupported())
+//            graphicsDevice.setFullScreenWindow(this);
 
         setContentPane(mainPanel);
         setGlassPane(glassPane);
@@ -148,17 +148,13 @@ public class MainFrame extends JFrame implements ActionListener {
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(2000);
         timer.setActionCommand("splashScreenShowingTime");
-//        timer.start();
+        timer.start();
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-//        setSize(1050, 618);
+        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
-
-        // Initialization of dialogs can be done only after this MainFrame is set to visible state (setVisible(true)).
-        // It is because we need to receive actual MainFrame keypad's size and location.
-        initDialogWindows();
     }
 
     public void setCardOfMainPanel(String cardName) {
@@ -190,7 +186,7 @@ public class MainFrame extends JFrame implements ActionListener {
         keypadPanel.setActionButtonsAmount(1);     // set the amount of action buttons of our keypadPanel
         jlayer.setUI(layerUI);
 
-        setCardOfMainPanel("mainSellPanel");
+        setCardOfMainPanel("splashScreenPanel");
         navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
 
         String[] columnNames = {"First Name",
@@ -310,9 +306,26 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     public void initDialogWindows() {
-        // get actual keypad dimensions and location on screen in MainFrame. All another keypads must have the same dimensions.
-        kpSize = keypadPanel.getSize();
-        kpPoint = keypadPanel.getLocationOnScreen();
+        if (loginDialog == null) {
+            // get actual keypad dimensions on screen in MainFrame. All another keypads must have the same dimensions.
+            kpSize = keypadPanel.getSize();
+            // set the approximately desired location of keypad on screen in MainFrame (because we cannot get real at this moment)
+            kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - 20, getHeight() - (int) kpSize.getHeight() - 20);
+
+            loginDialog = new KeypadDialogLogin(this);
+            manualDiscountDialog = new KeypadDialogManualDiscount(this);
+            paymentDialog = new PaymentDialog(this);
+            confirmDialog = new ConfirmDialog(this);
+            messageDialog = new MessageDialog(this);
+        } else {
+            // get actual keypad location on screen in MainFrame. We will use it as relational location.
+            kpSize = keypadPanel.getSize();
+            try {
+                kpPoint = keypadPanel.getLocationOnScreen();
+            } catch (IllegalComponentStateException e) {
+                // exception will occur only if keypadPanel has invisible state.
+            }
+        }
 
         // utility variables
         Dimension size = new Dimension();
@@ -320,8 +333,7 @@ public class MainFrame extends JFrame implements ActionListener {
         double kpWRatio;
         double kpHRatio;
 
-        /** {@link KeypadDialogLogin} initialization */
-        loginDialog = new KeypadDialogLogin(this);
+        /** {@link KeypadDialogLogin} customization */
         // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
         kpHRatio = 86.0 / 100;
         // Next code calculates dimensions and location of dialog on screen.
@@ -333,10 +345,9 @@ public class MainFrame extends JFrame implements ActionListener {
         loginDialog.setSize(size);
         loginDialog.setLocation(location);
 
-        /** {@link KeypadDialogManualDiscount} initialization */
-        manualDiscountDialog = new KeypadDialogManualDiscount(this);
+        /** {@link KeypadDialogManualDiscount} customization */
         // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-        kpHRatio = 86.0 / 120;     /** 120% - 100% + 20% of {@link KeypadDialog#extraPanel}, which is visible in this dialog */
+        kpHRatio = 86.0 / 114;     /** 114% = 100% + 14% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
         // Next code calculates dimensions and location of dialog on screen.
         // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
         // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
@@ -346,15 +357,13 @@ public class MainFrame extends JFrame implements ActionListener {
         manualDiscountDialog.setSize(size);
         manualDiscountDialog.setLocation(location);
 
-        /** {@link PaymentDialog} initialization */
-        paymentDialog = new PaymentDialog(this);
+        /** {@link PaymentDialog} customization */
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
         size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
         paymentDialog.setSize(size);
         paymentDialog.setLocation(0, 0);
 
-        /** {@link ConfirmDialog} initialization */
-        confirmDialog = new ConfirmDialog(this);
+        /** {@link ConfirmDialog} customization */
         // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
         // It is impossible to get this value from *.form file programmatically.
         kpWRatio = 36.5 / 100;
@@ -363,8 +372,7 @@ public class MainFrame extends JFrame implements ActionListener {
         confirmDialog.setSize(size);
         confirmDialog.setLocationRelativeTo(this);
 
-        /** {@link MessageDialog} initialization */
-        messageDialog = new MessageDialog(this);
+        /** {@link MessageDialog} customization */
         messageDialog.setSize(size);
         messageDialog.setLocationRelativeTo(this);
     }
@@ -377,6 +385,8 @@ public class MainFrame extends JFrame implements ActionListener {
         if (e.getSource() instanceof Timer) {
             ((Timer) e.getSource()).stop();
         }
+
+        initDialogWindows();
 
         // if timer for splashScreen appearing triggered
         if ("splashScreenShowingTime".equals(e.getActionCommand())) {

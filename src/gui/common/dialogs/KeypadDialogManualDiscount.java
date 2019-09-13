@@ -1,10 +1,11 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.09.2019
+ * Copyright (c) RESONANCE JSC, 13.09.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.fonts.FontProvider;
 import resources.Resources;
 
 import javax.swing.*;
@@ -28,11 +29,19 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         super(owner);
 
         extraPanel.setVisible(true);
-        extraPanelLayout.show(extraPanel, "discountPanel");
+        cardPanelLayout.show(cardPanel, "discountPanel");
+
+        dialogTitle.setText(Resources.getInstance().getString("manual_discount"));
+
+        Font robotoRegular30 = FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 30);
+        percentButton.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_BOLD, 38));
+        moneyButton.setFont(robotoRegular30);
+        productButton.setFont(robotoRegular30);
+        receiptButton.setFont(robotoRegular30);
 
         keypadPanel.setActionButtonsAmount(1);
-        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("set_discount"));
-        keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
+        keypadPanel.getActionButton0().setText(Resources.getInstance().getString("set_discount"));
+        keypadPanel.getActionButton0().addActionListener(this::actionPerformed);
     }
 
     /**
