@@ -11,6 +11,8 @@ import resources.Resources;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Class for dialog window, that contains {@link KeypadPanel} and additional toggle buttons for choosing
@@ -57,6 +59,16 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
         keypadPanel.getActionButton2().setText(Resources.getInstance().getString("cancel"));
         keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
+
+        this.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+                super.windowGainedFocus(e);
+                keypadPanel.getTextField().requestFocusInWindow();
+                keypadPanel.getTextField().setText("500.00");
+                keypadPanel.getTextField().selectAll();
+            }
+        });
     }
 
     /**
@@ -90,6 +102,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
                 withdrawButton.setBackground(beigeColor);
                 withdrawButton.setForeground(Color.BLACK);
                 keypadPanel.getActionButton1().setText(Resources.getInstance().getString("deposit_action"));
+                keypadPanel.getTextField().requestFocusInWindow();
                 break;
             case "withdrawButton":
                 depositButton.setBackground(beigeColor);
@@ -97,9 +110,11 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
                 withdrawButton.setBackground(blueColor);
                 withdrawButton.setForeground(Color.WHITE);
                 keypadPanel.getActionButton1().setText(Resources.getInstance().getString("withdraw_action"));
+                keypadPanel.getTextField().requestFocusInWindow();
                 break;
             default:
                 break;
         }
     }
+
 }

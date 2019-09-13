@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -149,15 +151,13 @@ public class MainFrame extends JFrame implements ActionListener {
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(2000);
         timer.setActionCommand("splashScreenShowingTime");
-//        timer.start();
+        timer.start();
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
 //        setSize(1050, 618);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
-
-        initDialogWindows();
     }
 
     public void setCardOfMainPanel(String cardName) {
@@ -189,8 +189,23 @@ public class MainFrame extends JFrame implements ActionListener {
         keypadPanel.setActionButtonsAmount(1);     // set the amount of action buttons of our keypadPanel
         jlayer.setUI(layerUI);
 
-        setCardOfMainPanel("mainSellPanel");
+        setCardOfMainPanel("splashScreenPanel");
         navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
+
+        // instantiation of dialogs
+        loginDialog = new KeypadDialogLogin(this);
+        manualDiscountDialog = new KeypadDialogManualDiscount(this);
+        depositWithdrawDialog = new KeypadDialogDepositWithdraw(this);
+        paymentDialog = new PaymentDialog(this);
+        confirmDialog = new ConfirmDialog(this);
+        messageDialog = new MessageDialog(this);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                initDialogWindows();
+            }
+        });
 
         String[] columnNames = {"First Name",
                 "Last Name",
@@ -311,28 +326,33 @@ public class MainFrame extends JFrame implements ActionListener {
         timer.start();
     }
 
+    /**
+     * Method
+     */
     public void initDialogWindows() {
-        if (loginDialog == null) {
-            // get actual keypad dimensions on screen in MainFrame. All another keypads must have the same dimensions.
-            kpSize = keypadPanel.getSize();
-            // set the approximately desired location of keypad on screen in MainFrame (because we cannot get real at this moment)
-            kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - 20, getHeight() - (int) kpSize.getHeight() - 20);
-
-            loginDialog = new KeypadDialogLogin(this);
-            manualDiscountDialog = new KeypadDialogManualDiscount(this);
-            depositWithdrawDialog = new KeypadDialogDepositWithdraw(this);
-            paymentDialog = new PaymentDialog(this);
-            confirmDialog = new ConfirmDialog(this);
-            messageDialog = new MessageDialog(this);
-        } else {
-            // get actual keypad location on screen in MainFrame. We will use it as relational location.
-            kpSize = keypadPanel.getSize();
-            try {
-                kpPoint = keypadPanel.getLocationOnScreen();
-            } catch (IllegalComponentStateException e) {
-                // exception will occur only if keypadPanel has invisible state.
-            }
+        // get actual keypad size on screen in MainFrame. All another dialog's keypads must have the same dimensions.
+        kpSize = keypadPanel.getSize();
+        System.out.println(kpPoint + " kpPoint before");
+        Point kpPointTemp = null;
+        Point kpPointException = null;
+        // get actual keypad location on screen in MainFrame. We will use it as relational location.
+        try {
+            kpPointTemp = keypadPanel.getLocationOnScreen();
+            System.out.println(kpPointTemp + " kpPointTemp ");
+        } catch (IllegalComponentStateException e) {
+            // Exception occurs only if keypadPanel is in invisible state.
+            // Use approximately assuming location of keypad on screen in MainFrame. Need for SplashScreen keypadPanel basically.
+            kpPointException = new Point(getWidth() - (int) kpSize.getWidth() - 20, getHeight() - (int) kpSize.getHeight() - 20);
+            System.out.println(kpPointException + " kpPointTemp exception");
         }
+        if (kpPoint == null && kpPointTemp != null) {
+            kpPoint = kpPointTemp;
+            System.out.println(kpPoint + " kpPoint after1");
+        } else if (kpPoint == null) {
+            kpPoint = kpPointException;
+            System.out.println(kpPoint + " kpPoint after2");
+        }
+
 
         // utility variables
         Dimension size = new Dimension();
@@ -661,4 +681,5 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel 
+    // TODO: 13.09.2019 Formatted text fields for keypadPanels изхятие-внесение и скидка 
 }
