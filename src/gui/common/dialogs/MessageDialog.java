@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.09.2019
+ * Copyright (c) RESONANCE JSC, 16.09.2019
  */
 
 package gui.common.dialogs;
@@ -67,6 +67,9 @@ public class MessageDialog extends JWindow implements ActionListener {
         // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "okButton":
+                // Returns initial mainPanel of main_frame.form. Does not affect performance.
+                // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
+                parentFrame.setContentPane(null);
                 glassPane.deactivate();
                 // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
                 Timer timer = new Timer(0, this);

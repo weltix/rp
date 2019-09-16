@@ -110,13 +110,15 @@
                 <constraints>
                   <card name="sellPanel"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <visible value="true"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <grid id="e2bec" layout-manager="GridBagLayout">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="1.25"/>
+                      <gridbag weightx="1.0" weighty="1.5"/>
                     </constraints>
                     <properties>
                       <background color="-1183240"/>
@@ -156,7 +158,7 @@
                   <grid id="4e3a6" layout-manager="GridBagLayout">
                     <constraints>
                       <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="95.35"/>
+                      <gridbag weightx="1.0" weighty="95.6"/>
                     </constraints>
                     <properties>
                       <background color="-1183240"/>

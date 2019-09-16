@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.09.2019
+ * Copyright (c) RESONANCE JSC, 16.09.2019
  */
 
 package gui.common.dialogs;
@@ -51,7 +51,7 @@ public class KeypadDialogLogin extends KeypadDialog {
 
                 if (parentFrame.getSplashScreenPanel().isVisible()) {
                     parentFrame.setCardOfMainPanel("mainSellPanel");
-                    parentFrame.setCardOfMainSellPanelScreens("sellPanel");
+                    parentFrame.setCardOfSellPanelScreens("sellPanel");
                 }
 
                 glassPane.deactivate();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 13.09.2019
+ * Copyright (c) RESONANCE JSC, 16.09.2019
  */
 
 package gui.common;
@@ -18,8 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -102,7 +102,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     private GraphicsDevice graphicsDevice;      // used to set full screen mode
     private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
-    private CardLayout mainSellPanelScreensLayout = (CardLayout) sellPanelScreens.getLayout();
+    private CardLayout sellPanelScreensLayout = (CardLayout) sellPanelScreens.getLayout();
     private CardLayout navigatePanelContainerLayout = (CardLayout) navigatePanelContainer.getLayout();
     private GlassPane glassPane = new GlassPane();
     private KeypadDialog loginDialog;
@@ -164,8 +164,8 @@ public class MainFrame extends JFrame implements ActionListener {
         mainPanelLayout.show(mainPanel, cardName);
     }
 
-    public void setCardOfMainSellPanelScreens(String cardName) {
-        mainSellPanelScreensLayout.show(sellPanelScreens, cardName);
+    public void setCardOfSellPanelScreens(String cardName) {
+        sellPanelScreensLayout.show(sellPanelScreens, cardName);
     }
 
     private void initComponents() {
@@ -200,10 +200,19 @@ public class MainFrame extends JFrame implements ActionListener {
         confirmDialog = new ConfirmDialog(this);
         messageDialog = new MessageDialog(this);
 
-        this.addWindowListener(new WindowAdapter() {
+        // When sellPanel become visible we can get MainFrame's keypadPanel location, that some dialogs may use.
+        sellPanel.addComponentListener(new ComponentAdapter() {
             @Override
-            public void windowActivated(WindowEvent e) {
-                initDialogWindows();
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                // Next condition checks if sellPanel become visible after iconify-deiconify of app.
+                // We need invisible sellPanel when splashScreenPanel is visible to ensure that current method will
+                // be surely called when sellPanel really appears on screen.
+                if (!splashScreenPanel.isVisible()) {
+                    initDialogWindows();
+                } else {
+                    sellPanel.setVisible(false);
+                }
             }
         });
 
@@ -327,32 +336,32 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Method
+     * Method provides getting of size and location of {@link MainFrame}'s keypadPanel.
+     * Getting of location is possible only when appropriate container becomes visible ({@link MainFrame#sellPanel}).
+     * In another case we set location manually (first time only, when {@link MainFrame#splashScreenPanel} appears).
      */
     public void initDialogWindows() {
         // get actual keypad size on screen in MainFrame. All another dialog's keypads must have the same dimensions.
         kpSize = keypadPanel.getSize();
-        System.out.println(kpPoint + " kpPoint before");
-        Point kpPointTemp = null;
-        Point kpPointException = null;
         // get actual keypad location on screen in MainFrame. We will use it as relational location.
         try {
-            kpPointTemp = keypadPanel.getLocationOnScreen();
-            System.out.println(kpPointTemp + " kpPointTemp ");
+            kpPoint = keypadPanel.getLocationOnScreen();
         } catch (IllegalComponentStateException e) {
             // Exception occurs only if keypadPanel is in invisible state.
             // Use approximately assuming location of keypad on screen in MainFrame. Need for SplashScreen keypadPanel basically.
-            kpPointException = new Point(getWidth() - (int) kpSize.getWidth() - 20, getHeight() - (int) kpSize.getHeight() - 20);
-            System.out.println(kpPointException + " kpPointTemp exception");
+            kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - 20, getHeight() - (int) kpSize.getHeight() - 20);
         }
-        if (kpPoint == null && kpPointTemp != null) {
-            kpPoint = kpPointTemp;
-            System.out.println(kpPoint + " kpPoint after1");
-        } else if (kpPoint == null) {
-            kpPoint = kpPointException;
-            System.out.println(kpPoint + " kpPoint after2");
-        }
-
+        // TODO: 16.09.2019 delete commented
+//        if (kpPoint != null && kpPointTemp != null) {
+//            kpPoint = kpPointTemp;
+//            System.out.println(kpPoint + " kpPoint after1");
+//        } else if (kpPoint == null && kpPointException != null) {
+//            kpPoint = kpPointException;
+//            System.out.println(kpPoint + " kpPoint after2");
+//        }
+//        kpPoint = kpPointTemp;
+//        if (kpPointException != null)
+//            kpPoint = kpPointException;
 
         // utility variables
         Dimension size = new Dimension();
@@ -424,14 +433,15 @@ public class MainFrame extends JFrame implements ActionListener {
         if (e.getSource() instanceof Timer) {
             ((Timer) e.getSource()).stop();
         }
-        // the call of next methos is here, because we need some time to get all components visible
-        initDialogWindows();
 
         // if timer for splashScreen appearing triggered
         if ("splashScreenShowingTime".equals(e.getActionCommand())) {
+            initDialogWindows();        // this call need to get size and location of MainFrame's keyboard to tune up loginDialog
             launchDialog(false, loginDialog);
+            sellPanel.setVisible(false);    // need here to trigger listener of sellPanel when it will be shown (visible) first time
             return;
         }
+
         // show appropriate dialog after timer triggering (timer, that makes very small delay, see method launchDialog)
         switch (e.getActionCommand()) {
             case "LOGIN":
@@ -506,16 +516,16 @@ public class MainFrame extends JFrame implements ActionListener {
         Consumer<Integer> actions = buttonNumber -> {
             switch (buttonNumber) {
                 case 0:
-                    mainSellPanelScreensLayout.show(sellPanelScreens, "addGoodPanel");
+                    sellPanelScreensLayout.show(sellPanelScreens, "addGoodPanel");
                     break;
                 case 1:
-                    mainSellPanelScreensLayout.show(sellPanelScreens, "workWithReceiptPanel");
+                    sellPanelScreensLayout.show(sellPanelScreens, "workWithReceiptPanel");
                     break;
                 case 2:
-                    mainSellPanelScreensLayout.show(sellPanelScreens, "cashboxPanel");
+                    sellPanelScreensLayout.show(sellPanelScreens, "cashboxPanel");
                     break;
                 case 3:
-                    mainSellPanelScreensLayout.show(sellPanelScreens, "servicePanel");
+                    sellPanelScreensLayout.show(sellPanelScreens, "servicePanel");
                     break;
                 case 4:
                     launchDialog(true, loginDialog);
@@ -545,7 +555,7 @@ public class MainFrame extends JFrame implements ActionListener {
         Font iconsFont = FontProvider.getInstance().getFont(FONTAWESOME_REGULAR, 58);
         actions = buttonNumber -> {
             navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
-            mainSellPanelScreensLayout.show(sellPanelScreens, "sellPanel");
+            sellPanelScreensLayout.show(sellPanelScreens, "sellPanel");
             revalidate();
             repaint();      // enforced to call to provide synchronous appearance of both panels on weak hardware
         };
@@ -681,5 +691,6 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel 
-    // TODO: 13.09.2019 Formatted text fields for keypadPanels изхятие-внесение и скидка 
+    // TODO: 13.09.2019 Formatted text fields for keypadPanels изхятие-внесение и скидка
+    // TODO: 16.09.2019 Для всех диалогов сделать общий класс, расширяющий JWindow (или JPanel, если придётся)
 }
