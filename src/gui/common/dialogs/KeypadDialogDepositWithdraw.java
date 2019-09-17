@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 16.09.2019
+ * Copyright (c) RESONANCE JSC, 17.09.2019
  */
 
 package gui.common.dialogs;
@@ -10,9 +10,8 @@ import resources.Resources;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.util.Locale;
 
 /**
  * Class for dialog window, that contains {@link KeypadPanel} and additional toggle buttons for choosing
@@ -24,6 +23,8 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
 
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
+
+    private Double cashInBox = 5000000.00;
 
     /**
      * Constructor tunes the look of this dialog, and sets action for action button.
@@ -50,6 +51,8 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
         depositButton.setFont(robotoRegular30);
         withdrawButton.setFont(robotoRegular30);
         cashAmountLabel.setFont(robotoRegular30);
+        cashAmountLabel.setText(Resources.getInstance().getString("cash_in_cashbox")
+                .concat(String.format("%.2f", cashInBox)));
 
         depositButton.addActionListener(this::actionPerformed);
         withdrawButton.addActionListener(this::actionPerformed);
@@ -65,8 +68,15 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
             public void windowGainedFocus(WindowEvent e) {
                 super.windowGainedFocus(e);
                 keypadPanel.getTextField().requestFocusInWindow();
-                keypadPanel.getTextField().setText("500.00");
+                keypadPanel.getTextField().setText(String.format(Locale.ROOT,"%.2f", cashInBox));
                 keypadPanel.getTextField().selectAll();
+            }
+        });
+        keypadPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                System.out.println("componentShown");
             }
         });
     }
