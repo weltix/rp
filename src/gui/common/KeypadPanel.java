@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 13.09.2019
+ * Copyright (c) RESONANCE JSC, 18.09.2019
  */
 
 package gui.common;
@@ -7,6 +7,9 @@ package gui.common;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,6 +64,45 @@ public class KeypadPanel extends JComponent implements ActionListener {
 
         textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         textField.setBorder(BorderFactory.createEmptyBorder());
+
+        textField.setDocument(new PlainDocument() {
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                String text = this.getText(0, getLength());
+//                System.out.println("text = " + text + " textLength = " + getLength());
+//                if ((str == null)
+//                        || (str.equals(".") && text.contains("."))
+//                        || (str.equals(".") && offset == 0)
+//                        || !str.matches("\\d")) {
+//                    System.out.println("return");
+//                    return;
+//                }
+//                int dotPosition = text.indexOf('.');    // if '.' is already in textField, than get it position, else get -1
+//                System.out.println("dotPosition = " + dotPosition + " offset = " + offset + " getLength() = " + getLength());
+//
+//                if (!text.contains(".")) {
+//                    if ((text.length() < 7) || (text.length() < 8 && str.equals(".")))
+//                        super.insertString(offset, str, attr);
+//                } else if ((offset <= dotPosition && dotPosition < 7)
+//                        || (offset > dotPosition && text.length() <= dotPosition + 2))
+//                    super.insertString(offset, str, attr);
+                System.out.println("insertString");
+                String regex = "\\d{1,7}(\\.\\d{0,2})?";
+                StringBuilder builder = new StringBuilder(text).insert(offset, str);
+                if (builder.toString().matches(regex))
+                    super.insertString(offset, str, attr);
+            }
+
+            @Override
+            public void remove(int offs, int len) throws BadLocationException {
+                String text = this.getText(0, getLength());
+                System.out.println("removeString");
+                String regex = "\\d{1,7}(\\.\\d{0,2})?";
+                StringBuilder builder = new StringBuilder(text).delete(offs, len);
+                if (builder.toString().matches(regex))
+                    super.remove(offs, len);
+            }
+        });
 
         // timer for generation repeated clicks of numeric keys when a key is in pressed state
         Timer timer = new Timer(30, this);
@@ -176,7 +218,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     @Override
-    public Point getLocationOnScreen() throws IllegalComponentStateException{
+    public Point getLocationOnScreen() throws IllegalComponentStateException {
         return mainPanel.getLocationOnScreen();
     }
 

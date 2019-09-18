@@ -105,11 +105,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="0"/>
                 </properties>
               </component>
@@ -123,11 +125,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="."/>
                 </properties>
               </component>
@@ -141,11 +145,13 @@
                   <background color="-1315861"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="C"/>
                 </properties>
               </component>
@@ -244,11 +250,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="7"/>
                 </properties>
               </component>
@@ -262,11 +270,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="8"/>
                 </properties>
               </component>
@@ -280,11 +290,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="9"/>
                 </properties>
               </component>
@@ -349,11 +361,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="4"/>
                 </properties>
               </component>
@@ -367,11 +381,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="5"/>
                 </properties>
               </component>
@@ -385,11 +401,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="6"/>
                 </properties>
               </component>
@@ -455,12 +473,14 @@
                   <borderPainted value="false"/>
                   <contentAreaFilled value="true"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <opaque value="true"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <rolloverEnabled value="true"/>
                   <text value="1"/>
                 </properties>
@@ -475,11 +495,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="2"/>
                 </properties>
               </component>
@@ -493,11 +515,13 @@
                   <background color="-1"/>
                   <borderPainted value="false"/>
                   <focusPainted value="false"/>
+                  <focusable value="false"/>
                   <foreground color="-13350562"/>
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                   <text value="3"/>
                 </properties>
               </component>
@@ -664,6 +688,7 @@
                       <background color="-1"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <focusable value="false"/>
                       <foreground color="-13350562"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
@@ -671,6 +696,7 @@
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="backspace_button"/>
                       <verticalAlignment value="0"/>
                       <verticalTextPosition value="1"/>

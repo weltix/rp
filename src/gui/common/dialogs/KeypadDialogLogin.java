@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 16.09.2019
+ * Copyright (c) RESONANCE JSC, 18.09.2019
  */
 
 package gui.common.dialogs;
@@ -24,11 +24,11 @@ public class KeypadDialogLogin extends KeypadDialog {
     public KeypadDialogLogin(Frame owner) {
         super(owner);
 
+        keypadPanel.switchToPasswordTextField();
         keypadPanel.setActionButtonsAmount(2);
         keypadPanel.getActionButton1().setText(Resources.getInstance().getString("ok"));
         keypadPanel.getActionButton2().setText(Resources.getInstance().getString("exit"));
         keypadPanel.doubleWidthA0Button();
-        keypadPanel.switchToPasswordTextField();
 
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
         keypadPanel.getActionButton2().addActionListener(this::actionPerformed);

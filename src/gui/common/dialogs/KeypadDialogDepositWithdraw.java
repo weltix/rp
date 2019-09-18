@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 17.09.2019
+ * Copyright (c) RESONANCE JSC, 18.09.2019
  */
 
 package gui.common.dialogs;
@@ -27,7 +27,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
     private Double cashInBox = 5000000.00;
 
     /**
-     * Constructor tunes the look of this dialog, and sets action for action button.
+     * Constructor tunes the look of this dialog, and sets actions for action buttons.
      * Constructor of parent is called initially.
      *
      * @param owner {@link Frame} object, from which this window was called
@@ -52,7 +52,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
         withdrawButton.setFont(robotoRegular30);
         cashAmountLabel.setFont(robotoRegular30);
         cashAmountLabel.setText(Resources.getInstance().getString("cash_in_cashbox")
-                .concat(String.format("%.2f", cashInBox)));
+                .concat(String.format(Locale.ROOT, "%.2f", cashInBox)));
 
         depositButton.addActionListener(this::actionPerformed);
         withdrawButton.addActionListener(this::actionPerformed);
