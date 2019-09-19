@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 18.09.2019
+ * Copyright (c) RESONANCE JSC, 19.09.2019
  */
 
 package gui.common.dialogs;
@@ -10,7 +10,9 @@ import resources.Resources;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Locale;
 
 /**
@@ -25,6 +27,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
     private Color beigeColor = new Color(235, 235, 235);
 
     private Double cashInBox = 5000000.00;
+    private String cashInBoxString = String.format(Locale.ROOT, "%.2f", cashInBox);
 
     /**
      * Constructor tunes the look of this dialog, and sets actions for action buttons.
@@ -51,32 +54,24 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
         depositButton.setFont(robotoRegular30);
         withdrawButton.setFont(robotoRegular30);
         cashAmountLabel.setFont(robotoRegular30);
-        cashAmountLabel.setText(Resources.getInstance().getString("cash_in_cashbox")
-                .concat(String.format(Locale.ROOT, "%.2f", cashInBox)));
 
         depositButton.addActionListener(this::actionPerformed);
         withdrawButton.addActionListener(this::actionPerformed);
 
+        keypadPanel.setFormattedTextField(7, 2);
         keypadPanel.setActionButtonsAmount(2);
         keypadPanel.getActionButton1().setText(Resources.getInstance().getString("deposit"));
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
         keypadPanel.getActionButton2().setText(Resources.getInstance().getString("cancel"));
         keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
 
-        this.addWindowFocusListener(new WindowAdapter() {
-            @Override
-            public void windowGainedFocus(WindowEvent e) {
-                super.windowGainedFocus(e);
-                keypadPanel.getTextField().requestFocusInWindow();
-                keypadPanel.getTextField().setText(String.format(Locale.ROOT,"%.2f", cashInBox));
-                keypadPanel.getTextField().selectAll();
-            }
-        });
-        keypadPanel.addComponentListener(new ComponentAdapter() {
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
-                super.componentShown(e);
-                System.out.println("componentShown");
+                cashAmountLabel.setText(Resources.getInstance().getString("cash_in_cashbox").concat(cashInBoxString));
+                keypadPanel.getTextField().setText(cashInBoxString);
+                keypadPanel.getTextField().requestFocus();
+                keypadPanel.getTextField().selectAll();
             }
         });
     }

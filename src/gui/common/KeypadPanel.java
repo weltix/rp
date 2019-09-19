@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 18.09.2019
+ * Copyright (c) RESONANCE JSC, 19.09.2019
  */
 
 package gui.common;
@@ -11,10 +11,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -65,45 +62,6 @@ public class KeypadPanel extends JComponent implements ActionListener {
         textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         textField.setBorder(BorderFactory.createEmptyBorder());
 
-        textField.setDocument(new PlainDocument() {
-            @Override
-            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-                String text = this.getText(0, getLength());
-//                System.out.println("text = " + text + " textLength = " + getLength());
-//                if ((str == null)
-//                        || (str.equals(".") && text.contains("."))
-//                        || (str.equals(".") && offset == 0)
-//                        || !str.matches("\\d")) {
-//                    System.out.println("return");
-//                    return;
-//                }
-//                int dotPosition = text.indexOf('.');    // if '.' is already in textField, than get it position, else get -1
-//                System.out.println("dotPosition = " + dotPosition + " offset = " + offset + " getLength() = " + getLength());
-//
-//                if (!text.contains(".")) {
-//                    if ((text.length() < 7) || (text.length() < 8 && str.equals(".")))
-//                        super.insertString(offset, str, attr);
-//                } else if ((offset <= dotPosition && dotPosition < 7)
-//                        || (offset > dotPosition && text.length() <= dotPosition + 2))
-//                    super.insertString(offset, str, attr);
-                System.out.println("insertString");
-                String regex = "\\d{1,7}(\\.\\d{0,2})?";
-                StringBuilder builder = new StringBuilder(text).insert(offset, str);
-                if (builder.toString().matches(regex))
-                    super.insertString(offset, str, attr);
-            }
-
-            @Override
-            public void remove(int offs, int len) throws BadLocationException {
-                String text = this.getText(0, getLength());
-                System.out.println("removeString");
-                String regex = "\\d{1,7}(\\.\\d{0,2})?";
-                StringBuilder builder = new StringBuilder(text).delete(offs, len);
-                if (builder.toString().matches(regex))
-                    super.remove(offs, len);
-            }
-        });
-
         // timer for generation repeated clicks of numeric keys when a key is in pressed state
         Timer timer = new Timer(30, this);
         timer.setInitialDelay(500);
@@ -149,10 +107,29 @@ public class KeypadPanel extends JComponent implements ActionListener {
      * @param ch symbol identifier of pressed digital key (basically it is symbol represented on the certain button)
      */
     private void changeTextField(char ch) {
+
+
         int caretPosition = textField.getCaretPosition();
-        if (ch == '\uf104') {       // backspace button's char code
-            textField.select(caretPosition - 1, caretPosition);
-            textField.replaceSelection("");
+        if (ch == '\uf104') {                         // backspace button's char code
+//            if (textField.getSelectedText() == null)  // if there are no any selected text to delete, one char before caret will be deleted
+//                textField.select(caretPosition - 1, caretPosition);
+////            textField.replaceSelection("");
+//            try {
+//                int selectedLength = textField.getSelectionEnd() - textField.getSelectionStart();
+//                textField.getDocument().remove(textField.getSelectionStart(), selectedLength);
+//            } catch (BadLocationException e) {
+//                e.printStackTrace();
+//            }
+            Robot robot;
+            try {
+                robot = new Robot();
+                robot.keyPress(KeyEvent.VK_BACK_SPACE);
+                robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+            } catch (AWTException e) {
+                e.printStackTrace();
+            }
+
+
         } else if (ch == 'C')
             textField.setText("");
         else
@@ -210,6 +187,61 @@ public class KeypadPanel extends JComponent implements ActionListener {
         textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 60));
         textField.setBorder(BorderFactory.createEmptyBorder());
         textFieldPanel.add(textField, constraintsTextField);
+    }
+
+    /**
+     * Method defines some limits for {@link KeypadPanel#textField}.
+     *
+     * @param integerDigits  number or integer digits before comma
+     * @param fractionDigits number or fraction digits after comma
+     */
+    public void setFormattedTextField(int integerDigits, int fractionDigits) {
+        textField.setDocument(new PlainDocument() {
+            private String regex = String.format("(\\d{1,%d}(\\.\\d{0,%d})?)?", integerDigits, fractionDigits);
+            private String regexEmptyIntegerPart = String.format("((\\.\\d{0,%d})?)?", fractionDigits);
+            private String currentText;
+            private StringBuilder strBuilder = new StringBuilder();
+
+            @Override
+            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                System.out.println("insertString");
+                currentText = this.getText(0, getLength());
+                strBuilder.delete(0, strBuilder.length()).append(currentText).insert(offset, str);
+                System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
+                if (strBuilder.toString().matches(regex))
+                    super.insertString(offset, str, attr);
+            }
+
+            @Override
+            public void replace(int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                System.out.println("replace");
+                currentText = this.getText(0, getLength());
+                strBuilder.delete(0, strBuilder.length()).append(currentText).replace(offset, offset + length, text);
+                System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
+                if (strBuilder.toString().matches(regex))
+                    super.replace(offset, length, text, attrs);
+//                else if ((strBuilder.toString().matches(regexEmptyIntegerPart)) && (textField.getSelectionEnd() == 1)) {
+//                    insertString(offset, "0", null);
+//                    super.remove(offs, len);
+//                    textField.select(0, 1);
+//                }
+            }
+
+            @Override
+            public void remove(int offs, int len) throws BadLocationException {
+                System.out.println("remove");
+                currentText = this.getText(0, getLength());
+                strBuilder.delete(0, strBuilder.length()).append(currentText).delete(offs, offs + len);
+                System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
+                if (strBuilder.toString().matches(regex))
+                    super.remove(offs, len);
+                else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {
+                    super.remove(0, 1);
+                    insertString(0, "0", null);
+                    textField.select(0, 1);
+                }
+            }
+        });
     }
 
     @Override
