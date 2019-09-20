@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 19.09.2019
+ * Copyright (c) RESONANCE JSC, 20.09.2019
  */
 
 package gui.common;
@@ -47,6 +47,8 @@ public class KeypadPanel extends JComponent implements ActionListener {
     private JPanel verticalLine;
     private JPanel textFieldPanel;
 
+    private Robot robot = null;         // object that provides generation of keys presses
+
     public KeypadPanel() {
         initComponents();
     }
@@ -65,6 +67,12 @@ public class KeypadPanel extends JComponent implements ActionListener {
         // timer for generation repeated clicks of numeric keys when a key is in pressed state
         Timer timer = new Timer(30, this);
         timer.setInitialDelay(500);
+
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
 
         // cycle sets properties for numeric keys (12 buttons) (getComponents() returns only components of 1-st level of nesting)
         if (centerPanel instanceof Container) {
@@ -107,9 +115,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
      * @param ch symbol identifier of pressed digital key (basically it is symbol represented on the certain button)
      */
     private void changeTextField(char ch) {
-
-
-        int caretPosition = textField.getCaretPosition();
+//        int caretPosition = textField.getCaretPosition();
         if (ch == '\uf104') {                         // backspace button's char code
 //            if (textField.getSelectedText() == null)  // if there are no any selected text to delete, one char before caret will be deleted
 //                textField.select(caretPosition - 1, caretPosition);
@@ -120,16 +126,9 @@ public class KeypadPanel extends JComponent implements ActionListener {
 //            } catch (BadLocationException e) {
 //                e.printStackTrace();
 //            }
-            Robot robot;
-            try {
-                robot = new Robot();
-                robot.keyPress(KeyEvent.VK_BACK_SPACE);
-                robot.keyRelease(KeyEvent.VK_BACK_SPACE);
-            } catch (AWTException e) {
-                e.printStackTrace();
-            }
-
-
+            textField.requestFocus();
+            robot.keyPress(KeyEvent.VK_BACK_SPACE);
+            robot.keyRelease(KeyEvent.VK_BACK_SPACE);
         } else if (ch == 'C')
             textField.setText("");
         else
@@ -197,13 +196,18 @@ public class KeypadPanel extends JComponent implements ActionListener {
      */
     public void setFormattedTextField(int integerDigits, int fractionDigits) {
         textField.setDocument(new PlainDocument() {
-            private String regex = String.format("(\\d{1,%d}(\\.\\d{0,%d})?)?", integerDigits, fractionDigits);
-            private String regexEmptyIntegerPart = String.format("((\\.\\d{0,%d})?)?", fractionDigits);
+            private String regex = String.format("(\\d{1,%d}(\\.\\d{0,%d})?){1}", integerDigits, fractionDigits);
+            private String regexEmptyIntegerPart = String.format("((\\.\\d{0,%d})?){1}", fractionDigits);
+            private String regexExcessLeadingZero = "0+\\d+.*";
             private String currentText;
             private StringBuilder strBuilder = new StringBuilder();
+            // flag needful in "remove" method to determine if it was called by "replace" method or not and, consequently,
+            // will "insertString" method be called after it or not
+            private boolean insertStringExpected = false;
 
             @Override
             public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+                insertStringExpected = false;
                 System.out.println("insertString");
                 currentText = this.getText(0, getLength());
                 strBuilder.delete(0, strBuilder.length()).append(currentText).insert(offset, str);
@@ -212,19 +216,25 @@ public class KeypadPanel extends JComponent implements ActionListener {
                     super.insertString(offset, str, attr);
             }
 
+            /**
+             * This method calls first {@link PlainDocument#remove} method then {@link PlainDocument#insertString} method.
+             */
             @Override
             public void replace(int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                 System.out.println("replace");
                 currentText = this.getText(0, getLength());
                 strBuilder.delete(0, strBuilder.length()).append(currentText).replace(offset, offset + length, text);
                 System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
-                if (strBuilder.toString().matches(regex))
+                if (strBuilder.toString().matches(regexExcessLeadingZero)) {
+                    return;
+                } else if (strBuilder.toString().matches(regex)) {
+                    insertStringExpected = true;
                     super.replace(offset, length, text, attrs);
-//                else if ((strBuilder.toString().matches(regexEmptyIntegerPart)) && (textField.getSelectionEnd() == 1)) {
-//                    insertString(offset, "0", null);
-//                    super.remove(offs, len);
-//                    textField.select(0, 1);
-//                }
+                } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {  // if before '.' will be emptiness,
+                    insertStringExpected = true;                                    // than
+                    super.replace(offset, length, "0" + text, attrs);          // we add '0' in front (text = "")
+                }
+
             }
 
             @Override
@@ -232,13 +242,17 @@ public class KeypadPanel extends JComponent implements ActionListener {
                 System.out.println("remove");
                 currentText = this.getText(0, getLength());
                 strBuilder.delete(0, strBuilder.length()).append(currentText).delete(offs, offs + len);
-                System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
+//                if (strBuilder.toString().matches(regexExcessLeadingZero)){
+//                    super.remove(offs, len);
+//                }
                 if (strBuilder.toString().matches(regex))
                     super.remove(offs, len);
-                else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {
-                    super.remove(0, 1);
-                    insertString(0, "0", null);
-                    textField.select(0, 1);
+                else if (strBuilder.toString().matches(regexEmptyIntegerPart) || strBuilder.toString().equals("")) {
+                    super.remove(offs, len);
+                    if (!insertStringExpected) {
+                        insertString(0, "0", null);
+                        textField.select(0, 1);
+                    }
                 }
             }
         });

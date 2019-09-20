@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 16.09.2019
+ * Copyright (c) RESONANCE JSC, 20.09.2019
  */
 
 package gui.common.dialogs;
@@ -8,9 +8,10 @@ import gui.common.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * Class for dialog window, that contains {@link KeypadPanel} and additional toggle buttons for choosing
@@ -38,6 +39,11 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         dialogTitle.setText(Resources.getInstance().getString("manual_discount"));
         dialogHint.setText(Resources.getInstance().getString("hint_set_discount"));
 
+        // 14% - weight in Y axis of extraPanel (100% - original height, and we add 14% of extraPanel. Totally 114%)
+        constraintsExtraPanel.weighty = 14;
+        mainPanel.remove(extraPanel);
+        mainPanel.add(extraPanel, constraintsExtraPanel);
+
         Font robotoRegular30 = FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 30);
         percentButton.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_BOLD, 38));
         moneyButton.setFont(robotoRegular30);
@@ -49,9 +55,19 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         productButton.addActionListener(this::actionPerformed);
         receiptButton.addActionListener(this::actionPerformed);
 
+        keypadPanel.setFormattedTextField(7, 2);
         keypadPanel.setActionButtonsAmount(1);
         keypadPanel.getActionButton0().setText(Resources.getInstance().getString("set_discount"));
         keypadPanel.getActionButton0().addActionListener(this::actionPerformed);
+
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                keypadPanel.getTextField().setText("0");
+                keypadPanel.getTextField().requestFocus();
+                keypadPanel.getTextField().selectAll();
+            }
+        });
     }
 
     /**
@@ -65,16 +81,7 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "actionButton0":
-                // Returns initial mainPanel of main_frame.form. Does not affect performance.
-                // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
-                parentFrame.setContentPane(null);
-                glassPane.deactivate();
-                keypadPanel.getTextField().setText("");
-                // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
-                Timer timer = new Timer(0, this);
-                timer.setInitialDelay(10);
-                timer.setActionCommand("delayBeforeClosingThisWindow");
-                timer.start();
+                prepareToDispose();
                 break;
             case "percentButton":
                 percentButton.setBackground(blueColor);

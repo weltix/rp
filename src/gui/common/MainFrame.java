@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 16.09.2019
+ * Copyright (c) RESONANCE JSC, 20.09.2019
  */
 
 package gui.common;
@@ -108,7 +108,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private KeypadDialog loginDialog;
     private KeypadDialog manualDiscountDialog;
     private KeypadDialog depositWithdrawDialog;
-    private JWindow paymentDialog;
+    private AbstractDialog paymentDialog;
     private ConfirmDialog confirmDialog;
     private MessageDialog messageDialog;
     private Dimension kpSize;   // size of this MainFrame's keypadPanel in px
@@ -118,7 +118,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private LayerUI<JComponent> layerUI = new BlurLayerUI();
     // component-decorator for another components. It doesn't change components, but paints over them.
     private JLayer<JComponent> jlayer = new JLayer<>();
-    public boolean blurBackground = false;
+    public boolean blurBackground = true;
 
     public MainFrame() {
         init();

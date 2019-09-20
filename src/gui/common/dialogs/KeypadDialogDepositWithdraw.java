@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 19.09.2019
+ * Copyright (c) RESONANCE JSC, 20.09.2019
  */
 
 package gui.common.dialogs;
@@ -8,7 +8,6 @@ import gui.common.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -41,7 +40,6 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
         extraPanel.setVisible(true);
         cardPanelLayout.show(cardPanel, "depositWithdrawPanel");
 
-        GridBagConstraints constraintsExtraPanel = gbLayoutMainPanel.getConstraints(extraPanel);
         // 19% - weight in Y axis of extraPanel (100% - original height, and we add 19% of extraPanel. Totally 119%)
         constraintsExtraPanel.weighty = 19;
         mainPanel.remove(extraPanel);
@@ -89,16 +87,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
             case "actionButton1":
                 break;
             case "actionButton2":
-                // Returns initial mainPanel of main_frame.form. Does not affect performance.
-                // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
-                parentFrame.setContentPane(null);
-                glassPane.deactivate();
-                keypadPanel.getTextField().setText("");
-                // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
-                Timer timer = new Timer(0, this);
-                timer.setInitialDelay(10);
-                timer.setActionCommand("delayBeforeClosingThisWindow");
-                timer.start();
+                prepareToDispose();
                 break;
             case "depositButton":
                 depositButton.setBackground(blueColor);

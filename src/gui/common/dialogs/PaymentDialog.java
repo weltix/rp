@@ -1,19 +1,16 @@
 /*
- * Copyright (c) RESONANCE JSC, 16.09.2019
+ * Copyright (c) RESONANCE JSC, 20.09.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
-import gui.common.MainFrame;
-import gui.common.utility_components.GlassPane;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static gui.fonts.FontProvider.ROBOTO_BOLD;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
@@ -22,7 +19,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * Class for payment dialog window. Bounded to payment_dialog.form
  * It is separately standing dialog window that nor inherit any classes nor have derivative classes.
  */
-public class PaymentDialog extends JWindow implements ActionListener {
+public class PaymentDialog extends AbstractDialog {
     private JPanel mainPanel;
     private KeypadPanel keypadPanel;
     private JButton cashButton;
@@ -37,9 +34,6 @@ public class PaymentDialog extends JWindow implements ActionListener {
     private JLabel mustBePaidSumLabel;
     private JPanel centerPanel;
     private JButton clearButton;
-
-    private GlassPane glassPane;
-    private MainFrame parentFrame;
 
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
@@ -61,27 +55,9 @@ public class PaymentDialog extends JWindow implements ActionListener {
         mustBePaidLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 46));
         mustBePaidSumLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 46));
 
-        if (getParent() instanceof MainFrame)
-            parentFrame = (MainFrame) getParent();
-        if (parentFrame.getGlassPane() instanceof GlassPane) {
-            glassPane = (GlassPane) parentFrame.getGlassPane();
-        }
-
-        cashButton.addActionListener(this);
-        cardButton.addActionListener(this);
-
-        cancelButton.addActionListener(e -> {
-            // Returns initial mainPanel of main_frame.form. Does not affect performance.
-            // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
-            parentFrame.setContentPane(null);
-            glassPane.deactivate();
-            keypadPanel.getTextField().setText("");
-            // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
-            Timer timer = new Timer(0, this);
-            timer.setInitialDelay(10);
-            timer.setActionCommand("delayBeforeClosingThisWindow");
-            timer.start();
-        });
+        cashButton.addActionListener(this::actionPerformed);
+        cardButton.addActionListener(this::actionPerformed);
+        cancelButton.addActionListener(this::actionPerformed);
 
         keypadPanel.setActionButtonsAmount(1);
         keypadPanel.getActionButton1().setText(Resources.getInstance().getString("pay_in"));
@@ -94,13 +70,13 @@ public class PaymentDialog extends JWindow implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // if timer for closing this dialog triggered
-        if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
-            ((Timer) e.getSource()).stop();
-            this.dispose();
-        }
+        super.actionPerformed(e);
         // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
+            case "cancelButton":
+                prepareToDispose();
+                keypadPanel.getTextField().setText("");
+                break;
             case "cashButton":
                 cashButton.setBackground(blueColor);
                 cashButton.setForeground(Color.WHITE);

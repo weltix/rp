@@ -180,11 +180,13 @@
                       <background color="-13264677"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <focusable value="false"/>
                       <foreground color="-1"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="-1" height="-1"/>
                       <minimumSize width="-1" height="-1"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text value="%"/>
                     </properties>
                   </component>
@@ -198,12 +200,14 @@
                       <background color="-1315861"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <focusable value="false"/>
                       <font/>
                       <label value="Грн."/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="-1" height="-1"/>
                       <minimumSize width="-1" height="-1"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text value="Грн." noi18n="true"/>
                     </properties>
                   </component>
@@ -231,11 +235,13 @@
                       <background color="-13264677"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <focusable value="false"/>
                       <foreground color="-1"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="-1" height="-1"/>
                       <minimumSize width="-1" height="-1"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="product"/>
                     </properties>
                   </component>
@@ -249,10 +255,12 @@
                       <background color="-1315861"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <focusable value="false"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="-1" height="-1"/>
                       <minimumSize width="-1" height="-1"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="receipt"/>
                     </properties>
                   </component>

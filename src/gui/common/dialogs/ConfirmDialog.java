@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 16.09.2019
+ * Copyright (c) RESONANCE JSC, 20.09.2019
  */
 
 package gui.common.dialogs;
@@ -11,7 +11,6 @@ import gui.fonts.FontProvider;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.function.Consumer;
 
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
@@ -20,7 +19,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * Class for confirm dialog window, that contains title, question and two option {@link JButton}s - Yes or No.
  * Bounded to confirm_dialog.form
  */
-public class ConfirmDialog extends JWindow implements ActionListener {
+public class ConfirmDialog extends AbstractDialog{
     private JPanel mainPanel;
     private JLabel dialogTitle;
     private JLabel dialogQuestion;
@@ -66,26 +65,14 @@ public class ConfirmDialog extends JWindow implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // if timer for closing this dialog triggered
-        if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
-            ((Timer) e.getSource()).stop();
-            this.dispose();
-        }
+        super.actionPerformed(e);
         // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "yesButton":
                 yesButtonAction.accept(0);      // in is no matter what
                 break;
             case "noButton":
-                // Returns initial mainPanel of main_frame.form. Does not affect performance.
-                // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
-                parentFrame.setContentPane(null);
-                glassPane.deactivate();
-                // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
-                Timer timer = new Timer(0, this);
-                timer.setInitialDelay(10);
-                timer.setActionCommand("delayBeforeClosingThisWindow");
-                timer.start();
+                prepareToDispose();
                 break;
             default:
                 break;

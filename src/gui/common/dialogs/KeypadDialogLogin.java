@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 18.09.2019
+ * Copyright (c) RESONANCE JSC, 20.09.2019
  */
 
 package gui.common.dialogs;
@@ -45,22 +45,11 @@ public class KeypadDialogLogin extends KeypadDialog {
         // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "actionButton1":
-                // Returns initial mainPanel of main_frame.form. Does not affect performance.
-                // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
-                parentFrame.setContentPane(null);
-
+                prepareToDispose();
                 if (parentFrame.getSplashScreenPanel().isVisible()) {
                     parentFrame.setCardOfMainPanel("mainSellPanel");
                     parentFrame.setCardOfSellPanelScreens("sellPanel");
                 }
-
-                glassPane.deactivate();
-                keypadPanel.getTextField().setText("");
-                // this delay - workaround for weak hardware (makes rendering faster when glassPane disappears)
-                Timer timer = new Timer(0, this);
-                timer.setInitialDelay(10);
-                timer.setActionCommand("delayBeforeClosingThisWindow");
-                timer.start();
                 break;
             case "actionButton2":
                 this.dispose();
