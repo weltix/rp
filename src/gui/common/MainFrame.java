@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 23.09.2019
  */
 
 package gui.common;
@@ -118,7 +118,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private LayerUI<JComponent> layerUI = new BlurLayerUI();
     // component-decorator for another components. It doesn't change components, but paints over them.
     private JLayer<JComponent> jlayer = new JLayer<>();
-    public boolean blurBackground = true;
+    public boolean blurBackground = false;
 
     public MainFrame() {
         init();

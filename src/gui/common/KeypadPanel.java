@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 23.09.2019
  */
 
 package gui.common;
@@ -110,22 +110,12 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Changes the text in text field when digital keys are pressing.
+     * Changes the text in text field when digital keys of our programming keyboard are pressing.
      *
      * @param ch symbol identifier of pressed digital key (basically it is symbol represented on the certain button)
      */
     private void changeTextField(char ch) {
-//        int caretPosition = textField.getCaretPosition();
         if (ch == '\uf104') {                         // backspace button's char code
-//            if (textField.getSelectedText() == null)  // if there are no any selected text to delete, one char before caret will be deleted
-//                textField.select(caretPosition - 1, caretPosition);
-////            textField.replaceSelection("");
-//            try {
-//                int selectedLength = textField.getSelectionEnd() - textField.getSelectionStart();
-//                textField.getDocument().remove(textField.getSelectionStart(), selectedLength);
-//            } catch (BadLocationException e) {
-//                e.printStackTrace();
-//            }
             textField.requestFocus();
             robot.keyPress(KeyEvent.VK_BACK_SPACE);
             robot.keyRelease(KeyEvent.VK_BACK_SPACE);
@@ -191,18 +181,18 @@ public class KeypadPanel extends JComponent implements ActionListener {
     /**
      * Method defines some limits for {@link KeypadPanel#textField}.
      *
-     * @param integerDigits  number or integer digits before comma
-     * @param fractionDigits number or fraction digits after comma
+     * @param integerDigits  number or integer digits before comma, must be >= 1
+     * @param fractionDigits number or fraction digits after comma, must be >= 0
      */
     public void setFormattedTextField(int integerDigits, int fractionDigits) {
         textField.setDocument(new PlainDocument() {
             private String regex = String.format("(\\d{1,%d}(\\.\\d{0,%d})?){1}", integerDigits, fractionDigits);
-            private String regexEmptyIntegerPart = String.format("((\\.\\d{0,%d})?){1}", fractionDigits);
-            private String regexExcessLeadingZero = "0+\\d+.*";
+            private String regexEmptyIntegerPart = String.format("((\\.\\d{0,%d})?){1}", fractionDigits); // to avoid '' or '.32'. Right 0 or 0.32
+            private String regexExcessLeadingZero = "0+\\d+.*";                                  // to avoid 02, 003, 0005.43, etc. Right 2, 3, 5.43
             private String currentText;
             private StringBuilder strBuilder = new StringBuilder();
             // flag needful in "remove" method to determine if it was called by "replace" method or not and, consequently,
-            // will "insertString" method be called after it or not
+            // will "insertString" method be called after it or not.
             private boolean insertStringExpected = false;
 
             @Override
@@ -212,29 +202,32 @@ public class KeypadPanel extends JComponent implements ActionListener {
                 currentText = this.getText(0, getLength());
                 strBuilder.delete(0, strBuilder.length()).append(currentText).insert(offset, str);
                 System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
-                if (strBuilder.toString().matches(regex))
+                if (strBuilder.toString().matches(regex)) {
                     super.insertString(offset, str, attr);
+                    if (strBuilder.toString().matches(regexExcessLeadingZero)) {  // if result of insert will be "0" + 1 or more digits
+                        int leadingZerosAmount = textField.getText().length() - textField.getText().replaceFirst("0+", "").length();
+                        remove(0, leadingZerosAmount);                      // than remove all leading zeros (02, 0004 become 2, 4)
+                    }
+                }
             }
 
             /**
              * This method calls first {@link PlainDocument#remove} method then {@link PlainDocument#insertString} method.
              */
             @Override
-            public void replace(int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+            public void replace(int offset, int length, String text, AttributeSet attrs) throws
+                    BadLocationException {
                 System.out.println("replace");
                 currentText = this.getText(0, getLength());
                 strBuilder.delete(0, strBuilder.length()).append(currentText).replace(offset, offset + length, text);
                 System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
-                if (strBuilder.toString().matches(regexExcessLeadingZero)) {
-                    return;
-                } else if (strBuilder.toString().matches(regex)) {
+                if (strBuilder.toString().matches(regex)) {
                     insertStringExpected = true;
                     super.replace(offset, length, text, attrs);
-                } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {  // if before '.' will be emptiness,
+                } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {  // if result of replace will be ".*" or ""
                     insertStringExpected = true;                                    // than
-                    super.replace(offset, length, "0" + text, attrs);          // we add '0' in front (text = "")
+                    super.replace(offset, length, "0" + text, attrs);          // we add "0" in front ( result "0.*" or "0")
                 }
-
             }
 
             @Override
@@ -242,17 +235,22 @@ public class KeypadPanel extends JComponent implements ActionListener {
                 System.out.println("remove");
                 currentText = this.getText(0, getLength());
                 strBuilder.delete(0, strBuilder.length()).append(currentText).delete(offs, offs + len);
-//                if (strBuilder.toString().matches(regexExcessLeadingZero)){
-//                    super.remove(offs, len);
-//                }
-                if (strBuilder.toString().matches(regex))
+                System.out.println(strBuilder.toString());
+                if (strBuilder.toString().matches(regexExcessLeadingZero)     // if result of remove will be "0" + any digits,
+                        && !insertStringExpected) {                           // and if insert method will not follow
+                    System.out.println("regexExcessLeadingZero");
                     super.remove(offs, len);
-                else if (strBuilder.toString().matches(regexEmptyIntegerPart) || strBuilder.toString().equals("")) {
+                    int leadingZerosAmount = textField.getText().length() - textField.getText().replaceFirst("0+", "").length();
+                    super.remove(0, leadingZerosAmount);                 // than remove all leading zeros (02, 0004 become 2, 4)
+                    remove(0, 0);       // recycling call of this method if we got result ".*" from "200.*" deleting 2
+                } else if (strBuilder.toString().matches(regex)) {
+                    if (textField.getText().charAt(offs) == '.')
+                        len = len +5;
                     super.remove(offs, len);
-                    if (!insertStringExpected) {
-                        insertString(0, "0", null);
-                        textField.select(0, 1);
-                    }
+                } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {    // if result of remove will be  ".*" or ""
+                    super.remove(offs, len);
+                    if (!insertStringExpected)                                      // if insertString method will not follows
+                        insertString(0, "0", null);                 // than we add manually "0" in front ( result "0.*" or "0")
                 }
             }
         });
