@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 24.09.2019
  */
 
 package gui.common.dialogs;
@@ -56,7 +56,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
         depositButton.addActionListener(this::actionPerformed);
         withdrawButton.addActionListener(this::actionPerformed);
 
-        keypadPanel.setFormattedTextField(7, 2);
+        keypadPanel.setTextFieldDocument("money72");
         keypadPanel.setActionButtonsAmount(2);
         keypadPanel.getActionButton1().setText(Resources.getInstance().getString("deposit"));
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
@@ -95,7 +95,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
                 withdrawButton.setBackground(beigeColor);
                 withdrawButton.setForeground(Color.BLACK);
                 keypadPanel.getActionButton1().setText(Resources.getInstance().getString("deposit_action"));
-                keypadPanel.getTextField().requestFocusInWindow();
+                keypadPanel.getTextField().requestFocusInWindow();      // keeps text selection if it was selected already
                 break;
             case "withdrawButton":
                 depositButton.setBackground(beigeColor);
@@ -103,7 +103,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
                 withdrawButton.setBackground(blueColor);
                 withdrawButton.setForeground(Color.WHITE);
                 keypadPanel.getActionButton1().setText(Resources.getInstance().getString("withdraw_action"));
-                keypadPanel.getTextField().requestFocusInWindow();
+                keypadPanel.getTextField().requestFocusInWindow();      // keeps text selection if it was selected already
                 break;
             default:
                 break;

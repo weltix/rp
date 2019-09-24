@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 23.09.2019
+ * Copyright (c) RESONANCE JSC, 24.09.2019
  */
 
 package gui.common;
@@ -48,6 +48,10 @@ public class KeypadPanel extends JComponent implements ActionListener {
     private JPanel textFieldPanel;
 
     private Robot robot = null;         // object that provides generation of keys presses
+
+    // we define some PlainDocuments for our text field to provide it's different behavior in different contexts
+    private final PlainDocument percentTextFieldDocument = new PercentTextFieldDocument(textField);
+    private final PlainDocument money72TextFieldDocument = new DigitTextFieldDocument(textField, 7, 2);
 
     public KeypadPanel() {
         initComponents();
@@ -179,81 +183,138 @@ public class KeypadPanel extends JComponent implements ActionListener {
     }
 
     /**
-     * Method defines some limits for {@link KeypadPanel#textField}.
+     * Method provides some limits and features for {@link KeypadPanel#textField}.
      *
-     * @param integerDigits  number or integer digits before comma, must be >= 1
-     * @param fractionDigits number or fraction digits after comma, must be >= 0
+     * @param textFieldDocument type of document.
      */
-    public void setFormattedTextField(int integerDigits, int fractionDigits) {
-        textField.setDocument(new PlainDocument() {
-            private String regex = String.format("(\\d{1,%d}(\\.\\d{0,%d})?){1}", integerDigits, fractionDigits);
-            private String regexEmptyIntegerPart = String.format("((\\.\\d{0,%d})?){1}", fractionDigits); // to avoid '' or '.32'. Right 0 or 0.32
-            private String regexExcessLeadingZero = "0+\\d+.*";                                  // to avoid 02, 003, 0005.43, etc. Right 2, 3, 5.43
-            private String currentText;
-            private StringBuilder strBuilder = new StringBuilder();
-            // flag needful in "remove" method to determine if it was called by "replace" method or not and, consequently,
-            // will "insertString" method be called after it or not.
-            private boolean insertStringExpected = false;
+    public void setTextFieldDocument(String textFieldDocument) {
+        switch (textFieldDocument) {
+            case "percent":
+                textField.setDocument(percentTextFieldDocument);
+                break;
+            case "money72":
+                textField.setDocument(money72TextFieldDocument);
+                break;
+            default:
+                break;
+        }
+    }
 
-            @Override
-            public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
-                insertStringExpected = false;
-                System.out.println("insertString");
-                currentText = this.getText(0, getLength());
-                strBuilder.delete(0, strBuilder.length()).append(currentText).insert(offset, str);
-                System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
-                if (strBuilder.toString().matches(regex)) {
-                    super.insertString(offset, str, attr);
-                    if (strBuilder.toString().matches(regexExcessLeadingZero)) {  // if result of insert will be "0" + 1 or more digits
-                        int leadingZerosAmount = textField.getText().length() - textField.getText().replaceFirst("0+", "").length();
-                        remove(0, leadingZerosAmount);                      // than remove all leading zeros (02, 0004 become 2, 4)
-                    }
-                }
-            }
+    /**
+     * Class provides some limits and features for textField, that use it as document:
+     * 1. Max digits amount of integer part (parameter of constructor);
+     * 2. Max digits amount of fraction part (parameter of constructor);
+     * 3. Only one "." may be entered;
+     * 4. Integer part never will be empty. In such case "0" is entered automatically;
+     * 5. Any excessive leading "0"s truncated automatically;
+     * 6. Fraction part is removed if "." is removed.
+     */
+    private static class DigitTextFieldDocument extends PlainDocument {
 
-            /**
-             * This method calls first {@link PlainDocument#remove} method then {@link PlainDocument#insertString} method.
-             */
-            @Override
-            public void replace(int offset, int length, String text, AttributeSet attrs) throws
-                    BadLocationException {
-                System.out.println("replace");
-                currentText = this.getText(0, getLength());
-                strBuilder.delete(0, strBuilder.length()).append(currentText).replace(offset, offset + length, text);
-                System.out.println("currentText = " + currentText + " strBuilder = " + strBuilder.toString());
-                if (strBuilder.toString().matches(regex)) {
-                    insertStringExpected = true;
-                    super.replace(offset, length, text, attrs);
-                } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {  // if result of replace will be ".*" or ""
-                    insertStringExpected = true;                                    // than
-                    super.replace(offset, length, "0" + text, attrs);          // we add "0" in front ( result "0.*" or "0")
-                }
-            }
+        private final String regex;
+        private final String regexEmptyIntegerPart;     // to avoid '' or '.32'. Will be 0 or 0.32
+        private final String regexExcessLeadingZero;    // to avoid 02, 003, 0005.43, etc. Will be 2, 3, 5.43
+        JTextField textField;
+        private StringBuilder strBuilder = new StringBuilder();
+        // flag needful in "remove" method to determine if it was called by "replace" method or not and, consequently,
+        // will "insertString" method be called after it or not.
+        private boolean insertStringExpected = false;
 
-            @Override
-            public void remove(int offs, int len) throws BadLocationException {
-                System.out.println("remove");
-                currentText = this.getText(0, getLength());
-                strBuilder.delete(0, strBuilder.length()).append(currentText).delete(offs, offs + len);
-                System.out.println(strBuilder.toString());
-                if (strBuilder.toString().matches(regexExcessLeadingZero)     // if result of remove will be "0" + any digits,
-                        && !insertStringExpected) {                           // and if insert method will not follow
-                    System.out.println("regexExcessLeadingZero");
-                    super.remove(offs, len);
+        /**
+         * @param integerDigits  number or integer digits before comma, must be >= 1
+         * @param fractionDigits number or fraction digits after comma, must be >= 0
+         */
+        DigitTextFieldDocument(JTextField textField, int integerDigits, int fractionDigits) {
+            this.textField = textField;
+            regex = String.format("(\\d{1,%d}(\\.\\d{0,%d})?){1}", integerDigits, fractionDigits);
+            regexEmptyIntegerPart = String.format("((\\.\\d{0,%d})?){1}", fractionDigits);
+            regexExcessLeadingZero = "0+\\d+.*";
+        }
+
+        @Override
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+            insertStringExpected = false;
+            String currentText = this.getText(0, getLength());
+            strBuilder.delete(0, strBuilder.length()).append(currentText).insert(offset, str);
+            if (strBuilder.toString().matches(regex)) {
+                super.insertString(offset, str, attr);
+                if (strBuilder.toString().matches(regexExcessLeadingZero)) {  // if result of insert will be "0" + 1 or more digits
                     int leadingZerosAmount = textField.getText().length() - textField.getText().replaceFirst("0+", "").length();
-                    super.remove(0, leadingZerosAmount);                 // than remove all leading zeros (02, 0004 become 2, 4)
-                    remove(0, 0);       // recycling call of this method if we got result ".*" from "200.*" deleting 2
-                } else if (strBuilder.toString().matches(regex)) {
-                    if (textField.getText().charAt(offs) == '.')
-                        len = len +5;
-                    super.remove(offs, len);
-                } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {    // if result of remove will be  ".*" or ""
-                    super.remove(offs, len);
-                    if (!insertStringExpected)                                      // if insertString method will not follows
-                        insertString(0, "0", null);                 // than we add manually "0" in front ( result "0.*" or "0")
+                    remove(0, leadingZerosAmount);                      // than remove all leading zeros (02, 0004 become 2, 4)
                 }
             }
-        });
+        }
+
+        /**
+         * This method calls first {@link PlainDocument#remove} method then {@link PlainDocument#insertString} method.
+         */
+        @Override
+        public void replace(int offset, int length, String text, AttributeSet attrs) throws
+                BadLocationException {
+            String currentText = this.getText(0, getLength());
+            strBuilder.delete(0, strBuilder.length()).append(currentText).replace(offset, offset + length, text);
+            if (strBuilder.toString().matches(regex)) {
+                insertStringExpected = true;
+                super.replace(offset, length, text, attrs);
+            } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {  // if result of replace will be ".*" or ""
+                insertStringExpected = true;                                    // than
+                super.replace(offset, length, "0" + text, attrs);          // we add "0" in front ( result "0.*" or "0")
+            }
+        }
+
+        @Override
+        public void remove(int offs, int len) throws BadLocationException {
+            String currentText = this.getText(0, getLength());
+            if (textField.getText().substring(offs, offs + len).contains(".")) {
+                len = textField.getText().length() - offs;             // fraction part is deleted if "." is deleted
+            }
+            strBuilder.delete(0, strBuilder.length()).append(currentText).delete(offs, offs + len);
+            if (strBuilder.toString().matches(regexExcessLeadingZero)     // if result of remove will be "0" + any digits,
+                    && !insertStringExpected) {                           // and if insert method will not follow
+                super.remove(offs, len);
+                int leadingZerosAmount = textField.getText().length() - textField.getText().replaceFirst("0+", "").length();
+                super.remove(0, leadingZerosAmount);                 // than remove all leading zeros (02, 0004 become 2, 4)
+                remove(0, 0);       // recycling call of this method if we got result ".*" from "200.*" deleting 2
+            } else if (strBuilder.toString().matches(regex)) {
+                super.remove(offs, len);
+            } else if (strBuilder.toString().matches(regexEmptyIntegerPart)) {    // if result of remove will be  ".*" or ""
+                super.remove(offs, len);
+                if (!insertStringExpected)                                      // if insertString method will not follows
+                    insertString(0, "0", null);                 // than we add manually "0" in front ( result "0.*" or "0")
+            }
+        }
+    }
+
+    /**
+     * Class provides some limits and features for textField, that use it as document:
+     * 1. Max value (in text form), that may be entered into the field <= 100.00;
+     * 2. All other limits derived from super class.
+     */
+    private static class PercentTextFieldDocument extends DigitTextFieldDocument {
+
+        PercentTextFieldDocument(JTextField textField) {
+            super(textField, 3, 2);
+        }
+
+        /**
+         * Method checks if entered into the text field value satisfies certain conditions and calls appropriate method
+         * of superclass if true. Condition: value must be <= 100.00
+         */
+        @Override
+        public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+            String currentText = this.getText(0, getLength()).concat(str);
+            Double textToDouble;
+            try {
+                textToDouble = Double.valueOf(currentText);
+            } catch (NumberFormatException e) {
+                textToDouble = 101.0;
+            }
+            if (textToDouble <= 100.0) {
+                if (textToDouble == 100.0 && currentText.contains("."))
+                    return;
+                super.insertString(offset, str, attr);
+            }
+        }
     }
 
     @Override

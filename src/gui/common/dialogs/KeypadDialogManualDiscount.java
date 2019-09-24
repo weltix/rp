@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 24.09.2019
  */
 
 package gui.common.dialogs;
@@ -8,6 +8,7 @@ import gui.common.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
@@ -20,6 +21,8 @@ import java.awt.event.ComponentEvent;
  * CardLayout as layout manager, and contains another JPanels different for different subclasses.
  */
 public class KeypadDialogManualDiscount extends KeypadDialog {
+
+    private JTextField textField;
 
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
@@ -55,17 +58,20 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         productButton.addActionListener(this::actionPerformed);
         receiptButton.addActionListener(this::actionPerformed);
 
-        keypadPanel.setFormattedTextField(7, 2);
         keypadPanel.setActionButtonsAmount(1);
         keypadPanel.getActionButton0().setText(Resources.getInstance().getString("set_discount"));
         keypadPanel.getActionButton0().addActionListener(this::actionPerformed);
 
+        textField = keypadPanel.getTextField();
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
-                keypadPanel.getTextField().setText("0");
-                keypadPanel.getTextField().requestFocus();
-                keypadPanel.getTextField().selectAll();
+                keypadPanel.setTextFieldDocument("money72");
+                textField.setText("0");
+                keypadPanel.setTextFieldDocument("percent");
+                textField.setText("0");
+                textField.requestFocus();
+                textField.selectAll();
             }
         });
     }
@@ -88,12 +94,16 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
                 percentButton.setForeground(Color.WHITE);
                 moneyButton.setBackground(beigeColor);
                 moneyButton.setForeground(Color.BLACK);
+                keypadPanel.setTextFieldDocument("percent");
+                textField.setCaretPosition(textField.getText().length());
                 break;
             case "moneyButton":
                 percentButton.setBackground(beigeColor);
                 percentButton.setForeground(Color.BLACK);
                 moneyButton.setBackground(blueColor);
                 moneyButton.setForeground(Color.WHITE);
+                keypadPanel.setTextFieldDocument("money72");
+                textField.setCaretPosition(textField.getText().length());
                 break;
             case "productButton":
                 productButton.setBackground(blueColor);
