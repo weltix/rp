@@ -95,7 +95,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
                 withdrawButton.setBackground(beigeColor);
                 withdrawButton.setForeground(Color.BLACK);
                 keypadPanel.getActionButton1().setText(Resources.getInstance().getString("deposit_action"));
-                keypadPanel.getTextField().requestFocusInWindow();      // keeps text selection if it was selected already
+                keypadPanel.getTextField().requestFocus();      // keeps text selection if it was selected already
                 break;
             case "withdrawButton":
                 depositButton.setBackground(beigeColor);
@@ -103,7 +103,7 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
                 withdrawButton.setBackground(blueColor);
                 withdrawButton.setForeground(Color.WHITE);
                 keypadPanel.getActionButton1().setText(Resources.getInstance().getString("withdraw_action"));
-                keypadPanel.getTextField().requestFocusInWindow();      // keeps text selection if it was selected already
+                keypadPanel.getTextField().requestFocus();      // keeps text selection if it was selected already
                 break;
             default:
                 break;

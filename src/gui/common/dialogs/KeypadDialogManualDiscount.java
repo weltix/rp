@@ -70,6 +70,10 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
                 textField.setText("0");
                 keypadPanel.setTextFieldDocument("percent");
                 textField.setText("0");
+                if (moneyButton.getModel().isPressed())
+                    keypadPanel.setTextFieldDocument("money72");
+                else if (percentButton.getModel().isPressed())
+                    keypadPanel.setTextFieldDocument("percent");
                 textField.requestFocus();
                 textField.selectAll();
             }
@@ -92,18 +96,24 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
             case "percentButton":
                 percentButton.setBackground(blueColor);
                 percentButton.setForeground(Color.WHITE);
+                percentButton.getModel().setPressed(true);
                 moneyButton.setBackground(beigeColor);
                 moneyButton.setForeground(Color.BLACK);
+                moneyButton.getModel().setPressed(false);
                 keypadPanel.setTextFieldDocument("percent");
-                textField.setCaretPosition(textField.getText().length());
+                textField.requestFocus();
+                textField.selectAll();
                 break;
             case "moneyButton":
                 percentButton.setBackground(beigeColor);
                 percentButton.setForeground(Color.BLACK);
+                percentButton.getModel().setPressed(false);
                 moneyButton.setBackground(blueColor);
                 moneyButton.setForeground(Color.WHITE);
+                moneyButton.getModel().setPressed(true);
                 keypadPanel.setTextFieldDocument("money72");
-                textField.setCaretPosition(textField.getText().length());
+                textField.requestFocus();
+                textField.selectAll();
                 break;
             case "productButton":
                 productButton.setBackground(blueColor);

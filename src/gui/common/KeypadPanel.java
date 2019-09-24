@@ -68,9 +68,21 @@ public class KeypadPanel extends JComponent implements ActionListener {
         textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         textField.setBorder(BorderFactory.createEmptyBorder());
 
+        // timer for selection text by long mouse pressing
+        Timer timerTextFieldLongPress = new Timer(0, this);
+        timerTextFieldLongPress.setInitialDelay(1500);
+        timerTextFieldLongPress.setActionCommand("timerTextFieldLongPress");
+        textField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                timerTextFieldLongPress.start();
+            }
+        });
+
         // timer for generation repeated clicks of numeric keys when a key is in pressed state
-        Timer timer = new Timer(30, this);
-        timer.setInitialDelay(500);
+        Timer timerRepeatingClicks = new Timer(30, this);
+        timerRepeatingClicks.setInitialDelay(500);
 
         try {
             robot = new Robot();
@@ -93,18 +105,18 @@ public class KeypadPanel extends JComponent implements ActionListener {
                         public void mousePressed(MouseEvent e) {
                             String buttonText = ((JButton) e.getSource()).getText();
                             changeTextField(buttonText.charAt(0));
-                            timer.setActionCommand(buttonText);
-                            timer.start();
+                            timerRepeatingClicks.setActionCommand(buttonText);
+                            timerRepeatingClicks.start();
                         }
 
                         @Override
                         public void mouseReleased(MouseEvent e) {
-                            timer.stop();
+                            timerRepeatingClicks.stop();
                         }
 
                         @Override
                         public void mouseExited(MouseEvent e) {
-                            timer.stop();
+                            timerRepeatingClicks.stop();
                         }
                     });
                 }
@@ -136,7 +148,12 @@ public class KeypadPanel extends JComponent implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        changeTextField(e.getActionCommand().charAt(0));
+        changeTextField(e.getActionCommand().charAt(0));    // don't stop timer for this event here!!! It must work still.
+
+        if ("timerTextFieldLongPress".equals(e.getActionCommand())) {
+            ((Timer) e.getSource()).stop();
+//            textField.selectAll();
+        }
     }
 
     /**
@@ -251,7 +268,7 @@ public class KeypadPanel extends JComponent implements ActionListener {
         @Override
         public void replace(int offset, int length, String text, AttributeSet attrs) throws
                 BadLocationException {
-            String currentText = this.getText(0, getLength());
+            String currentText = this.getText(0, getLength()).replaceAll(",", ".");
             strBuilder.delete(0, strBuilder.length()).append(currentText).replace(offset, offset + length, text);
             if (strBuilder.toString().matches(regex)) {
                 insertStringExpected = true;
@@ -343,6 +360,6 @@ public class KeypadPanel extends JComponent implements ActionListener {
         return textField;
     }
 
-    // TODO: 25.07.2019 Можно сделать выделение текста в текстовом поле по долгому нажатию левой кнопки мыши, а также по двойному щелчку
+    // TODO: 25.07.2019 Можно сделать выделение текста в текстовом поле по долгому нажатию левой кнопки мыши
     // TODO: 26.07.2019 Подобрать более оптимальный фон кнопки при её нажатии
 }
