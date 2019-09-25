@@ -288,7 +288,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * @param dialogWindow           object of dialog window
      */
     private void launchDialog(boolean glassPaneHasBackground, JWindow dialogWindow) {
-        Color base = UIManager.getColor("inactiveCaptionBorder");
+        Color base = new Color(184, 207, 229);
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
         if (!glassPaneHasBackground)
             background = null;
@@ -673,10 +673,10 @@ public class MainFrame extends JFrame implements ActionListener {
      * class *.form file. Method is intended to initialize this specified component(s).
      */
     private void createUIComponents() {
+        initLookAndFeel();
         initSplashScreenPanel();
         initNavigatePanel();
         initTiledPanel();
-        initLookAndFeel();
     }
 
     /**

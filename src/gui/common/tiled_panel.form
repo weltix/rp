@@ -9,6 +9,7 @@
       <background color="-1183240"/>
       <focusable value="false"/>
       <minimumSize width="0" height="0"/>
+      <name value="mainBackground"/>
       <preferredSize width="-1" height="-1"/>
       <requestFocusEnabled value="false"/>
     </properties>
@@ -22,6 +23,7 @@
         <properties>
           <background color="-1183240"/>
           <focusable value="false"/>
+          <name value="mainBackground"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
@@ -551,6 +553,7 @@
         <properties>
           <background color="-1183240"/>
           <focusable value="false"/>
+          <name value="mainBackground"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
@@ -565,6 +568,7 @@
         <properties>
           <background color="-1183240"/>
           <focusable value="false"/>
+          <name value="mainBackground"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
@@ -579,6 +583,7 @@
         <properties>
           <background color="-1183240"/>
           <focusable value="false"/>
+          <name value="mainBackground"/>
           <preferredSize width="5" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
