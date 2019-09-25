@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 23.09.2019
+ * Copyright (c) RESONANCE JSC, 25.09.2019
  */
 
 package gui.common;
@@ -351,17 +351,6 @@ public class MainFrame extends JFrame implements ActionListener {
             // Use approximately assuming location of keypad on screen in MainFrame. Need for SplashScreen keypadPanel basically.
             kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - 20, getHeight() - (int) kpSize.getHeight() - 20);
         }
-        // TODO: 16.09.2019 delete commented
-//        if (kpPoint != null && kpPointTemp != null) {
-//            kpPoint = kpPointTemp;
-//            System.out.println(kpPoint + " kpPoint after1");
-//        } else if (kpPoint == null && kpPointException != null) {
-//            kpPoint = kpPointException;
-//            System.out.println(kpPoint + " kpPoint after2");
-//        }
-//        kpPoint = kpPointTemp;
-//        if (kpPointException != null)
-//            kpPoint = kpPointException;
 
         // utility variables
         Dimension size = new Dimension();
@@ -691,6 +680,4 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel 
-    // TODO: 13.09.2019 Formatted text fields for keypadPanels изхятие-внесение и скидка
-    // TODO: 16.09.2019 Для всех диалогов сделать общий класс, расширяющий JWindow (или JPanel, если придётся)
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 24.09.2019
+ * Copyright (c) RESONANCE JSC, 25.09.2019
  */
 
 package gui.common;
@@ -47,13 +47,18 @@ public class KeypadPanel extends JComponent implements ActionListener {
     private JPanel verticalLine;
     private JPanel textFieldPanel;
 
-    private Robot robot = null;         // object that provides generation of keys presses
+    private Robot robot = null;         // provides generation of keys presses
 
     // we define some PlainDocuments for our text field to provide it's different behavior in different contexts
     private final PlainDocument percentTextFieldDocument = new PercentTextFieldDocument(textField);
     private final PlainDocument money72TextFieldDocument = new DigitTextFieldDocument(textField, 7, 2);
 
     public KeypadPanel() {
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
         initComponents();
     }
 
@@ -69,8 +74,14 @@ public class KeypadPanel extends JComponent implements ActionListener {
         textField.setBorder(BorderFactory.createEmptyBorder());
 
         // timer for selection text by long mouse pressing
-        Timer timerTextFieldLongPress = new Timer(0, this);
-        timerTextFieldLongPress.setInitialDelay(1500);
+        Timer timerTextFieldLongPress = new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ((Timer) e.getSource()).stop();
+                textField.selectAll();
+            }
+        });
+        timerTextFieldLongPress.setInitialDelay(600);
         timerTextFieldLongPress.setActionCommand("timerTextFieldLongPress");
         textField.addMouseListener(new MouseAdapter() {
             @Override
@@ -78,17 +89,23 @@ public class KeypadPanel extends JComponent implements ActionListener {
                 super.mousePressed(e);
                 timerTextFieldLongPress.start();
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+                timerTextFieldLongPress.stop();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                super.mouseExited(e);
+                timerTextFieldLongPress.stop();
+            }
         });
 
         // timer for generation repeated clicks of numeric keys when a key is in pressed state
         Timer timerRepeatingClicks = new Timer(30, this);
         timerRepeatingClicks.setInitialDelay(500);
-
-        try {
-            robot = new Robot();
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }
 
         // cycle sets properties for numeric keys (12 buttons) (getComponents() returns only components of 1-st level of nesting)
         if (centerPanel instanceof Container) {
@@ -149,11 +166,6 @@ public class KeypadPanel extends JComponent implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         changeTextField(e.getActionCommand().charAt(0));    // don't stop timer for this event here!!! It must work still.
-
-        if ("timerTextFieldLongPress".equals(e.getActionCommand())) {
-            ((Timer) e.getSource()).stop();
-//            textField.selectAll();
-        }
     }
 
     /**
@@ -360,6 +372,5 @@ public class KeypadPanel extends JComponent implements ActionListener {
         return textField;
     }
 
-    // TODO: 25.07.2019 Можно сделать выделение текста в текстовом поле по долгому нажатию левой кнопки мыши
     // TODO: 26.07.2019 Подобрать более оптимальный фон кнопки при её нажатии
 }
