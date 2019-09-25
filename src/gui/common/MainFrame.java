@@ -14,6 +14,7 @@ import resources.Resources;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -675,6 +676,25 @@ public class MainFrame extends JFrame implements ActionListener {
         initSplashScreenPanel();
         initNavigatePanel();
         initTiledPanel();
+        initLookAndFeel();
+    }
+
+    /**
+     * Loads the .xml file with appropriate look and feel (button, panel, label colors and fonts).
+     */
+    private void initLookAndFeel() {
+        SynthLookAndFeel lookAndFeel = new SynthLookAndFeel();
+        try {
+            lookAndFeel.load(MainFrame.class.getResourceAsStream("style.xml"),
+                    MainFrame.class);
+            UIManager.setLookAndFeel(lookAndFeel);
+        } catch (Exception e) {
+            System.err.println("Couldn't get specified look and feel ("
+                    + lookAndFeel
+                    + "), for some reason.");
+            System.err.println("Using the default look and feel.");
+            e.printStackTrace();
+        }
     }
 
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
