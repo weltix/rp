@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common;
@@ -12,7 +12,7 @@ import static gui.fonts.FontProvider.MENU_ICONS;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Class represents one button of navigation panel. Bounded to navigate_button.form.
+ * Class represents one button of navigation panel. Bound to navigate_button.form.
  */
 public class NavigateButton{
     private JPanel button;

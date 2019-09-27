@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common;
@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Class describes tiled panel. Bounded to tiled_panel.form.
+ * Class describes tiled panel. Bound to tiled_panel.form.
  * This panel is used as common panel that holds buttons with different functions for selling.
  * We create all buttons from start, and then remove unnecessary of them.
  * Such approach is more easy for tune-up of buttons, also reduce the amount of code, because all used buttons already
@@ -24,7 +24,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * Only flaw is redundant work for garbage collector.
  * <p>
  * Top, right and bottom panels are customizing programmatically.
- * Left panel's width and button's insets are adjusting in appropriate *.form file.
+ * Left panel's width and button's insets are adjusting in bound *.form file.
  */
 public class TiledPanel {
     private JPanel mainPanel;

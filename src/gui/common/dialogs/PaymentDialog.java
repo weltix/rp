@@ -16,7 +16,7 @@ import static gui.fonts.FontProvider.ROBOTO_BOLD;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Class for payment dialog window. Bounded to payment_dialog.form
+ * Class for payment dialog window. Bound to payment_dialog.form
  */
 public class PaymentDialog extends AbstractDialog {
     private JPanel mainPanel;
@@ -63,17 +63,15 @@ public class PaymentDialog extends AbstractDialog {
     }
 
     /**
-     * Method is called when action occurs (i.e. button pressed or timer triggers).
-     *
-     * @param e event, that occurs.
+     * More detailed description look in superclass.
+     * Action commands for buttons have been assigned in bound *.form file.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-        // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "cancelButton":
-                prepareToDispose();
+                close();
                 keypadPanel.getTextField().setText("");
                 break;
             case "cashButton":

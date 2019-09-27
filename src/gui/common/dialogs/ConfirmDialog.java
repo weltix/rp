@@ -17,7 +17,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
  * Class for confirm dialog window, that contains title, question and two option {@link JButton}s - Yes or No.
- * Bounded to confirm_dialog.form
+ * Bound to confirm_dialog.form
  */
 public class ConfirmDialog extends AbstractDialog{
     private JPanel mainPanel;
@@ -51,20 +51,18 @@ public class ConfirmDialog extends AbstractDialog{
     }
 
     /**
-     * Method is called when action occurs (i.e. button pressed or timer triggers).
-     *
-     * @param e event, that occurs.
+     * More detailed description look in superclass.
+     * Action commands for buttons have been assigned in bound *.form file.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-        // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "yesButton":
-                yesButtonAction.accept(0);      // in is no matter what
+                yesButtonAction.accept(0);
                 break;
             case "noButton":
-                prepareToDispose();
+                close();
                 break;
             default:
                 break;

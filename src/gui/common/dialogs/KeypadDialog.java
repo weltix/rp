@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -12,7 +12,7 @@ import java.awt.*;
 
 /**
  * General abstract class for dialog window, that contains {@link JTextField} and {@link KeypadPanel}.
- * Used for inheritance by another descent classes. Bounded to keypad_dialog.form
+ * Used for inheritance by another descent classes. Bound to keypad_dialog.form
  */
 public abstract class KeypadDialog extends AbstractDialog {
     protected JPanel mainPanel;
@@ -47,8 +47,8 @@ public abstract class KeypadDialog extends AbstractDialog {
     }
 
     @Override
-    protected void prepareToDispose() {
-        super.prepareToDispose();
+    protected void close() {
+        super.close();
         keypadPanel.getTextField().setText("");
     }
 }

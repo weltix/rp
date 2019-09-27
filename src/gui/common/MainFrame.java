@@ -31,10 +31,12 @@ import static gui.fonts.FontProvider.FONTAWESOME_REGULAR;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Class describes main window of our graphic interface. Bounded to main_frame.form.
+ * Class describes main window of our graphic interface. Bound to main_frame.form.
  * This {@link JFrame} is the single window, where all application will be rendering.
  * CardLayout will provide showing of different screens (i.e. different cards-panels).
  * {@link JWindow} will provide showing of dialog windows ({@link JWindow} is parent class for {@link JFrame} and {@link JDialog}).
+ * Using of JPanels instead of {@link JWindow} consumes the same amount of RAM and CPU. Only difference - {@link JWindow}
+ * appears with slight single blink.
  * <p>
  * We use special Full Screen mode to paint directly to screen without using windows system of operation system.
  * <p>
@@ -157,9 +159,14 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setVisible(true);
 
-        Timer timer = new Timer(0, this);
+        // timer makes delay before showing login dialog
+        Timer timer = new Timer(1000, e -> {
+            ((Timer) e.getSource()).stop();     // stop after first triggering
+            initDialogWindows();                // this call need to get size and location of MainFrame's keyboard to tune up loginDialog
+            launchDialog(false, loginDialog);
+            sellPanel.setVisible(false);    // need here to trigger listener of sellPanel when it will be shown (visible) first time
+        });
         timer.setInitialDelay(1000);
-        timer.setActionCommand("splashScreenShowingTime");
         timer.start();
 
         // 1.32 - physical scale rate relate to my display
@@ -286,63 +293,6 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Provides glassPane showing, then runs timer, that after triggering will show specified dialog window.
-     * All dialogs are launched using timer with very small delay, that make dialog appearance faster on weak hardware.
-     *
-     * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
-     * @param dialogWindow           object of dialog window
-     */
-    private void launchDialog(boolean glassPaneHasBackground, JWindow dialogWindow) {
-        Color base = new Color(184, 207, 229);
-        Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
-        if (!glassPaneHasBackground)
-            background = new Color(255, 255, 255, 0);   // glassPane will be transparent
-
-        if (!splashScreenPanel.isVisible()) {
-            glassPane.activate(background);
-            // code will make background around dialog window blurred (optional using of blurring feature)
-            if (blurBackground) {
-                jlayer.setView(mainPanel);
-                setContentPane(jlayer);
-                revalidate();
-                repaint();
-            }
-        }
-
-        // determines DialogType of current dialog window object
-        DialogType dialogType = null;
-        switch (dialogWindow.getClass().getSimpleName()) {
-            case "KeypadDialogLogin":
-                dialogType = DialogType.LOGIN;
-//                SwingUtilities.invokeLater(()->loginDialog.setVisible(true));
-                break;
-            case "KeypadDialogManualDiscount":
-                dialogType = DialogType.MANUAL_DISCOUNT;
-                break;
-            case "KeypadDialogDepositWithdraw":
-                dialogType = DialogType.DEPOSIT_WITHDRAW;
-                break;
-            case "PaymentDialog":
-                dialogType = DialogType.PAYMENT;
-//                SwingUtilities.invokeLater(()->paymentDialog.setVisible(true));
-                break;
-            case "ConfirmDialog":
-                dialogType = DialogType.CONFIRM;
-                break;
-            case "MessageDialog":
-                dialogType = DialogType.MESSAGE;
-                break;
-            default:
-                break;
-        }
-        // this delay - workaround for weak hardware (for fast appearance of glassPane without delays)
-        Timer timer = new Timer(0, this);
-        timer.setInitialDelay(10);
-        timer.setActionCommand(dialogType.name());
-        timer.start();
-    }
-
-    /**
      * Method provides getting of size and location of {@link MainFrame}'s keypadPanel.
      * Getting of location is possible only when appropriate container becomes visible ({@link MainFrame#sellPanel}).
      * In another case we set location manually (first time only, when {@link MainFrame#splashScreenPanel} appears).
@@ -432,45 +382,59 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Basically is using for timer events handling.
+     * Provides glassPane showing, allowing optional blurring of it, then shows specified dialog window.
+     *
+     * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
+     * @param dialogWindow           object of dialog window
      */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof Timer) {
-            ((Timer) e.getSource()).stop();
+    private void launchDialog(boolean glassPaneHasBackground, JWindow dialogWindow) {
+        Color base = new Color(184, 207, 229);
+        Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
+        if (!glassPaneHasBackground)
+            background = new Color(255, 255, 255, 0);   // glassPane will be transparent
+        if (!splashScreenPanel.isVisible()) {
+            glassPane.activate(background);
+            // code will make background around dialog window blurred (optional using of blurring feature)
+            if (blurBackground) {
+                jlayer.setView(mainPanel);
+                setContentPane(jlayer);
+                revalidate();
+                repaint();
+            }
         }
 
-        // if timer for splashScreen appearing triggered
-        if ("splashScreenShowingTime".equals(e.getActionCommand())) {
-            initDialogWindows();        // this call need to get size and location of MainFrame's keyboard to tune up loginDialog
-            launchDialog(false, loginDialog);
-            sellPanel.setVisible(false);    // need here to trigger listener of sellPanel when it will be shown (visible) first time
-            return;
-        }
-
-        // show appropriate dialog after timer triggering (timer, that makes very small delay, see method launchDialog)
-        switch (e.getActionCommand()) {
-            case "LOGIN":
-                loginDialog.setVisible(true);
+        switch (dialogWindow.getClass().getSimpleName()) {
+            case "KeypadDialogLogin":
+                SwingUtilities.invokeLater(() -> loginDialog.setVisible(true));
                 break;
-            case "MANUAL_DISCOUNT":
-                manualDiscountDialog.setVisible(true);
+            case "KeypadDialogManualDiscount":
+                SwingUtilities.invokeLater(() -> manualDiscountDialog.setVisible(true));
                 break;
-            case "DEPOSIT_WITHDRAW":
-                depositWithdrawDialog.setVisible(true);
+            case "KeypadDialogDepositWithdraw":
+                SwingUtilities.invokeLater(() -> depositWithdrawDialog.setVisible(true));
                 break;
-            case "PAYMENT":
-                paymentDialog.setVisible(true);
+            case "PaymentDialog":
+                SwingUtilities.invokeLater(() -> paymentDialog.setVisible(true));
                 break;
-            case "CONFIRM":
-                confirmDialog.setVisible(true);
+            case "ConfirmDialog":
+                SwingUtilities.invokeLater(() -> confirmDialog.setVisible(true));
                 break;
-            case "MESSAGE":
-                messageDialog.setVisible(true);
+            case "MessageDialog":
+                SwingUtilities.invokeLater(() -> messageDialog.setVisible(true));
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * Method is called when action occurs (i.e. button pressed or timer triggers).
+     *
+     * @param e event, that occurs.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 
     /**
@@ -686,8 +650,8 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
     /**
-     * Custom initialization of specified components of form, that is bounded to this class.
-     * This method is mandatory if "Custom Create" option is marked for at least one component of bounded to this
+     * Custom initialization of specified components of form, that is bound to this class.
+     * This method is mandatory if "Custom Create" option is marked for at least one component of bound to this
      * class *.form file. Method is intended to initialize this specified component(s).
      */
     private void createUIComponents() {
@@ -715,7 +679,7 @@ public class MainFrame extends JFrame implements ActionListener {
         }
     }
 
-    // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
+    // TODO: 01.08.2019  Look and feel в xml не годится, тормозит.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel
     // TODO: 26.09.2019 Окно оплаты

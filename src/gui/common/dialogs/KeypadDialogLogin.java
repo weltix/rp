@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -35,24 +35,21 @@ public class KeypadDialogLogin extends KeypadDialog {
     }
 
     /**
-     * Method is called when action occurs (i.e. button pressed or timer triggers).
-     *
-     * @param e event, that occurs.
+     * More detailed description look in superclass.
+     * Action commands for buttons have been assigned in bound *.form file.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-        // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "actionButton1":
-                prepareToDispose();
+                close();
                 if (parentFrame.getSplashScreenPanel().isVisible()) {
                     parentFrame.setCardOfMainPanel("mainSellPanel");
                     parentFrame.setCardOfSellPanelScreens("sellPanel");
                 }
                 break;
             case "actionButton2":
-                this.dispose();
                 System.exit(0);
                 break;
             default:

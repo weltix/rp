@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -42,26 +42,16 @@ public abstract class AbstractDialog extends JWindow implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // if timer for closing this dialog triggered
-        if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
-            ((Timer) e.getSource()).stop();
-            this.dispose();
-        }
     }
 
     /**
-     * Method prepares dialog for disposing.
-     * Timer is used as workaround for weak hardware (it makes rendering faster when glassPane disappears).
-     * Actually timer makes little delay between glass pane deactivating and disposing of dialog.
+     * Returns initial mainPanel of main_frame.form. Does not affect performance.
+     * Needful if previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
+     * Then deactivates glass pane and calls dispose method.
      */
-    protected void prepareToDispose() {
-        // Returns initial mainPanel of main_frame.form. Does not affect performance.
-        // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
+    protected void close() {
         parentFrame.setContentPane(null);
         glassPane.deactivate();
-        Timer timer = new Timer(0, this);
-        timer.setInitialDelay(10);
-        timer.setActionCommand("delayBeforeClosingThisWindow");
-        timer.start();
+        SwingUtilities.invokeLater(()->this.dispose());
     }
 }

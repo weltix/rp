@@ -16,7 +16,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
  * Class for message (alert) dialog window, that contains title, message and one {@link JButton} OK.
- * Bounded to message_dialog.form
+ * Bound to message_dialog.form
  */
 public class MessageDialog extends AbstractDialog {
     private JPanel mainPanel;
@@ -44,17 +44,15 @@ public class MessageDialog extends AbstractDialog {
     }
 
     /**
-     * Method is called when action occurs (i.e. button pressed or timer triggers).
-     *
-     * @param e event, that occurs.
+     * More detailed description look in superclass.
+     * Action commands for buttons have been assigned in bound *.form file.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
-        // actionCommands for buttons assigned in bounded *.form file
         switch (e.getActionCommand()) {
             case "okButton":
-                prepareToDispose();
+                close();
                 break;
             default:
                 break;

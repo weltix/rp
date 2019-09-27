@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 import static gui.fonts.FontProvider.ROBOTO_BOLD;
 
 /**
- * Class describes navigation panel. Bounded to navigate_panel.form.
+ * Class describes navigation panel. Bound to navigate_panel.form.
  * We enforced to create from start all navigate buttons, and then make unnecessary buttons invisible or transparent,
  * because approach with adding buttons is not work properly (division inaccuracy when height is calculated).
  */

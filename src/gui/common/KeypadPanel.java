@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 25.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common;
@@ -11,7 +11,9 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,9 +22,9 @@ import static gui.fonts.FontProvider.FONTAWESOME_REGULAR;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Class contains numeric keyboard block. Bounded to keypad_panel.form
+ * Class contains numeric keyboard block. Bound to keypad_panel.form
  */
-public class KeypadPanel extends JComponent implements ActionListener {
+public class KeypadPanel extends JComponent {
     private JButton actionButton0;
     private JButton actionButton1;
     private JButton actionButton2;
@@ -74,15 +76,11 @@ public class KeypadPanel extends JComponent implements ActionListener {
         textField.setBorder(BorderFactory.createEmptyBorder());
 
         // timer for selection text by long mouse pressing
-        Timer timerTextFieldLongPress = new Timer(0, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ((Timer) e.getSource()).stop();
-                textField.selectAll();
-            }
+        Timer timerTextFieldLongPress = new Timer(1000, e -> {
+            ((Timer) e.getSource()).stop();     // stop timer after first triggering
+            textField.selectAll();
         });
         timerTextFieldLongPress.setInitialDelay(600);
-        timerTextFieldLongPress.setActionCommand("timerTextFieldLongPress");
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -104,7 +102,9 @@ public class KeypadPanel extends JComponent implements ActionListener {
         });
 
         // timer for generation repeated clicks of numeric keys when a key is in pressed state
-        Timer timerRepeatingClicks = new Timer(30, this);
+        Timer timerRepeatingClicks = new Timer(30, e -> {
+            changeTextField(e.getActionCommand().charAt(0));
+        });
         timerRepeatingClicks.setInitialDelay(500);
 
         // cycle sets properties for numeric keys (12 buttons) (getComponents() returns only components of 1-st level of nesting)
@@ -156,16 +156,6 @@ public class KeypadPanel extends JComponent implements ActionListener {
             textField.setText("");
         else
             textField.replaceSelection(String.valueOf(ch));
-    }
-
-    /**
-     * Method is called when action occurs (button pressed or timer triggers).
-     *
-     * @param e event, that occurs.
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        changeTextField(e.getActionCommand().charAt(0));    // don't stop timer for this event here!!! It must work still.
     }
 
     /**
