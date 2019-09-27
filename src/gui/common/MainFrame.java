@@ -542,6 +542,8 @@ public class MainFrame extends JFrame implements ActionListener {
                     break;
             }
             navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelBack");
+            revalidate();
+            repaint();                  // enforced to call to provide synchronous appearance of both panels on weak hardware
 
             // Get height of header panel with title in top left corner of screen, then use this height in tilesPanels.
             // Here is only place where height of header panel may be determined
