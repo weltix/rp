@@ -723,4 +723,5 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 26.09.2019 Окно клавиатуры
     // TODO: 26.09.2019 Окно с плиткой товаров
     // TODO: 26.09.2019 В этом файле описание look and feel шрифты упоминать? Также остальные данные, содержащиеся в нём проверить.
+    // TODO: 27.09.2019 Проверить Analyzer ом. 
 }
