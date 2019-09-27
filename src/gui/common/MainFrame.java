@@ -124,6 +124,9 @@ public class MainFrame extends JFrame implements ActionListener {
     private LayerUI<JComponent> layerUI = new BlurLayerUI();
     // component-decorator for another components. It doesn't change components, but paints over them.
     private JLayer<JComponent> jlayer = new JLayer<>();
+    // screen resolution
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
     public boolean blurBackground = false;
 
     public MainFrame() {
@@ -347,6 +350,15 @@ public class MainFrame extends JFrame implements ActionListener {
      * In another case we set location manually (first time only, when {@link MainFrame#splashScreenPanel} appears).
      */
     public void initDialogWindows() {
+        int loginDlgXMargin = 0;            // need for login dialog location on splash screen
+        int loginDlgYMargin = 0;            // need for login dialog location on splash screen
+        if (screenSize.getWidth() == 1920 && screenSize.getHeight() == 1080) {
+            loginDlgXMargin = (int) (0.0115 * getWidth());
+            loginDlgYMargin = (int) (0.019 * getHeight());
+        } else if (screenSize.getWidth() == 1366 && screenSize.getHeight() == 768) {
+            loginDlgXMargin = (int) (0.013 * getWidth());
+            loginDlgYMargin = (int) (0.02 * getHeight());
+        }
         // get actual keypad size on screen in MainFrame. All another dialog's keypads must have the same dimensions.
         kpSize = keypadPanel.getSize();
         // get actual keypad location on screen in MainFrame. We will use it as relational location.
@@ -355,7 +367,8 @@ public class MainFrame extends JFrame implements ActionListener {
         } catch (IllegalComponentStateException e) {
             // Exception occurs only if keypadPanel is in invisible state.
             // Use approximately assuming location of keypad on screen in MainFrame. Need for SplashScreen keypadPanel basically.
-            kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - 20, getHeight() - (int) kpSize.getHeight() - 20);
+            kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - loginDlgXMargin,
+                    getHeight() - (int) kpSize.getHeight() - loginDlgYMargin);
         }
 
         // utility variables
@@ -678,7 +691,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * class *.form file. Method is intended to initialize this specified component(s).
      */
     private void createUIComponents() {
-        initLookAndFeel();
+//        initLookAndFeel();
         initSplashScreenPanel();
         initNavigatePanel();
         initTiledPanel();
@@ -709,6 +722,5 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 26.09.2019 Окно со списком
     // TODO: 26.09.2019 Окно клавиатуры
     // TODO: 26.09.2019 Окно с плиткой товаров
-    // TODO: 26.09.2019 Подровнять клавиатуру на Splash Screen
-    // TODO: 26.09.2019  В этом файле описание look and feel шрифты упоминать? Также остальные данные, содержащиеся в нём проверить.
+    // TODO: 26.09.2019 В этом файле описание look and feel шрифты упоминать? Также остальные данные, содержащиеся в нём проверить.
 }
