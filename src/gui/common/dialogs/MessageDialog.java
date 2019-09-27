@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -9,7 +9,6 @@ import gui.common.utility_components.GlassPane;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
@@ -27,23 +26,17 @@ public class MessageDialog extends AbstractDialog {
     private GlassPane glassPane;
     private MainFrame parentFrame;
 
-    public MessageDialog(Frame owner) {
-        super(owner);
+    public MessageDialog(GlassPane glassPane) {
+        super(glassPane);
 
-        this.setContentPane(mainPanel);
+
+        this.add(mainPanel);
 
         dialogTitle.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         dialogMessage.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 32));
         okButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
 
-        // get glass pane of MainFrame
-        if (getParent() instanceof MainFrame)
-            parentFrame = (MainFrame) getParent();
-        if (parentFrame.getGlassPane() instanceof GlassPane) {
-            glassPane = (GlassPane) parentFrame.getGlassPane();
-        }
-
-        okButton.addActionListener(this::actionPerformed);
+       okButton.addActionListener(this::actionPerformed);
     }
 
     public void setProperties(String title, String message) {

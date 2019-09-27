@@ -1,10 +1,11 @@
 /*
- * Copyright (c) RESONANCE JSC, 24.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.common.utility_components.GlassPane;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
@@ -32,10 +33,9 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
      * Constructor tunes the look of this dialog, and sets actions for action buttons.
      * Constructor of parent is called initially.
      *
-     * @param owner {@link Frame} object, from which this window was called
      */
-    public KeypadDialogDepositWithdraw(Frame owner) {
-        super(owner);
+    public KeypadDialogDepositWithdraw(GlassPane glassPane) {
+        super(glassPane);
 
         extraPanel.setVisible(true);
         cardPanelLayout.show(cardPanel, "depositWithdrawPanel");

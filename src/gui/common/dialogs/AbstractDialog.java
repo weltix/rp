@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -12,23 +12,28 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static java.awt.GridBagConstraints.BOTH;
+
 /**
  * General abstract class for all dialog windows of this app. Used for inheritance by another descent classes.
  */
-public abstract class AbstractDialog extends JWindow implements ActionListener {
+public abstract class AbstractDialog extends JPanel implements ActionListener {
 
     protected MainFrame parentFrame;        // it is our MainFrame object (parent of any our dialog)
     protected GlassPane glassPane;          // it is glass pane that is set in MainFrame's object
+    protected GridBagConstraints gbConstraints;
 
-    public AbstractDialog(Frame owner) {
-        super(owner);
+    public AbstractDialog(GlassPane glassPane) {
+//        super(owner);
+        this.glassPane = glassPane;
+        this.setLayout(new GridBagLayout());
+        gbConstraints = new GridBagConstraints();
+        gbConstraints.fill = BOTH;
+        gbConstraints.weightx = 1;
+        gbConstraints.weighty = 1;
+//        this.setSize(500, 650);
 
-        if (getParent() instanceof MainFrame)
-            parentFrame = (MainFrame) getParent();
-        if (parentFrame.getGlassPane() instanceof GlassPane) {
-            glassPane = (GlassPane) parentFrame.getGlassPane();
-        }
-//        // hide cursor from current JWindow
+ //        // hide cursor from current JWindow
 //        setCursor(getToolkit().createCustomCursor(
 //                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
 //                new Point(),
@@ -45,7 +50,7 @@ public abstract class AbstractDialog extends JWindow implements ActionListener {
         // if timer for closing this dialog triggered
         if ("delayBeforeClosingThisWindow".equals(e.getActionCommand())) {
             ((Timer) e.getSource()).stop();
-            this.dispose();
+//            this.setVisible(false);
         }
     }
 
@@ -57,7 +62,6 @@ public abstract class AbstractDialog extends JWindow implements ActionListener {
     protected void prepareToDispose() {
         // Returns initial mainPanel of main_frame.form. Does not affect performance.
         // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
-        parentFrame.setContentPane(null);
         glassPane.deactivate();
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(10);

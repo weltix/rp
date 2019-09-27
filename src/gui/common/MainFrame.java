@@ -156,11 +156,11 @@ public class MainFrame extends JFrame implements ActionListener {
         initComponents();
 
         setVisible(true);
-
+        initDialogWindows();
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(2000);
         timer.setActionCommand("splashScreenShowingTime");
-        timer.start();
+//        timer.start();
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
@@ -198,16 +198,16 @@ public class MainFrame extends JFrame implements ActionListener {
         keypadPanel.setActionButtonsAmount(1);     // set the amount of action buttons of our keypadPanel
         jlayer.setUI(layerUI);
 
-        setCardOfMainPanel("splashScreenPanel");
+        setCardOfMainPanel("mainSellPanel");
         navigatePanelContainerLayout.show(navigatePanelContainer, "navPanelMain");
 
         // instantiation of dialogs
-        loginDialog = new KeypadDialogLogin(this);
-        manualDiscountDialog = new KeypadDialogManualDiscount(this);
-        depositWithdrawDialog = new KeypadDialogDepositWithdraw(this);
-        paymentDialog = new PaymentDialog(this);
-        confirmDialog = new ConfirmDialog(this);
-        messageDialog = new MessageDialog(this);
+        loginDialog = new KeypadDialogLogin(glassPane);
+        manualDiscountDialog = new KeypadDialogManualDiscount(glassPane);
+        depositWithdrawDialog = new KeypadDialogDepositWithdraw(glassPane);
+        paymentDialog = new PaymentDialog(glassPane);
+        confirmDialog = new ConfirmDialog(glassPane);
+        messageDialog = new MessageDialog(glassPane);
 
         // When sellPanel become visible we can get MainFrame's keypadPanel location, that some dialogs may use.
         sellPanel.addComponentListener(new ComponentAdapter() {
@@ -295,7 +295,7 @@ public class MainFrame extends JFrame implements ActionListener {
      * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
      * @param dialogWindow           object of dialog window
      */
-    private void launchDialog(boolean glassPaneHasBackground, JWindow dialogWindow) {
+    private void launchDialog(boolean glassPaneHasBackground, JPanel dialogWindow) {
         Color base = new Color(184, 207, 229);
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
         if (!glassPaneHasBackground)
@@ -386,8 +386,6 @@ public class MainFrame extends JFrame implements ActionListener {
         // container using they weights, the sizes of components are rounding to down.
         size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
         location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
-        loginDialog.setSize(size);
-        loginDialog.setLocation(location);
 
         /** {@link KeypadDialogManualDiscount} customization */
         // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
@@ -416,8 +414,11 @@ public class MainFrame extends JFrame implements ActionListener {
         /** {@link PaymentDialog} customization */
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
         size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
-        paymentDialog.setSize(size);
+        paymentDialog.setSize(1200, 800);
         paymentDialog.setLocation(0, 0);
+        paymentDialog.setVisible(true);
+        glassPane.add(paymentDialog);
+
 
         /** {@link ConfirmDialog} customization */
         // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
@@ -426,11 +427,11 @@ public class MainFrame extends JFrame implements ActionListener {
         kpHRatio = 28.0 / 100;
         size.setSize(this.getWidth() * kpWRatio, this.getHeight() * kpHRatio);
         confirmDialog.setSize(size);
-        confirmDialog.setLocationRelativeTo(this);
+        paymentDialog.setLocation(0, 0);
 
         /** {@link MessageDialog} customization */
         messageDialog.setSize(size);
-        messageDialog.setLocationRelativeTo(this);
+        paymentDialog.setLocation(0, 0);
     }
 
     /**

@@ -1,14 +1,14 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.common.utility_components.GlassPane;
 import resources.Resources;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -19,10 +19,9 @@ public class KeypadDialogLogin extends KeypadDialog {
      * Constructor tunes the look of this dialog, and sets actions for action buttons.
      * Constructor of parent is called initially.
      *
-     * @param owner {@link Frame} object, from which this window was called
      */
-    public KeypadDialogLogin(Frame owner) {
-        super(owner);
+    public KeypadDialogLogin(GlassPane glassPane) {
+        super(glassPane);
 
         keypadPanel.switchToPasswordTextField();
         keypadPanel.setActionButtonsAmount(2);
@@ -52,7 +51,7 @@ public class KeypadDialogLogin extends KeypadDialog {
                 }
                 break;
             case "actionButton2":
-                this.dispose();
+//                this.dispose();
                 System.exit(0);
                 break;
             default:

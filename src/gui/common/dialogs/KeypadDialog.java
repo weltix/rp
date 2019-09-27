@@ -1,10 +1,11 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.common.utility_components.GlassPane;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;
@@ -35,9 +36,9 @@ public abstract class KeypadDialog extends AbstractDialog {
     // get layout to operate with cards-JPanels, that contained in appropriate container
     protected CardLayout cardPanelLayout = (CardLayout) cardPanel.getLayout();
 
-    public KeypadDialog(Frame owner) {
-        super(owner);
-        this.setContentPane(mainPanel);
+    public KeypadDialog(GlassPane glassPane) {
+        super(glassPane);
+        this.add(mainPanel, gbConstraints);
 
         extraPanel.setVisible(false);       // default value
 

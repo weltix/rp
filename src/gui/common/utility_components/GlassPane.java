@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.utility_components;
@@ -38,7 +38,7 @@ public class GlassPane extends JComponent
         //  Set glass pane properties
 
         setOpaque(false);
-        setLayout(new GridBagLayout());
+//        setLayout(new GridBagLayout());
 
 //        Color base = UIManager.getColor("inactiveCaptionBorder");
         Color base = new Color(184, 207, 229);
@@ -50,6 +50,11 @@ public class GlassPane extends JComponent
         add(message, new GridBagConstraints());
         message.setOpaque(false);
         message.setBorder(MESSAGE_BORDER);
+
+//        JPanel q = new PaymentDialog(this);
+//        q.setSize(1200, 850);
+//        q.setLocation(20, 20);
+//        this.add(q);
 
         //  Disable Mouse, Key and Focus events for the glass pane
 
@@ -113,6 +118,8 @@ public class GlassPane extends JComponent
 
         setVisible(true);
         requestFocusInWindow();
+
+
     }
 
     /*

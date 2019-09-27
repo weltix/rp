@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -9,7 +9,6 @@ import gui.common.utility_components.GlassPane;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.function.Consumer;
 
@@ -31,22 +30,16 @@ public class ConfirmDialog extends AbstractDialog{
 
     private Consumer<Integer> yesButtonAction;     // object of functional interface Consumer, hold action for yesButton
 
-    public ConfirmDialog(Frame owner) {
-        super(owner);
+    public ConfirmDialog(GlassPane glassPane) {
+        super(glassPane);
 
-        this.setContentPane(mainPanel);
+        this.add(mainPanel);
 
         dialogTitle.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         dialogQuestion.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 32));
         yesButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
         noButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
 
-        // get glass pane of MainFrame
-        if (getParent() instanceof MainFrame)
-            parentFrame = (MainFrame) getParent();
-        if (parentFrame.getGlassPane() instanceof GlassPane) {
-            glassPane = (GlassPane) parentFrame.getGlassPane();
-        }
 
         yesButton.addActionListener(this::actionPerformed);
         noButton.addActionListener(this::actionPerformed);

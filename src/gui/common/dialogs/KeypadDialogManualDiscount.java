@@ -1,10 +1,11 @@
 /*
- * Copyright (c) RESONANCE JSC, 24.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.common.utility_components.GlassPane;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
@@ -31,10 +32,9 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
      * Constructor tunes the look of this dialog, and sets action for action button.
      * Constructor of parent is called initially.
      *
-     * @param owner {@link Frame} object, from which this window was called
      */
-    public KeypadDialogManualDiscount(Frame owner) {
-        super(owner);
+    public KeypadDialogManualDiscount(GlassPane glassPane) {
+        super(glassPane);
 
         extraPanel.setVisible(true);
         cardPanelLayout.show(cardPanel, "discountPanel");

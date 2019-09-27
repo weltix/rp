@@ -1,10 +1,11 @@
 /*
- * Copyright (c) RESONANCE JSC, 25.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.common.utility_components.GlassPane;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
@@ -38,9 +39,9 @@ public class PaymentDialog extends AbstractDialog {
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
 
-    public PaymentDialog(Frame owner) {
-        super(owner);
-        this.setContentPane(mainPanel);
+    public PaymentDialog(GlassPane glassPane) {
+        super(glassPane);
+        this.add(mainPanel, gbConstraints);
 
         Font robotoRegular38 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38);
         cashButton.setFont(robotoRegular38);
