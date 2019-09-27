@@ -158,7 +158,7 @@ public class MainFrame extends JFrame implements ActionListener {
         setVisible(true);
 
         Timer timer = new Timer(0, this);
-        timer.setInitialDelay(2000);
+        timer.setInitialDelay(1000);
         timer.setActionCommand("splashScreenShowingTime");
         timer.start();
 
@@ -209,18 +209,15 @@ public class MainFrame extends JFrame implements ActionListener {
         confirmDialog = new ConfirmDialog(this);
         messageDialog = new MessageDialog(this);
 
+        sellPanel.setVisible(false);    // we need invisible sellPanel to trigger next listener when sellPanel will become visible
         // When sellPanel become visible we can get MainFrame's keypadPanel location, that some dialogs may use.
         sellPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
+                // this method checks if sellPanel become visible also after iconify-deiconify of app.
                 super.componentShown(e);
-                // Next condition checks if sellPanel become visible after iconify-deiconify of app.
-                // We need invisible sellPanel when splashScreenPanel is visible to ensure that current method will
-                // be surely called when sellPanel really appears on screen.
                 if (!splashScreenPanel.isVisible()) {
                     initDialogWindows();
-                } else {
-                    sellPanel.setVisible(false);
                 }
             }
         });
@@ -299,12 +296,11 @@ public class MainFrame extends JFrame implements ActionListener {
         Color base = new Color(184, 207, 229);
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
         if (!glassPaneHasBackground)
-            background = null;
+            background = new Color(255, 255, 255, 0);   // glassPane will be transparent
 
-        // optional using of blurring feature
         if (!splashScreenPanel.isVisible()) {
             glassPane.activate(background);
-            // code will make background around dialog window blurred
+            // code will make background around dialog window blurred (optional using of blurring feature)
             if (blurBackground) {
                 jlayer.setView(mainPanel);
                 setContentPane(jlayer);
@@ -318,6 +314,7 @@ public class MainFrame extends JFrame implements ActionListener {
         switch (dialogWindow.getClass().getSimpleName()) {
             case "KeypadDialogLogin":
                 dialogType = DialogType.LOGIN;
+//                SwingUtilities.invokeLater(()->loginDialog.setVisible(true));
                 break;
             case "KeypadDialogManualDiscount":
                 dialogType = DialogType.MANUAL_DISCOUNT;
@@ -327,6 +324,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 break;
             case "PaymentDialog":
                 dialogType = DialogType.PAYMENT;
+//                SwingUtilities.invokeLater(()->paymentDialog.setVisible(true));
                 break;
             case "ConfirmDialog":
                 dialogType = DialogType.CONFIRM;

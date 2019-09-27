@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -40,14 +40,6 @@ public class ConfirmDialog extends AbstractDialog{
         dialogQuestion.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 32));
         yesButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
         noButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
-
-        // get glass pane of MainFrame
-        if (getParent() instanceof MainFrame)
-            parentFrame = (MainFrame) getParent();
-        if (parentFrame.getGlassPane() instanceof GlassPane) {
-            glassPane = (GlassPane) parentFrame.getGlassPane();
-        }
-
         yesButton.addActionListener(this::actionPerformed);
         noButton.addActionListener(this::actionPerformed);
     }

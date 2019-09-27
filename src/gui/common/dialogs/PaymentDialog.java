@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 25.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common.dialogs;
@@ -17,7 +17,6 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
  * Class for payment dialog window. Bounded to payment_dialog.form
- * It is separately standing dialog window that nor inherit any classes nor have derivative classes.
  */
 public class PaymentDialog extends AbstractDialog {
     private JPanel mainPanel;
