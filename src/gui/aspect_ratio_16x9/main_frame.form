@@ -114,7 +114,7 @@
                 </constraints>
                 <properties>
                   <name value=""/>
-                  <visible value="false"/>
+                  <visible value="true"/>
                 </properties>
                 <border type="none"/>
                 <children>
@@ -125,10 +125,12 @@
                     </constraints>
                     <properties>
                       <background color="-1183240"/>
+                      <focusable value="false"/>
                       <minimumSize width="-1" height="-1"/>
                       <name value="mainBackground"/>
                       <opaque value="true"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
                     <children/>
@@ -140,9 +142,11 @@
                     </constraints>
                     <properties>
                       <background color="-1183240"/>
+                      <focusable value="false"/>
                       <minimumSize width="-1" height="-1"/>
                       <name value="mainBackground"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
                     <children/>
@@ -154,9 +158,11 @@
                     </constraints>
                     <properties>
                       <background color="-1183240"/>
+                      <focusable value="false"/>
                       <minimumSize width="-1" height="-1"/>
                       <name value="mainBackground"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
                     <children/>
@@ -168,9 +174,11 @@
                     </constraints>
                     <properties>
                       <background color="-1183240"/>
+                      <focusable value="false"/>
                       <minimumSize width="-1" height="-1"/>
                       <name value="mainBackground"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
                     <children/>
@@ -257,6 +265,7 @@
                           <background color="-1"/>
                           <maximumSize width="-1" height="-1"/>
                           <minimumSize width="-1" height="-1"/>
+                          <name value="sellPanelKeypadPanel"/>
                           <preferredSize width="-1" height="-1"/>
                         </properties>
                         <border type="line">
@@ -293,6 +302,7 @@
                             </constraints>
                             <properties>
                               <background color="-1"/>
+                              <name value="whiteBackground"/>
                               <preferredSize width="-1" height="-1"/>
                             </properties>
                             <border type="none"/>
@@ -329,6 +339,7 @@
                               <margin top="0" left="0" bottom="0" right="0"/>
                               <maximumSize width="-1" height="-1"/>
                               <minimumSize width="0" height="0"/>
+                              <name value="darkButton"/>
                               <preferredSize width="0" height="0"/>
                               <text resource-bundle="resources/strings" key="discount"/>
                             </properties>
@@ -340,6 +351,7 @@
                             </constraints>
                             <properties>
                               <background color="-1"/>
+                              <name value="whiteBackground"/>
                             </properties>
                             <border type="none"/>
                             <children>
@@ -349,6 +361,7 @@
                                   <gridbag top="5" left="0" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
                                 </constraints>
                                 <properties>
+                                  <foreground color="-13350562"/>
                                   <maximumSize width="-1" height="-1"/>
                                   <minimumSize width="-1" height="-1"/>
                                   <preferredSize width="-1" height="-1"/>
@@ -361,6 +374,7 @@
                                   <gridbag top="5" left="10" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
                                 </constraints>
                                 <properties>
+                                  <foreground color="-13350562"/>
                                   <maximumSize width="-1" height="-1"/>
                                   <minimumSize width="-1" height="-1"/>
                                   <preferredSize width="-1" height="-1"/>
@@ -374,6 +388,7 @@
                                   <gridbag top="0" left="10" bottom="0" right="0" weightx="1.0" weighty="1.0"/>
                                 </constraints>
                                 <properties>
+                                  <foreground color="-13350562"/>
                                   <maximumSize width="-1" height="-1"/>
                                   <minimumSize width="-1" height="-1"/>
                                   <preferredSize width="-1" height="-1"/>
@@ -388,6 +403,7 @@
                                   <gridbag weightx="1.0" weighty="1.0"/>
                                 </constraints>
                                 <properties>
+                                  <foreground color="-13350562"/>
                                   <maximumSize width="-1" height="-1"/>
                                   <minimumSize width="-1" height="-1"/>
                                   <preferredSize width="-1" height="-1"/>
@@ -411,6 +427,7 @@
                               <margin top="0" left="0" bottom="0" right="0"/>
                               <maximumSize width="-1" height="-1"/>
                               <minimumSize width="0" height="0"/>
+                              <name value="lightButton"/>
                               <preferredSize width="0" height="0"/>
                               <text resource-bundle="resources/strings" key="payment"/>
                             </properties>
@@ -424,7 +441,9 @@
                         </constraints>
                         <properties>
                           <background color="-1183240"/>
+                          <focusable value="false"/>
                           <name value="mainBackground"/>
+                          <requestFocusEnabled value="false"/>
                         </properties>
                         <border type="none"/>
                         <children/>
@@ -438,9 +457,11 @@
                     </constraints>
                     <properties>
                       <background color="-1183240"/>
+                      <focusable value="false"/>
                       <minimumSize width="0" height="0"/>
                       <name value="mainBackground"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                     </properties>
                     <border type="none"/>
                     <children/>

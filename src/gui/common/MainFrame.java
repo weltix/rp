@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 25.09.2019
+ * Copyright (c) RESONANCE JSC, 27.09.2019
  */
 
 package gui.common;
@@ -37,6 +37,11 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * {@link JWindow} will provide showing of dialog windows ({@link JWindow} is parent class for {@link JFrame} and {@link JDialog}).
  * <p>
  * We use special Full Screen mode to paint directly to screen without using windows system of operation system.
+ * <p>
+ * Look & feel is loading first of all from file style.xml (contains all used colors).
+ * Then information from *.form files is loading (contains all components, layouts),
+ * but previously loaded look & feel has priority (colors especially).
+ * Program code may overwrite any look or behaviour of any component.
  * <p>
  * JDialog may be used for dialog windows showing (set {@code setModal=true} to prevent screen blinking when dialog appears).
  * But it is necessary to switch off FullScreenMode, because in Windows systems app minimizes to tray when dialog appears.
@@ -699,5 +704,11 @@ public class MainFrame extends JFrame implements ActionListener {
 
     // TODO: 01.08.2019  Переделать для кнопок look and feel так, чтобы это было прописано в xml файле.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
-    // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel 
+    // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel
+    // TODO: 26.09.2019 Окно оплаты
+    // TODO: 26.09.2019 Окно со списком
+    // TODO: 26.09.2019 Окно клавиатуры
+    // TODO: 26.09.2019 Окно с плиткой товаров
+    // TODO: 26.09.2019 Подровнять клавиатуру на Splash Screen
+    // TODO: 26.09.2019  В этом файле описание look and feel шрифты упоминать? Также остальные данные, содержащиеся в нём проверить.
 }

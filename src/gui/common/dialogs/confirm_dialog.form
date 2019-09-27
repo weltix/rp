@@ -6,6 +6,11 @@
     </constraints>
     <properties>
       <background color="-1"/>
+      <focusable value="false"/>
+      <minimumSize width="0" height="0"/>
+      <name value="dialogWindow"/>
+      <preferredSize width="-1" height="-1"/>
+      <requestFocusEnabled value="false"/>
     </properties>
     <border type="line">
       <color color="-3618616"/>
@@ -57,6 +62,7 @@
         <properties>
           <background color="-1"/>
           <focusable value="false"/>
+          <name value="whiteBackground"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
@@ -78,6 +84,7 @@
           <horizontalTextPosition value="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
+          <name value="darkButton"/>
           <preferredSize width="-1" height="-1"/>
           <text resource-bundle="resources/strings" key="yes"/>
         </properties>
@@ -90,6 +97,7 @@
         <properties>
           <background color="-1"/>
           <focusable value="false"/>
+          <name value="whiteBackground"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
@@ -112,6 +120,7 @@
           <horizontalTextPosition value="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
+          <name value="lightButton"/>
           <preferredSize width="-1" height="-1"/>
           <text resource-bundle="resources/strings" key="no"/>
         </properties>

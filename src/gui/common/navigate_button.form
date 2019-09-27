@@ -6,9 +6,11 @@
     </constraints>
     <properties>
       <background color="-13350562"/>
+      <focusable value="false"/>
       <minimumSize width="0" height="0"/>
       <name value="NavigateButton.mainPanel"/>
       <preferredSize width="-1" height="-1"/>
+      <requestFocusEnabled value="false"/>
     </properties>
     <border type="none"/>
     <children>

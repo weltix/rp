@@ -7,6 +7,7 @@
     <properties>
       <background color="-1"/>
       <focusable value="false"/>
+      <name value="whiteBackground"/>
       <preferredSize width="-1" height="-1"/>
       <requestFocusEnabled value="false"/>
     </properties>
@@ -22,6 +23,7 @@
           <focusable value="false"/>
           <maximumSize width="2147483647" height="2147483647"/>
           <minimumSize width="0" height="0"/>
+          <name value="whiteBackground"/>
           <preferredSize width="-1" height="-1"/>
           <requestFocusEnabled value="false"/>
         </properties>
@@ -39,7 +41,7 @@
               <focusable value="false"/>
               <maximumSize width="2147483647" height="2147483647"/>
               <minimumSize width="0" height="0"/>
-              <name value=""/>
+              <name value="whiteBackground"/>
               <preferredSize width="-1" height="-1"/>
               <requestFocusEnabled value="false"/>
             </properties>
@@ -56,6 +58,7 @@
               <focusable value="false"/>
               <maximumSize width="2147483647" height="2147483647"/>
               <minimumSize width="0" height="0"/>
+              <name value="whiteBackground"/>
               <preferredSize width="-1" height="-1"/>
               <requestFocusEnabled value="false"/>
             </properties>
@@ -72,6 +75,7 @@
               <focusable value="false"/>
               <maximumSize width="-1" height="-1"/>
               <minimumSize width="-1" height="-1"/>
+              <name value="whiteBackground"/>
               <preferredSize width="-1" height="-1"/>
               <requestFocusEnabled value="false"/>
             </properties>
@@ -89,6 +93,7 @@
                   <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -110,6 +115,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="0"/>
@@ -130,6 +136,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="."/>
@@ -150,6 +157,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButtonBeige"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="C"/>
@@ -166,6 +174,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -183,6 +192,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -200,6 +210,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -217,6 +228,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -234,6 +246,7 @@
                   <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -255,6 +268,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="7"/>
@@ -275,6 +289,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="8"/>
@@ -295,6 +310,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="9"/>
@@ -311,6 +327,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -328,6 +345,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -345,6 +363,7 @@
                   <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -366,6 +385,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="4"/>
@@ -386,6 +406,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="5"/>
@@ -406,6 +427,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="6"/>
@@ -422,6 +444,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -439,6 +462,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -456,6 +480,7 @@
                   <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -478,6 +503,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <opaque value="true"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
@@ -500,7 +526,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
-                  <name value="whiteButton"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="2"/>
@@ -521,6 +547,7 @@
                   <margin top="0" left="0" bottom="0" right="0"/>
                   <maximumSize width="-1" height="-1"/>
                   <minimumSize width="-1" height="-1"/>
+                  <name value="keypadButton"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <text value="3"/>
@@ -537,6 +564,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -554,6 +582,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -571,6 +600,7 @@
                   <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -588,6 +618,7 @@
                   <focusable value="false"/>
                   <maximumSize width="2147483647" height="2147483647"/>
                   <minimumSize width="0" height="0"/>
+                  <name value="whiteBackground"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -605,6 +636,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -622,6 +654,7 @@
                   <focusable value="false"/>
                   <maximumSize width="1" height="-1"/>
                   <minimumSize width="1" height="-1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -639,6 +672,7 @@
                   <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -656,6 +690,7 @@
                   <focusable value="false"/>
                   <maximumSize width="2147483647" height="2147483647"/>
                   <minimumSize width="0" height="0"/>
+                  <name value="whiteBackground"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <visible value="true"/>
@@ -696,6 +731,7 @@
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
+                      <name value="keypadButton"/>
                       <preferredSize width="-1" height="-1"/>
                       <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="backspace_button"/>
@@ -715,6 +751,7 @@
                   <focusable value="false"/>
                   <maximumSize width="2147483647" height="2147483647"/>
                   <minimumSize width="0" height="0"/>
+                  <name value="whiteBackground"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
@@ -727,7 +764,7 @@
                   <gridbag weightx="1.0" weighty="16.0"/>
                 </constraints>
                 <properties>
-                  <background color="-3618616"/>
+                  <background color="-855310"/>
                   <focusable value="false"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
@@ -743,7 +780,7 @@
                       <opaque value="false"/>
                       <preferredSize width="-1" height="-1"/>
                       <requestFocusEnabled value="false"/>
-                      <visible value="true"/>
+                      <visible value="false"/>
                     </properties>
                     <border type="none">
                       <title-color color="-16777216"/>
@@ -765,6 +802,7 @@
                           <margin top="0" left="0" bottom="0" right="0"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
+                          <name value="darkButton"/>
                           <opaque value="true"/>
                           <preferredSize width="-1" height="-1"/>
                           <text resource-bundle="resources/strings" key="search"/>
@@ -801,6 +839,7 @@
                           <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
+                          <name value="darkButton"/>
                           <preferredSize width="-1" height="-1"/>
                           <text resource-bundle="resources/strings" key="ok"/>
                         </properties>
@@ -819,6 +858,7 @@
                           <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
+                          <name value="lightButton"/>
                           <preferredSize width="-1" height="-1"/>
                           <text resource-bundle="resources/strings" key="cancel"/>
                         </properties>
@@ -835,6 +875,7 @@
                 <properties>
                   <background color="-1"/>
                   <focusable value="false"/>
+                  <name value="whiteBackground"/>
                   <preferredSize width="-1" height="-1"/>
                   <requestFocusEnabled value="false"/>
                   <visible value="true"/>
@@ -853,6 +894,7 @@
                   <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
+                  <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
                   <requestFocusEnabled value="false"/>
                 </properties>
