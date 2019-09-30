@@ -23,6 +23,8 @@ public abstract class AbstractDialog extends JWindow implements ActionListener {
     public AbstractDialog(Frame owner) {
         super(owner);
 
+        this.setBackground(new Color(255,255,255, 0));
+
         if (getParent() instanceof MainFrame)
             parentFrame = (MainFrame) getParent();
         if (parentFrame.getGlassPane() instanceof GlassPane) {

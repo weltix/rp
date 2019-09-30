@@ -387,7 +387,8 @@ public class MainFrame extends JFrame implements ActionListener {
         Color base = new Color(184, 207, 229);
         Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
         if (!glassPaneHasBackground)
-            background = new Color(255, 255, 255, 0);   // glassPane will be transparent
+            background = null;   // glassPane will be transparent, but in visible state (to cover rest part of screen from clicks)
+
         if (!splashScreenPanel.isVisible()) {
             glassPane.activate(background);
             // code will make background around dialog window blurred (optional using of blurring feature)

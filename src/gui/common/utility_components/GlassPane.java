@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 30.09.2019
  */
 
 package gui.common.utility_components;
@@ -104,15 +104,15 @@ public class GlassPane extends JComponent
     public void activate(Color backgroundColor) {
         if (backgroundColor != null)
             setBackground(backgroundColor);
+        else setBackground(new Color(255, 255, 255, 0));        // transparent glass pane
 
-        // hide cursor from current JFrame
+        // hide cursor from current JComponent
         setCursor(getToolkit().createCustomCursor(
                 new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
                 new Point(),
                 null));
 
         setVisible(true);
-        requestFocusInWindow();
     }
 
     /*
