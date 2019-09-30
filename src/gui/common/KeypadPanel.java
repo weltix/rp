@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 30.09.2019
  */
 
 package gui.common;
@@ -361,6 +361,4 @@ public class KeypadPanel extends JComponent {
     public JTextField getTextField() {
         return textField;
     }
-
-    // TODO: 26.07.2019 Подобрать более оптимальный фон кнопки при её нажатии
 }

@@ -48,6 +48,7 @@ public class KeypadDialogLogin extends KeypadDialog {
                     parentFrame.setCardOfMainPanel("mainSellPanel");
                     parentFrame.setCardOfSellPanelScreens("sellPanel");
                 }
+                keypadPanel.getTextField().setText("");
                 break;
             case "actionButton2":
                 System.exit(0);

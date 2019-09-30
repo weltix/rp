@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -125,18 +126,21 @@ public class MainFrame extends JFrame implements ActionListener {
     // screen resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    public boolean blurBackground = false;
+    public boolean blurBackground = false;                      // if true, than background under glass panel will be blurred
+    public static final boolean IS_CURSOR_INVISIBLE = false;    // value for all application
+    private boolean areDialogsInitialized = false;
 
     public MainFrame() {
         init();
     }
 
     private void init() {
-//        // hide cursor from current JFrame
-//        setCursor(getToolkit().createCustomCursor(
-//                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-//                new Point(),
-//                null));
+        if (IS_CURSOR_INVISIBLE) {
+            setCursor(getToolkit().createCustomCursor(
+                    new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+                    new Point(),
+                    null));
+        }
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setUndecorated(true);                       //need for full screen mode
@@ -217,7 +221,7 @@ public class MainFrame extends JFrame implements ActionListener {
         sellPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
-                // this method checks if sellPanel become visible also after iconify-deiconify of app.
+                // this method checks if sellPanel become visible (also after iconify-deiconify of app).
                 super.componentShown(e);
                 if (!splashScreenPanel.isVisible()) {
                     initDialogWindows();
@@ -294,6 +298,9 @@ public class MainFrame extends JFrame implements ActionListener {
      * In another case we set location manually (first time only, when {@link MainFrame#splashScreenPanel} appears).
      */
     public void initDialogWindows() {
+        if (areDialogsInitialized)
+            return;
+
         int loginDlgXMargin = 0;            // need for login dialog location on splash screen
         int loginDlgYMargin = 0;            // need for login dialog location on splash screen
         if (screenSize.getWidth() == 1920 && screenSize.getHeight() == 1080) {
@@ -308,6 +315,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // get actual keypad location on screen in MainFrame. We will use it as relational location.
         try {
             kpPoint = keypadPanel.getLocationOnScreen();
+            areDialogsInitialized = true;
         } catch (IllegalComponentStateException e) {
             // Exception occurs only if keypadPanel is in invisible state.
             // Use approximately assuming location of keypad on screen in MainFrame. Need for SplashScreen keypadPanel basically.
@@ -324,8 +332,7 @@ public class MainFrame extends JFrame implements ActionListener {
         /** {@link KeypadDialogLogin} customization */
         // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
         kpHRatio = 86.0 / 100;
-        // Next code calculates dimensions and location of dialog on screen.
-        // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
         // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
         // container using they weights, the sizes of components are rounding to down.
         size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
@@ -336,8 +343,7 @@ public class MainFrame extends JFrame implements ActionListener {
         /** {@link KeypadDialogManualDiscount} customization */
         // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
         kpHRatio = 86.0 / 114;     /** 114% = 100% + 14% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
-        // Next code calculates dimensions and location of dialog on screen.
-        // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
         // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
         // container using they weights, the sizes of components are rounding to down.
         size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
@@ -348,8 +354,7 @@ public class MainFrame extends JFrame implements ActionListener {
         /** {@link KeypadDialogDepositWithdraw} customization */
         // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
         kpHRatio = 86.0 / 119;     /** 119% = 100% + 19% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
-        // Next code calculates dimensions and location of dialog on screen.
-        // 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
         // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
         // container using they weights, the sizes of components are rounding to down.
         size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
@@ -360,8 +365,11 @@ public class MainFrame extends JFrame implements ActionListener {
         /** {@link PaymentDialog} customization */
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
         size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
+        location.setLocation(0,1);
         paymentDialog.setSize(size);
-        paymentDialog.setLocation(0, 0);
+        paymentDialog.setLocation(location);
+        System.out.println(size);
+        System.out.println(location);
 
         /** {@link ConfirmDialog} customization */
         // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
@@ -379,6 +387,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
     /**
      * Provides glassPane showing, allowing optional blurring of it, then shows specified dialog window.
+     * Simple this.setEnabled(false) is not suitable because of blinking of screen when all elements are becoming disabled.
      *
      * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
      * @param dialogWindow           object of dialog window
@@ -402,22 +411,28 @@ public class MainFrame extends JFrame implements ActionListener {
 
         switch (dialogWindow.getClass().getSimpleName()) {
             case "KeypadDialogLogin":
-                SwingUtilities.invokeLater(() -> loginDialog.setVisible(true));
+//                SwingUtilities.invokeLater(() -> loginDialog.setVisible(true));
+                loginDialog.setVisible(true);
                 break;
             case "KeypadDialogManualDiscount":
-                SwingUtilities.invokeLater(() -> manualDiscountDialog.setVisible(true));
+//                SwingUtilities.invokeLater(() -> manualDiscountDialog.setVisible(true));
+                manualDiscountDialog.setVisible(true);
                 break;
             case "KeypadDialogDepositWithdraw":
-                SwingUtilities.invokeLater(() -> depositWithdrawDialog.setVisible(true));
+//                SwingUtilities.invokeLater(() -> depositWithdrawDialog.setVisible(true));
+                depositWithdrawDialog.setVisible(true);
                 break;
             case "PaymentDialog":
-                SwingUtilities.invokeLater(() -> paymentDialog.setVisible(true));
+//                SwingUtilities.invokeLater(() -> paymentDialog.setVisible(true));
+                paymentDialog.setVisible(true);
                 break;
             case "ConfirmDialog":
-                SwingUtilities.invokeLater(() -> confirmDialog.setVisible(true));
+//                SwingUtilities.invokeLater(() -> confirmDialog.setVisible(true));
+                confirmDialog.setVisible(true);
                 break;
             case "MessageDialog":
-                SwingUtilities.invokeLater(() -> messageDialog.setVisible(true));
+//                SwingUtilities.invokeLater(() -> messageDialog.setVisible(true));
+                messageDialog.setVisible(true);
                 break;
             default:
                 break;
@@ -657,7 +672,6 @@ public class MainFrame extends JFrame implements ActionListener {
         initTiledPanel();
     }
 
-    // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel
     // TODO: 26.09.2019 Окно оплаты
     // TODO: 26.09.2019 Окно со списком
@@ -666,5 +680,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 27.09.2019 Проверить Analyzer ом.
     // TODO: 27.09.2019 invokeLater glasspanel
     // TODO: 27.09.2019 вид кнопок при нажатии, рисование компонентов
-    // TODO: 30.09.2019 Папку с картинками для synth удалить
+    // TODO: 30.09.2019 Папку с картинками для synth удалить после того, как нарисую цвет кнопки
+    // TODO: 26.07.2019 Подобрать более оптимальный фон кнопки при её нажатии
+
 }

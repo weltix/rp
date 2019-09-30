@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 
+import static gui.common.MainFrame.IS_CURSOR_INVISIBLE;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /*
@@ -106,12 +107,12 @@ public class GlassPane extends JComponent
             setBackground(backgroundColor);
         else setBackground(new Color(255, 255, 255, 0));        // transparent glass pane
 
-        // hide cursor from current JComponent
-        setCursor(getToolkit().createCustomCursor(
-                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-                new Point(),
-                null));
-
+        if (IS_CURSOR_INVISIBLE) {
+            setCursor(getToolkit().createCustomCursor(
+                    new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+                    new Point(),
+                    null));
+        }
         setVisible(true);
     }
 

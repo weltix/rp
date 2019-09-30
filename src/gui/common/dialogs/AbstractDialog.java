@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
+import static gui.common.MainFrame.IS_CURSOR_INVISIBLE;
 
 /**
  * General abstract class for all dialog windows of this app. Used for inheritance by another descent classes.
@@ -30,11 +33,13 @@ public abstract class AbstractDialog extends JWindow implements ActionListener {
         if (parentFrame.getGlassPane() instanceof GlassPane) {
             glassPane = (GlassPane) parentFrame.getGlassPane();
         }
-//        // hide cursor from current JWindow
-//        setCursor(getToolkit().createCustomCursor(
-//                new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
-//                new Point(),
-//                null));
+
+        if (IS_CURSOR_INVISIBLE) {
+            setCursor(getToolkit().createCustomCursor(
+                    new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB),
+                    new Point(),
+                    null));
+        }
     }
 
     /**
