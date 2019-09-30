@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 30.09.2019
  */
 
 package gui.common;
@@ -14,7 +14,6 @@ import resources.Resources;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
-import javax.swing.plaf.synth.SynthLookAndFeel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -40,10 +39,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * <p>
  * We use special Full Screen mode to paint directly to screen without using windows system of operation system.
  * <p>
- * Look & feel is loading first of all from file style.xml (contains all used colors).
- * Then information from *.form files is loading (contains all components, layouts),
- * but previously loaded look & feel has priority (colors especially).
- * Program code may overwrite any look or behaviour of any component.
+ * Using Synth look & feel *.xml is unsuitable because of lagging of interface (rendering is 2 or 3 times longer than usually).
  * <p>
  * JDialog may be used for dialog windows showing (set {@code setModal=true} to prevent screen blinking when dialog appears).
  * But it is necessary to switch off FullScreenMode, because in Windows systems app minimizes to tray when dialog appears.
@@ -655,37 +651,19 @@ public class MainFrame extends JFrame implements ActionListener {
      * class *.form file. Method is intended to initialize this specified component(s).
      */
     private void createUIComponents() {
-//        initLookAndFeel();
         initSplashScreenPanel();
         initNavigatePanel();
         initTiledPanel();
     }
 
-    /**
-     * Loads the .xml file with appropriate look and feel (button, panel, label colors and fonts).
-     */
-    private void initLookAndFeel() {
-        SynthLookAndFeel lookAndFeel = new SynthLookAndFeel();
-        try {
-            lookAndFeel.load(MainFrame.class.getResourceAsStream("style.xml"),
-                    MainFrame.class);
-            UIManager.setLookAndFeel(lookAndFeel);
-        } catch (Exception e) {
-            System.err.println("Couldn't get specified look and feel ("
-                    + lookAndFeel
-                    + "), for some reason.");
-            System.err.println("Using the default look and feel.");
-            e.printStackTrace();
-        }
-    }
-
-    // TODO: 01.08.2019  Look and feel в xml не годится, тормозит.
     // TODO: 07.08.2019  Как вариант, скрывать курсор во всём приложении с помощью glassPaneю
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel
     // TODO: 26.09.2019 Окно оплаты
     // TODO: 26.09.2019 Окно со списком
     // TODO: 26.09.2019 Окно клавиатуры
     // TODO: 26.09.2019 Окно с плиткой товаров
-    // TODO: 26.09.2019 В этом файле описание look and feel шрифты упоминать? Также остальные данные, содержащиеся в нём проверить.
-    // TODO: 27.09.2019 Проверить Analyzer ом. 
+    // TODO: 27.09.2019 Проверить Analyzer ом.
+    // TODO: 27.09.2019 invokeLater glasspanel
+    // TODO: 27.09.2019 вид кнопок при нажатии, рисование компонентов
+    // TODO: 30.09.2019 Папку с картинками для synth удалить
 }

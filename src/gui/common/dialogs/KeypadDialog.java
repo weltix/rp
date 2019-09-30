@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 30.09.2019
  */
 
 package gui.common.dialogs;
@@ -44,11 +44,5 @@ public abstract class KeypadDialog extends AbstractDialog {
         // type and size of fonts in heading
         dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
         dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
-    }
-
-    @Override
-    protected void close() {
-        super.close();
-        keypadPanel.getTextField().setText("");
     }
 }

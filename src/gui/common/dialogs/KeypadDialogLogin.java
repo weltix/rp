@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 30.09.2019
  */
 
 package gui.common.dialogs;
@@ -55,7 +55,5 @@ public class KeypadDialogLogin extends KeypadDialog {
             default:
                 break;
         }
-
-
     }
 }

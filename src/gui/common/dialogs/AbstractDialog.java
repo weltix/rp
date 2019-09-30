@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 30.09.2019
  */
 
 package gui.common.dialogs;
@@ -52,6 +52,6 @@ public abstract class AbstractDialog extends JWindow implements ActionListener {
     protected void close() {
         parentFrame.setContentPane(null);
         glassPane.deactivate();
-        SwingUtilities.invokeLater(()->this.dispose());
+        SwingUtilities.invokeLater(() -> this.dispose());
     }
 }
