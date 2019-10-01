@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 30.09.2019
+ * Copyright (c) RESONANCE JSC, 01.10.2019
  */
 
 package gui.common.dialogs;
@@ -26,7 +26,7 @@ public abstract class AbstractDialog extends JWindow implements ActionListener {
     public AbstractDialog(Frame owner) {
         super(owner);
 
-        this.setBackground(new Color(255,255,255, 0));
+        this.setBackground(new Color(255,255,255, 0));  // actual for weak hardware
 
         if (getParent() instanceof MainFrame)
             parentFrame = (MainFrame) getParent();

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 30.09.2019
+ * Copyright (c) RESONANCE JSC, 01.10.2019
  */
 
 package gui.common;
@@ -8,6 +8,7 @@ import gui.common.dialogs.*;
 import gui.common.utility_components.BackgroundImagePanel;
 import gui.common.utility_components.BlurLayerUI;
 import gui.common.utility_components.GlassPane;
+import gui.common.utility_components.TouchScroll;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
@@ -29,6 +30,7 @@ import java.util.function.Consumer;
 
 import static gui.fonts.FontProvider.FONTAWESOME_REGULAR;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
+import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
 
 /**
  * Class describes main window of our graphic interface. Bound to main_frame.form.
@@ -104,6 +106,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private TiledPanel tiledPanel0;
     private TiledPanel tiledPanel1;
     private TiledPanel tiledPanel2;
+    private JScrollPane scrollPaneTable;
 
     private GraphicsDevice graphicsDevice;      // used to set full screen mode
     private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
@@ -229,67 +232,151 @@ public class MainFrame extends JFrame implements ActionListener {
             }
         });
 
-        String[] columnNames = {"First Name",
-                "Last Name",
-                "Sport",
-                "# of Years",
-                "Vegetarian"};
+        String[] columnNames = {"#",
+                "Название",
+                "Кол-во",
+                "Сумма"};
 
         Object[][] data = {
-                {"Kathy", "Smith3w4t3q4vqw4tgv4wgt4gt34gt4evtegvw4t",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Joe", "Brown",
-                        "Pool", new Integer(10), new Boolean(false)},
-                {"Kathy", "Smith3w4t3q4vqw4tgv4wgt4gt34gt4evtegvw4t",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Joe", "Brown",
-                        "Pool", new Integer(10), new Boolean(false)},
-                {"Kathy", "Smith3w4t3q4vqw4tgv4wgt4gt34gt4evtegvw4t",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Joe", "Brown",
-                        "Pool", new Integer(10), new Boolean(false)}
+                {" ", "Лосьон для тела Dove Чай матча и экстракт сакуры, 250 мл   4539448\n",
+                        new Integer(5), new Double(250.50)},
+                {" ", "Лосьон для тела Dove Экстракт лотоса и рисовое молочко, 250 мл   4539449\n",
+                        new Integer(3), new Double(124)},
+                {" ", "Лосьон для тела Love Beauty and Planet «Бархатное масло ши», 400 мл   4539461\n",
+                        new Integer(2), new Double(248)},
+                {" ", "Лосьон для тела Love Beauty and Planet «Восхитительно сияние», 400 мл   4539462\n",
+                        new Integer(20), new Double(1030)},
+                {" ", "Лосьон для тела Love Beauty and Planet «Соблазнительное увлажнение», 400 мл   4539463\n",
+                        new Integer(10), new Double(400.80)},
+                {" ", "Молочко для тела Villaphyta, с алоэ, 200 мл   4545913\n",
+                        new Integer(5), new Double(500)},
+                {" ", "Регенерирующее масло для тела Cosnature «Гранат», 100 мл   4545931\n",
+                        new Integer(3), new Double(700)},
+                {" ", "Бальзам для тела Alkmene Sensitiv «Био Мальва», 250 мл   4545947\n",
+                        new Integer(2), new Double(300.40)},
+                {" ", "Молочко для тела Alkmene «Био Нероли», живительное, 250 мл   4545951\n",
+                        new Integer(20), new Double(170.50)},
+                {" ", "Интенсивный бальзам для тела Alkmene «Био Олива», 250 мл   4545953\n",
+                        new Integer(10), new Double(200)},
+                {" ", "Бальзам для тела Alkmene «Био Каштан», расслабляющий, 150 мл   4545955\n",
+                        new Integer(5), new Double(340)},
+                {" ", "Молочко для тела Alkmene «Био Алоэ», ухаживающее, 250 мл   4545957\n",
+                        new Integer(3), new Double(124)},
+                {" ", "Масло для тела Ayluna «Лунный восход», 100 мл   4545993\n",
+                        new Integer(2), new Double(800)},
+                {" ", "Масло для тела Ayluna «Чудесное дерево», 100 мл   4545994\n",
+                        new Integer(20), new Double(650)},
+                {" ", "Сливки для тела Ayluna «Лунный восход», 250 мл   4545999\n",
+                        new Integer(10), new Double(320)},
+                {" ", "Сливки для тела Ayluna «Утренняя заря», 250 мл   4546000\n",
+                        new Integer(5), new Double(174)},
+                {" ", "Лосьон для тела Eunyul, с маслом черного тмина, 500 мл   4639063\n",
+                        new Integer(3), new Double(100)},
+                {" ", "Гель для тела Lebelage, увлажняющий успокаивающий, с экстрактом алоэ, 300 мл   4639098\n",
+                        new Integer(2), new Double(540)},
+                {" ", "Гель для тела Lebelage, увлажняющий успокаивающий, с экстрактом огурца, 300 мл   4639099\n",
+                        new Integer(20), new Double(140)},
+                {" ", "Гель для тела Lebelage, увлажняющий успокаивающий, с муцином улитки, 300 мл   4639100\n",
+                        new Integer(10), new Double(220)},
+                {" ", "Масло для массажа, 150 мл 40336 609906\n",
+                        new Integer(5), new Double(120.50)},
+                {" ", "Крем для тела Organic Shop \"Ванильный взбитый крем\" увлажняющий 450 мл 1155253\n",
+                        new Integer(3), new Double(140.50)},
+                {" ", "Крем для тела Organic Shop \"Банановый молочный коктейль\" восстанавливающий 450 мл 1155254\n",
+                        new Integer(2), new Double(900)},
+                {" ", "Крем для тела Organic Shop \"Карамельный каппуччино\" подтягивающий 450 мл 1155255\n",
+                        new Integer(20), new Double(300.80)},
+                {" ", "Масло для тела Банька Агафьи  густое мускатное, 300 мл 1155332\n",
+                        new Integer(10), new Double(500.60)},
+                {" ", "Маска для тела Банька Агафьи \"Черная торфяная\", 100 мл 1224853\n",
+                        new Integer(5), new Double(400.80)},
+                {" ", "Обертывание-крио водорослевое, Compliment Body, 475 мл   2925152\n",
+                        new Integer(3), new Double(120)},
+                {" ", "Успокаивающий арома-спрей для здорового сна Французская лаванда и Магический ирис, 75 мл   3604211\n",
+                        new Integer(2), new Double(100)},
+                {" ", "Мусс для тела Zeitun «Ночной обновляющий» сандал и амбра, 200 мл   4321997\n",
+                        new Integer(20), new Double(70)},
+                {" ", "Мусс для тела Nivea «Огуречный лимонад», 200 мл   4349312\n",
+                        new Integer(10), new Double(50)},
+                {" ", "Лосьон для тела Dove Чай матча и экстракт сакуры, 250 мл   4539448\n",
+                        new Integer(5), new Double(250.50)},
+                {" ", "Лосьон для тела Dove Экстракт лотоса и рисовое молочко, 250 мл   4539449\n",
+                        new Integer(3), new Double(124)},
+                {" ", "Лосьон для тела Love Beauty and Planet «Бархатное масло ши», 400 мл   4539461\n",
+                        new Integer(2), new Double(248)},
+                {" ", "Лосьон для тела Love Beauty and Planet «Восхитительно сияние», 400 мл   4539462\n",
+                        new Integer(20), new Double(1030)},
+                {" ", "Лосьон для тела Love Beauty and Planet «Соблазнительное увлажнение», 400 мл   4539463\n",
+                        new Integer(10), new Double(400.80)},
+                {" ", "Молочко для тела Villaphyta, с алоэ, 200 мл   4545913\n",
+                        new Integer(5), new Double(500)},
+                {" ", "Регенерирующее масло для тела Cosnature «Гранат», 100 мл   4545931\n",
+                        new Integer(3), new Double(700)},
+                {" ", "Бальзам для тела Alkmene Sensitiv «Био Мальва», 250 мл   4545947\n",
+                        new Integer(2), new Double(300.40)},
+                {" ", "Молочко для тела Alkmene «Био Нероли», живительное, 250 мл   4545951\n",
+                        new Integer(20), new Double(170.50)},
+                {" ", "Интенсивный бальзам для тела Alkmene «Био Олива», 250 мл   4545953\n",
+                        new Integer(10), new Double(200)},
+                {" ", "Бальзам для тела Alkmene «Био Каштан», расслабляющий, 150 мл   4545955\n",
+                        new Integer(5), new Double(340)},
+                {" ", "Молочко для тела Alkmene «Био Алоэ», ухаживающее, 250 мл   4545957\n",
+                        new Integer(3), new Double(124)},
+                {" ", "Масло для тела Ayluna «Лунный восход», 100 мл   4545993\n",
+                        new Integer(2), new Double(800)},
+                {" ", "Масло для тела Ayluna «Чудесное дерево», 100 мл   4545994\n",
+                        new Integer(20), new Double(650)},
+                {" ", "Сливки для тела Ayluna «Лунный восход», 250 мл   4545999\n",
+                        new Integer(10), new Double(320)},
+                {" ", "Сливки для тела Ayluna «Утренняя заря», 250 мл   4546000\n",
+                        new Integer(5), new Double(174)},
+                {" ", "Лосьон для тела Eunyul, с маслом черного тмина, 500 мл   4639063\n",
+                        new Integer(3), new Double(100)},
+                {" ", "Гель для тела Lebelage, увлажняющий успокаивающий, с экстрактом алоэ, 300 мл   4639098\n",
+                        new Integer(2), new Double(540)},
+                {" ", "Гель для тела Lebelage, увлажняющий успокаивающий, с экстрактом огурца, 300 мл   4639099\n",
+                        new Integer(20), new Double(140)},
+                {" ", "Гель для тела Lebelage, увлажняющий успокаивающий, с муцином улитки, 300 мл   4639100\n",
+                        new Integer(10), new Double(220)},
+                {" ", "Масло для массажа, 150 мл 40336 609906\n",
+                        new Integer(5), new Double(120.50)},
+                {" ", "Крем для тела Organic Shop \"Ванильный взбитый крем\" увлажняющий 450 мл 1155253\n",
+                        new Integer(3), new Double(140.50)},
+                {" ", "Крем для тела Organic Shop \"Банановый молочный коктейль\" восстанавливающий 450 мл 1155254\n",
+                        new Integer(2), new Double(900)},
+                {" ", "Крем для тела Organic Shop \"Карамельный каппуччино\" подтягивающий 450 мл 1155255\n",
+                        new Integer(20), new Double(300.80)},
+                {" ", "Масло для тела Банька Агафьи  густое мускатное, 300 мл 1155332\n",
+                        new Integer(10), new Double(500.60)},
+                {" ", "Маска для тела Банька Агафьи \"Черная торфяная\", 100 мл 1224853\n",
+                        new Integer(5), new Double(400.80)},
+                {" ", "Обертывание-крио водорослевое, Compliment Body, 475 мл   2925152\n",
+                        new Integer(3), new Double(120)},
+                {" ", "Успокаивающий арома-спрей для здорового сна Французская лаванда и Магический ирис, 75 мл   3604211\n",
+                        new Integer(2), new Double(100)},
+                {" ", "Мусс для тела Zeitun «Ночной обновляющий» сандал и амбра, 200 мл   4321997\n",
+                        new Integer(20), new Double(70)},
+                {" ", "Мусс для тела Nivea «Огуречный лимонад», 200 мл   4349312\n",
+                        new Integer(10), new Double(50)}
         };
 
-
-        String data1 = "Kathy32465312542346243523524 45745y45herghesrgerg";
-        String data2 = "John";
-        String data3 = "Sue";
-        String data4 = "Jane";
-        String data5 = "Jane";
-
-        Object[] row = {data1, data2, data3, data4, data5};
-
-//        sellTable.setPreferredScrollableViewportSize(new Dimension(500, 70));
-//        sellTable.setFillsViewportHeight(true);
+        scrollPaneTable.setViewportView(sellTable);
+        sellTable.setSelectionMode(SINGLE_SELECTION);
+        sellTable.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34));
 
         DefaultTableModel sellTableModel = (DefaultTableModel) sellTable.getModel();
-        sellTableModel.addColumn("1");
-        sellTableModel.addColumn("2");
-        sellTableModel.addColumn("3");
-        sellTableModel.addColumn("4");
-        sellTableModel.addColumn("5");
-        sellTableModel.addRow(row);
-        sellTableModel.setDataVector(data, row);
+//        sellTableModel.setColumnIdentifiers(columnNames);   // names of columns
+//        sellTableModel.addColumn("1");
+//        sellTableModel.addColumn("2");
+//        sellTableModel.addColumn("3");
+//        sellTableModel.addColumn("4");
+//        sellTableModel.addColumn("5");
+//        sellTableModel.addRow(columnNames);
+        sellTableModel.setDataVector(data, columnNames);
 
-        sellTableModel.setRowCount(25);
+        sellTableModel.setRowCount(60);
+
+
     }
 
     /**
@@ -365,11 +452,9 @@ public class MainFrame extends JFrame implements ActionListener {
         /** {@link PaymentDialog} customization */
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
         size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
-        location.setLocation(0,1);
+        location.setLocation(0, 1);
         paymentDialog.setSize(size);
         paymentDialog.setLocation(location);
-        System.out.println(size);
-        System.out.println(location);
 
         /** {@link ConfirmDialog} customization */
         // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
@@ -670,6 +755,7 @@ public class MainFrame extends JFrame implements ActionListener {
         initSplashScreenPanel();
         initNavigatePanel();
         initTiledPanel();
+        scrollPaneTable = new TouchScroll();
     }
 
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel
@@ -682,5 +768,7 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 27.09.2019 вид кнопок при нажатии, рисование компонентов
     // TODO: 30.09.2019 Папку с картинками для synth удалить после того, как нарисую цвет кнопки
     // TODO: 26.07.2019 Подобрать более оптимальный фон кнопки при её нажатии
+    // TODO: 01.10.2019 Установку всех цветов и шрифтов собрать в одном месте 
+    // TODO: 01.10.2019 Диалоговые окна реализовать с помощью JPanels
 
 }
