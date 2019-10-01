@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 01.10.2019
  */
 
 package gui.common.utility_components;
@@ -28,7 +28,7 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * P.S. Glass pane helps us to catch and cancel all key events of mouse and keyboard.
  * We basically need it as replacement for JFrame.setEnable(false), which causes screen blinking.
  */
-public class GlassPane extends JComponent
+public class GlassPane extends JPanel
         implements KeyListener {
     private final static Border MESSAGE_BORDER = new EmptyBorder(10, 10, 10, 10);
     private JLabel
@@ -38,7 +38,7 @@ public class GlassPane extends JComponent
         //  Set glass pane properties
 
         setOpaque(false);
-//        setLayout(new GridBagLayout());
+        setLayout(null);
 
 //        Color base = UIManager.getColor("inactiveCaptionBorder");
         Color base = new Color(184, 207, 229);
@@ -47,9 +47,9 @@ public class GlassPane extends JComponent
 
         //  Add a message label to the glass pane
 
-        add(message, new GridBagConstraints());
-        message.setOpaque(false);
-        message.setBorder(MESSAGE_BORDER);
+//        add(message, new GridBagConstraints());
+//        message.setOpaque(false);
+//        message.setBorder(MESSAGE_BORDER);
 
 //        JPanel q = new PaymentDialog(this);
 //        q.setSize(1200, 850);
@@ -117,9 +117,8 @@ public class GlassPane extends JComponent
                 null));
 
         setVisible(true);
-        requestFocusInWindow();
-
-
+        revalidate();
+        repaint();
     }
 
     /*

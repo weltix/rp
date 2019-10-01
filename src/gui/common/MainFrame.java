@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 01.10.2019
  */
 
 package gui.common;
@@ -303,7 +303,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         // optional using of blurring feature
         if (!splashScreenPanel.isVisible()) {
-            glassPane.activate(background);
+
             // code will make background around dialog window blurred
             if (blurBackground) {
                 jlayer.setView(mainPanel);
@@ -326,7 +326,9 @@ public class MainFrame extends JFrame implements ActionListener {
                 dialogType = DialogType.DEPOSIT_WITHDRAW;
                 break;
             case "PaymentDialog":
-                dialogType = DialogType.PAYMENT;
+                paymentDialog.setBounds(100, 100, 600, 500);
+                glassPane.add(paymentDialog);
+                glassPane.activate( new Color(184, 207, 229,128));
                 break;
             case "ConfirmDialog":
                 dialogType = DialogType.CONFIRM;
@@ -337,11 +339,7 @@ public class MainFrame extends JFrame implements ActionListener {
             default:
                 break;
         }
-        // this delay - workaround for weak hardware (for fast appearance of glassPane without delays)
-        Timer timer = new Timer(0, this);
-        timer.setInitialDelay(10);
-        timer.setActionCommand(dialogType.name());
-        timer.start();
+
     }
 
     /**
@@ -414,11 +412,8 @@ public class MainFrame extends JFrame implements ActionListener {
         /** {@link PaymentDialog} customization */
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
         size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
-        paymentDialog.setSize(1200, 800);
-        paymentDialog.setLocation(0, 0);
-        paymentDialog.setVisible(true);
-        glassPane.add(paymentDialog);
-
+//        paymentDialog.setSize(size);
+        paymentDialog.setBounds(100, 100, size.width, size.height);
 
         /** {@link ConfirmDialog} customization */
         // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
@@ -463,7 +458,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 depositWithdrawDialog.setVisible(true);
                 break;
             case "PAYMENT":
-                paymentDialog.setVisible(true);
+
                 break;
             case "CONFIRM":
                 confirmDialog.setVisible(true);

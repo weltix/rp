@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 01.10.2019
  */
 
 package gui.common.dialogs;
@@ -63,6 +63,7 @@ public abstract class AbstractDialog extends JPanel implements ActionListener {
         // Returns initial mainPanel of main_frame.form. Does not affect performance.
         // Need to call, because previously MainFrame#setContentPane(jlayer) possibly was called for blurring of background.
         glassPane.deactivate();
+        glassPane.remove(this);
         Timer timer = new Timer(0, this);
         timer.setInitialDelay(10);
         timer.setActionCommand("delayBeforeClosingThisWindow");
