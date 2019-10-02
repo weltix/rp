@@ -170,7 +170,7 @@
                   <grid id="4e3a6" layout-manager="GridBagLayout">
                     <constraints>
                       <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="95.6"/>
+                      <gridbag weightx="1.0" weighty="95.1"/>
                     </constraints>
                     <properties>
                       <background color="-1183240"/>
@@ -198,34 +198,49 @@
                       <visible value="true"/>
                     </properties>
                     <border type="none">
+                      <size top="0" left="0" bottom="0" right="0"/>
                       <color color="-3618616"/>
                     </border>
                     <children>
-                      <scrollpane id="fd896" binding="scrollPaneTable">
+                      <scrollpane id="fd896" binding="scrollPaneOfSellTable">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                           <gridbag weightx="1.0" weighty="1.0"/>
                         </constraints>
                         <properties>
+                          <background color="-1183240"/>
+                          <focusable value="false"/>
+                          <foreground color="-16777216"/>
+                          <minimumSize width="0" height="0"/>
+                          <preferredSize width="-1" height="-1"/>
+                          <requestFocusEnabled value="false"/>
                           <wheelScrollingEnabled value="true"/>
                         </properties>
-                        <border type="line">
+                        <border type="empty">
                           <color color="-3618616"/>
                         </border>
                         <children>
                           <component id="51bb9" class="javax.swing.JTable" binding="sellTable">
                             <constraints/>
                             <properties>
+                              <autoCreateColumnsFromModel value="true"/>
+                              <autoCreateRowSorter value="false"/>
                               <autoResizeMode value="2"/>
+                              <autoscrolls value="true"/>
+                              <editingColumn value="-1"/>
                               <enabled value="true"/>
                               <fillsViewportHeight value="true"/>
                               <gridColor color="-2236963"/>
-                              <rowHeight value="70"/>
+                              <intercellSpacing width="1" height="1"/>
+                              <rowHeight value="71"/>
+                              <rowMargin value="1"/>
+                              <selectionBackground color="-4665371"/>
                               <visible value="true"/>
                             </properties>
                             <clientProperties>
                               <JTable.autoStartsEdit class="java.lang.Boolean" value="false"/>
                               <Table.isFileList class="java.lang.Boolean" value="false"/>
+                              <terminateEditOnFocusLost class="java.lang.Boolean" value="false"/>
                             </clientProperties>
                           </component>
                         </children>

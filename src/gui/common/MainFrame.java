@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 01.10.2019
+ * Copyright (c) RESONANCE JSC, 02.10.2019
  */
 
 package gui.common;
@@ -15,7 +15,9 @@ import resources.Resources;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -106,7 +108,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private TiledPanel tiledPanel0;
     private TiledPanel tiledPanel1;
     private TiledPanel tiledPanel2;
-    private JScrollPane scrollPaneTable;
+    private JScrollPane scrollPaneOfSellTable;
 
     private GraphicsDevice graphicsDevice;      // used to set full screen mode
     private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
@@ -229,10 +231,15 @@ public class MainFrame extends JFrame implements ActionListener {
                 if (!splashScreenPanel.isVisible()) {
                     initDialogWindows();
                 }
+
+                sellTable.getColumnModel().getColumn(0).setPreferredWidth(1);
+                sellTable.getColumnModel().getColumn(1).setPreferredWidth(500);
+                sellTable.getColumnModel().getColumn(2).setPreferredWidth(60);
+                sellTable.getColumnModel().getColumn(3).setPreferredWidth(60);
             }
         });
 
-        String[] columnNames = {"#",
+        String[] columnNames = {"",
                 "Название",
                 "Кол-во",
                 "Сумма"};
@@ -360,12 +367,54 @@ public class MainFrame extends JFrame implements ActionListener {
                         new Integer(10), new Double(50)}
         };
 
-        scrollPaneTable.setViewportView(sellTable);
+        scrollPaneOfSellTable.setViewportView(sellTable);       // method is actual for TouchScroll.class
+
+
+
         sellTable.setSelectionMode(SINGLE_SELECTION);
         sellTable.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34));
+        sellTable.setBorder(BorderFactory.createMatteBorder(0,1,0,1, new Color(200, 200, 200)));
+        sellTable.getTableHeader().setReorderingAllowed(false);     // don't allow reorder columns by hands
+
+        class DefaultHeaderRenderer extends JLabel implements TableCellRenderer {
+
+            DefaultHeaderRenderer() {
+                setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 26));
+                setOpaque(true);
+                setForeground(Color.WHITE);
+                setBackground(new Color(52, 73, 94));
+                setBorder(BorderFactory.createMatteBorder(0,0,0,1, new Color(255, 255, 255)));
+                setPreferredSize(new Dimension(0, 33));
+                setHorizontalAlignment(JLabel.CENTER);
+            }
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                                                           boolean isSelected, boolean hasFocus, int row, int column) {
+                setText(value.toString());
+                return this;
+            }
+        }
+
+        class DefaultCellRenderer extends DefaultTableCellRenderer {
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBorder(noFocusBorder);
+                return this;
+            }
+        }
+
+        sellTable.getTableHeader().setDefaultRenderer(new DefaultHeaderRenderer());
+        sellTable.setDefaultRenderer(Object.class, new DefaultCellRenderer());
+
 
         DefaultTableModel sellTableModel = (DefaultTableModel) sellTable.getModel();
+
 //        sellTableModel.setColumnIdentifiers(columnNames);   // names of columns
+
+
 //        sellTableModel.addColumn("1");
 //        sellTableModel.addColumn("2");
 //        sellTableModel.addColumn("3");
@@ -388,8 +437,8 @@ public class MainFrame extends JFrame implements ActionListener {
         if (areDialogsInitialized)
             return;
 
-        int loginDlgXMargin = 0;            // need for login dialog location on splash screen
-        int loginDlgYMargin = 0;            // need for login dialog location on splash screen
+        int loginDlgXMargin = getWidth();       // need for login dialog location on splash screen
+        int loginDlgYMargin = getHeight();      // need for login dialog location on splash screen
         if (screenSize.getWidth() == 1920 && screenSize.getHeight() == 1080) {
             loginDlgXMargin = (int) (0.0115 * getWidth());
             loginDlgYMargin = (int) (0.019 * getHeight());
@@ -755,7 +804,7 @@ public class MainFrame extends JFrame implements ActionListener {
         initSplashScreenPanel();
         initNavigatePanel();
         initTiledPanel();
-        scrollPaneTable = new TouchScroll();
+        scrollPaneOfSellTable = new TouchScroll();      // for scrolling of sell table
     }
 
     // TODO: 11.09.2019 Установить действия на все кнопки TiledPanel
@@ -770,5 +819,6 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 26.07.2019 Подобрать более оптимальный фон кнопки при её нажатии
     // TODO: 01.10.2019 Установку всех цветов и шрифтов собрать в одном месте 
     // TODO: 01.10.2019 Диалоговые окна реализовать с помощью JPanels
+    // TODO: 02.10.2019 Scrolling of JTable
 
 }
