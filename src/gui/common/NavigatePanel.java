@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 03.10.2019
  */
 
 package gui.common;
@@ -141,5 +141,13 @@ public class NavigatePanel extends JPanel {
      */
     public int getHeaderPanelHeight() {
         return headerPanel.getHeight();
+    }
+
+    /**
+     * Header panel is panel with title like "RESPOS MARKET" in top left corner of screen.
+     */
+    public void setHeaderPanelHeight(int height) {
+        headerPanel.setPreferredSize(new Dimension(10, height));
+        System.out.println(headerPanel.getSize() + " headerPanel.getSize()");
     }
 }
