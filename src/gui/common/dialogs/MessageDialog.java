@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 04.10.2019
  */
 
 package gui.common.dialogs;
@@ -11,6 +11,8 @@ import gui.fonts.FontProvider;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
@@ -36,6 +38,15 @@ public class MessageDialog extends AbstractDialog {
         dialogMessage.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 32));
         okButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
         okButton.addActionListener(this::actionPerformed);
+
+        mainPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER
+                        || e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    okButton.doClick();
+            }
+        });
     }
 
     public void setProperties(String title, String message) {

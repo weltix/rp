@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 04.10.2019
  */
 
 package gui.common.dialogs;
@@ -58,9 +58,11 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         productButton.addActionListener(this::actionPerformed);
         receiptButton.addActionListener(this::actionPerformed);
 
-        keypadPanel.setActionButtonsAmount(1);
-        keypadPanel.getActionButton0().setText(Resources.getInstance().getString("set_discount"));
-        keypadPanel.getActionButton0().addActionListener(this::actionPerformed);
+        keypadPanel.setActionButtonsAmount(2);
+        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("set"));
+        keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
+        keypadPanel.getActionButton2().setText(Resources.getInstance().getString("cancel"));
+        keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
 
         textField = keypadPanel.getTextField();
         this.addComponentListener(new ComponentAdapter() {
@@ -88,7 +90,10 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
     public void actionPerformed(ActionEvent e) {
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
-            case "actionButton0":
+            case "actionButton1":
+                System.out.println("yes");
+                break;
+            case "actionButton2":
                 close();
                 break;
             case "percentButton":

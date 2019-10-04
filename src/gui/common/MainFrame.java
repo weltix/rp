@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 03.10.2019
+ * Copyright (c) RESONANCE JSC, 04.10.2019
  */
 
 package gui.common;
@@ -181,7 +181,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // next parameters make window for my monitor with physical dimensions like real 14' POS
 //        setSize(1050, 618);
 //        setSize(1280, 720);
-        setSize(1920, 1080);
+//        setSize(1920, 1080);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
     }
 

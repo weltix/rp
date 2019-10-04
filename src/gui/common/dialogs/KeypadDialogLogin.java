@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 03.10.2019
+ * Copyright (c) RESONANCE JSC, 04.10.2019
  */
 
 package gui.common.dialogs;
@@ -10,8 +10,6 @@ import resources.Resources;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * Class for dialog window, that contains {@link JPasswordField} and {@link KeypadPanel} for login to system.
@@ -34,19 +32,6 @@ public class KeypadDialogLogin extends KeypadDialog {
 
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
         keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
-
-        keypadPanel.getTextField().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                switch (e.getKeyCode()) {
-                    case KeyEvent.VK_ENTER:
-                        keypadPanel.getActionButton1().doClick();
-                        break;
-                    case KeyEvent.VK_ESCAPE:
-                        keypadPanel.getActionButton2().doClick();
-                }
-            }
-        });
     }
 
     /**

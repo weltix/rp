@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 04.10.2019
  */
 
 package gui.common.dialogs;
@@ -11,6 +11,8 @@ import gui.fonts.FontProvider;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.function.Consumer;
 
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
@@ -42,6 +44,22 @@ public class ConfirmDialog extends AbstractDialog{
         noButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
         yesButton.addActionListener(this::actionPerformed);
         noButton.addActionListener(this::actionPerformed);
+
+        mainPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                            yesButton.doClick();
+                        break;
+                    case KeyEvent.VK_ESCAPE:
+                            noButton.doClick();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     public void setProperties (String title, String question, Consumer<Integer> action){

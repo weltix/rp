@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 30.09.2019
+ * Copyright (c) RESONANCE JSC, 04.10.2019
  */
 
 package gui.common;
@@ -11,6 +11,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -50,6 +51,8 @@ public class KeypadPanel extends JComponent {
     private JPanel textFieldPanel;
 
     private Robot robot = null;         // provides generation of keys presses
+    private KeyAdapter textFieldKeyListener = new TextFieldKeyListener();
+    private int actionButtonAmount = 1; // default value
 
     // we define some PlainDocuments for our text field to provide it's different behavior in different contexts
     private final PlainDocument percentTextFieldDocument = new PercentTextFieldDocument(textField);
@@ -74,6 +77,8 @@ public class KeypadPanel extends JComponent {
 
         textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
         textField.setBorder(BorderFactory.createEmptyBorder());
+
+        textField.addKeyListener(textFieldKeyListener);
 
         // timer for selection text by long mouse pressing
         Timer timerTextFieldLongPress = new Timer(1000, e -> {
@@ -167,10 +172,12 @@ public class KeypadPanel extends JComponent {
         switch (amount) {
             case 2:
                 cardLayout.show(actionButtonPanel, "twoActionButtons");
+                actionButtonAmount = 2;
                 break;
             case 1:
             default:
                 cardLayout.show(actionButtonPanel, "oneActionButton");
+                actionButtonAmount = 1;
                 break;
         }
     }
@@ -194,11 +201,13 @@ public class KeypadPanel extends JComponent {
     public void switchToPasswordTextField() {
         GridBagLayout textFieldPanelLayout = (GridBagLayout) textFieldPanel.getLayout();
         GridBagConstraints constraintsTextField = textFieldPanelLayout.getConstraints(textField);
+        textField.removeKeyListener(textFieldKeyListener);
         textFieldPanel.remove(textField);
         textField = new JPasswordField();
         textField.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 60));
         textField.setBorder(BorderFactory.createEmptyBorder());
         textFieldPanel.add(textField, constraintsTextField);
+        textField.addKeyListener(textFieldKeyListener);
     }
 
     /**
@@ -270,7 +279,8 @@ public class KeypadPanel extends JComponent {
         @Override
         public void replace(int offset, int length, String text, AttributeSet attrs) throws
                 BadLocationException {
-            String currentText = this.getText(0, getLength()).replaceAll(",", ".");
+            String currentText = this.getText(0, getLength());
+            text = text.replaceFirst(",", ".");
             strBuilder.delete(0, strBuilder.length()).append(currentText).replace(offset, offset + length, text);
             if (strBuilder.toString().matches(regex)) {
                 insertStringExpected = true;
@@ -332,6 +342,30 @@ public class KeypadPanel extends JComponent {
                 if (textToDouble == 100.0 && currentText.contains("."))
                     return;
                 super.insertString(offset, str, attr);
+            }
+        }
+    }
+
+    /**
+     * Class listener for buttons presses of physical keyboard when {@link KeypadPanel#textField} is focused.
+     * ENTER and ESCAPE presses are matched to clicks of appropriate action buttons of our keypadPanel.
+     */
+    private class TextFieldKeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_ENTER:
+                    if (actionButtonAmount == 1)
+                        actionButton0.doClick();
+                    else if (actionButtonAmount == 2)
+                        actionButton1.doClick();
+                    break;
+                case KeyEvent.VK_ESCAPE:
+                    if (actionButtonAmount == 2)
+                        actionButton2.doClick();
+                    break;
+                default:
+                    break;
             }
         }
     }
