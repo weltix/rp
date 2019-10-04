@@ -40,13 +40,17 @@ import static javax.swing.ListSelectionModel.SINGLE_SELECTION;
  * Class describes main window of our graphic interface. Bound to main_frame.form.
  * This {@link JFrame} is the single window, where all application will be rendering.
  * CardLayout will provide showing of different screens (i.e. different cards-panels).
- * {@link JWindow} will provide showing of dialog windows ({@link JWindow} is parent class for {@link JFrame} and {@link JDialog}).
- * Using of JPanels instead of {@link JWindow} consumes the same amount of RAM and CPU. Only difference - {@link JWindow}
- * appears with slight single blink.
  * <p>
  * We use special Full Screen mode to paint directly to screen without using windows system of operation system.
  * <p>
  * Using Synth look & feel *.xml is unsuitable because of lagging of interface (rendering is 2 or 3 times longer than usually).
+ * The reasong is loading images (more images = lower performance) and weak hardware.
+ * <p>
+ * {@link JWindow} is more appropriate way for showing of dialog windows
+ * ({@link JWindow} is parent class for {@link JFrame} and {@link JDialog}).
+ * Using of JPanels located on glass pane instead of {@link JWindow} consumes the same amount of RAM and CPU.
+ * Only difference - {@link JWindow} appears with slight single blink (the reason is glass pane appearing first).
+ * So, we will use JPanels on glass pane for greater performance.
  * <p>
  * JDialog may be used for dialog windows showing (set {@code setModal=true} to prevent screen blinking when dialog appears).
  * But it is necessary to switch off FullScreenMode, because in Windows systems app minimizes to tray when dialog appears.
@@ -111,6 +115,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private TiledPanel tiledPanel1;
     private TiledPanel tiledPanel2;
     private JScrollPane scrollPaneOfSellTable;
+    private JPanel topPanel;
 
     private GraphicsDevice graphicsDevice;      // used to set full screen mode
     private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
@@ -132,6 +137,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private JLayer<JComponent> jlayer = new JLayer<>();
     // screen resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private static final int SELL_TABLE_ROW_COUNT = 14;
 
     public boolean blurBackground = false;                      // if true, than background under glass panel will be blurred
     public static final boolean IS_CURSOR_INVISIBLE = false;    // value for all application
@@ -166,11 +172,15 @@ public class MainFrame extends JFrame implements ActionListener {
 
         setVisible(true);
 
-        // timer makes delay before showing login dialog
+        // Timer makes delay before showing of login dialog.
+        // This place also is suitable for initialization of some components of mainSellPanel (it is hidden behind
+        // splash screen yet, but we can get sizes of it's components already, location of them will became available only when
+        // mainSellPanel will become visible).
         Timer timer = new Timer(1000, e -> {
             ((Timer) e.getSource()).stop();     // stop after first triggering
             initDialogWindows();                // this call need to get size and location of MainFrame's keyboard to tune up loginDialog
             launchDialog(false, loginDialog);
+            initSellTable(SELL_TABLE_ROW_COUNT);
             sellPanel.setVisible(false);    // need here to trigger listener of sellPanel when it will be shown (visible) first time
         });
         timer.setInitialDelay(1000);
@@ -233,10 +243,6 @@ public class MainFrame extends JFrame implements ActionListener {
                  * Method is called when sellPanel becomes visible, and here we can complete initializations of some components
                  */
                 super.componentShown(e);
-
-
-
-
                 if (!splashScreenPanel.isVisible()) {
                     initDialogWindows();
 
@@ -244,56 +250,217 @@ public class MainFrame extends JFrame implements ActionListener {
                     sellTable.getColumnModel().getColumn(1).setPreferredWidth(500);
                     sellTable.getColumnModel().getColumn(2).setPreferredWidth(60);
                     sellTable.getColumnModel().getColumn(3).setPreferredWidth(60);
-
-                    // 14.6x = 14x + 0.6x, where x is one row height, 14 - row count, 0.6 - ratio of header height to cell height
-                    int tablePanelHeight = scrollPaneOfSellTable.getHeight();
-                    int tableRowHeight = (int) Math.ceil(tablePanelHeight / 14.6);
-                    int tableHeaderHeight = tablePanelHeight - (tableRowHeight * 14);
-                    System.out.println("tablePanelHeight = " + tablePanelHeight
-                            + " tableRowHeight " + tableRowHeight
-                            + " tableHeaderHeight " + tableHeaderHeight);
-
-                    /**
-                     * Local class for tune up of table's header (sets font, colors, borders, size and alignment).
-                     */
-                    class DefaultHeaderRenderer extends JLabel implements TableCellRenderer {
-
-                        DefaultHeaderRenderer(int height) {
-                            setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 26));
-                            setOpaque(true);
-                            setForeground(Color.WHITE);
-                            setBackground(new Color(52, 73, 94));
-                            setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(255, 255, 255)));
-                            setPreferredSize(new Dimension(0, height));
-                            setHorizontalAlignment(JLabel.CENTER);
-                        }
-
-                        @Override
-                        public Component getTableCellRendererComponent(JTable table, Object value,
-                                                                       boolean isSelected, boolean hasFocus, int row, int column) {
-                            setText(value.toString());
-                            return this;
-                        }
-                    }
-
-                    sellTable.setRowHeight(tableRowHeight);
-                    sellTable.getTableHeader().setDefaultRenderer(new DefaultHeaderRenderer(tableHeaderHeight));
-                    navPanelMain.setHeaderPanelHeight((int)tablePanel.getLocation().getY() - 1 + tableHeaderHeight);
-                    navPanelBack.setHeaderPanelHeight((int)tablePanel.getLocation().getY() - 1 + tableHeaderHeight);
-                    System.out.println("tablePanel.getLocation().getY() " + tablePanel.getLocation().getY());
-                    mainPanel.revalidate();
-                    mainPanel.repaint();
-
-
-                    // Get height of header panel with title in top left corner of screen, then use this height in tilesPanels.
-                    int height = navPanelBack.getHeaderPanelHeight();
-                    tiledPanel0.setTopPanelHeight(height);
-                    tiledPanel1.setTopPanelHeight(height);
-                    tiledPanel2.setTopPanelHeight(height);
-
                 }
             }
         });
+    }
+
+    /**
+     * Method provides getting of size and location of {@link MainFrame}'s keypadPanel.
+     * Getting of location is possible only when appropriate container becomes visible ({@link MainFrame#sellPanel}).
+     * In another case we set location manually (first time only, when {@link MainFrame#splashScreenPanel} appears).
+     */
+    private void initDialogWindows() {
+        if (areDialogsInitialized)
+            return;
+
+        int loginDlgXMargin = (int) (0.012 * getWidth());      // (default) need for login dialog location on splash screen
+        int loginDlgYMargin = (int) (0.02 * getHeight());      // (default) need for login dialog location on splash screen
+        if (screenSize.getWidth() == 1920 && screenSize.getHeight() == 1080) {
+            loginDlgXMargin = (int) (0.0115 * getWidth());
+            loginDlgYMargin = (int) (0.019 * getHeight());
+        } else if ((screenSize.getWidth() == 1366 && screenSize.getHeight() == 768)
+                || (screenSize.getWidth() == 1280 && screenSize.getHeight() == 720)) {
+            loginDlgXMargin = (int) (0.013 * getWidth());
+            loginDlgYMargin = (int) (0.02 * getHeight());
+        }
+        // get actual keypad size on screen in MainFrame. All another dialog's keypads must have the same dimensions.
+        kpSize = keypadPanel.getSize();
+        // get actual keypad location on screen in MainFrame. We will use it as relational location.
+        try {
+            kpPoint = keypadPanel.getLocationOnScreen();
+            areDialogsInitialized = true;
+        } catch (IllegalComponentStateException e) {
+            // Exception occurs only if keypadPanel is in invisible state.
+            // Use approximately assuming location of keypad on screen in MainFrame. Need for SplashScreen keypadPanel basically.
+            kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - loginDlgXMargin,
+                    getHeight() - (int) kpSize.getHeight() - loginDlgYMargin);
+        }
+
+        // utility variables
+        Dimension size = new Dimension();
+        Point location = new Point();
+        double kpWRatio;
+        double kpHRatio;
+
+        /** {@link KeypadDialogLogin} customization */
+        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
+        kpHRatio = 86.0 / 100;
+        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
+        // container using they weights, the sizes of components are rounding to down.
+        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
+        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
+        loginDialog.setSize(size);
+        loginDialog.setLocation(location);
+
+        /** {@link KeypadDialogManualDiscount} customization */
+        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
+        kpHRatio = 86.0 / 114;     /** 114% = 100% + 14% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
+        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
+        // container using they weights, the sizes of components are rounding to down.
+        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
+        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
+        manualDiscountDialog.setSize(size);
+        manualDiscountDialog.setLocation(location);
+
+        /** {@link KeypadDialogDepositWithdraw} customization */
+        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
+        kpHRatio = 86.0 / 119;     /** 119% = 100% + 19% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
+        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
+        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
+        // container using they weights, the sizes of components are rounding to down.
+        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
+        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
+        depositWithdrawDialog.setSize(size);
+        depositWithdrawDialog.setLocation(location);
+
+        /** {@link PaymentDialog} customization */
+        // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
+        size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
+        location.setLocation(0, 1);
+        paymentDialog.setSize(size);
+        paymentDialog.setLocation(location);
+
+        /** {@link ConfirmDialog} customization */
+        // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
+        // It is impossible to get this value from *.form file programmatically.
+        kpWRatio = 36.5 / 100;
+        kpHRatio = 28.0 / 100;
+        size.setSize(this.getWidth() * kpWRatio, this.getHeight() * kpHRatio);
+        confirmDialog.setSize(size);
+        confirmDialog.setLocationRelativeTo(this);
+
+        /** {@link MessageDialog} customization */
+        messageDialog.setSize(size);
+        messageDialog.setLocationRelativeTo(this);
+    }
+
+    /**
+     * Provides glassPane showing, allowing optional blurring of it, then shows specified dialog window.
+     * Simple this.setEnabled(false) is not suitable because of blinking of screen when all elements are becoming disabled.
+     *
+     * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
+     * @param dialogWindow           object of dialog window
+     */
+    private void launchDialog(boolean glassPaneHasBackground, JWindow dialogWindow) {
+        Color base = new Color(184, 207, 229);
+        Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
+        if (!glassPaneHasBackground)
+            background = null;   // glassPane will be transparent, but in visible state (to cover rest part of screen from clicks)
+
+        if (!splashScreenPanel.isVisible()) {
+            glassPane.activate(background);
+            // code will make background around dialog window blurred (optional using of blurring feature)
+            if (blurBackground) {
+                jlayer.setView(mainPanel);
+                setContentPane(jlayer);
+                revalidate();
+                repaint();
+            }
+        }
+
+        switch (dialogWindow.getClass().getSimpleName()) {
+            case "KeypadDialogLogin":
+//                SwingUtilities.invokeLater(() -> loginDialog.setVisible(true));
+                loginDialog.setVisible(true);
+                break;
+            case "KeypadDialogManualDiscount":
+//                SwingUtilities.invokeLater(() -> manualDiscountDialog.setVisible(true));
+                manualDiscountDialog.setVisible(true);
+                break;
+            case "KeypadDialogDepositWithdraw":
+//                SwingUtilities.invokeLater(() -> depositWithdrawDialog.setVisible(true));
+                depositWithdrawDialog.setVisible(true);
+                break;
+            case "PaymentDialog":
+//                SwingUtilities.invokeLater(() -> paymentDialog.setVisible(true));
+                paymentDialog.setVisible(true);
+                break;
+            case "ConfirmDialog":
+//                SwingUtilities.invokeLater(() -> confirmDialog.setVisible(true));
+                confirmDialog.setVisible(true);
+                break;
+            case "MessageDialog":
+//                SwingUtilities.invokeLater(() -> messageDialog.setVisible(true));
+                messageDialog.setVisible(true);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Code makes all settings for sell table (fonts, colors, dimensions, behavior).
+     * ScrollPane for this table also is setting up here.
+     * Also we use some received here dimensions for tune up of NavigatePanel header and TiledPanels.
+     *
+     * Table will have {@code rowCount} rows, and height of single one is calculated below.
+     *
+     * @param rowCount amount of rows of our table
+     */
+    private void initSellTable(int rowCount) {
+        // Example: 14.5x = 14x + 0.5x, where x is one row height.
+        // If received table header has too small height, than round height of one row not to ceil, but already to floor.
+        double prefHeaderToRowRatio = 0.5;  // header height to row height ratio is nearly this value,
+        double minHeaderToRowRatio = 0.4;   // but no less then this value
+        int tablePanelHeight = scrollPaneOfSellTable.getHeight();
+        double rawTableHeaderHeight = tablePanelHeight / (rowCount + prefHeaderToRowRatio);
+        int tableRowHeight = (int) Math.ceil(rawTableHeaderHeight);
+        int tableHeaderHeight = tablePanelHeight - (tableRowHeight * rowCount);
+        if ((double) tableHeaderHeight / (double) tableRowHeight < minHeaderToRowRatio) {
+            tableRowHeight = (int) Math.floor(rawTableHeaderHeight);
+            tableHeaderHeight = tablePanelHeight - (tableRowHeight * rowCount);
+        }
+
+        /**
+         * Local class for tune up of table's header (sets font, colors, borders, size and alignment).
+         */
+        class DefaultHeaderRenderer extends JLabel implements TableCellRenderer {
+
+            DefaultHeaderRenderer(int height) {
+                setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 26));
+                setOpaque(true);
+                setForeground(Color.WHITE);
+                setBackground(new Color(52, 73, 94));
+                setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(255, 255, 255)));
+                setPreferredSize(new Dimension(0, height));
+                setHorizontalAlignment(JLabel.CENTER);
+            }
+
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                                                           boolean isSelected, boolean hasFocus, int row, int column) {
+                setText(value.toString());
+                return this;
+            }
+        }
+
+        sellTable.setRowHeight(tableRowHeight);
+        sellTable.getTableHeader().setDefaultRenderer(new DefaultHeaderRenderer(tableHeaderHeight));
+        navPanelMain.setHeaderPanelHeight((int) tablePanel.getLocation().getY() - 1 + tableHeaderHeight);
+        navPanelBack.setHeaderPanelHeight((int) tablePanel.getLocation().getY() - 1 + tableHeaderHeight);
+        System.out.println("tablePanel.getLocation().getY() " + tablePanel.getLocation().getY());
+        mainPanel.revalidate();
+        mainPanel.repaint();
+
+
+        // Get height of header panel with title in top left corner of screen, then use this height in tilesPanels.
+        int height = navPanelBack.getHeaderPanelHeight();
+        tiledPanel0.setTopPanelHeight(height);
+        tiledPanel1.setTopPanelHeight(height);
+        tiledPanel2.setTopPanelHeight(height);
 
         String[] columnNames = {"",
                 "Название",
@@ -530,154 +697,6 @@ public class MainFrame extends JFrame implements ActionListener {
         sellTableModel.setDataVector(data, columnNames);
 
 //        sellTableModel.setRowCount(60);
-
-
-    }
-
-    /**
-     * Method provides getting of size and location of {@link MainFrame}'s keypadPanel.
-     * Getting of location is possible only when appropriate container becomes visible ({@link MainFrame#sellPanel}).
-     * In another case we set location manually (first time only, when {@link MainFrame#splashScreenPanel} appears).
-     */
-    public void initDialogWindows() {
-        if (areDialogsInitialized)
-            return;
-
-        int loginDlgXMargin = (int) (0.012 * getWidth());      // (default) need for login dialog location on splash screen
-        int loginDlgYMargin = (int) (0.02 * getHeight());      // (default) need for login dialog location on splash screen
-        if (screenSize.getWidth() == 1920 && screenSize.getHeight() == 1080) {
-            loginDlgXMargin = (int) (0.0115 * getWidth());
-            loginDlgYMargin = (int) (0.019 * getHeight());
-        } else if ((screenSize.getWidth() == 1366 && screenSize.getHeight() == 768)
-                || (screenSize.getWidth() == 1280 && screenSize.getHeight() == 720)) {
-            loginDlgXMargin = (int) (0.013 * getWidth());
-            loginDlgYMargin = (int) (0.02 * getHeight());
-        }
-        // get actual keypad size on screen in MainFrame. All another dialog's keypads must have the same dimensions.
-        kpSize = keypadPanel.getSize();
-        // get actual keypad location on screen in MainFrame. We will use it as relational location.
-        try {
-            kpPoint = keypadPanel.getLocationOnScreen();
-            areDialogsInitialized = true;
-        } catch (IllegalComponentStateException e) {
-            // Exception occurs only if keypadPanel is in invisible state.
-            // Use approximately assuming location of keypad on screen in MainFrame. Need for SplashScreen keypadPanel basically.
-            kpPoint = new Point(getWidth() - (int) kpSize.getWidth() - loginDlgXMargin,
-                    getHeight() - (int) kpSize.getHeight() - loginDlgYMargin);
-        }
-
-        // utility variables
-        Dimension size = new Dimension();
-        Point location = new Point();
-        double kpWRatio;
-        double kpHRatio;
-
-        /** {@link KeypadDialogLogin} customization */
-        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-        kpHRatio = 86.0 / 100;
-        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
-        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
-        // container using they weights, the sizes of components are rounding to down.
-        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
-        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
-        loginDialog.setSize(size);
-        loginDialog.setLocation(location);
-
-        /** {@link KeypadDialogManualDiscount} customization */
-        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-        kpHRatio = 86.0 / 114;     /** 114% = 100% + 14% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
-        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
-        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
-        // container using they weights, the sizes of components are rounding to down.
-        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
-        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
-        manualDiscountDialog.setSize(size);
-        manualDiscountDialog.setLocation(location);
-
-        /** {@link KeypadDialogDepositWithdraw} customization */
-        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-        kpHRatio = 86.0 / 119;     /** 119% = 100% + 19% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
-        // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
-        // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
-        // container using they weights, the sizes of components are rounding to down.
-        size.setSize(kpSize.getWidth() + 2, kpSize.getHeight() / kpHRatio + 3);
-        location.setLocation(kpPoint.getX() - 1, kpPoint.getY() - ((size.getHeight() - 3) * (1 - kpHRatio)) - 2);
-        depositWithdrawDialog.setSize(size);
-        depositWithdrawDialog.setLocation(location);
-
-        /** {@link PaymentDialog} customization */
-        // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
-        size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
-        location.setLocation(0, 1);
-        paymentDialog.setSize(size);
-        paymentDialog.setLocation(location);
-
-        /** {@link ConfirmDialog} customization */
-        // 36,5% is dialog width to screen width ratio. 28% is dialog height to screen height ratio.
-        // It is impossible to get this value from *.form file programmatically.
-        kpWRatio = 36.5 / 100;
-        kpHRatio = 28.0 / 100;
-        size.setSize(this.getWidth() * kpWRatio, this.getHeight() * kpHRatio);
-        confirmDialog.setSize(size);
-        confirmDialog.setLocationRelativeTo(this);
-
-        /** {@link MessageDialog} customization */
-        messageDialog.setSize(size);
-        messageDialog.setLocationRelativeTo(this);
-    }
-
-    /**
-     * Provides glassPane showing, allowing optional blurring of it, then shows specified dialog window.
-     * Simple this.setEnabled(false) is not suitable because of blinking of screen when all elements are becoming disabled.
-     *
-     * @param glassPaneHasBackground defines, should the background around the dialog window be darker or not
-     * @param dialogWindow           object of dialog window
-     */
-    private void launchDialog(boolean glassPaneHasBackground, JWindow dialogWindow) {
-        Color base = new Color(184, 207, 229);
-        Color background = new Color(base.getRed(), base.getGreen(), base.getBlue(), 128);   // 128 is original alpha value
-        if (!glassPaneHasBackground)
-            background = null;   // glassPane will be transparent, but in visible state (to cover rest part of screen from clicks)
-
-        if (!splashScreenPanel.isVisible()) {
-            glassPane.activate(background);
-            // code will make background around dialog window blurred (optional using of blurring feature)
-            if (blurBackground) {
-                jlayer.setView(mainPanel);
-                setContentPane(jlayer);
-                revalidate();
-                repaint();
-            }
-        }
-
-        switch (dialogWindow.getClass().getSimpleName()) {
-            case "KeypadDialogLogin":
-//                SwingUtilities.invokeLater(() -> loginDialog.setVisible(true));
-                loginDialog.setVisible(true);
-                break;
-            case "KeypadDialogManualDiscount":
-//                SwingUtilities.invokeLater(() -> manualDiscountDialog.setVisible(true));
-                manualDiscountDialog.setVisible(true);
-                break;
-            case "KeypadDialogDepositWithdraw":
-//                SwingUtilities.invokeLater(() -> depositWithdrawDialog.setVisible(true));
-                depositWithdrawDialog.setVisible(true);
-                break;
-            case "PaymentDialog":
-//                SwingUtilities.invokeLater(() -> paymentDialog.setVisible(true));
-                paymentDialog.setVisible(true);
-                break;
-            case "ConfirmDialog":
-//                SwingUtilities.invokeLater(() -> confirmDialog.setVisible(true));
-                confirmDialog.setVisible(true);
-                break;
-            case "MessageDialog":
-//                SwingUtilities.invokeLater(() -> messageDialog.setVisible(true));
-                messageDialog.setVisible(true);
-                break;
-            default:
-                break;
-        }
     }
 
     /**
