@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 07.10.2019
  */
 
 package gui.common;
@@ -82,12 +82,9 @@ public class TiledPanel {
 
     /**
      * Set the height of top panel. The width is not important and here may get any value.
-     * 1 - correction for height (repairs Swing inaccuracy)
      */
     public void setTopPanelHeight(int height) {
-        topPanel.setPreferredSize(new Dimension(10, height + 1));
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        topPanel.setPreferredSize(new Dimension(10, height));
     }
 
     /**

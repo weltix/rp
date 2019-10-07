@@ -1,22 +1,21 @@
 /*
- * Copyright (c) RESONANCE JSC, 04.10.2019
+ * Copyright (c) RESONANCE JSC, 07.10.2019
  */
 
 package gui.common;
 
+import gui.common.components.BackgroundImagePanel;
+import gui.common.components.GlassPane;
+import gui.common.components.TouchScroll;
 import gui.common.dialogs.*;
-import gui.common.utility_components.BackgroundImagePanel;
-import gui.common.utility_components.BlurLayerUI;
-import gui.common.utility_components.GlassPane;
-import gui.common.utility_components.TouchScroll;
+import gui.common.ui.BlurLayerUI;
+import gui.common.ui.DefaultScrollBarUI;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
-import javax.swing.plaf.basic.BasicArrowButton;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -115,7 +114,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private TiledPanel tiledPanel1;
     private TiledPanel tiledPanel2;
     private JScrollPane scrollPaneOfSellTable;
-    private JPanel topPanel;
 
     private GraphicsDevice graphicsDevice;      // used to set full screen mode
     private CardLayout mainPanelLayout = (CardLayout) mainPanel.getLayout();
@@ -178,9 +176,18 @@ public class MainFrame extends JFrame implements ActionListener {
         // mainSellPanel will become visible).
         Timer timer = new Timer(1000, e -> {
             ((Timer) e.getSource()).stop();     // stop after first triggering
+
             initDialogWindows();                // this call need to get size and location of MainFrame's keyboard to tune up loginDialog
             launchDialog(false, loginDialog);
-            initSellTable(SELL_TABLE_ROW_COUNT);
+
+            int navPanelHeaderHeight = initSellTable(SELL_TABLE_ROW_COUNT);
+            // next we can set missing sizes of some components (it is good that this components still behind splash screen)
+            navPanelMain.setHeaderPanelHeight(navPanelHeaderHeight - 1);        // 1 - correction (Swing inaccuracy)
+            navPanelBack.setHeaderPanelHeight(navPanelHeaderHeight - 1);        // 1 - correction (Swing inaccuracy)
+            tiledPanel0.setTopPanelHeight(navPanelHeaderHeight);
+            tiledPanel1.setTopPanelHeight(navPanelHeaderHeight);
+            tiledPanel2.setTopPanelHeight(navPanelHeaderHeight);
+
             sellPanel.setVisible(false);    // need here to trigger listener of sellPanel when it will be shown (visible) first time
         });
         timer.setInitialDelay(1000);
@@ -189,7 +196,7 @@ public class MainFrame extends JFrame implements ActionListener {
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
         // next parameters make window for my monitor with physical dimensions like real 14' POS
-//        setSize(1050, 618);
+//        setSize(1033, 580);
 //        setSize(1280, 720);
 //        setSize(1920, 1080);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -405,16 +412,21 @@ public class MainFrame extends JFrame implements ActionListener {
      * Code makes all settings for sell table (fonts, colors, dimensions, behavior).
      * ScrollPane for this table also is setting up here.
      * Also we use some received here dimensions for tune up of NavigatePanel header and TiledPanels.
-     *
+     * <p>
      * Table will have {@code rowCount} rows, and height of single one is calculated below.
      *
-     * @param rowCount amount of rows of our table
+     * @param rowCount amount of rows of our table.
+     * @return value of {@link NavigatePanel#headerPanel} height, that is possible to get on this step
+     *         when table header's height calculated.
      */
-    private void initSellTable(int rowCount) {
-        // Example: 14.5x = 14x + 0.5x, where x is one row height.
+    private int initSellTable(int rowCount) {
+        // First we will find height of table's header and row.
+        // Example of calculations: 14.5x = 14x + 0.5x, where x is one row height, 14 - rows count, 0.5 - prefHeaderToRowRatio.
         // If received table header has too small height, than round height of one row not to ceil, but already to floor.
-        double prefHeaderToRowRatio = 0.5;  // header height to row height ratio is nearly this value,
-        double minHeaderToRowRatio = 0.4;   // but no less then this value
+        double prefHeaderToRowRatio = 0.5;  // Header height to row height ratio is nearly this value,
+        double minHeaderToRowRatio = 0.4;   // but no less then this value (custom defined values)
+        double scrollBarButtonToRowHeightRatio = 0.8;   // custom defined value
+// TODO: 07.10.2019 0.8 сделать более глобальным параметром?
         int tablePanelHeight = scrollPaneOfSellTable.getHeight();
         double rawTableHeaderHeight = tablePanelHeight / (rowCount + prefHeaderToRowRatio);
         int tableRowHeight = (int) Math.ceil(rawTableHeaderHeight);
@@ -424,17 +436,19 @@ public class MainFrame extends JFrame implements ActionListener {
             tableHeaderHeight = tablePanelHeight - (tableRowHeight * rowCount);
         }
 
+        sellTable.setRowHeight(tableRowHeight);
+
         /**
-         * Local class for tune up of table's header (sets font, colors, borders, size and alignment).
+         * Local class for customizing of table's header (sets font, colors, borders, size and alignment).
          */
         class DefaultHeaderRenderer extends JLabel implements TableCellRenderer {
 
-            DefaultHeaderRenderer(int height) {
+            private DefaultHeaderRenderer(int height) {
                 setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 26));
                 setOpaque(true);
                 setForeground(Color.WHITE);
                 setBackground(new Color(52, 73, 94));
-                setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(255, 255, 255)));
+                setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.WHITE));
                 setPreferredSize(new Dimension(0, height));
                 setHorizontalAlignment(JLabel.CENTER);
             }
@@ -446,21 +460,31 @@ public class MainFrame extends JFrame implements ActionListener {
                 return this;
             }
         }
-
-        sellTable.setRowHeight(tableRowHeight);
         sellTable.getTableHeader().setDefaultRenderer(new DefaultHeaderRenderer(tableHeaderHeight));
-        navPanelMain.setHeaderPanelHeight((int) tablePanel.getLocation().getY() - 1 + tableHeaderHeight);
-        navPanelBack.setHeaderPanelHeight((int) tablePanel.getLocation().getY() - 1 + tableHeaderHeight);
-        System.out.println("tablePanel.getLocation().getY() " + tablePanel.getLocation().getY());
-        mainPanel.revalidate();
-        mainPanel.repaint();
 
+        /**
+         * Local class for customizing of table's cell (sets border absence of selected cell).
+         */
+        class DefaultCellRenderer extends DefaultTableCellRenderer {
 
-        // Get height of header panel with title in top left corner of screen, then use this height in tilesPanels.
-        int height = navPanelBack.getHeaderPanelHeight();
-        tiledPanel0.setTopPanelHeight(height);
-        tiledPanel1.setTopPanelHeight(height);
-        tiledPanel2.setTopPanelHeight(height);
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                setBorder(noFocusBorder);
+                return this;
+            }
+        }
+        sellTable.setDefaultRenderer(Object.class, new DefaultCellRenderer());
+
+        sellTable.setSelectionMode(SINGLE_SELECTION);
+        sellTable.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34));
+        sellTable.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, new Color(200, 200, 200)));
+        sellTable.getTableHeader().setReorderingAllowed(false);     // don't allow reorder columns by hands
+
+        int scrollBarButtonSize = (int) (tableRowHeight * scrollBarButtonToRowHeightRatio);
+        UIManager.put("ScrollBar.width", scrollBarButtonSize);
+        scrollPaneOfSellTable.getVerticalScrollBar().setUI(new DefaultScrollBarUI(scrollBarButtonSize));
+        scrollPaneOfSellTable.setViewportView(sellTable);       // method is actual for TouchScroll.class
 
         String[] columnNames = {"",
                 "Название",
@@ -590,100 +614,6 @@ public class MainFrame extends JFrame implements ActionListener {
                         new Integer(10), new Double(50)}
         };
 
-        scrollPaneOfSellTable.setViewportView(sellTable);       // method is actual for TouchScroll.class
-
-        class DefaultScrollBarUI extends BasicScrollBarUI {
-            private final Dimension d = new Dimension(10, 40);
-
-            @Override
-            protected JButton createDecreaseButton(int orientation) {
-                return new BasicArrowButton(orientation,
-                        new Color(235, 235, 235),
-                        new Color(200, 200, 200),
-                        new Color(128, 128, 128),
-                        new Color(200, 200, 200)) {
-                    @Override
-                    public Dimension getPreferredSize() {
-                        return d;
-                    }
-                };
-            }
-
-            @Override
-            protected JButton createIncreaseButton(int orientation) {
-                return new BasicArrowButton(orientation,
-                        new Color(235, 235, 235),
-                        new Color(200, 200, 200),
-                        new Color(128, 128, 128),
-                        new Color(200, 200, 200)) {
-                    @Override
-                    public Dimension getPreferredSize() {
-                        return d;
-                    }
-                };
-            }
-
-            @Override
-            protected void paintTrack(Graphics g, JComponent c, Rectangle r) {
-                c.setBackground(new Color(250, 250, 250));
-            }
-
-            @Override
-            protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
-                Graphics2D g2 = (Graphics2D) g.create();
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                Color color = null;
-                JScrollBar sb = (JScrollBar) c;
-                if (!sb.isEnabled() || r.width > r.height) {
-                    return;
-                } else if (isDragging) {
-                    color = new Color(246, 246, 246);
-                } else if (isThumbRollover()) {
-                    color = new Color(246, 246, 246);
-                } else {
-                    color = new Color(235, 235, 235);
-                }
-                g2.setPaint(color);
-                g2.fillRect(r.x, r.y, r.width, r.height);
-                g2.setPaint(new Color(200, 200, 200));
-                g2.drawRect(r.x, r.y, r.width - 1, r.height);
-                g2.dispose();
-            }
-
-            @Override
-            protected void setThumbBounds(int x, int y, int width, int height) {
-                super.setThumbBounds(x, y, width, height);
-                scrollbar.repaint();
-            }
-        }
-
-        UIManager.put("ScrollBar.width", 40);
-
-        scrollPaneOfSellTable.getVerticalScrollBar().setUI(new DefaultScrollBarUI());
-//        UIManager.put("ScrollBarUI", "gui.common.MainFrame.DefaultScrollBarUI");    // for all program
-
-        sellTable.setSelectionMode(SINGLE_SELECTION);
-        sellTable.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34));
-        sellTable.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, new Color(200, 200, 200)));
-        sellTable.getTableHeader().setReorderingAllowed(false);     // don't allow reorder columns by hands
-
-
-        /**
-         * Local class for tune up of table's cell (sets border absence of selected cell).
-         */
-        class DefaultCellRenderer extends DefaultTableCellRenderer {
-
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                setBorder(noFocusBorder);
-                return this;
-            }
-        }
-
-        sellTable.setDefaultRenderer(Object.class, new DefaultCellRenderer());
-
         DefaultTableModel sellTableModel = (DefaultTableModel) sellTable.getModel();
 //        sellTableModel.setColumnIdentifiers(columnNames);   // names of columns
 
@@ -697,6 +627,12 @@ public class MainFrame extends JFrame implements ActionListener {
         sellTableModel.setDataVector(data, columnNames);
 
 //        sellTableModel.setRowCount(60);
+
+
+        int tablePanelLocationY = (int) tablePanel.getLocation().getY();    // actually, determines height of panel under table
+        int navPanelHeaderHeight = tablePanelLocationY + tableHeaderHeight;
+
+        return navPanelHeaderHeight;
     }
 
     /**
@@ -938,5 +874,4 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 01.10.2019 Установку всех цветов и шрифтов собрать в одном месте 
     // TODO: 01.10.2019 Диалоговые окна реализовать с помощью JPanels
     // TODO: 02.10.2019 Scrolling of JTable
-
 }

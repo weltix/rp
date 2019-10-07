@@ -1,11 +1,11 @@
 /*
- * Copyright (c) RESONANCE JSC, 04.10.2019
+ * Copyright (c) RESONANCE JSC, 07.10.2019
  */
 
 package gui.common.dialogs;
 
 import gui.common.MainFrame;
-import gui.common.utility_components.GlassPane;
+import gui.common.components.GlassPane;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;

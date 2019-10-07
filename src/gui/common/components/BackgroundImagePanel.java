@@ -1,8 +1,8 @@
 /*
- * Copyright (c) RESONANCE JSC, 20.08.2019
+ * Copyright (c) RESONANCE JSC, 07.10.2019
  */
 
-package gui.common.utility_components;
+package gui.common.components;
 
 import javax.swing.*;
 import java.awt.*;
