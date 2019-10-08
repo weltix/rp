@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 07.10.2019
+ * Copyright (c) RESONANCE JSC, 08.10.2019
  */
 
 package gui.common;
@@ -19,6 +19,7 @@ import javax.swing.plaf.LayerUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -253,10 +254,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 if (!splashScreenPanel.isVisible()) {
                     initDialogWindows();
 
-                    sellTable.getColumnModel().getColumn(0).setPreferredWidth(1);
-                    sellTable.getColumnModel().getColumn(1).setPreferredWidth(500);
-                    sellTable.getColumnModel().getColumn(2).setPreferredWidth(60);
-                    sellTable.getColumnModel().getColumn(3).setPreferredWidth(60);
+
                 }
             }
         });
@@ -426,7 +424,7 @@ public class MainFrame extends JFrame implements ActionListener {
         double prefHeaderToRowRatio = 0.5;  // Header height to row height ratio is nearly this value,
         double minHeaderToRowRatio = 0.4;   // but no less then this value (custom defined values)
         double scrollBarButtonToRowHeightRatio = 0.8;   // custom defined value
-// TODO: 07.10.2019 0.8 сделать более глобальным параметром?
+// TODO: 07.10.2019 0.8 сделать глобальным параметром?
         int tablePanelHeight = scrollPaneOfSellTable.getHeight();
         double rawTableHeaderHeight = tablePanelHeight / (rowCount + prefHeaderToRowRatio);
         int tableRowHeight = (int) Math.ceil(rawTableHeaderHeight);
@@ -485,6 +483,7 @@ public class MainFrame extends JFrame implements ActionListener {
         UIManager.put("ScrollBar.width", scrollBarButtonSize);
         scrollPaneOfSellTable.getVerticalScrollBar().setUI(new DefaultScrollBarUI(scrollBarButtonSize));
         scrollPaneOfSellTable.setViewportView(sellTable);       // method is actual for TouchScroll.class
+//        scrollPaneOfSellTable.getHorizontalScrollBar().setUnitIncrement(1);
 
         String[] columnNames = {"",
                 "Название",
@@ -628,11 +627,32 @@ public class MainFrame extends JFrame implements ActionListener {
 
 //        sellTableModel.setRowCount(60);
 
+        sellTable.getColumnModel().getColumn(0).setPreferredWidth(1);
+        sellTable.getColumnModel().getColumn(1).setPreferredWidth(500);
+        sellTable.getColumnModel().getColumn(2).setPreferredWidth(60);
+        sellTable.getColumnModel().getColumn(3).setPreferredWidth(60);
 
         int tablePanelLocationY = (int) tablePanel.getLocation().getY();    // actually, determines height of panel under table
         int navPanelHeaderHeight = tablePanelLocationY + tableHeaderHeight;
 
         return navPanelHeaderHeight;
+    }
+
+    /**
+     * Method sets table's columns width.
+     */
+    public static void setJTableColumnsWidth(JTable table, int tablePreferredWidth,
+                                             double... percentages) {
+        double total = 0;
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            total += percentages[i];
+        }
+
+        for (int i = 0; i < table.getColumnModel().getColumnCount(); i++) {
+            TableColumn column = table.getColumnModel().getColumn(i);
+            column.setPreferredWidth((int)
+                    (tablePreferredWidth * (percentages[i] / total)));
+        }
     }
 
     /**
@@ -874,4 +894,5 @@ public class MainFrame extends JFrame implements ActionListener {
     // TODO: 01.10.2019 Установку всех цветов и шрифтов собрать в одном месте 
     // TODO: 01.10.2019 Диалоговые окна реализовать с помощью JPanels
     // TODO: 02.10.2019 Scrolling of JTable
+    // TODO: 08.10.2019 Заменить html переносы на TextPanes во всех местах, где может возникнуть перенос
 }

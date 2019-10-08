@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 08.10.2019
  */
 
 package gui.common;
@@ -27,4 +27,4 @@ public class NavigateButton{
     }
 }
 
-// TODO: 09.09.2019 Переделать панельки на кнопки
+// TODO: 09.09.2019 Переделать панельки на кнопки?
