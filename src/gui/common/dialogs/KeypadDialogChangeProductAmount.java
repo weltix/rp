@@ -5,35 +5,37 @@
 package gui.common.dialogs;
 
 import gui.common.KeypadPanel;
+import gui.fonts.FontProvider;
 import resources.Resources;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Class for dialog window, that contains {@link JPasswordField} and {@link KeypadPanel} for login to system.
+ * Class for dialog window, that contains {@link KeypadPanel}.
+ * Class is intended to change amount of selected product in receipt.
  */
-public class KeypadDialogLogin extends KeypadDialog {
+public class KeypadDialogChangeProductAmount extends KeypadDialog {
+
     /**
      * Constructor tunes up the look of this dialog, and sets actions for action buttons.
      * Constructor of parent is called initially.
      *
      * @param owner {@link Frame} object, from which this window was called
      */
-    public KeypadDialogLogin(Frame owner) {
+    public KeypadDialogChangeProductAmount(Frame owner) {
         super(owner);
 
-        dialogTitle.setText(Resources.getInstance().getString("login_to_system"));
-        dialogHint.setText(Resources.getInstance().getString("hint_confirm_rights"));
+        dialogTitle.setText(Resources.getInstance().getString("change_product_amount"));
+        dialogHint.setText(Resources.getInstance().getString("hint_set_necessary_value"));
 
-        keypadPanel.switchToPasswordTextField();
+        Font robotoRegular30 = FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 30);
+
+        keypadPanel.setTextFieldDocument("money63");
         keypadPanel.setActionButtonsAmount(2);
-        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("ok"));
-        keypadPanel.getActionButton2().setText(Resources.getInstance().getString("exit"));
-        keypadPanel.doubleWidthA0Button();
-
+        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("set"));
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
+        keypadPanel.getActionButton2().setText(Resources.getInstance().getString("cancel"));
         keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
     }
 
@@ -47,17 +49,13 @@ public class KeypadDialogLogin extends KeypadDialog {
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
             case "actionButton1":
-                close();
-                if (parentFrame.getSplashScreenPanel().isVisible()) {
-                    parentFrame.setCardOfMainPanel("mainSellPanel");
-                    parentFrame.setCardOfSellPanelScreens("sellPanel");
-                }
                 break;
             case "actionButton2":
-                System.exit(0);
+                close();
                 break;
             default:
                 break;
         }
     }
+
 }

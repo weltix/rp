@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 30.09.2019
+ * Copyright (c) RESONANCE JSC, 08.10.2019
  */
 
 package gui.common.dialogs;
@@ -45,4 +45,17 @@ public abstract class KeypadDialog extends AbstractDialog {
         dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
         dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
     }
+
+    /**
+     * Method sets the text in text field of dialog. Must be called every time before launching dialog window.
+     *
+     * @param extraData text for text field of dialog. If equals {@code null}, than text in text field will not change.
+     */
+    public void setTextFieldText(String extraData) {
+        if (extraData != null)
+            keypadPanel.getTextField().setText(extraData);
+        keypadPanel.getTextField().requestFocus();
+        keypadPanel.getTextField().selectAll();
+    }
 }
+// TODO: 08.10.2019 Вынести операцию нажатия на actionButton2 в этот суперкласс из всех наследников?

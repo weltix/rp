@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 04.10.2019
+ * Copyright (c) RESONANCE JSC, 08.10.2019
  */
 
 package gui.common.dialogs;
@@ -8,11 +8,8 @@ import gui.common.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 /**
  * Class for dialog window, that contains {@link KeypadPanel} and additional toggle buttons for choosing
@@ -22,13 +19,12 @@ import java.awt.event.ComponentEvent;
  */
 public class KeypadDialogManualDiscount extends KeypadDialog {
 
-    private JTextField textField;
-
+    // used for toggle buttons
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
 
     /**
-     * Constructor tunes the look of this dialog, and sets action for action button.
+     * Constructor tunes up the look of this dialog, and sets action for action button.
      * Constructor of parent is called initially.
      *
      * @param owner {@link Frame} object, from which this window was called
@@ -64,27 +60,16 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         keypadPanel.getActionButton2().setText(Resources.getInstance().getString("cancel"));
         keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
 
-        textField = keypadPanel.getTextField();
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent e) {
-                keypadPanel.setTextFieldDocument("money72");
-                textField.setText("0");
-                keypadPanel.setTextFieldDocument("percent");
-                textField.setText("0");
-                if (moneyButton.getModel().isPressed())
-                    keypadPanel.setTextFieldDocument("money72");
-                else if (percentButton.getModel().isPressed())
-                    keypadPanel.setTextFieldDocument("percent");
-                textField.requestFocus();
-                textField.selectAll();
-            }
-        });
+        keypadPanel.setTextFieldDocument("money72");
+        keypadPanel.getTextField().setText("0");
+        keypadPanel.setTextFieldDocument("percent");
+        keypadPanel.getTextField().setText("0");
     }
 
     /**
-     * More detailed description look in superclass.
      * Action commands for buttons have been assigned in bound *.form file.
+     *
+     * @see {@link AbstractDialog#actionPerformed(ActionEvent)}
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -99,24 +84,18 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
             case "percentButton":
                 percentButton.setBackground(blueColor);
                 percentButton.setForeground(Color.WHITE);
-                percentButton.getModel().setPressed(true);
                 moneyButton.setBackground(beigeColor);
                 moneyButton.setForeground(Color.BLACK);
-                moneyButton.getModel().setPressed(false);
                 keypadPanel.setTextFieldDocument("percent");
-                textField.requestFocus();
-                textField.selectAll();
+                setTextFieldText(null);    // only selects text in text field
                 break;
             case "moneyButton":
                 percentButton.setBackground(beigeColor);
                 percentButton.setForeground(Color.BLACK);
-                percentButton.getModel().setPressed(false);
                 moneyButton.setBackground(blueColor);
                 moneyButton.setForeground(Color.WHITE);
-                moneyButton.getModel().setPressed(true);
                 keypadPanel.setTextFieldDocument("money72");
-                textField.requestFocus();
-                textField.selectAll();
+                setTextFieldText(null);    // only selects text in text field
                 break;
             case "productButton":
                 productButton.setBackground(blueColor);

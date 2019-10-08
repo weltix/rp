@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 import static gui.fonts.FontProvider.FONTAWESOME_REGULAR;
@@ -122,6 +123,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private CardLayout navigatePanelContainerLayout = (CardLayout) navigatePanelContainer.getLayout();
     private GlassPane glassPane = new GlassPane();
     private KeypadDialog loginDialog;
+    private KeypadDialog changeAmountDialog;
     private KeypadDialog manualDiscountDialog;
     private KeypadDialog depositWithdrawDialog;
     private AbstractDialog paymentDialog;
@@ -136,11 +138,11 @@ public class MainFrame extends JFrame implements ActionListener {
     private JLayer<JComponent> jlayer = new JLayer<>();
     // screen resolution
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private static final int SELL_TABLE_ROW_COUNT = 14;
-
-    public boolean blurBackground = false;                      // if true, than background under glass panel will be blurred
-    public static final boolean IS_CURSOR_INVISIBLE = false;    // value for all application
     private boolean areDialogsInitialized = false;
+
+    private static final int SELL_TABLE_ROW_COUNT = 14;
+    public boolean blurBackground = false;                      // if true, than background under glass panel will be blurred
+    public static final boolean IS_CURSOR_INVISIBLE = false;    // value for whole application
 
     public MainFrame() {
         init();
@@ -216,6 +218,10 @@ public class MainFrame extends JFrame implements ActionListener {
 
         discountButton.setFont(robotoRegular30);
         paymentButton.setFont(robotoRegular30);
+        discountButton.addActionListener(e -> {
+            changeAmountDialog.setTextFieldText(String.format(Locale.ROOT, "%.3f", 5.4));
+            launchDialog(true, changeAmountDialog);
+        });
         paymentButton.addActionListener(e -> launchDialog(true, paymentDialog));
 
         toPayLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38));
@@ -237,6 +243,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         // instantiation of dialogs
         loginDialog = new KeypadDialogLogin(this);
+        changeAmountDialog = new KeypadDialogChangeProductAmount(this);
         manualDiscountDialog = new KeypadDialogManualDiscount(this);
         depositWithdrawDialog = new KeypadDialogDepositWithdraw(this);
         paymentDialog = new PaymentDialog(this);
@@ -309,6 +316,10 @@ public class MainFrame extends JFrame implements ActionListener {
         loginDialog.setSize(size);
         loginDialog.setLocation(location);
 
+        // everything is the same like for previous dialog
+        changeAmountDialog.setSize(size);
+        changeAmountDialog.setLocation(location);
+
         /** {@link KeypadDialogManualDiscount} customization */
         // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
         kpHRatio = 86.0 / 114;     /** 114% = 100% + 14% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
@@ -380,6 +391,10 @@ public class MainFrame extends JFrame implements ActionListener {
             case "KeypadDialogLogin":
 //                SwingUtilities.invokeLater(() -> loginDialog.setVisible(true));
                 loginDialog.setVisible(true);
+                break;
+            case "KeypadDialogChangeProductAmount":
+//                SwingUtilities.invokeLater(() -> changeAmountDialog.setVisible(true));
+                changeAmountDialog.setVisible(true);
                 break;
             case "KeypadDialogManualDiscount":
 //                SwingUtilities.invokeLater(() -> manualDiscountDialog.setVisible(true));
@@ -726,6 +741,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     sellPanelScreensLayout.show(sellPanelScreens, "servicePanel");
                     break;
                 case 4:
+                    loginDialog.setTextFieldText("");
                     launchDialog(true, loginDialog);
                     return;
                 default:
@@ -762,7 +778,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private void initTiledPanel() {
         String[] names0 = {"receipt_cleaning", "return_receipt", "put_off_receipt", "load_receipt", "print_copy",
                 "last_receipt", "load_order", "profile_filling", "remove_discounts", "manual_discount",
-                "set_displayed_columns"};
+                "displayed_columns_of_table"};
         List<String> buttonTexts = new ArrayList<>();
         for (int i = 0; i < names0.length; i++) {
             buttonTexts.add(Resources.getInstance().getString(names0[i]));
@@ -809,7 +825,7 @@ public class MainFrame extends JFrame implements ActionListener {
                     launchDialog(true, confirmDialog);
                     break;
                 case 9:
-                    action = e -> this.dispose();
+                    manualDiscountDialog.setTextFieldText(null);   // null - only selects text in text field
                     launchDialog(true, manualDiscountDialog);
                     break;
                 case 10:
@@ -828,7 +844,8 @@ public class MainFrame extends JFrame implements ActionListener {
         actions = buttonNumber -> {
             switch (buttonNumber) {
                 case 0:
-                    Consumer<Integer> action = e -> this.dispose();
+                    double cashAmount = 10.43;
+                    depositWithdrawDialog.setTextFieldText(String.format(Locale.ROOT, "%.2f", cashAmount));
                     launchDialog(true, depositWithdrawDialog);
                     break;
                 case 1:

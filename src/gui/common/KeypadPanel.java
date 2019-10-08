@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 04.10.2019
+ * Copyright (c) RESONANCE JSC, 08.10.2019
  */
 
 package gui.common;
@@ -55,8 +55,9 @@ public class KeypadPanel extends JComponent {
     private int actionButtonAmount = 1; // default value
 
     // we define some PlainDocuments for our text field to provide it's different behavior in different contexts
-    private final PlainDocument percentTextFieldDocument = new PercentTextFieldDocument(textField);
+    private final PlainDocument money63TextFieldDocument = new DigitTextFieldDocument(textField, 6, 3);
     private final PlainDocument money72TextFieldDocument = new DigitTextFieldDocument(textField, 7, 2);
+    private final PlainDocument percentTextFieldDocument = new PercentTextFieldDocument(textField);
 
     public KeypadPanel() {
         try {
@@ -79,32 +80,6 @@ public class KeypadPanel extends JComponent {
         textField.setBorder(BorderFactory.createEmptyBorder());
 
         textField.addKeyListener(textFieldKeyListener);
-
-        // timer for selection text by long mouse pressing
-        Timer timerTextFieldLongPress = new Timer(1000, e -> {
-            ((Timer) e.getSource()).stop();     // stop timer after first triggering
-            textField.selectAll();
-        });
-        timerTextFieldLongPress.setInitialDelay(600);
-        textField.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                timerTextFieldLongPress.start();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                super.mouseReleased(e);
-                timerTextFieldLongPress.stop();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-                timerTextFieldLongPress.stop();
-            }
-        });
 
         // timer for generation repeated clicks of numeric keys when a key is in pressed state
         Timer timerRepeatingClicks = new Timer(30, e -> {
@@ -217,11 +192,14 @@ public class KeypadPanel extends JComponent {
      */
     public void setTextFieldDocument(String textFieldDocument) {
         switch (textFieldDocument) {
-            case "percent":
-                textField.setDocument(percentTextFieldDocument);
+            case "money63":
+                textField.setDocument(money63TextFieldDocument);
                 break;
             case "money72":
                 textField.setDocument(money72TextFieldDocument);
+                break;
+            case "percent":
+                textField.setDocument(percentTextFieldDocument);
                 break;
             default:
                 break;

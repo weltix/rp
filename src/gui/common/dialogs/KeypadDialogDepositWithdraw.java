@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 08.10.2019
  */
 
 package gui.common.dialogs;
@@ -8,11 +8,9 @@ import gui.common.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.util.Locale;
 
 /**
  * Class for dialog window, that contains {@link KeypadPanel} and additional toggle buttons for choosing
@@ -22,14 +20,12 @@ import java.util.Locale;
  */
 public class KeypadDialogDepositWithdraw extends KeypadDialog {
 
+    // used for toggle buttons
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
 
-    private Double cashInBox = 5000000.00;
-    private String cashInBoxString = String.format(Locale.ROOT, "%.2f", cashInBox);
-
     /**
-     * Constructor tunes the look of this dialog, and sets actions for action buttons.
+     * Constructor tunes up the look of this dialog, and sets actions for action buttons.
      * Constructor of parent is called initially.
      *
      * @param owner {@link Frame} object, from which this window was called
@@ -62,21 +58,23 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
         keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
         keypadPanel.getActionButton2().setText(Resources.getInstance().getString("cancel"));
         keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
-
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentShown(ComponentEvent e) {
-                cashAmountLabel.setText(Resources.getInstance().getString("cash_in_cashbox").concat(cashInBoxString));
-                keypadPanel.getTextField().setText(cashInBoxString);
-                keypadPanel.getTextField().requestFocus();
-                keypadPanel.getTextField().selectAll();
-            }
-        });
     }
 
     /**
-     * More detailed description look in superclass.
+     * @param extraData text for text field and label of dialog.
+     *
+     * @see {@link KeypadDialog#setTextFieldText(String)}
+     */
+    @Override
+    public void setTextFieldText(String extraData) {
+        cashAmountLabel.setText(Resources.getInstance().getString("cash_in_cashbox").concat(extraData));
+        SwingUtilities.invokeLater(() -> super.setTextFieldText(extraData));    // use invokeLater to let execute string above first
+    }
+
+    /**
      * Action commands for buttons have been assigned in bound *.form file.
+     *
+     * @see {@link AbstractDialog#actionPerformed(ActionEvent)}
      */
     @Override
     public void actionPerformed(ActionEvent e) {

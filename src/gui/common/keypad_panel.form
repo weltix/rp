@@ -798,6 +798,7 @@
                           <borderPainted value="false"/>
                           <contentAreaFilled value="true"/>
                           <focusPainted value="false"/>
+                          <focusable value="false"/>
                           <foreground color="-1"/>
                           <margin top="0" left="0" bottom="0" right="0"/>
                           <maximumSize width="2147483647" height="2147483647"/>
@@ -805,6 +806,7 @@
                           <name value="darkButton"/>
                           <opaque value="true"/>
                           <preferredSize width="-1" height="-1"/>
+                          <requestFocusEnabled value="false"/>
                           <text resource-bundle="resources/strings" key="search"/>
                         </properties>
                       </component>
@@ -836,11 +838,13 @@
                           <background color="-13350562"/>
                           <borderPainted value="false"/>
                           <focusPainted value="false"/>
+                          <focusable value="false"/>
                           <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
                           <name value="darkButton"/>
                           <preferredSize width="-1" height="-1"/>
+                          <requestFocusEnabled value="false"/>
                           <text resource-bundle="resources/strings" key="ok"/>
                         </properties>
                       </component>
@@ -855,11 +859,13 @@
                           <background color="-13264677"/>
                           <borderPainted value="false"/>
                           <focusPainted value="false"/>
+                          <focusable value="false"/>
                           <foreground color="-1"/>
                           <maximumSize width="2147483647" height="2147483647"/>
                           <minimumSize width="0" height="0"/>
                           <name value="lightButton"/>
                           <preferredSize width="-1" height="-1"/>
+                          <requestFocusEnabled value="false"/>
                           <text resource-bundle="resources/strings" key="cancel"/>
                         </properties>
                       </component>

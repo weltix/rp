@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 07.10.2019
+ * Copyright (c) RESONANCE JSC, 08.10.2019
  */
 
 package gui.common.dialogs;
@@ -49,6 +49,12 @@ public class MessageDialog extends AbstractDialog {
         });
     }
 
+    /**
+     * Method is intended to provide different data for every separate instance of dialog.
+     *
+     * @param title   title of dialog
+     * @param message message of dialog
+     */
     public void setProperties(String title, String message) {
         dialogTitle.setText(title);
         dialogMessage.setText(message);
