@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.10.2019
+ * Copyright (c) RESONANCE JSC, 09.10.2019
  */
 
 package gui.common;
@@ -15,6 +15,7 @@ import resources.Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.plaf.LayerUI;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +30,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -193,13 +195,12 @@ public class MainFrame extends JFrame implements ActionListener {
 
             sellPanel.setVisible(false);    // need here to trigger listener of sellPanel when it will be shown (visible) first time
         });
-        timer.setInitialDelay(1000);
+        timer.setInitialDelay(10);
         timer.start();
 
         // 1.32 - physical scale rate relate to my display
         // 1,9 - font scale for next parameters for debugging
-        // next parameters make window for my monitor with physical dimensions like real 14' POS
-//        setSize(1033, 580);
+//        setSize(1033, 580);        // makes window for my monitor with physical dimensions like real 14' POS
 //        setSize(1280, 720);
 //        setSize(1920, 1080);
 //        setSize(Toolkit.getDefaultToolkit().getScreenSize());
@@ -430,7 +431,7 @@ public class MainFrame extends JFrame implements ActionListener {
      *
      * @param rowCount amount of rows of our table.
      * @return value of {@link NavigatePanel#headerPanel} height, that is possible to get on this step
-     *         when table header's height calculated.
+     * when table header's height calculated.
      */
     private int initSellTable(int rowCount) {
         // First we will find height of table's header and row.
@@ -480,17 +481,20 @@ public class MainFrame extends JFrame implements ActionListener {
          */
         class DefaultCellRenderer extends DefaultTableCellRenderer {
 
+            Border padding = BorderFactory.createEmptyBorder(0, 5, 0, 5);
+
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 setBorder(noFocusBorder);
+                setBorder(BorderFactory.createCompoundBorder(getBorder(), padding));
                 return this;
             }
         }
         sellTable.setDefaultRenderer(Object.class, new DefaultCellRenderer());
 
         sellTable.setSelectionMode(SINGLE_SELECTION);
-        sellTable.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 34));
+        sellTable.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 36));
         sellTable.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, new Color(200, 200, 200)));
         sellTable.getTableHeader().setReorderingAllowed(false);     // don't allow reorder columns by hands
 
@@ -498,18 +502,21 @@ public class MainFrame extends JFrame implements ActionListener {
         UIManager.put("ScrollBar.width", scrollBarButtonSize);
         scrollPaneOfSellTable.getVerticalScrollBar().setUI(new DefaultScrollBarUI(scrollBarButtonSize));
         scrollPaneOfSellTable.setViewportView(sellTable);       // method is actual for TouchScroll.class
-//        scrollPaneOfSellTable.getHorizontalScrollBar().setUnitIncrement(1);
+        scrollPaneOfSellTable.getVerticalScrollBar().setUnitIncrement(tableRowHeight);
+        scrollPaneOfSellTable.getVerticalScrollBar().setBlockIncrement(tableRowHeight * SELL_TABLE_ROW_COUNT);
 
-        String[] columnNames = {"",
-                "Название",
-                "Кол-во",
-                "Сумма"};
+        String[] columnNames = {"", "№",
+                Resources.getInstance().getString("name"),
+                Resources.getInstance().getString("am_nt"),
+                Resources.getInstance().getString("sum")};
 
         Object[][] data = {
                 {" ", "Лосьон для тела Dove Чай матча и экстракт сакуры, 250 мл   4539448\n",
-                        new Integer(5), new Double(250.50)},
+                        String.format(Locale.ROOT, "%.3f", 999.9),
+                        String.format(Locale.ROOT, "%.2f", 999.9)},
                 {" ", "Лосьон для тела Dove Экстракт лотоса и рисовое молочко, 250 мл   4539449\n",
-                        new Integer(3), new Double(124)},
+                        String.format(Locale.ROOT, "%.3f", 10.9),
+                        String.format(Locale.ROOT, "%.2f", 10000.9)},
                 {" ", "Лосьон для тела Love Beauty and Planet «Бархатное масло ши», 400 мл   4539461\n",
                         new Integer(2), new Double(248)},
                 {" ", "Лосьон для тела Love Beauty and Planet «Восхитительно сияние», 400 мл   4539462\n",
@@ -625,12 +632,18 @@ public class MainFrame extends JFrame implements ActionListener {
                 {" ", "Мусс для тела Zeitun «Ночной обновляющий» сандал и амбра, 200 мл   4321997\n",
                         new Integer(20), new Double(70)},
                 {" ", "Мусс для тела Nivea «Огуречный лимонад», 200 мл   4349312\n",
-                        new Integer(10), new Double(50)}
+                        new Integer(10), new Double(706)}
         };
+        // add numeration to array of objects above
+        List<Object[]> dataList = new ArrayList<>(Arrays.asList(data));
+        for (int i = 0; i < dataList.size(); i++) {
+            List<Object> dataListItem = new ArrayList<>(Arrays.asList(dataList.get(i)));
+            dataListItem.add(1, Integer.valueOf(i + 1));
+            data[i] = dataListItem.toArray();
+        }
 
         DefaultTableModel sellTableModel = (DefaultTableModel) sellTable.getModel();
 //        sellTableModel.setColumnIdentifiers(columnNames);   // names of columns
-
 
 //        sellTableModel.addColumn("1");
 //        sellTableModel.addColumn("2");
@@ -640,12 +653,64 @@ public class MainFrame extends JFrame implements ActionListener {
 //        sellTableModel.addRow(columnNames);
         sellTableModel.setDataVector(data, columnNames);
 
-//        sellTableModel.setRowCount(60);
+        if (sellTable.getRowCount() < SELL_TABLE_ROW_COUNT)
+            sellTableModel.setRowCount(SELL_TABLE_ROW_COUNT);
 
-        sellTable.getColumnModel().getColumn(0).setPreferredWidth(1);
-        sellTable.getColumnModel().getColumn(1).setPreferredWidth(500);
-        sellTable.getColumnModel().getColumn(2).setPreferredWidth(60);
-        sellTable.getColumnModel().getColumn(3).setPreferredWidth(60);
+        DefaultTableCellRenderer centerRenderer = new DefaultCellRenderer();
+        centerRenderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        List<String> columnAliases = new ArrayList<>(Arrays.asList("", "№", "am_nt", "un_of_measure", "balance"));
+        for (String columnAlias : columnAliases) {
+            try {
+                sellTable.getColumn(columnAlias).setCellRenderer(centerRenderer);
+            } catch (IllegalArgumentException iae) {
+                // exception occurs if there is no column with such alias in table at present moment
+            }
+        }
+        DefaultTableCellRenderer rightRenderer = new DefaultCellRenderer();
+        rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.RIGHT);
+        columnAliases =  new ArrayList<>(Arrays.asList("sum", "price", "discount"));
+        for (String columnAlias : columnAliases) {
+            try {
+                sellTable.getColumn(columnAlias).setCellRenderer(rightRenderer);
+            } catch (IllegalArgumentException iae) {
+                // exception occurs if there is no column with such alias in table at present moment
+            }
+        }
+
+//        for (int column = 0; column < sellTable.getColumnCount(); column++) {
+//            if (column == 2 ) continue;
+//            TableColumn tableColumn = sellTable.getColumnModel().getColumn(column);
+//            int preferredWidth = tableColumn.getMinWidth();
+//            int maxWidth = tableColumn.getMaxWidth();
+//            System.out.println("column " + column + " preferredWidth = " + preferredWidth + " maxWidth = " + maxWidth);
+//
+//            for (int row = 0; row < sellTable.getRowCount(); row++) {
+//                TableCellRenderer cellRenderer = sellTable.getCellRenderer(row, column);
+//                Component c = sellTable.prepareRenderer(cellRenderer, row, column);
+//                int width = c.getPreferredSize().width + sellTable.getIntercellSpacing().width;
+//                preferredWidth = Math.max(preferredWidth, width);
+//
+//                //  We've exceeded the maximum width, no need to check other rows
+//
+//                if (preferredWidth >= maxWidth) {
+//                    preferredWidth = maxWidth;
+//                    break;
+//                }
+//            }
+//
+//            tableColumn.setPreferredWidth(preferredWidth);
+//        }
+
+        setJTableColumnsWidth(sellTable, sellTable.getWidth(), 5, 7, 65, 10, 13);
+
+//        sellTable.getColumn(Resources.getInstance().getString("name")).setPreferredWidth(300);
+        System.out.println(sellTable.getWidth() + " ");
+        System.out.println(sellTable.getColumn("").getPreferredWidth() + " ");
+        System.out.println(sellTable.getColumn("№").getPreferredWidth() + " ");
+        System.out.println(sellTable.getColumn(Resources.getInstance().getString("name")).getPreferredWidth() + " ");
+        System.out.println(sellTable.getColumn(Resources.getInstance().getString("am_nt")).getPreferredWidth() + " ");
+        System.out.println(sellTable.getColumn(Resources.getInstance().getString("sum")).getPreferredWidth() + " ");
+
 
         int tablePanelLocationY = (int) tablePanel.getLocation().getY();    // actually, determines height of panel under table
         int navPanelHeaderHeight = tablePanelLocationY + tableHeaderHeight;

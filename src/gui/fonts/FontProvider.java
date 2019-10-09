@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 13.09.2019
+ * Copyright (c) RESONANCE JSC, 09.10.2019
  */
 
 package gui.fonts;
@@ -33,7 +33,12 @@ public class FontProvider {
 
     private FontProvider() {
         double screenWidth = Toolkit.getDefaultToolkit().getScreenSize().getWidth();    //our screen width in pixels
-        scaleValue = (float) (1920 / screenWidth);                                      //1920px screen width - starting point
+//        scaleValue = (float) (1920 / screenWidth);                                      //1920px screen width - starting point
+        double frameWidth = 1366;    // FIXME: 09.10.2019 Delete
+//        frameWidth = 1033;    // FIXME: 09.10.2019 Delete
+//        frameWidth = 1280;    // FIXME: 09.10.2019 Delete
+//        frameWidth = 1920;    // FIXME: 09.10.2019 Delete
+        scaleValue = (float) (1920 / frameWidth);       // FIXME: 09.10.2019 Delete
 //        scaleValue = scaleValue * 1.32f;        //scaleValue * 1,32f to test on my display as it is 14' POS, DELETE this later
     }
 
