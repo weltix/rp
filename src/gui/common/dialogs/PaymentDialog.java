@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 27.09.2019
+ * Copyright (c) RESONANCE JSC, 10.10.2019
  */
 
 package gui.common.dialogs;
@@ -23,8 +23,6 @@ public class PaymentDialog extends AbstractDialog {
     private KeypadPanel keypadPanel;
     private JButton cashButton;
     private JButton cardButton;
-    private JButton cancelButton;
-    private JButton payButton;
     private JLabel toPayLabel;
     private JLabel toPaySumLabel;
     private JLabel paymentFormLabel;
@@ -32,7 +30,7 @@ public class PaymentDialog extends AbstractDialog {
     private JLabel mustBePaidLabel;
     private JLabel mustBePaidSumLabel;
     private JPanel centerPanel;
-    private JButton clearButton;
+    private JComboBox comboBox1;
 
     private Color blueColor = new Color(53, 152, 219);
     private Color beigeColor = new Color(235, 235, 235);
@@ -44,9 +42,6 @@ public class PaymentDialog extends AbstractDialog {
         Font robotoRegular38 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38);
         cashButton.setFont(robotoRegular38);
         cardButton.setFont(robotoRegular38);
-        cancelButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 32));
-        payButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 42));
-        clearButton.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 32));
         toPayLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 52));
         toPaySumLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_BOLD, 52));
         paymentFormLabel.setFont(FontProvider.getInstance().getFont(ROBOTO_REGULAR, 40));
@@ -56,7 +51,6 @@ public class PaymentDialog extends AbstractDialog {
 
         cashButton.addActionListener(this::actionPerformed);
         cardButton.addActionListener(this::actionPerformed);
-        cancelButton.addActionListener(this::actionPerformed);
 
         keypadPanel.setActionButtonsAmount(1);
         keypadPanel.getActionButton1().setText(Resources.getInstance().getString("pay_in"));

@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.dialogs.PaymentDialog">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="749" height="459"/>
+      <xy x="20" y="20" width="703" height="517"/>
     </constraints>
     <properties>
       <background color="-1"/>
@@ -52,46 +52,59 @@
                   <gridbag weightx="1.0" weighty="10.0"/>
                 </constraints>
                 <properties>
+                  <focusable value="false"/>
                   <minimumSize width="0" height="0"/>
                   <preferredSize width="-1" height="-1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children>
                   <component id="864e6" class="javax.swing.JButton" binding="cashButton">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="1.0"/>
+                      <gridbag weightx="50.0" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="cashButton"/>
                       <background color="-13264677"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <focusable value="false"/>
                       <foreground color="-1"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <name value="lightButton"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="cash"/>
                     </properties>
                   </component>
                   <component id="d37d9" class="javax.swing.JButton" binding="cardButton">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="0.0"/>
+                      <gridbag weightx="40.0" weighty="0.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="cardButton"/>
                       <background color="-1315861"/>
                       <borderPainted value="false"/>
                       <focusPainted value="false"/>
+                      <focusable value="false"/>
                       <margin top="0" left="0" bottom="0" right="0"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="card"/>
                     </properties>
+                  </component>
+                  <component id="37cf3" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="10.0" weighty="0.0"/>
+                    </constraints>
+                    <properties/>
                   </component>
                 </children>
               </grid>
@@ -112,15 +125,17 @@
                 <children>
                   <component id="547e3" class="javax.swing.JLabel" binding="toPayLabel">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="60.0" weighty="1.0"/>
                     </constraints>
                     <properties>
+                      <focusable value="false"/>
                       <foreground color="-13264677"/>
                       <horizontalTextPosition value="10"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="to_pay"/>
                       <verticalAlignment value="3"/>
                       <verticalTextPosition value="3"/>
@@ -128,15 +143,89 @@
                   </component>
                   <component id="121f1" class="javax.swing.JLabel" binding="toPaySumLabel">
                     <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="40.0" weighty="0.0"/>
                     </constraints>
                     <properties>
+                      <focusable value="false"/>
                       <foreground color="-13264677"/>
                       <horizontalAlignment value="11"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text value="0.00"/>
+                      <verticalAlignment value="3"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                  <component id="8165e" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="60.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <foreground color="-13264677"/>
+                      <horizontalTextPosition value="10"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text resource-bundle="resources/strings" key="to_pay"/>
+                      <verticalAlignment value="3"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                  <component id="98b1f" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="40.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <foreground color="-13264677"/>
+                      <horizontalAlignment value="11"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text value="0.00"/>
+                      <verticalAlignment value="3"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                  <component id="f1c30" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="60.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <foreground color="-13264677"/>
+                      <horizontalTextPosition value="10"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text resource-bundle="resources/strings" key="to_pay"/>
+                      <verticalAlignment value="3"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                  <component id="8f68c" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="40.0" weighty="0.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <foreground color="-13264677"/>
+                      <horizontalAlignment value="11"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text value="0.00"/>
                       <verticalAlignment value="3"/>
                       <verticalTextPosition value="3"/>
@@ -151,10 +240,12 @@
                 </constraints>
                 <properties>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -180,10 +271,12 @@
                       <gridbag weightx="1.0" weighty="1.0"/>
                     </constraints>
                     <properties>
+                      <focusable value="false"/>
                       <horizontalTextPosition value="10"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="card"/>
                       <verticalAlignment value="1"/>
                       <verticalTextPosition value="1"/>
@@ -192,6 +285,102 @@
                   <component id="a67d3" class="javax.swing.JLabel" binding="paymentFormSumLabel">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <horizontalAlignment value="11"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text value="0.00"/>
+                      <verticalAlignment value="1"/>
+                      <verticalTextPosition value="1"/>
+                    </properties>
+                  </component>
+                  <component id="bfad7" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <horizontalTextPosition value="10"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text resource-bundle="resources/strings" key="card"/>
+                      <verticalAlignment value="1"/>
+                      <verticalTextPosition value="1"/>
+                    </properties>
+                  </component>
+                  <component id="406f0" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <horizontalTextPosition value="10"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text resource-bundle="resources/strings" key="card"/>
+                      <verticalAlignment value="1"/>
+                      <verticalTextPosition value="1"/>
+                    </properties>
+                  </component>
+                  <component id="4073a" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <focusable value="false"/>
+                      <horizontalTextPosition value="10"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
+                      <text resource-bundle="resources/strings" key="card"/>
+                      <verticalAlignment value="1"/>
+                      <verticalTextPosition value="1"/>
+                    </properties>
+                  </component>
+                  <component id="fa1c9" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <horizontalAlignment value="11"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text value="0.00"/>
+                      <verticalAlignment value="1"/>
+                      <verticalTextPosition value="1"/>
+                    </properties>
+                  </component>
+                  <component id="c2120" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <gridbag weightx="1.0" weighty="1.0"/>
+                    </constraints>
+                    <properties>
+                      <horizontalAlignment value="11"/>
+                      <maximumSize width="2147483647" height="2147483647"/>
+                      <minimumSize width="0" height="0"/>
+                      <preferredSize width="-1" height="-1"/>
+                      <text value="0.00"/>
+                      <verticalAlignment value="1"/>
+                      <verticalTextPosition value="1"/>
+                    </properties>
+                  </component>
+                  <component id="77870" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="1.0" weighty="1.0"/>
                     </constraints>
                     <properties>
@@ -213,10 +402,12 @@
                 </constraints>
                 <properties>
                   <background color="-3618616"/>
+                  <focusable value="false"/>
                   <maximumSize width="-1" height="1"/>
                   <minimumSize width="-1" height="1"/>
                   <name value="beigeBackground"/>
                   <preferredSize width="-1" height="1"/>
+                  <requestFocusEnabled value="false"/>
                 </properties>
                 <border type="none"/>
                 <children/>
@@ -242,11 +433,13 @@
                       <gridbag weightx="65.0" weighty="1.0"/>
                     </constraints>
                     <properties>
+                      <focusable value="false"/>
                       <foreground color="-13264677"/>
                       <horizontalTextPosition value="10"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text resource-bundle="resources/strings" key="must_be_paid"/>
                       <verticalAlignment value="1"/>
                       <verticalTextPosition value="1"/>
@@ -258,85 +451,16 @@
                       <gridbag weightx="35.0" weighty="1.0"/>
                     </constraints>
                     <properties>
+                      <focusable value="false"/>
                       <foreground color="-13264677"/>
                       <horizontalAlignment value="11"/>
                       <maximumSize width="2147483647" height="2147483647"/>
                       <minimumSize width="0" height="0"/>
                       <preferredSize width="-1" height="-1"/>
+                      <requestFocusEnabled value="false"/>
                       <text value="0.00"/>
                       <verticalAlignment value="1"/>
                       <verticalTextPosition value="1"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
-              <grid id="837c2" layout-manager="GridBagLayout">
-                <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="15.0"/>
-                </constraints>
-                <properties>
-                  <focusable value="false"/>
-                  <minimumSize width="0" height="0"/>
-                  <preferredSize width="-1" height="-1"/>
-                  <requestFocusEnabled value="false"/>
-                </properties>
-                <border type="none"/>
-                <children>
-                  <component id="b8c1e" class="javax.swing.JButton" binding="cancelButton">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="25.0" weighty="1.0"/>
-                    </constraints>
-                    <properties>
-                      <actionCommand value="cancelButton"/>
-                      <background color="-13350562"/>
-                      <borderPainted value="false"/>
-                      <focusPainted value="false"/>
-                      <foreground color="-1"/>
-                      <margin top="0" left="0" bottom="0" right="0"/>
-                      <maximumSize width="2147483647" height="2147483647"/>
-                      <minimumSize width="0" height="0"/>
-                      <name value="darkButton"/>
-                      <preferredSize width="-1" height="-1"/>
-                      <text resource-bundle="resources/strings" key="cancel"/>
-                    </properties>
-                  </component>
-                  <component id="d8a66" class="javax.swing.JButton" binding="payButton">
-                    <constraints>
-                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="50.0" weighty="0.0"/>
-                    </constraints>
-                    <properties>
-                      <actionCommand value="payButton"/>
-                      <background color="-1315861"/>
-                      <borderPainted value="false"/>
-                      <focusPainted value="false"/>
-                      <foreground color="-16777216"/>
-                      <margin top="0" left="0" bottom="0" right="0"/>
-                      <maximumSize width="2147483647" height="2147483647"/>
-                      <minimumSize width="0" height="0"/>
-                      <preferredSize width="-1" height="-1"/>
-                      <text resource-bundle="resources/strings" key="pay"/>
-                    </properties>
-                  </component>
-                  <component id="ddb0d" class="javax.swing.JButton" binding="clearButton">
-                    <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="25.0" weighty="0.0"/>
-                    </constraints>
-                    <properties>
-                      <actionCommand value="clearButton"/>
-                      <background color="-13350562"/>
-                      <borderPainted value="false"/>
-                      <focusPainted value="false"/>
-                      <foreground color="-1"/>
-                      <margin top="0" left="0" bottom="0" right="0"/>
-                      <maximumSize width="2147483647" height="2147483647"/>
-                      <minimumSize width="0" height="0"/>
-                      <name value="darkButton"/>
-                      <preferredSize width="-1" height="-1"/>
-                      <text resource-bundle="resources/strings" key="clear"/>
                     </properties>
                   </component>
                 </children>
@@ -406,7 +530,7 @@
       <grid id="dc4e3" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="20.0"/>
+          <gridbag weightx="0.0" weighty="30.0"/>
         </constraints>
         <properties>
           <background color="-1"/>
@@ -420,7 +544,7 @@
       <nested-form id="1e3a5" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="37.5" weighty="80.0"/>
+          <gridbag weightx="37.5" weighty="70.0"/>
         </constraints>
       </nested-form>
     </children>

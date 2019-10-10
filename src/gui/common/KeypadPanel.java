@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.10.2019
+ * Copyright (c) RESONANCE JSC, 10.10.2019
  */
 
 package gui.common;
@@ -374,3 +374,5 @@ public class KeypadPanel extends JComponent {
         return textField;
     }
 }
+
+// TODO: 10.10.2019 Можно поменять цвет выделения текстового поля.
