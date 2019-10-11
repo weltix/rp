@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
 package gui.common.dialogs;
@@ -19,10 +19,6 @@ import java.awt.event.ActionEvent;
  * CardLayout as layout manager, and contains another JPanels different for different subclasses.
  */
 public class KeypadDialogDepositWithdraw extends KeypadDialog {
-
-    // used for toggle buttons
-    private Color blueColor = new Color(53, 152, 219);
-    private Color beigeColor = new Color(235, 235, 235);
 
     /**
      * Constructor tunes up the look of this dialog, and sets actions for action buttons.

@@ -19,10 +19,6 @@ import java.awt.event.ActionEvent;
  */
 public class KeypadDialogManualDiscount extends KeypadDialog {
 
-    // used for toggle buttons
-    private Color blueColor = new Color(53, 152, 219);
-    private Color beigeColor = new Color(235, 235, 235);
-
     /**
      * Constructor tunes up the look of this dialog, and sets action for action button.
      * Constructor of parent is called initially.

@@ -31,16 +31,32 @@ public abstract class KeypadDialog extends AbstractDialog {
     protected JButton withdrawButton;
     protected JLabel cashAmountLabel;
     private JPanel topPanel;
+    private JPanel centerPanel;
+    private JButton cashButton;
+    private JButton cardButton;
+    private JComboBox comboBox1;
+    private JLabel toPayLabel;
+    private JLabel toPaySumLabel;
+    private JLabel paymentFormLabel;
+    private JLabel paymentFormSumLabel;
+    private JLabel mustBePaidLabel;
+    private JLabel mustBePaidSumLabel;
+    protected JPanel paymentPanel;
     private final GridBagLayout gbLayoutMainPanel = (GridBagLayout) mainPanel.getLayout();
     protected GridBagConstraints constraintsExtraPanel = gbLayoutMainPanel.getConstraints(extraPanel);
     // get layout to operate with cards-JPanels, that contained in appropriate container
     protected CardLayout cardPanelLayout = (CardLayout) cardPanel.getLayout();
 
+    // used for toggle buttons in some subclasses
+    protected Color blueColor = new Color(53, 152, 219);
+    protected Color beigeColor = new Color(235, 235, 235);
+
     public KeypadDialog(Frame owner) {
         super(owner);
         this.setContentPane(mainPanel);
 
-        extraPanel.setVisible(false);       // default value
+        extraPanel.setVisible(false);       // default value, need only for some subclasses
+        paymentPanel.setVisible(false);     // default value, need only for some subclasses
 
         // type and size of fonts in heading
         dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));

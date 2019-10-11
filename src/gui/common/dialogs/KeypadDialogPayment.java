@@ -16,9 +16,12 @@ import static gui.fonts.FontProvider.ROBOTO_BOLD;
 import static gui.fonts.FontProvider.ROBOTO_REGULAR;
 
 /**
- * Class for payment dialog window. Bound to payment_dialog.form
+ * Class for dialog window, that contains {@link KeypadPanel} and additional payment panel.
+ * Class is intended to close receipt by making payment.
+ * Parent abstract class {@link KeypadDialog} contains JPanel {@link KeypadDialog#paymentPanel}, which we will make
+ * visible in this class.
  */
-public class PaymentDialog extends AbstractDialog {
+public class KeypadDialogPayment extends KeypadDialog {
     private JPanel mainPanel;
     private KeypadPanel keypadPanel;
     private JButton cashButton;
@@ -32,12 +35,12 @@ public class PaymentDialog extends AbstractDialog {
     private JPanel centerPanel;
     private JComboBox comboBox1;
 
-    private Color blueColor = new Color(53, 152, 219);
-    private Color beigeColor = new Color(235, 235, 235);
-
-    public PaymentDialog(Frame owner) {
+    public KeypadDialogPayment(Frame owner) {
         super(owner);
         this.setContentPane(mainPanel);
+
+        paymentPanel.setVisible(true);
+
 
         Font robotoRegular38 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38);
         cashButton.setFont(robotoRegular38);

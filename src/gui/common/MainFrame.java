@@ -128,7 +128,7 @@ public class MainFrame extends JFrame implements ActionListener {
     private KeypadDialog changeAmountDialog;
     private KeypadDialog manualDiscountDialog;
     private KeypadDialog depositWithdrawDialog;
-    private AbstractDialog paymentDialog;
+    private KeypadDialog paymentDialog;
     private ConfirmDialog confirmDialog;
     private MessageDialog messageDialog;
     private Dimension kpSize;   // size of this MainFrame's keypadPanel in px
@@ -247,7 +247,7 @@ public class MainFrame extends JFrame implements ActionListener {
         changeAmountDialog = new KeypadDialogChangeProductAmount(this);
         manualDiscountDialog = new KeypadDialogManualDiscount(this);
         depositWithdrawDialog = new KeypadDialogDepositWithdraw(this);
-        paymentDialog = new PaymentDialog(this);
+        paymentDialog = new KeypadDialogPayment(this);
         confirmDialog = new ConfirmDialog(this);
         messageDialog = new MessageDialog(this);
 
@@ -343,7 +343,7 @@ public class MainFrame extends JFrame implements ActionListener {
         depositWithdrawDialog.setSize(size);
         depositWithdrawDialog.setLocation(location);
 
-        /** {@link PaymentDialog} customization */
+        /** {@link KeypadDialogPayment} customization */
         // 37.3% keypad width to dialog width ratio. It is impossible to get this value from *.form file programmatically.
         size.setSize((kpSize.getWidth() / 37.5) * 100 * 1.005, (kpSize.getHeight() / 80) * 100 * 1.01);
         location.setLocation(0, 1);
@@ -405,7 +405,7 @@ public class MainFrame extends JFrame implements ActionListener {
 //                SwingUtilities.invokeLater(() -> depositWithdrawDialog.setVisible(true));
                 depositWithdrawDialog.setVisible(true);
                 break;
-            case "PaymentDialog":
+            case "KeypadDialogPayment":
 //                SwingUtilities.invokeLater(() -> paymentDialog.setVisible(true));
                 paymentDialog.setVisible(true);
                 break;
