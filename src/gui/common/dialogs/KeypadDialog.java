@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
 package gui.common.dialogs;
@@ -30,6 +30,7 @@ public abstract class KeypadDialog extends AbstractDialog {
     protected JButton depositButton;
     protected JButton withdrawButton;
     protected JLabel cashAmountLabel;
+    private JPanel topPanel;
     private final GridBagLayout gbLayoutMainPanel = (GridBagLayout) mainPanel.getLayout();
     protected GridBagConstraints constraintsExtraPanel = gbLayoutMainPanel.getConstraints(extraPanel);
     // get layout to operate with cards-JPanels, that contained in appropriate container

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
 package gui.common.dialogs;
@@ -38,8 +38,8 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         dialogTitle.setText(Resources.getInstance().getString("manual_discount"));
         dialogHint.setText(Resources.getInstance().getString("hint_set_discount"));
 
-        // 14% - weight in Y axis of extraPanel (100% - original height, and we add 14% of extraPanel. Totally 114%)
-        constraintsExtraPanel.weighty = 14;
+        // 13.4% - weight in Y axis of extraPanel (100% - original height, and we add 13.4% of extraPanel. Totally 113.4%)
+        constraintsExtraPanel.weighty = 13.4;
         mainPanel.remove(extraPanel);
         mainPanel.add(extraPanel, constraintsExtraPanel);
 

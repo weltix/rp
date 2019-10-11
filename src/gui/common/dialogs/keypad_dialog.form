@@ -16,7 +16,7 @@
       <color color="-3618616"/>
     </border>
     <children>
-      <grid id="40fc7" layout-manager="GridBagLayout">
+      <grid id="40fc7" binding="topPanel" layout-manager="GridBagLayout">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="1.0" weighty="14.0"/>
@@ -33,7 +33,7 @@
           <component id="49755" class="javax.swing.JLabel" binding="dialogTitle">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="90.0" weighty="7.0"/>
+              <gridbag weightx="90.8" weighty="7.0"/>
             </constraints>
             <properties>
               <alignmentY value="0.5"/>
@@ -68,7 +68,7 @@
           <grid id="523ff" layout-manager="GridBagLayout">
             <constraints>
               <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="5.0" weighty="0.0"/>
+              <gridbag weightx="4.6" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-1"/>
@@ -84,7 +84,7 @@
           <grid id="13901" layout-manager="GridBagLayout">
             <constraints>
               <grid row="0" column="2" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="5.0" weighty="0.0"/>
+              <gridbag weightx="4.6" weighty="0.0"/>
             </constraints>
             <properties>
               <background color="-1"/>
@@ -139,7 +139,7 @@
           <grid id="e1ed9" layout-manager="GridBagLayout">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="5.0" weighty="1.0"/>
+              <gridbag weightx="4.6" weighty="1.0"/>
             </constraints>
             <properties>
               <background color="-1"/>
@@ -184,7 +184,7 @@
                   <component id="f3f34" class="javax.swing.JButton" binding="percentButton">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="21.25" weighty="60.0"/>
+                      <gridbag weightx="21.45" weighty="57.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="percentButton"/>
@@ -205,7 +205,7 @@
                   <component id="f5c64" class="javax.swing.JButton" binding="moneyButton">
                     <constraints>
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="21.25" weighty="1.0"/>
+                      <gridbag weightx="21.45" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="moneyButton"/>
@@ -241,7 +241,7 @@
                   <component id="ef86a" class="javax.swing.JButton" binding="productButton">
                     <constraints>
                       <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="21.25" weighty="1.0"/>
+                      <gridbag weightx="21.45" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="productButton"/>
@@ -262,7 +262,7 @@
                   <component id="30502" class="javax.swing.JButton" binding="receiptButton">
                     <constraints>
                       <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="21.25" weighty="1.0"/>
+                      <gridbag weightx="21.45" weighty="1.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="receiptButton"/>
@@ -281,7 +281,7 @@
                   <grid id="90a19" layout-manager="GridBagLayout">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="20.0"/>
+                      <gridbag weightx="1.0" weighty="21.5"/>
                     </constraints>
                     <properties>
                       <background color="-1"/>
@@ -297,7 +297,7 @@
                   <grid id="c4946" layout-manager="GridBagLayout">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="1.0" weighty="20.0"/>
+                      <gridbag weightx="1.0" weighty="21.5"/>
                     </constraints>
                     <properties>
                       <background color="-1"/>
@@ -327,7 +327,7 @@
                   <component id="894fe" class="javax.swing.JButton" binding="depositButton">
                     <constraints>
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="45.0" weighty="40.0"/>
+                      <gridbag weightx="45.4" weighty="40.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="depositButton"/>
@@ -345,7 +345,7 @@
                   <component id="8bcbe" class="javax.swing.JButton" binding="withdrawButton">
                     <constraints>
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-                      <gridbag weightx="45.0" weighty="0.0"/>
+                      <gridbag weightx="45.4" weighty="0.0"/>
                     </constraints>
                     <properties>
                       <actionCommand value="withdrawButton"/>
@@ -428,7 +428,7 @@
           <grid id="224ab" layout-manager="GridBagLayout">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="5.0" weighty="1.0"/>
+              <gridbag weightx="4.6" weighty="1.0"/>
             </constraints>
             <properties>
               <background color="-1"/>

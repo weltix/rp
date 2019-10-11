@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 09.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
 package gui.common;
@@ -322,8 +322,8 @@ public class MainFrame extends JFrame implements ActionListener {
         changeAmountDialog.setLocation(location);
 
         /** {@link KeypadDialogManualDiscount} customization */
-        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-        kpHRatio = 86.0 / 114;     /** 114% = 100% + 14% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
+        // keypad height to dialog height ratio. 113.4% = 100% + 13.4% of KeypadDialog.extraPanel, which is visible in this dialog.
+        kpHRatio = 86.0 / 113.4;    // 13.4% is set in KeypadDialogManualDiscount class.
         // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
         // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
         // container using they weights, the sizes of components are rounding to down.
@@ -333,8 +333,8 @@ public class MainFrame extends JFrame implements ActionListener {
         manualDiscountDialog.setLocation(location);
 
         /** {@link KeypadDialogDepositWithdraw} customization */
-        // keypad height to dialog height ratio. It is impossible to get this value from *.form file programmatically.
-        kpHRatio = 86.0 / 119;     /** 119% = 100% + 19% of {@link KeypadDialog#extraPanel1}, which is visible in this dialog */
+        // keypad height to dialog height ratio. 119% = 100% + 19% of KeypadDialog.extraPanel1, which is visible in this dialog
+        kpHRatio = 86.0 / 119;     // 19% is set in KeypadDialogDepositWithdraw class.
         // 1, 2 and 3 - correction (dialog borders has absolute width 1px, also dividing lines has absolute width 1px).
         // Dimension.setSize() rounds it's arguments upwards, but when Swing calculates dimensions of components in
         // container using they weights, the sizes of components are rounding to down.
