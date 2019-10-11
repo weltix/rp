@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.NavigateButton">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.components.NavigateButton">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
       <xy x="20" y="20" width="158" height="136"/>

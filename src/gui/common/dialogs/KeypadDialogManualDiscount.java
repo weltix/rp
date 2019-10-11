@@ -4,7 +4,7 @@
 
 package gui.common.dialogs;
 
-import gui.common.KeypadPanel;
+import gui.common.components.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
@@ -36,7 +36,7 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
 
         // 13.4% - weight in Y axis of extraPanel (100% - original height, and we add 13.4% of extraPanel. Totally 113.4%)
         constraintsExtraPanel.weighty = 13.4;
-        mainPanel.remove(extraPanel);
+//        mainPanel.remove(extraPanel);
         mainPanel.add(extraPanel, constraintsExtraPanel);
 
         Font robotoRegular30 = FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 30);
@@ -72,10 +72,8 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
             case "actionButton1":
-                System.out.println("yes");
                 break;
             case "actionButton2":
-                close();
                 break;
             case "percentButton":
                 percentButton.setBackground(blueColor);

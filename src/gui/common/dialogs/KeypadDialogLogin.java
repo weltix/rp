@@ -1,10 +1,10 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
 package gui.common.dialogs;
 
-import gui.common.KeypadPanel;
+import gui.common.components.KeypadPanel;
 import resources.Resources;
 
 import javax.swing.*;
@@ -47,7 +47,6 @@ public class KeypadDialogLogin extends KeypadDialog {
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
             case "actionButton1":
-                close();
                 if (parentFrame.getSplashScreenPanel().isVisible()) {
                     parentFrame.setCardOfMainPanel("mainSellPanel");
                     parentFrame.setCardOfSellPanelScreens("sellPanel");

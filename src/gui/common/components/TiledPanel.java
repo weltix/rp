@@ -1,8 +1,8 @@
 /*
- * Copyright (c) RESONANCE JSC, 07.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
-package gui.common;
+package gui.common.components;
 
 import gui.fonts.FontProvider;
 

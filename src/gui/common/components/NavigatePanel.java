@@ -1,14 +1,16 @@
 /*
- * Copyright (c) RESONANCE JSC, 07.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
-package gui.common;
+package gui.common.components;
 
 import com.sun.istack.internal.Nullable;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -26,7 +28,7 @@ public class NavigatePanel extends JPanel {
     private JPanel navigatePanel;
     private JLabel headerLabel1;
     private JLabel headerLabel2;
-    JPanel headerPanel;
+    public JPanel headerPanel;
     private JPanel paddingPanel;
 
     // lists of icons and texts for navigate buttons. Icon is a text actually, but with special font, where no letters, but icons are.
@@ -44,6 +46,14 @@ public class NavigatePanel extends JPanel {
         navButtonActions = actions;
         navButtonsAmount = icons.size();
         initComponents();
+
+        mainPanel.addComponentListener(new ComponentAdapter() {     // need basically to listen key presses
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                mainPanel.requestFocus();
+            }
+        });
     }
 
     private void initComponents() {
@@ -142,5 +152,9 @@ public class NavigatePanel extends JPanel {
      */
     public void setHeaderPanelHeight(int height) {
         headerPanel.setPreferredSize(new Dimension(10, height));
+    }
+
+    public JPanel getMainPanel(){
+        return mainPanel;
     }
 }

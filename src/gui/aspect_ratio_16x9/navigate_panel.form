@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.NavigatePanel">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.components.NavigatePanel">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
       <xy x="20" y="20" width="77" height="811"/>
@@ -7,12 +7,12 @@
     <properties>
       <autoscrolls value="false"/>
       <background color="-16777216"/>
-      <focusable value="false"/>
+      <focusable value="true"/>
       <maximumSize width="-1" height="-1"/>
       <minimumSize width="-1" height="-1"/>
       <opaque value="true"/>
       <preferredSize width="-1" height="-1"/>
-      <requestFocusEnabled value="false"/>
+      <requestFocusEnabled value="true"/>
       <verifyInputWhenFocusTarget value="true"/>
       <visible value="true"/>
     </properties>
@@ -104,55 +104,55 @@
             <border type="none"/>
             <children/>
           </grid>
-          <nested-form id="b4b1c" form-file="gui/common/navigate_button.form">
+          <nested-form id="b4b1c" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="1dbc4" form-file="gui/common/navigate_button.form">
+          <nested-form id="1dbc4" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="5e6cb" form-file="gui/common/navigate_button.form">
+          <nested-form id="5e6cb" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="f70fe" form-file="gui/common/navigate_button.form">
+          <nested-form id="f70fe" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="3d851" form-file="gui/common/navigate_button.form">
+          <nested-form id="3d851" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="b749c" form-file="gui/common/navigate_button.form">
+          <nested-form id="b749c" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="5447f" form-file="gui/common/navigate_button.form">
+          <nested-form id="5447f" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="91c3a" form-file="gui/common/navigate_button.form">
+          <nested-form id="91c3a" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>
             </constraints>
           </nested-form>
-          <nested-form id="bef86" form-file="gui/common/navigate_button.form">
+          <nested-form id="bef86" form-file="gui/common/components/navigate_button.form">
             <constraints>
               <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="0.0" weighty="10.35"/>

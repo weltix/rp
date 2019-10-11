@@ -277,7 +277,7 @@
                           <color color="-3618616"/>
                         </border>
                         <children>
-                          <nested-form id="ae2f7" form-file="gui/common/keypad_panel.form" binding="keypadPanel">
+                          <nested-form id="ae2f7" form-file="gui/common/components/keypad_panel.form" binding="keypadPanel">
                             <constraints>
                               <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                               <gridbag weightx="1.0" weighty="92.5"/>
@@ -502,7 +502,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <nested-form id="f5287" form-file="gui/common/tiled_panel.form" binding="tiledPanel0" custom-create="true">
+                  <nested-form id="f5287" form-file="gui/common/components/tiled_panel.form" binding="tiledPanel0" custom-create="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="1.0" weighty="1.0"/>
@@ -524,7 +524,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <nested-form id="2de73" form-file="gui/common/tiled_panel.form" binding="tiledPanel1" custom-create="true">
+                  <nested-form id="2de73" form-file="gui/common/components/tiled_panel.form" binding="tiledPanel1" custom-create="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="1.0" weighty="1.0"/>
@@ -546,7 +546,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <nested-form id="1671e" form-file="gui/common/tiled_panel.form" binding="tiledPanel2" custom-create="true">
+                  <nested-form id="1671e" form-file="gui/common/components/tiled_panel.form" binding="tiledPanel2" custom-create="true">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                       <gridbag weightx="1.0" weighty="1.0"/>

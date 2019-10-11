@@ -4,9 +4,7 @@
 
 package gui.common;
 
-import gui.common.components.BackgroundImagePanel;
-import gui.common.components.GlassPane;
-import gui.common.components.TouchScroll;
+import gui.common.components.*;
 import gui.common.dialogs.*;
 import gui.common.ui.BlurLayerUI;
 import gui.common.ui.DefaultScrollBarUI;
@@ -22,10 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -668,7 +663,7 @@ public class MainFrame extends JFrame implements ActionListener {
         }
         DefaultTableCellRenderer rightRenderer = new DefaultCellRenderer();
         rightRenderer.setHorizontalAlignment(DefaultTableCellRenderer.RIGHT);
-        columnAliases =  new ArrayList<>(Arrays.asList("sum", "price", "discount"));
+        columnAliases = new ArrayList<>(Arrays.asList("sum", "price", "discount"));
         for (String columnAlias : columnAliases) {
             try {
                 sellTable.getColumn(columnAlias).setCellRenderer(rightRenderer);
@@ -833,6 +828,15 @@ public class MainFrame extends JFrame implements ActionListener {
             repaint();      // enforced to call to provide synchronous appearance of both panels on weak hardware
         };
         navPanelBack = new NavigatePanel(buttonIcons, buttonTexts, iconsFont, actions);
+
+        final Consumer<Integer> actionBackToSellPanel = actions;
+        navPanelBack.getMainPanel().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    actionBackToSellPanel.accept(0);    // parameter does not matter in this context
+            }
+        });
     }
 
     /**

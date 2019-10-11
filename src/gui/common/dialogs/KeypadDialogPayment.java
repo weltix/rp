@@ -4,11 +4,10 @@
 
 package gui.common.dialogs;
 
-import gui.common.KeypadPanel;
+import gui.common.components.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -22,25 +21,12 @@ import static gui.fonts.FontProvider.ROBOTO_REGULAR;
  * visible in this class.
  */
 public class KeypadDialogPayment extends KeypadDialog {
-    private JPanel mainPanel;
-    private KeypadPanel keypadPanel;
-    private JButton cashButton;
-    private JButton cardButton;
-    private JLabel toPayLabel;
-    private JLabel toPaySumLabel;
-    private JLabel paymentFormLabel;
-    private JLabel paymentFormSumLabel;
-    private JLabel mustBePaidLabel;
-    private JLabel mustBePaidSumLabel;
-    private JPanel centerPanel;
-    private JComboBox comboBox1;
 
     public KeypadDialogPayment(Frame owner) {
         super(owner);
-        this.setContentPane(mainPanel);
 
         paymentPanel.setVisible(true);
-
+        extraPanel.setVisible(true);
 
         Font robotoRegular38 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38);
         cashButton.setFont(robotoRegular38);
@@ -56,7 +42,10 @@ public class KeypadDialogPayment extends KeypadDialog {
         cardButton.addActionListener(this::actionPerformed);
 
         keypadPanel.setActionButtonsAmount(2);
-        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("pay_in"));
+        keypadPanel.getActionButton1().setText(Resources.getInstance().getString("deposit"));
+        keypadPanel.getActionButton1().addActionListener(this::actionPerformed);
+        keypadPanel.getActionButton2().setText(Resources.getInstance().getString("cancel"));
+        keypadPanel.getActionButton2().addActionListener(this::actionPerformed);
     }
 
     /**
@@ -65,11 +54,12 @@ public class KeypadDialogPayment extends KeypadDialog {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(extraPanel.getSize() + " pay");
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
-            case "cancelButton":
-                close();
-                keypadPanel.getTextField().setText("");
+            case "actionButton1":
+                break;
+            case "actionButton2":
                 break;
             case "cashButton":
                 cashButton.setBackground(blueColor);

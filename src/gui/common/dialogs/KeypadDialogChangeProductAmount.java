@@ -1,10 +1,10 @@
 /*
- * Copyright (c) RESONANCE JSC, 08.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
 package gui.common.dialogs;
 
-import gui.common.KeypadPanel;
+import gui.common.components.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
@@ -51,7 +51,6 @@ public class KeypadDialogChangeProductAmount extends KeypadDialog {
             case "actionButton1":
                 break;
             case "actionButton2":
-                close();
                 break;
             default:
                 break;

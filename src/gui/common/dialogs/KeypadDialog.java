@@ -4,11 +4,14 @@
 
 package gui.common.dialogs;
 
-import gui.common.KeypadPanel;
+import gui.common.components.KeypadPanel;
 import gui.fonts.FontProvider;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * General abstract class for dialog window, that contains {@link JTextField} and {@link KeypadPanel}.
@@ -31,17 +34,19 @@ public abstract class KeypadDialog extends AbstractDialog {
     protected JButton withdrawButton;
     protected JLabel cashAmountLabel;
     private JPanel topPanel;
-    private JPanel centerPanel;
-    private JButton cashButton;
-    private JButton cardButton;
-    private JComboBox comboBox1;
-    private JLabel toPayLabel;
-    private JLabel toPaySumLabel;
-    private JLabel paymentFormLabel;
-    private JLabel paymentFormSumLabel;
-    private JLabel mustBePaidLabel;
-    private JLabel mustBePaidSumLabel;
+    // next components are from payment panel
     protected JPanel paymentPanel;
+    protected JPanel centerPanel;
+    protected JButton cashButton;
+    protected JButton cardButton;
+    protected JComboBox comboBox;
+    protected JLabel toPayLabel;
+    protected JLabel toPaySumLabel;
+    protected JLabel paymentFormLabel;
+    protected JLabel paymentFormSumLabel;
+    protected JLabel mustBePaidLabel;
+    protected JLabel mustBePaidSumLabel;
+
     private final GridBagLayout gbLayoutMainPanel = (GridBagLayout) mainPanel.getLayout();
     protected GridBagConstraints constraintsExtraPanel = gbLayoutMainPanel.getConstraints(extraPanel);
     // get layout to operate with cards-JPanels, that contained in appropriate container
@@ -55,12 +60,37 @@ public abstract class KeypadDialog extends AbstractDialog {
         super(owner);
         this.setContentPane(mainPanel);
 
-        extraPanel.setVisible(false);       // default value, need only for some subclasses
         paymentPanel.setVisible(false);     // default value, need only for some subclasses
+        extraPanel.setVisible(false);       // default value, need only for some subclasses
 
         // type and size of fonts in heading
         dialogTitle.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 26));
         dialogHint.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 20));
+
+        mainPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
+                    keypadPanel.getActionButton2().doClick();
+            }
+        });
+    }
+
+    /**
+     * More detailed description look in superclass.
+     * Action commands for buttons have been assigned in bound *.form file.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        super.actionPerformed(e);
+        switch (e.getActionCommand()) {
+            case "actionButton0":
+            case "actionButton1":
+            case "actionButton2":
+                close();
+            default:
+                break;
+        }
     }
 
     /**

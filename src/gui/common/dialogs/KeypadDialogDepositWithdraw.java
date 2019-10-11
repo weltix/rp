@@ -4,7 +4,7 @@
 
 package gui.common.dialogs;
 
-import gui.common.KeypadPanel;
+import gui.common.components.KeypadPanel;
 import gui.fonts.FontProvider;
 import resources.Resources;
 
@@ -74,12 +74,12 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(extraPanel.getSize() + " depowith");
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
             case "actionButton1":
                 break;
             case "actionButton2":
-                close();
                 break;
             case "depositButton":
                 depositButton.setBackground(blueColor);

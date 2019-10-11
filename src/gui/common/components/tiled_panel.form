@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.TiledPanel">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.common.components.TiledPanel">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
       <xy x="20" y="20" width="677" height="462"/>
@@ -39,10 +39,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <selected value="false"/>
           <text value="Button"/>
@@ -58,6 +60,7 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <hideActionText value="false"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="11"/>
@@ -65,6 +68,7 @@
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -78,10 +82,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -95,10 +101,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -112,10 +120,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -129,10 +139,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -146,10 +158,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -163,10 +177,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -180,10 +196,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -197,10 +215,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -214,10 +234,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -231,10 +253,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -248,10 +272,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -265,10 +291,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -282,10 +310,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -299,10 +329,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -316,10 +348,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -333,10 +367,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -350,10 +386,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -367,10 +405,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -384,10 +424,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -401,10 +443,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -418,10 +462,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -435,10 +481,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -452,10 +500,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -469,10 +519,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -486,10 +538,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -503,10 +557,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -520,10 +576,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
@@ -537,10 +595,12 @@
           <background color="-1"/>
           <borderPainted value="true"/>
           <focusPainted value="false"/>
+          <focusable value="false"/>
           <margin top="0" left="0" bottom="0" right="0"/>
           <maximumSize width="-1" height="-1"/>
           <minimumSize width="-1" height="-1"/>
           <preferredSize width="-1" height="-1"/>
+          <requestFocusEnabled value="false"/>
           <rolloverEnabled value="true"/>
           <text value="Button"/>
         </properties>
