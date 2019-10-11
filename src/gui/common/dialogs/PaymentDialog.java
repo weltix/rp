@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 10.10.2019
+ * Copyright (c) RESONANCE JSC, 11.10.2019
  */
 
 package gui.common.dialogs;
@@ -52,7 +52,7 @@ public class PaymentDialog extends AbstractDialog {
         cashButton.addActionListener(this::actionPerformed);
         cardButton.addActionListener(this::actionPerformed);
 
-        keypadPanel.setActionButtonsAmount(1);
+        keypadPanel.setActionButtonsAmount(2);
         keypadPanel.getActionButton1().setText(Resources.getInstance().getString("pay_in"));
     }
 
