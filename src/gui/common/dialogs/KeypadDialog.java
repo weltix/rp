@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.10.2019
+ * Copyright (c) RESONANCE JSC, 15.10.2019
  */
 
 package gui.common.dialogs;
@@ -18,7 +18,8 @@ import java.awt.event.KeyEvent;
  * Used for inheritance by another descent classes. Bound to keypad_dialog.form
  */
 public abstract class KeypadDialog extends AbstractDialog {
-    protected JPanel mainPanel;
+    private JPanel mainPanel;
+    protected JPanel basicPanel;
     protected KeypadPanel keypadPanel;
     public JLabel dialogTitle;
     public JLabel dialogHint;
@@ -28,27 +29,28 @@ public abstract class KeypadDialog extends AbstractDialog {
     protected JButton moneyButton;
     protected JButton productButton;
     protected JButton receiptButton;
-    private JPanel discountPanel;
+    private JPanel topPanel;
     private JPanel depositWithdrawPanel;
+    private JPanel discountPanel;
     protected JButton depositButton;
     protected JButton withdrawButton;
     protected JLabel cashAmountLabel;
-    private JPanel topPanel;
     // next components are from payment panel
     protected JPanel paymentPanel;
-    protected JPanel centerPanel;
     protected JButton cashButton;
     protected JButton cardButton;
-    protected JComboBox comboBox;
     protected JLabel toPayLabel;
     protected JLabel toPaySumLabel;
     protected JLabel paymentFormLabel;
     protected JLabel paymentFormSumLabel;
     protected JLabel mustBePaidLabel;
     protected JLabel mustBePaidSumLabel;
+    protected JComboBox comboBox;
+    private JPanel centerPanel;
 
-    private final GridBagLayout gbLayoutMainPanel = (GridBagLayout) mainPanel.getLayout();
-    protected GridBagConstraints constraintsExtraPanel = gbLayoutMainPanel.getConstraints(extraPanel);
+
+    private final GridBagLayout gbLayoutBasicPanel = (GridBagLayout) basicPanel.getLayout();
+    protected GridBagConstraints constraintsExtraPanel = gbLayoutBasicPanel.getConstraints(extraPanel);
     // get layout to operate with cards-JPanels, that contained in appropriate container
     protected CardLayout cardPanelLayout = (CardLayout) cardPanel.getLayout();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.10.2019
+ * Copyright (c) RESONANCE JSC, 15.10.2019
  */
 
 package gui.common.dialogs;
@@ -34,8 +34,8 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
 
         // 19% - weight in Y axis of extraPanel (100% - original height, and we add 19% of extraPanel. Totally 119%)
         constraintsExtraPanel.weighty = 19;
-        mainPanel.remove(extraPanel);
-        mainPanel.add(extraPanel, constraintsExtraPanel);
+        basicPanel.remove(extraPanel);
+        basicPanel.add(extraPanel, constraintsExtraPanel);
 
         dialogTitle.setText(Resources.getInstance().getString("deposit_withdraw"));
         dialogHint.setText(Resources.getInstance().getString("hint_deposit_withdraw"));
@@ -74,7 +74,6 @@ public class KeypadDialogDepositWithdraw extends KeypadDialog {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(extraPanel.getSize() + " depowith");
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
             case "actionButton1":

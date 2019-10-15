@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.10.2019
+ * Copyright (c) RESONANCE JSC, 15.10.2019
  */
 
 package gui.common.dialogs;
@@ -26,7 +26,6 @@ public class KeypadDialogPayment extends KeypadDialog {
         super(owner);
 
         paymentPanel.setVisible(true);
-        extraPanel.setVisible(true);
 
         Font robotoRegular38 = FontProvider.getInstance().getFont(ROBOTO_REGULAR, 38);
         cashButton.setFont(robotoRegular38);
@@ -54,7 +53,6 @@ public class KeypadDialogPayment extends KeypadDialog {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(extraPanel.getSize() + " pay");
         super.actionPerformed(e);
         switch (e.getActionCommand()) {
             case "actionButton1":

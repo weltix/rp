@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.10.2019
+ * Copyright (c) RESONANCE JSC, 15.10.2019
  */
 
 package gui.common.dialogs;
@@ -31,13 +31,13 @@ public class KeypadDialogManualDiscount extends KeypadDialog {
         extraPanel.setVisible(true);
         cardPanelLayout.show(cardPanel, "discountPanel");
 
-        dialogTitle.setText(Resources.getInstance().getString("manual_discount"));
-        dialogHint.setText(Resources.getInstance().getString("hint_set_discount"));
-
         // 13.4% - weight in Y axis of extraPanel (100% - original height, and we add 13.4% of extraPanel. Totally 113.4%)
         constraintsExtraPanel.weighty = 13.4;
-//        mainPanel.remove(extraPanel);
-        mainPanel.add(extraPanel, constraintsExtraPanel);
+        basicPanel.remove(extraPanel);
+        basicPanel.add(extraPanel, constraintsExtraPanel);
+
+        dialogTitle.setText(Resources.getInstance().getString("manual_discount"));
+        dialogHint.setText(Resources.getInstance().getString("hint_set_discount"));
 
         Font robotoRegular30 = FontProvider.getInstance().getFont(FontProvider.ROBOTO_REGULAR, 30);
         percentButton.setFont(FontProvider.getInstance().getFont(FontProvider.ROBOTO_BOLD, 38));

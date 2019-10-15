@@ -1,5 +1,5 @@
 /*
- * Copyright (c) RESONANCE JSC, 11.10.2019
+ * Copyright (c) RESONANCE JSC, 15.10.2019
  */
 
 package gui.common;
@@ -179,6 +179,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
             initDialogWindows();                // this call need to get size and location of MainFrame's keyboard to tune up loginDialog
             launchDialog(false, loginDialog);
+            loginDialog.setTextFieldText(null);
 
             int navPanelHeaderHeight = initSellTable(SELL_TABLE_ROW_COUNT);
             // next we can set missing sizes of some components (it is good that this components still behind splash screen)
